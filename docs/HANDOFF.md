@@ -33,20 +33,47 @@ mini-read → review quiz. Strict anti-guessing mastery, spaced repetition, pare
 - Two Sonnet audits done (reports in the session scratchpad, not in repo). All 19 + 12 fix
   items were addressed; remaining known false-positive flags only.
 
-## In flight when this handoff was written
-A Sonnet agent is doing a FULL VISUAL REDESIGN ("word garden" brief: mist/soil/leaf/marigold/
-sky/petal palette, Fredoka 600 for the word + titles, Atkinson Hyperlegible for body, the
-SVG Garden bed on Home as the signature where each learned word is a seed/sprout/flower by
-mastery). Folded into the same pass, from user reports:
-1. Spelling step: add a "Check" button (+ Enter), reset state between words, show ✓/✗ with
-   the correct spelling and up to 2 retries (also for spelling items in the quiz), with tests.
-2. Exactly one speaker button per spoken thing (there were two on the word screen).
-3. Record daily-step results for Insights: SpellIt → logAnswer("spell_tiles");
-   SayItStep → sayCorrect/sayWrong + logAnswer("say_word"); MiniRead → logAnswer("read_answer").
-If that agent's work is not in git, check `git status` — it may be uncommitted. After it
-lands: `npm run build && npx vitest run`, commit, `git push` (Pages), `npm run deploy` (Firebase).
+## In flight when this handoff was written (update: 2026-08-27)
+A prior Sonnet agent was reported to be doing a FULL VISUAL REDESIGN ("word garden" brief:
+mist/soil/leaf/marigold/sky/petal palette, Fredoka 600 for the word + titles, Atkinson
+Hyperlegible for body, an SVG Garden bed on Home as the signature where each learned word is
+a seed/sprout/flower by mastery) plus 3 bug fixes. On resuming this session, `git status` was
+clean and none of that work — visual or functional — was present in the code, so it was lost
+(never committed) rather than merely uncommitted. The 3 functional fixes have now been
+re-implemented from scratch and committed (not yet pushed/deployed — see below); the full
+visual redesign has **not** been done and is still open (see "Likely next asks").
+
+Fixes re-implemented (commit "Fix daily-flow bugs: spelling reset/retries, duplicate
+speakers, Insights logging"):
+1. Spelling step: `SpellTiles` now resets tiles/feedback per word (was stale across words),
+   has a Check button, and up to 2 retries revealing the correct spelling on final failure.
+   `SpellType`/`SpellMissing` (used in Quiz) got the same 3-attempt/reveal treatment for
+   consistency.
+2. Removed duplicate speaker buttons on LearnWords (hero word was click-to-speak *and* had a
+   SpeakButton) and on SpellIt/SayItStep (page-level SpeakButton duplicated the one already
+   inside SpellTiles/SayIt).
+3. Insights logging wired up: SpellIt → `logAnswer("spell_tiles")`; SayItStep → new
+   `markSayCorrect`/`markSayWrong` scheduler helpers + `logAnswer("say_word")`; MiniRead →
+   `logAnswer("read_answer")`. Quiz.tsx now reuses the new scheduler helpers instead of
+   inlining the sayCorrect/sayWrong bump.
+
+All covered by new tests (`tests/spellTiles.test.tsx`, `tests/spellItLogging.test.tsx`,
+`tests/sayItStepLogging.test.tsx`, `tests/miniReadLogging.test.tsx`, plus additions to
+`tests/scheduler.test.ts`). 97 tests green, `tsc --noEmit` clean, `npm run build` clean.
+
+Environment note: this sandbox had no Node.js preinstalled; Node 22 + npm were installed via
+NodeSource (jsdom's undici needs Node ≥22). A fresh session may need to redo this before
+`npm test`/`npm run build` will work.
 
 ## Likely next asks
+- The full "word garden" visual redesign is still outstanding (see above) — mist/soil/leaf/
+  marigold/sky/petal palette, Fredoka 600 headings, Atkinson Hyperlegible body, SVG Garden
+  bed on Home. This is a large, subjective, visually-driven task; since the agent can't see
+  a rendered browser and the user reviews on a tablet, expect an iterative loop (agent
+  implements from the brief → user screenshots/describes from tablet → agent adjusts).
+- Push the current commit (`git push`, GitHub Pages) and deploy (`npm run deploy`, Firebase)
+  once the user's happy for the fixes to go live — not done automatically since these affect
+  shared/live systems.
 - User feedback from the tablet on the new design.
 - Change PIN; optional Google sign-in for cross-device sync (currently anonymous per device,
   with a one-time localStorage→Firestore migration in `store/progress.ts`).
