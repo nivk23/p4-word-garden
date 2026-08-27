@@ -35,7 +35,7 @@ anonymous Auth). Works fully offline in local-only mode if Firebase is not confi
   comprehension vs recognition, tricky spellings, hard-to-say words, JSON export, change PIN.
   Default PIN: `1234`.
 
-**Live:** https://nivk23.github.io/p4-word-garden/ (deployed automatically from `main` by GitHub Actions; runs in local-only mode — progress is stored in the browser).
+**Live:** https://p4-word-garden.web.app (Firebase Hosting, deploy with `npm run deploy`). Mirror: https://nivk23.github.io/p4-word-garden/ (auto-deployed from `main` by GitHub Actions). Both use the Firebase backend for progress.
 
 
 
