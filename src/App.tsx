@@ -13,6 +13,7 @@ const LazyMiniRead = lazy(() => import("./pages/MiniRead"));
 const LazyQuiz = lazy(() => import("./pages/Quiz"));
 const LazyDone = lazy(() => import("./pages/Done"));
 const LazyInsights = lazy(() => import("./pages/Insights"));
+const LazyCompareChildren = lazy(() => import("./pages/CompareChildren"));
 import PinGate from "./pages/PinGate";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/quiz" element={<LazyQuiz />} />
               <Route path="/done" element={<LazyDone />} />
               <Route path="/insights" element={<PinGate><LazyInsights /></PinGate>} />
+              <Route path="/compare-children" element={<PinGate><LazyCompareChildren /></PinGate>} />
             </Routes>
           </Suspense>
         </AuthGate>

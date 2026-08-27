@@ -145,6 +145,51 @@ export async function getActiveChild(): Promise<ChildProfile | null> {
   }
 }
 
+export interface ChildRawData {
+  items: SchedulerItem[];
+  dayRecords: DayRecord[];
+  logs: AnswerLog[];
+  profile: UserProfile;
+}
+
+/**
+ * Fetch a specific child's full progress data directly by id — not
+ * necessarily the active one. Used by the parent-facing "compare children"
+ * page. Firestore-only: there's no meaningful local-storage fallback for a
+ * child that isn't the one active on this device, so this simply returns
+ * empty data rather than reading another child's cache off the current
+ * device's localStorage.
+ */
+export async function getChildRawData(childId: string): Promise<ChildRawData> {
+  const empty: ChildRawData = { items: [], dayRecords: [], logs: [], profile: createUserProfile() };
+  if (!isFirebaseAvailable()) return empty;
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  if (!uid) return empty;
+
+  const db = getFirebaseDb()!;
+  const basePath = `users/${uid}/children/${childId}`;
+
+  try {
+    const [itemsSnap, daysSnap, answersSnap, profileSnap] = await Promise.all([
+      getDocs(collection(db, `${basePath}/items`)),
+      getDocs(collection(db, `${basePath}/days`)),
+      getDocs(collection(db, `${basePath}/answers`)),
+      getDoc(doc(db, basePath)),
+    ]);
+
+    return {
+      items: itemsSnap.docs.map((d) => d.data() as SchedulerItem),
+      dayRecords: daysSnap.docs.map((d) => d.data() as DayRecord),
+      logs: answersSnap.docs.map((d) => d.data() as AnswerLog),
+      profile: (profileSnap.exists() && profileSnap.data().profile) || createUserProfile(),
+    };
+  } catch (error) {
+    console.error(`Failed to load progress for child ${childId}:`, error);
+    return empty;
+  }
+}
+
 /**
  * Create a new child profile under the signed-in account.
  */

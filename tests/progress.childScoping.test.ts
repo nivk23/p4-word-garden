@@ -77,6 +77,11 @@ import {
   clearActiveChild,
   saveSchedulerItem,
   getSchedulerItems,
+  saveDayRecord,
+  logAnswer,
+  saveUserProfile,
+  getUserProfile,
+  getChildRawData,
 } from "../src/store/progress";
 
 describe("child profiles + scoped paths", () => {
@@ -181,6 +186,67 @@ describe("child profiles + scoped paths", () => {
 
       expect(firestoreStore.map.has(`users/parent-uid/children/${alice.id}/items/huge`)).toBe(true);
       expect(firestoreStore.map.has(`users/parent-uid/children/${bob.id}/items/huge`)).toBe(false);
+    });
+  });
+
+  describe("getChildRawData (for comparing children)", () => {
+    it("fetches a specific child's data by id, independent of which child is currently active", async () => {
+      const alice = await createChild("Alice");
+      const bob = await createChild("Bob");
+
+      setActiveChildId(alice.id);
+      await saveSchedulerItem({
+        itemId: "huge",
+        type: "word",
+        introducedOn: "2026-01-01",
+        box: 1,
+        correct: 1,
+        wrong: 0,
+        streak: 1,
+        lastSeen: "2026-01-01",
+        nextDue: "2026-01-02",
+      });
+      await saveDayRecord({
+        date: "2026-01-01",
+        wordIds: ["huge"],
+        grammarId: "lesson_1",
+        completed: true,
+        quizResults: [],
+        accuracy: 100,
+        durationSec: 60,
+      });
+      await logAnswer({ day: "2026-01-01", itemId: "huge", qType: "meaning", correct: true, ts: 1 });
+      const aliceProfile = await getUserProfile();
+      aliceProfile.streak = 5;
+      await saveUserProfile(aliceProfile);
+
+      // Switch active child to Bob — getChildRawData(alice.id) should be
+      // unaffected, since it reads by explicit id, not the active one.
+      setActiveChildId(bob.id);
+
+      const aliceData = await getChildRawData(alice.id);
+      expect(aliceData.items).toHaveLength(1);
+      expect(aliceData.items[0].itemId).toBe("huge");
+      expect(aliceData.dayRecords).toHaveLength(1);
+      expect(aliceData.logs).toHaveLength(1);
+      expect(aliceData.profile.streak).toBe(5);
+
+      const bobData = await getChildRawData(bob.id);
+      expect(bobData.items).toEqual([]);
+      expect(bobData.dayRecords).toEqual([]);
+      expect(bobData.logs).toEqual([]);
+      expect(bobData.profile.streak).toBe(0);
+    });
+
+    it("returns empty data in local-only mode or with no signed-in account", async () => {
+      const empty = { items: [], dayRecords: [], logs: [] };
+
+      firebaseAvailable = false;
+      expect(await getChildRawData("whatever")).toMatchObject(empty);
+
+      firebaseAvailable = true;
+      mockAuthState.currentUser = null;
+      expect(await getChildRawData("whatever")).toMatchObject(empty);
     });
   });
 });

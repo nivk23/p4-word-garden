@@ -189,12 +189,20 @@ export default function Insights() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-secondary-dark tracking-tight">
             Parent Insights
           </h1>
-          <button
-            onClick={() => navigate("/")}
-            className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4"
-          >
-            Back to Home
-          </button>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              onClick={() => navigate("/compare-children")}
+              className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4"
+            >
+              📊 Compare children
+            </button>
+            <button
+              onClick={() => navigate("/")}
+              className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4"
+            >
+              Back to Home
+            </button>
+          </div>
         </div>
 
         {noData ? (
