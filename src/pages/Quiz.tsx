@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   getSchedulerItems,
   getDayRecord,
@@ -11,7 +11,7 @@ import {
 } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
 import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong, markSayCorrect, markSayWrong } from "../lib/scheduler";
-import { buildDailyQuizWithSpelling, shuffleOptionsWithCorrect, createPracticeOnlyRetry, generateWordQuestions, generateGrammarQuestions } from "../lib/questions";
+import { buildDailyQuizWithSpelling, shuffleOptionsWithCorrect, createPracticeOnlyRetry, generateWordQuestions, generateGrammarQuestions, stripPunctuation } from "../lib/questions";
 import { allWords } from "../content/allWords";
 import { grammarLessons } from "../content/grammar";
 import { speak } from "../lib/tts";
@@ -114,6 +114,24 @@ export default function Quiz() {
     setSelectedIdx(null);
   }, [currentQuestionIdx, showMeaning]);
 
+  // Shuffle this question's options once, memoized on the question index —
+  // not recomputed on every render (which it was before: shuffleOptionsWithCorrect
+  // uses Math.random(), so it silently re-shuffled on every re-render of the
+  // *same* question, e.g. right after tapping an answer). correctAnswer here
+  // is the index adjusted for the shuffled order; using the *original*
+  // currentQuestion.correctAnswer against a shuffled-position tap (as this
+  // used to) marks correct taps wrong and highlights the wrong option —
+  // must be declared before any early return below (Rules of Hooks), so it
+  // guards for `questions` not being loaded yet itself.
+  const shuffled = useMemo(() => {
+    const q = questions[currentQuestionIdx];
+    if (!q || q.options.length === 0) {
+      return { options: [] as string[], correctAnswer: 0 };
+    }
+    return shuffleOptionsWithCorrect(q.options, q.correctAnswer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestionIdx, questions.length === 0]);
+
   if (isLoading) {
     return <Loading label="Loading quiz…" />;
   }
@@ -161,7 +179,7 @@ export default function Quiz() {
       return;
     }
 
-    const actuallyCorrect = isCorrect !== undefined ? isCorrect : (selectedIdxArg === currentQuestion.correctAnswer);
+    const actuallyCorrect = isCorrect !== undefined ? isCorrect : (selectedIdxArg === shuffled.correctAnswer);
 
     if (actuallyCorrect && !currentQuestion.practiceOnly) {
       setScore(score + 1);
@@ -244,11 +262,25 @@ export default function Quiz() {
   const handleOptionTap = (idx: number) => {
     if (selectedIdx !== null) return;
     setSelectedIdx(idx);
-    const justCorrect = idx === currentQuestion.correctAnswer;
+    const justCorrect = idx === shuffled.correctAnswer;
     if (!justCorrect) {
       speak(word?.kidMeaning || "");
     }
     setTimeout(() => handleAnswer(idx, undefined, !justCorrect), justCorrect ? 500 : 900);
+  };
+
+  // Same idea as handleOptionTap, for tag_noun/tag_verb/tag_adjective
+  // questions: tap a word within the sentence instead of picking from a
+  // list of options (there is no options list for these — see
+  // generateGrammarQuestions's correctWord).
+  const handleWordTap = (idx: number, cleanedWord: string) => {
+    if (selectedIdx !== null) return;
+    setSelectedIdx(idx);
+    const justCorrect = cleanedWord.toLowerCase() === (currentQuestion.correctWord || "").toLowerCase();
+    if (!justCorrect) {
+      speak(currentQuestion.context || "");
+    }
+    setTimeout(() => handleAnswer(idx, justCorrect, !justCorrect), justCorrect ? 500 : 900);
   };
 
   const handleSayCorrect = async () => {
@@ -296,11 +328,14 @@ export default function Quiz() {
     }
   };
 
-  // Shuffle options for this render (anti-guessing)
-  const { options: shuffledOptions } =
-    currentQuestion.options.length > 0
-      ? shuffleOptionsWithCorrect(currentQuestion.options, currentQuestion.correctAnswer)
-      : { options: [] };
+  const shuffledOptions = shuffled.options;
+
+  // For tap-word (sentence) questions: was the tapped word the correct one?
+  const contextTokens = currentQuestion.context ? currentQuestion.context.split(" ") : [];
+  const selectedTokenCorrect =
+    selectedIdx !== null &&
+    stripPunctuation(contextTokens[selectedIdx] || "").toLowerCase() ===
+      (currentQuestion.correctWord || "").toLowerCase();
 
   return (
     <Page>
@@ -380,43 +415,88 @@ export default function Quiz() {
               <SpeakButton text={currentQuestion.question} label="Hear question" size="sm" />
             </div>
 
-            <div className="space-y-3">
-              {shuffledOptions.map((option, idx) => {
-                const isSelected = selectedIdx === idx;
-                const isCorrectOption = idx === currentQuestion.correctAnswer;
-                let stateClass =
-                  "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
-                if (selectedIdx !== null) {
-                  if (isSelected && isCorrectOption) {
-                    stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
-                  } else if (isSelected && !isCorrectOption) {
-                    stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
-                  } else {
-                    stateClass = "bg-white border-2 border-gray-200 text-ink/40";
-                  }
-                }
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => handleOptionTap(idx)}
-                    disabled={selectedIdx !== null}
-                    className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl transition-colors disabled:cursor-not-allowed flex items-center gap-2 ${stateClass}`}
-                  >
-                    {isSelected && isCorrectOption && <span>✓</span>}
-                    {isSelected && !isCorrectOption && <span>✗</span>}
-                    {option}
-                  </button>
-                );
-              })}
-            </div>
+            {shuffledOptions.length > 0 ? (
+              <>
+                <div className="space-y-3">
+                  {shuffledOptions.map((option, idx) => {
+                    const isSelected = selectedIdx === idx;
+                    const isCorrectOption = idx === shuffled.correctAnswer;
+                    let stateClass =
+                      "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
+                    if (selectedIdx !== null) {
+                      if (isSelected && isCorrectOption) {
+                        stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
+                      } else if (isSelected && !isCorrectOption) {
+                        stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
+                      } else {
+                        stateClass = "bg-white border-2 border-gray-200 text-ink/40";
+                      }
+                    }
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => handleOptionTap(idx)}
+                        disabled={selectedIdx !== null}
+                        className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl transition-colors disabled:cursor-not-allowed flex items-center gap-2 ${stateClass}`}
+                      >
+                        {isSelected && isCorrectOption && <span>✓</span>}
+                        {isSelected && !isCorrectOption && <span>✗</span>}
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
 
-            {selectedIdx !== null && (
-              <div className="mt-5">
-                <FeedbackBanner tone={selectedIdx === currentQuestion.correctAnswer ? "correct" : "wrong"}>
-                  {selectedIdx === currentQuestion.correctAnswer ? "Nice one!" : "Not quite — let's look at it together."}
-                </FeedbackBanner>
-              </div>
-            )}
+                {selectedIdx !== null && (
+                  <div className="mt-5">
+                    <FeedbackBanner tone={selectedIdx === shuffled.correctAnswer ? "correct" : "wrong"}>
+                      {selectedIdx === shuffled.correctAnswer ? "Nice one!" : "Not quite — let's look at it together."}
+                    </FeedbackBanner>
+                  </div>
+                )}
+              </>
+            ) : contextTokens.length > 0 ? (
+              // tag_noun/tag_verb/tag_adjective: tap the matching word within
+              // the sentence instead of picking from a list of options.
+              <>
+                <div className="flex flex-wrap gap-2">
+                  {contextTokens.map((token, idx) => {
+                    const cleaned = stripPunctuation(token);
+                    const isSelected = selectedIdx === idx;
+                    const isCorrectToken = cleaned.toLowerCase() === (currentQuestion.correctWord || "").toLowerCase();
+                    let stateClass =
+                      "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
+                    if (selectedIdx !== null) {
+                      if (isSelected && isCorrectToken) {
+                        stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
+                      } else if (isSelected && !isCorrectToken) {
+                        stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
+                      } else {
+                        stateClass = "bg-white border-2 border-gray-200 text-ink/40";
+                      }
+                    }
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => handleWordTap(idx, cleaned)}
+                        disabled={selectedIdx !== null}
+                        className={`px-4 py-2.5 text-lg font-semibold rounded-xl transition-colors disabled:cursor-not-allowed ${stateClass}`}
+                      >
+                        {token}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {selectedIdx !== null && (
+                  <div className="mt-5">
+                    <FeedbackBanner tone={selectedTokenCorrect ? "correct" : "wrong"}>
+                      {selectedTokenCorrect ? "Nice one!" : "Not quite — let's look at it together."}
+                    </FeedbackBanner>
+                  </div>
+                )}
+              </>
+            ) : null}
           </div>
         )}
       </Card>

@@ -512,17 +512,20 @@ export function calculateStreak(dayRecords: DayRecord[]): number {
   if (sorted.length === 0) return 0;
 
   let streak = 0;
-  const today = getTodayKey();
-  let currentDate = new Date(today + "T00:00:00");
+  const today = new Date(getTodayKey() + "T00:00:00");
 
+  // dayDiff for the i-th (0-indexed) most-recent completed day should be
+  // exactly i if the streak is unbroken (today=0, yesterday=1, ...).
+  // Previously this also decremented a separate "current date" pointer
+  // inside the loop on top of incrementing `streak` — a double-decrement
+  // that made every streak longer than 1 day compare against the wrong
+  // date and break immediately, capping every real streak at 1.
   for (const record of sorted) {
     const recordDate = new Date(record.date + "T00:00:00");
-    const dayDiff =
-      (currentDate.getTime() - recordDate.getTime()) / (1000 * 60 * 60 * 24);
+    const dayDiff = (today.getTime() - recordDate.getTime()) / (1000 * 60 * 60 * 24);
 
     if (dayDiff === streak) {
       streak++;
-      currentDate.setDate(currentDate.getDate() - 1);
     } else {
       break;
     }

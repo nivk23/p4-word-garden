@@ -4,6 +4,7 @@ import { listChildren, getChildRawData } from "../store/progress";
 import type { ChildProfile } from "../store/progress";
 import {
   calculateMasteredCount,
+  calculateLearnedCount,
   calculateAccuracy,
   calculateComprehensionAccuracy,
   calculateSpellingAccuracy,
@@ -14,6 +15,7 @@ import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
 
 interface ChildRow {
   child: ChildProfile;
+  known: number;
   mastered: number;
   streak: number;
   daysCompleted: number;
@@ -35,6 +37,11 @@ export default function CompareChildren() {
           const { items, dayRecords, logs, profile } = await getChildRawData(child.id);
           return {
             child,
+            // "Words known" = has started learning it at all (box >= 1) —
+            // a much lower bar than "mastered" (streak/day/type rule), and
+            // the number a parent asking "how many words does she know?"
+            // actually means.
+            known: calculateLearnedCount(items),
             mastered: calculateMasteredCount(items),
             streak: profile.streak || 0,
             daysCompleted: dayRecords.filter((r) => r.completed).length,

@@ -6,6 +6,7 @@ import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { markCorrect, markWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
+import { stripPunctuation } from "../lib/questions";
 import { Page, PageTitle, Loading, Card, Button, SpeakButton, FeedbackBanner } from "../components/ui";
 
 /**
@@ -20,11 +21,6 @@ function resolvePracticeAnswer(item: { options?: string[]; correctAnswer: string
     return item.options[item.correctAnswer];
   }
   return String(item.correctAnswer);
-}
-
-/** Strip leading/trailing punctuation so a tapped word like "mat." matches "mat". */
-function stripPunctuation(word: string): string {
-  return word.replace(/^[.,!?;:"'()]+|[.,!?;:"'()]+$/g, "");
 }
 
 export default function GrammarLesson() {

@@ -12,7 +12,10 @@ export type QuestionType =
   | "fill_blank"
   | "pick_sentence"
   | "listen_pick"
-  | "grammar_tag"
+  | "tag_noun"
+  | "tag_verb"
+  | "tag_adjective"
+  | "pick_word"
   | "word_order"
   | "choose_form"
   | "editing"
@@ -28,7 +31,12 @@ export interface Question {
   question: string;
   options: string[]; // for most types
   correctAnswer: number; // index in options
-  context?: string; // passage text for read_answer
+  // For tap-word sentence questions (tag_noun/tag_verb/tag_adjective):
+  // options is empty and there's no index to check — the correct answer is
+  // a literal word within `context`, so it needs its own field rather than
+  // overloading correctAnswer's number type.
+  correctWord?: string;
+  context?: string; // passage text for read_answer, or the sentence to tap a word in
   practiceOnly?: boolean; // for anti-guessing: don't record this attempt
 }
 
@@ -116,13 +124,19 @@ export function generateWordQuestions(word: Word, askSeed?: number): Question[] 
 export function generateGrammarQuestions(lesson: GrammarLesson): Question[] {
   return lesson.practiceItems.map((item, idx) => ({
     id: `${lesson.id}_${idx}`,
-    type: item.type as any,
+    type: item.type,
     itemId: lesson.id,
     question: item.question,
     options: item.options || [],
     correctAnswer: typeof item.correctAnswer === "number" ? item.correctAnswer : 0,
+    correctWord: typeof item.correctAnswer === "string" ? item.correctAnswer : undefined,
     context: item.sentence,
   }));
+}
+
+/** Strip leading/trailing punctuation so a tapped word like "mat." matches "mat". */
+export function stripPunctuation(word: string): string {
+  return word.replace(/^[.,!?;:"'()]+|[.,!?;:"'()]+$/g, "");
 }
 
 /**

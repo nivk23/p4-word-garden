@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTodayKey } from "../lib/dates";
-import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems, clearActiveChild, getActiveChild } from "../store/progress";
+import { getDayRecord, getAllDayRecords, calculateStreak, getSchedulerItems, clearActiveChild, getActiveChild } from "../store/progress";
 import type { DayRecord, ChildProfile } from "../store/progress";
 import { isMastered } from "../lib/scheduler";
 import { isFirebaseAvailable } from "../firebase";
@@ -19,30 +19,29 @@ export default function Home() {
 
   useEffect(() => {
     async function loadData() {
-      await getUserProfile();
-      setActiveChild(await getActiveChild());
-
       const today = getTodayKey();
-      const record = await getDayRecord(today);
+
+      // Every read here is independent — fetch all of them concurrently
+      // instead of one at a time. This used to be ~34 separate Firestore
+      // reads (an unused getUserProfile() call whose result was never even
+      // read, today's record, then 30 *individual* getDayRecord calls just
+      // to compute the streak, then scheduler items) — now 4 concurrent
+      // reads total. getAllDayRecords() also incidentally fixes a latent
+      // correctness bug: a streak longer than 30 days would have been
+      // silently capped by the old date-window loop.
+      const [child, record, allDayRecords, schedulerItems] = await Promise.all([
+        getActiveChild(),
+        getDayRecord(today),
+        getAllDayRecords(),
+        getSchedulerItems(),
+      ]);
+
+      setActiveChild(child);
       setTodayRecord(record);
-
-      // Load last 30 days in parallel
-      const datePromises = [];
-      for (let i = 0; i < 30; i++) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        const dateStr = date.toISOString().split("T")[0];
-        datePromises.push(getDayRecord(dateStr));
-      }
-
-      const results = await Promise.all(datePromises);
-      const records = results.filter((r) => r !== null);
-      const calculatedStreak = calculateStreak(records);
-      setStreak(calculatedStreak);
+      setStreak(calculateStreak(allDayRecords));
 
       // Every learned word is a plant in the garden bed, growth stage
       // mirroring the scheduler's own mastery rule.
-      const schedulerItems = await getSchedulerItems();
       const words = schedulerItems.filter((i) => i.type === "word");
       let seeds = 0;
       let sprouts = 0;
