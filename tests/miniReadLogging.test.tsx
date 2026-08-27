@@ -75,4 +75,22 @@ describe("MiniRead logging", () => {
       ).toBe(true);
     });
   });
+
+  it("regression: does not highlight the correct option after a wrong tap — it says 'Try again!' while simultaneously giving away the answer", async () => {
+    await seedToday();
+
+    render(
+      <MemoryRouter>
+        <MiniRead />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => screen.getByText(/how big is tom's dog/i));
+    fireEvent.click(screen.getByText("tiny")); // wrong; correct answer is "huge"
+
+    await waitFor(() => screen.getByText(/listen to the relevant part|try again/i));
+
+    const correctOptionButton = screen.getByText("huge").closest("button")!;
+    expect(correctOptionButton.className).not.toMatch(/green/);
+  });
 });

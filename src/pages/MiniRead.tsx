@@ -124,22 +124,20 @@ export default function MiniRead() {
           )}
 
           <div className="space-y-3">
-            {question.options.map((option, idx) => {
-              const showAsCorrect = wrongAnswer && idx === question.correctAnswer;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => handleAnswer(idx)}
-                  className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl border-2 transition-colors ${
-                    showAsCorrect
-                      ? "bg-green-50 border-green-500 text-green-700"
-                      : "bg-white border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30"
-                  }`}
-                >
-                  {option}
-                </button>
-              );
-            })}
+            {/* On a wrong tap, the feedback above says "Try again!" and the
+                passage gets re-read aloud — options must stay neutral here.
+                This used to highlight the correct option in green the
+                instant any wrong answer was tapped, revealing the answer
+                while simultaneously asking the child to try again. */}
+            {question.options.map((option, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleAnswer(idx)}
+                className="w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl border-2 transition-colors bg-white border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30"
+              >
+                {option}
+              </button>
+            ))}
           </div>
 
           {selectedQuestion === passage.questions.length - 1 && !wrongAnswer && (
