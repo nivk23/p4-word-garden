@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validateSpelling } from "../lib/spelling";
 import { speak } from "../lib/tts";
 import type { Word } from "../content/words";
@@ -20,6 +20,18 @@ export default function SpellType({ word, onCorrect, onWrong }: Props) {
   // any interaction at all (same bug as SpellMissing.tsx).
   const [feedback, setFeedback] = useState<"" | "correct" | "wrong">("");
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
+
+  // Same fix as SpellMissing.tsx: Quiz.tsx reuses this component instance
+  // across consecutive spell_type questions (different `word` props, same
+  // JSX position), so without this the previous word's leftover
+  // answer/feedback carried over — `feedback` stuck at "correct" meant
+  // every subsequent spelling question rendered pre-filled and permanently
+  // disabled (disabled={feedback !== ""}), with no way to type at all.
+  useEffect(() => {
+    setAnswer("");
+    setFeedback("");
+    setAttemptsLeft(MAX_ATTEMPTS);
+  }, [word.word]);
 
   const handleSubmit = () => {
     if (validateSpelling(answer, word.word)) {
@@ -70,11 +82,13 @@ export default function SpellType({ word, onCorrect, onWrong }: Props) {
         </Button>
       </div>
 
-      {/* Example sentence */}
+      {/* Example sentence — audio only. Printing this as text would show
+          the spelled-out headword right next to a "type the word" input,
+          giving away the very spelling the child is meant to work out from
+          listening. */}
       {word.examples.length > 0 && (
         <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 w-full">
           <p className="text-sm text-ink/50 mb-2">Example</p>
-          <p className="text-ink/90 italic mb-3">{word.examples[0]}</p>
           <button
             onClick={() => speak(word.examples[0])}
             className="text-accent-dark font-semibold text-sm"

@@ -14,6 +14,7 @@ vi.mock("../src/lib/tts", () => ({
 
 const huge = allWords.find((w) => w.word === "huge")!; // no spellingTip
 const carried = allWords.find((w) => w.word === "carried")!; // "double r"
+const tiny = allWords.find((w) => w.word === "tiny")!;
 
 describe("SpellMissing", () => {
   beforeEach(() => cleanup());
@@ -41,6 +42,25 @@ describe("SpellMissing", () => {
     render(<SpellMissing word={carried} onCorrect={vi.fn()} onWrong={vi.fn()} />);
     expect(screen.getByText(/tricky/i)).toBeTruthy();
   });
+
+  it("regression: resets when Quiz.tsx reuses this component instance for the next spell_missing word", () => {
+    // Quiz.tsx renders <SpellMissing word={...}> at the same JSX position for
+    // every spell_missing question, so React reuses the instance instead of
+    // remounting it — simulate that here with rerender (not a fresh render).
+    const { rerender } = render(<SpellMissing word={huge} onCorrect={vi.fn()} onWrong={vi.fn()} />);
+
+    const firstInput = screen.getByPlaceholderText("Type the missing letters") as HTMLInputElement;
+    fireEvent.change(firstInput, { target: { value: huge.word } });
+    fireEvent.click(screen.getByRole("button", { name: /check/i }));
+    expect(screen.getByText(/correct!/i)).toBeTruthy();
+
+    rerender(<SpellMissing word={tiny} onCorrect={vi.fn()} onWrong={vi.fn()} />);
+
+    const secondInput = screen.getByPlaceholderText("Type the missing letters") as HTMLInputElement;
+    expect(secondInput.disabled).toBe(false);
+    expect(secondInput.value).toBe("");
+    expect(screen.queryByText(/correct!/i)).toBeNull();
+  });
 });
 
 describe("SpellType", () => {
@@ -54,5 +74,12 @@ describe("SpellType", () => {
 
     fireEvent.change(input, { target: { value: "huge" } });
     expect(input.value).toBe("huge");
+  });
+
+  it("regression: does not print the example sentence as text (it spells out the word being tested, right above the 'type the word' input)", () => {
+    render(<SpellType word={huge} onCorrect={vi.fn()} onWrong={vi.fn()} />);
+
+    expect(screen.queryByText(huge.examples[0])).toBeNull();
+    expect(screen.getByText(/hear example/i)).toBeTruthy();
   });
 });

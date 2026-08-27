@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { generateSpellingMissing, validateSpelling, highlightTricky } from "../lib/spelling";
 import type { Word } from "../content/words";
 import { Button, Chip, SpeakButton, FeedbackBanner } from "./ui";
@@ -20,6 +20,21 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
   // any interaction at all.
   const [feedback, setFeedback] = useState<"" | "correct" | "wrong">("");
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
+
+  // Quiz.tsx renders this same component instance for consecutive
+  // spell_missing questions (different `word` props at the same JSX
+  // position) — React doesn't remount it, so without this the *previous*
+  // word's leftover `answer`/`feedback` carried over. In particular,
+  // `feedback` stuck at "correct" from the prior word meant every
+  // subsequent spelling question rendered pre-filled with the old answer,
+  // showing "Correct!" for the wrong word, and — since
+  // `disabled={feedback !== ""}` — permanently disabled the input, with no
+  // way to type at all. Same class of bug already fixed in SpellTiles.tsx.
+  useEffect(() => {
+    setAnswer("");
+    setFeedback("");
+    setAttemptsLeft(MAX_ATTEMPTS);
+  }, [word.word]);
 
   const handleSubmit = () => {
     if (validateSpelling(answer, word.word)) {
