@@ -14,6 +14,12 @@ vi.mock("../src/lib/tts", () => ({
   isSpeechAvailable: () => false,
 }));
 
+const mockNavigate = vi.fn();
+vi.mock("react-router-dom", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router-dom")>();
+  return { ...actual, useNavigate: () => mockNavigate };
+});
+
 const word = allWords.find((w) => w.word === "huge")!;
 
 async function seedWordQuiz() {
@@ -77,6 +83,7 @@ describe("Quiz scoring", () => {
   beforeEach(() => {
     localStorage.clear();
     cleanup();
+    mockNavigate.mockClear();
   });
 
   afterEach(() => {
@@ -205,5 +212,36 @@ describe("Quiz scoring", () => {
     await waitFor(() => screen.getByText(/tap the noun/i));
     const freshCatButton = (await screen.findByRole("button", { name: "cat" })) as HTMLButtonElement;
     expect(freshCatButton.disabled).toBe(false);
+  });
+
+  it("regression: the final score/total sent to the Done page includes the very last question answered, not last render's stale count", async () => {
+    // goToNext() used to be called right after setScore/setAnsweredCount in
+    // the same synchronous block — those are async state updates, so
+    // goToNext read last render's stale `score`/`answeredCount` closure
+    // values. When the *last* question of the quiz was a practice-only
+    // retry resolved correctly (as here — a wrong tap_noun re-asked and
+    // then gotten right), the /done navigation reported score:0, total:0
+    // instead of score:1, total:1 — the last answer was silently dropped
+    // from the final tally.
+    await seedGrammarQuiz();
+
+    render(
+      <MemoryRouter>
+        <Quiz />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => screen.getByText(/tap the noun/i));
+    fireEvent.click(await screen.findByRole("button", { name: "sits" })); // wrong
+    await waitFor(() => screen.getByText(/the answer is/i));
+    fireEvent.click(await screen.findByRole("button", { name: /continue/i }));
+
+    await waitFor(() => screen.getByText(/tap the noun/i));
+    fireEvent.click(await screen.findByRole("button", { name: "cat" })); // retry, correct
+    await waitFor(() => screen.getByText(/nice one/i));
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith("/done", { state: { score: 0, total: 1 } });
+    });
   });
 });

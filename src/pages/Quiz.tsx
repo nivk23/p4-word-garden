@@ -182,8 +182,10 @@ export default function Quiz() {
     const actuallyCorrect = isCorrect !== undefined ? isCorrect : (selectedIdxArg === shuffled.correctAnswer);
 
     if (actuallyCorrect && !currentQuestion.practiceOnly) {
-      setScore(score + 1);
-      setAnsweredCount(answeredCount + 1);
+      const newScore = score + 1;
+      const newAnsweredCount = answeredCount + 1;
+      setScore(newScore);
+      setAnsweredCount(newAnsweredCount);
 
       // Record success
       if (schedulerItem) {
@@ -212,7 +214,7 @@ export default function Quiz() {
         ts: Date.now(),
       });
 
-      goToNext();
+      goToNext(newScore, newAnsweredCount);
     } else if (!actuallyCorrect && !currentQuestion.practiceOnly) {
       // Wrong answer: show meaning + audio, then re-queue as practiceOnly.
       // word is undefined for grammar questions (itemId is a lesson id,
@@ -252,8 +254,9 @@ export default function Quiz() {
       setQuestions([...questions, practiceQuestion]);
     } else if (currentQuestion.practiceOnly) {
       // Practice-only retry: don't record, just move on
-      setAnsweredCount(answeredCount + 1);
-      goToNext();
+      const newAnsweredCount = answeredCount + 1;
+      setAnsweredCount(newAnsweredCount);
+      goToNext(score, newAnsweredCount);
     }
   };
 
@@ -294,7 +297,14 @@ export default function Quiz() {
     handleAnswer(0, false);
   };
 
-  const goToNext = async () => {
+  // Callers that just called setScore/setAnsweredCount must pass the new
+  // values explicitly — those setState calls haven't applied yet when this
+  // runs synchronously afterward, so reading `score`/`answeredCount` here
+  // would use last render's stale numbers. This under-counted the very
+  // last question of a quiz whenever it was answered correctly (or was a
+  // practice-only retry resolved on the last slot): the final tally sent
+  // to /done was missing the point/attempt that had just been recorded.
+  const goToNext = async (finalScore = score, finalAnsweredCount = answeredCount) => {
     if (currentQuestionIdx < questions.length - 1) {
       setCurrentQuestionIdx(currentQuestionIdx + 1);
     } else {
@@ -303,7 +313,7 @@ export default function Quiz() {
 
       if (dayRecord) {
         const durationSec = Math.floor((Date.now() - startTime) / 1000);
-        const accuracy = answeredCount > 0 ? Math.round((score / answeredCount) * 100) : 0;
+        const accuracy = finalAnsweredCount > 0 ? Math.round((finalScore / finalAnsweredCount) * 100) : 0;
 
         await saveDayRecord({
           ...dayRecord,
@@ -327,7 +337,7 @@ export default function Quiz() {
         }
       }
 
-      navigate("/done", { state: { score, total: answeredCount } });
+      navigate("/done", { state: { score: finalScore, total: finalAnsweredCount } });
     }
   };
 
