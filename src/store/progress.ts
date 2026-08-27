@@ -371,3 +371,40 @@ export function calculateStreak(dayRecords: DayRecord[]): number {
 
   return streak;
 }
+
+/**
+ * One-time migration: if the child already has progress in localStorage (local-only mode)
+ * and this Firebase user has no scheduler items yet, copy everything up to Firestore.
+ * Safe to call on every start-up; it no-ops once done.
+ */
+export async function migrateLocalToCloud(): Promise<boolean> {
+  if (!isFirebaseAvailable()) return false;
+  const uid = await getUserId();
+  const marker = localStorage.getItem("migrated_to_cloud");
+  if (marker === uid) return false;
+
+  const localItems: SchedulerItem[] = JSON.parse(localStorage.getItem("scheduler_items") || "[]");
+  if (localItems.length === 0) {
+    localStorage.setItem("migrated_to_cloud", uid);
+    return false;
+  }
+
+  const db = getFirebaseDb()!;
+  const existing = await getDocs(collection(db, `users/${uid}/items`));
+  if (!existing.empty) {
+    localStorage.setItem("migrated_to_cloud", uid);
+    return false;
+  }
+
+  const profileRaw = localStorage.getItem("user_profile");
+  if (profileRaw) await setDoc(doc(db, `users/${uid}`), { profile: JSON.parse(profileRaw) }, { merge: true });
+  for (const item of localItems) await setDoc(doc(db, `users/${uid}/items/${item.itemId}`), item);
+  const days: DayRecord[] = JSON.parse(localStorage.getItem("day_records") || "[]");
+  for (const d of days) await setDoc(doc(db, `users/${uid}/days/${d.date}`), d);
+  const logs: AnswerLog[] = JSON.parse(localStorage.getItem("answer_logs") || "[]");
+  for (const l of logs) await setDoc(doc(db, `users/${uid}/answers/${l.ts}_${l.itemId}`), l);
+
+  localStorage.setItem("migrated_to_cloud", uid);
+  console.log(`Migrated ${localItems.length} items, ${days.length} days, ${logs.length} answers to Firestore.`);
+  return true;
+}
