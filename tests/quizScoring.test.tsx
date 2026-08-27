@@ -176,4 +176,34 @@ describe("Quiz scoring", () => {
 
     await waitFor(() => screen.getByText(/it means|not quite/i));
   });
+
+  it("regression: a wrong grammar-question answer shows a Continue button and actually advances, instead of leaving the quiz permanently stuck", async () => {
+    // `word` (looked up by currentQuestion.itemId, a word string) is always
+    // undefined for grammar questions (itemId is a lesson id) — the
+    // reveal+continue screen used to be gated on `showMeaning && word`, so
+    // it never rendered here. Nothing else re-enables the tiles or offers
+    // a way forward, so any wrong grammar answer froze the quiz.
+    await seedGrammarQuiz();
+
+    render(
+      <MemoryRouter>
+        <Quiz />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => screen.getByText(/tap the noun/i));
+    fireEvent.click(await screen.findByRole("button", { name: "sits" }));
+
+    const continueBtn = await screen.findByRole("button", { name: /continue/i }, { timeout: 2000 });
+    expect(screen.getByText(/the answer is/i)).toBeTruthy();
+    expect(screen.getByText("cat")).toBeTruthy();
+    fireEvent.click(continueBtn);
+
+    // Lands on the practice-only retry of the same question with a fresh,
+    // un-disabled set of tappable words — not stuck on the previous
+    // (disabled, wrong-highlighted) attempt forever.
+    await waitFor(() => screen.getByText(/tap the noun/i));
+    const freshCatButton = (await screen.findByRole("button", { name: "cat" })) as HTMLButtonElement;
+    expect(freshCatButton.disabled).toBe(false);
+  });
 });

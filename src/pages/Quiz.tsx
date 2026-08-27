@@ -214,9 +214,12 @@ export default function Quiz() {
 
       goToNext();
     } else if (!actuallyCorrect && !currentQuestion.practiceOnly) {
-      // Wrong answer: show meaning + audio, then re-queue as practiceOnly
+      // Wrong answer: show meaning + audio, then re-queue as practiceOnly.
+      // word is undefined for grammar questions (itemId is a lesson id,
+      // not a word) — fall back to announcing the correct answer instead
+      // of silently speaking nothing.
       setShowMeaning(true);
-      if (!skipSpeak) speak(word?.kidMeaning || "");
+      if (!skipSpeak) speak(word?.kidMeaning || currentQuestion.correctWord || shuffled.options[shuffled.correctAnswer] || "");
 
       // Record failure
       if (schedulerItem) {
@@ -264,7 +267,7 @@ export default function Quiz() {
     setSelectedIdx(idx);
     const justCorrect = idx === shuffled.correctAnswer;
     if (!justCorrect) {
-      speak(word?.kidMeaning || "");
+      speak(word?.kidMeaning || shuffled.options[shuffled.correctAnswer] || "");
     }
     setTimeout(() => handleAnswer(idx, undefined, !justCorrect), justCorrect ? 500 : 900);
   };
@@ -354,22 +357,44 @@ export default function Quiz() {
       </div>
 
       <Card>
-        {showMeaning && word ? (
+        {showMeaning ? (
+          // Reveal + continue. Previously gated on `showMeaning && word` —
+          // `word` is only ever found for word-type questions (it's looked
+          // up by currentQuestion.itemId, which for a grammar question is a
+          // lesson id, not a word), so this whole branch never rendered for
+          // ANY wrong grammar-question answer. Since showMeaning was still
+          // true and nothing else in the render checks it, the quiz just
+          // re-rendered the same (now-disabled) question with no way to
+          // proceed — a wrong grammar answer permanently blocked the quiz.
           <div className="text-center">
-            <div className="text-6xl mb-3">{word.emoji}</div>
-            <h2
-              className="font-display font-semibold text-secondary-dark mb-4"
-              style={{ fontSize: "clamp(2.5rem, 6vw + 1rem, 3.5rem)" }}
-            >
-              {word.word}
-            </h2>
-            <div className="rounded-2xl bg-secondary-light p-6 mb-6">
-              <p className="text-sm font-bold uppercase tracking-wide text-secondary-dark mb-2">It means</p>
-              <p className="text-2xl font-semibold text-ink">{word.kidMeaning}</p>
-            </div>
-            <div className="flex justify-center mb-6">
-              <SpeakButton text={word.kidMeaning} label="Hear again" size="lg" />
-            </div>
+            {word ? (
+              <>
+                <div className="text-6xl mb-3">{word.emoji}</div>
+                <h2
+                  className="font-display font-semibold text-secondary-dark mb-4"
+                  style={{ fontSize: "clamp(2.5rem, 6vw + 1rem, 3.5rem)" }}
+                >
+                  {word.word}
+                </h2>
+                <div className="rounded-2xl bg-secondary-light p-6 mb-6">
+                  <p className="text-sm font-bold uppercase tracking-wide text-secondary-dark mb-2">It means</p>
+                  <p className="text-2xl font-semibold text-ink">{word.kidMeaning}</p>
+                </div>
+                <div className="flex justify-center mb-6">
+                  <SpeakButton text={word.kidMeaning} label="Hear again" size="lg" />
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-xl font-bold text-ink mb-4">{currentQuestion.question}</p>
+                <div className="rounded-2xl bg-secondary-light p-6 mb-6">
+                  <p className="text-sm font-bold uppercase tracking-wide text-secondary-dark mb-2">The answer is</p>
+                  <p className="text-2xl font-semibold text-ink">
+                    {currentQuestion.correctWord || shuffled.options[shuffled.correctAnswer]}
+                  </p>
+                </div>
+              </>
+            )}
             <Button onClick={() => handleAnswer(0)}>Continue →</Button>
           </div>
         ) : currentQuestion.type === "spell_tiles" && word ? (
