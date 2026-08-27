@@ -45,7 +45,11 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
       (error) => {
         console.error("Speech error:", error);
         setStatus("idle");
-        setErrorMessage(describeSpeechError(error));
+        // Include the raw code — "not-allowed" (mic permission) and
+        // "service-not-allowed" (the recognition service itself refused,
+        // e.g. unreachable) look identical to a parent otherwise, but need
+        // different fixes.
+        setErrorMessage(`${describeSpeechError(error)} (${error})`);
       }
     );
   };
