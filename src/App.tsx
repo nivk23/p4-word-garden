@@ -23,7 +23,7 @@ function LoadingSpinner() {
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50" style={{ fontFamily: "Nunito, sans-serif" }}>
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>

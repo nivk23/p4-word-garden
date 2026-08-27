@@ -2,15 +2,15 @@
   "name": "P4 Word Garden",
   "short_name": "Word Garden",
   "description": "A short daily English routine for kids - vocabulary and grammar learning with spaced repetition",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#7C3AED",
   "background_color": "#F3F4F6",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
