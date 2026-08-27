@@ -1,4 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { speak } from "../lib/tts";
 
 /**
@@ -185,17 +186,37 @@ export function SpeakButton({
     md: "w-14 h-14 text-2xl",
     lg: "w-20 h-20 text-4xl",
   }[size];
+
+  // If speech never actually starts (no working voice on this device — seen
+  // on some Android phones with a non-Google TTS engine), show a clear "no
+  // sound" signal instead of the button silently doing nothing.
+  const [failed, setFailed] = useState(false);
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) clearTimeout(resetTimeoutRef.current);
+    };
+  }, []);
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    if (stopPropagation) e.stopPropagation();
+    setFailed(false);
+    speak(text, () => {
+      setFailed(true);
+      resetTimeoutRef.current = setTimeout(() => setFailed(false), 3000);
+    });
+  };
+
   return (
     <button
       type="button"
-      aria-label={label}
-      onClick={(e) => {
-        if (stopPropagation) e.stopPropagation();
-        speak(text);
-      }}
-      className={`flex-shrink-0 flex items-center justify-center rounded-full bg-accent text-white shadow-sm hover:bg-accent-dark active:scale-95 transition-transform ${sizeClass} ${className}`}
+      aria-label={failed ? "Sound isn't available on this device" : label}
+      onClick={handleClick}
+      className={`flex-shrink-0 flex items-center justify-center rounded-full text-white shadow-sm active:scale-95 transition-transform ${
+        failed ? "bg-red-400" : "bg-accent hover:bg-accent-dark"
+      } ${sizeClass} ${className}`}
     >
-      🔊
+      {failed ? "🔇" : "🔊"}
     </button>
   );
 }
