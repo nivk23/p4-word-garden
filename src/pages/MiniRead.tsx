@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { passages } from "../content/passages";
-import { getDayRecord } from "../store/progress";
+import { getDayRecord, logAnswer } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { useState, useEffect } from "react";
@@ -68,7 +68,18 @@ export default function MiniRead() {
   const question = passage.questions[selectedQuestion];
 
   const handleAnswer = (idx: number) => {
-    if (idx === question.correctAnswer) {
+    const itemId = `${passage.id}_q${selectedQuestion}`;
+    const isCorrect = idx === question.correctAnswer;
+
+    logAnswer({
+      day: getTodayKey(),
+      itemId,
+      qType: "read_answer",
+      correct: isCorrect,
+      ts: Date.now(),
+    });
+
+    if (isCorrect) {
       // Correct answer
       setWrongAnswer(false);
       setWrongAnswerText("");

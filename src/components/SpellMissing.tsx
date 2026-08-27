@@ -9,27 +9,31 @@ interface Props {
   onWrong: () => void;
 }
 
+const MAX_ATTEMPTS = 3; // first try + up to 2 retries
+
 export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
   const spelling = generateSpellingMissing(word);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState<"" | "correct" | "wrong">();
-  const [triesLeft, setTriesLeft] = useState(3);
+  const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
 
   const handleSubmit = () => {
     if (validateSpelling(answer, word.word)) {
       setFeedback("correct");
       setTimeout(onCorrect, 1000);
+      return;
+    }
+
+    setFeedback("wrong");
+    const remaining = attemptsLeft - 1;
+    setAttemptsLeft(remaining);
+    if (remaining <= 0) {
+      setTimeout(() => onWrong(), 2200);
     } else {
-      setFeedback("wrong");
-      setTriesLeft(triesLeft - 1);
-      if (triesLeft <= 1) {
-        setTimeout(() => onWrong(), 2000);
-      } else {
-        setTimeout(() => {
-          setAnswer("");
-          setFeedback("");
-        }, 1500);
-      }
+      setTimeout(() => {
+        setAnswer("");
+        setFeedback("");
+      }, 1500);
     }
   };
 
@@ -78,7 +82,11 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
       {feedback === "wrong" && (
         <div className="w-full flex items-center gap-3">
           <div className="flex-1">
-            <FeedbackBanner tone="wrong">{`Not quite. Try again! (${triesLeft} left)`}</FeedbackBanner>
+            <FeedbackBanner tone="wrong">
+              {attemptsLeft > 0
+                ? `Not quite. Try again! (${attemptsLeft} left)`
+                : `Not quite. The word is "${word.word}".`}
+            </FeedbackBanner>
           </div>
           <SpeakButton text={word.word} size="sm" />
         </div>

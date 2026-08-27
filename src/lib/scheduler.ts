@@ -84,6 +84,26 @@ export function markSpellingWrong(item: SchedulerItem): SchedulerItem {
 }
 
 /**
+ * Mark a pronunciation (Say It) attempt as correct
+ */
+export function markSayCorrect(item: SchedulerItem): SchedulerItem {
+  return {
+    ...item,
+    sayCorrect: (item.sayCorrect || 0) + 1,
+  };
+}
+
+/**
+ * Mark a pronunciation (Say It) attempt as wrong
+ */
+export function markSayWrong(item: SchedulerItem): SchedulerItem {
+  return {
+    ...item,
+    sayWrong: (item.sayWrong || 0) + 1,
+  };
+}
+
+/**
  * Move item back on wrong answer, resetting mastery progress
  */
 export function markWrong(item: SchedulerItem, today: string): SchedulerItem {

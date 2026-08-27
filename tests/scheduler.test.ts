@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   markCorrect,
   markWrong,
+  markSayCorrect,
+  markSayWrong,
   calculateWeight,
   buildDailyQuiz,
   addDays,
@@ -78,6 +80,34 @@ describe("Scheduler", () => {
       item.streak = 5;
       const updated = markWrong(item, "2024-01-02");
       expect(updated.streak).toBe(0);
+    });
+  });
+
+  describe("markSayCorrect", () => {
+    it("should increment sayCorrect and leave box/streak untouched", () => {
+      const item = createItem("word1", 2);
+      item.streak = 3;
+      const updated = markSayCorrect(item);
+      expect(updated.sayCorrect).toBe(1);
+      expect(updated.box).toBe(2);
+      expect(updated.streak).toBe(3);
+    });
+
+    it("should accumulate across repeated calls", () => {
+      const item = createItem("word1", 0);
+      const updated = markSayCorrect(markSayCorrect(item));
+      expect(updated.sayCorrect).toBe(2);
+    });
+  });
+
+  describe("markSayWrong", () => {
+    it("should increment sayWrong without blocking progress (box/streak untouched)", () => {
+      const item = createItem("word1", 2);
+      item.streak = 3;
+      const updated = markSayWrong(item);
+      expect(updated.sayWrong).toBe(1);
+      expect(updated.box).toBe(2);
+      expect(updated.streak).toBe(3);
     });
   });
 

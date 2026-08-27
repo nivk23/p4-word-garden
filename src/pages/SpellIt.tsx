@@ -6,11 +6,12 @@ import {
   getSchedulerItems,
   saveSchedulerItem,
   getDayRecord,
+  logAnswer,
 } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { markSpellingCorrect, markSpellingWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
-import { Page, PageTitle, Loading, Card, Button, ProgressDots, SpeakButton } from "../components/ui";
+import { Page, PageTitle, Loading, Card, Button, ProgressDots } from "../components/ui";
 
 export default function SpellIt() {
   const navigate = useNavigate();
@@ -69,6 +70,13 @@ export default function SpellIt() {
   const handleSpellingCorrect = async () => {
     const updated = markSpellingCorrect(item);
     await saveSchedulerItem(updated);
+    await logAnswer({
+      day: getTodayKey(),
+      itemId: item.itemId,
+      qType: "spell_tiles",
+      correct: true,
+      ts: Date.now(),
+    });
 
     if (currentWordIdx < spellingItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
@@ -80,6 +88,13 @@ export default function SpellIt() {
   const handleSpellingWrong = async () => {
     const updated = markSpellingWrong(item);
     await saveSchedulerItem(updated);
+    await logAnswer({
+      day: getTodayKey(),
+      itemId: item.itemId,
+      qType: "spell_tiles",
+      correct: false,
+      ts: Date.now(),
+    });
 
     if (currentWordIdx < spellingItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
@@ -97,7 +112,6 @@ export default function SpellIt() {
         <div className="flex flex-col items-center text-center gap-3 mb-6">
           <div className="text-6xl">{word.emoji}</div>
           <p className="text-sm font-semibold text-ink/50">Listen carefully</p>
-          <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" />
         </div>
 
         <SpellTiles

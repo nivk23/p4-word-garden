@@ -10,7 +10,7 @@ import {
   saveUserProfile,
 } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
-import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong } from "../lib/scheduler";
+import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong, markSayCorrect, markSayWrong } from "../lib/scheduler";
 import { buildDailyQuizWithSpelling, shuffleOptionsWithCorrect, createPracticeOnlyRetry, generateWordQuestions, generateGrammarQuestions } from "../lib/questions";
 import { allWords } from "../content/allWords";
 import { grammarLessons } from "../content/grammar";
@@ -170,10 +170,7 @@ export default function Quiz() {
 
         // Handle say tracking
         if (currentQuestion.type === "say_word" && schedulerItem.type === "word") {
-          updated = {
-            ...updated,
-            sayCorrect: (updated.sayCorrect ?? 0) + 1,
-          };
+          updated = markSayCorrect(updated);
         }
 
         await saveSchedulerItem(updated);
@@ -205,10 +202,7 @@ export default function Quiz() {
 
         // Handle say tracking
         if (currentQuestion.type === "say_word" && schedulerItem.type === "word") {
-          updated = {
-            ...updated,
-            sayWrong: (updated.sayWrong ?? 0) + 1,
-          };
+          updated = markSayWrong(updated);
         }
 
         await saveSchedulerItem(updated);

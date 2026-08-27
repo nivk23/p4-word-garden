@@ -5,10 +5,13 @@ import SayIt from "../components/SayIt";
 import {
   getSchedulerItems,
   getDayRecord,
+  saveSchedulerItem,
+  logAnswer,
 } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
+import { markSayCorrect, markSayWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
-import { Page, PageTitle, Loading, Card, Button, ProgressDots, SpeakButton } from "../components/ui";
+import { Page, PageTitle, Loading, Card, Button, ProgressDots } from "../components/ui";
 
 export default function SayItStep() {
   const navigate = useNavigate();
@@ -63,6 +66,16 @@ export default function SayItStep() {
   }
 
   const handleSayCorrect = async () => {
+    const updated = markSayCorrect(item);
+    await saveSchedulerItem(updated);
+    await logAnswer({
+      day: getTodayKey(),
+      itemId: item.itemId,
+      qType: "say_word",
+      correct: true,
+      ts: Date.now(),
+    });
+
     if (currentWordIdx < sayItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
     } else {
@@ -71,6 +84,16 @@ export default function SayItStep() {
   };
 
   const handleSayWrong = async () => {
+    const updated = markSayWrong(item);
+    await saveSchedulerItem(updated);
+    await logAnswer({
+      day: getTodayKey(),
+      itemId: item.itemId,
+      qType: "say_word",
+      correct: false,
+      ts: Date.now(),
+    });
+
     if (currentWordIdx < sayItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
     } else {
@@ -88,9 +111,6 @@ export default function SayItStep() {
           <div className="text-6xl">{word.emoji}</div>
           <h2 className="text-4xl font-extrabold text-secondary-dark">{word.word}</h2>
           <p className="text-lg text-ink/70">{word.kidMeaning}</p>
-          <div className="mt-2">
-            <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" />
-          </div>
         </div>
 
         <SayIt

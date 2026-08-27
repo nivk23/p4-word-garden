@@ -106,16 +106,7 @@ export default function LearnWords() {
 
       <Card>
         {/* Hero word */}
-        <div
-          className="flex flex-col items-center text-center gap-1 cursor-pointer select-none"
-          role="button"
-          tabIndex={0}
-          onClick={() => speak(word.word)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") speak(word.word);
-          }}
-          aria-label={`Hear ${word.word}`}
-        >
+        <div className="flex flex-col items-center text-center gap-1">
           <div className="text-6xl mb-1">{word.emoji}</div>
           <h2
             className="font-extrabold text-secondary-dark leading-tight"
@@ -127,7 +118,7 @@ export default function LearnWords() {
         </div>
 
         <div className="flex justify-center mt-4 mb-8">
-          <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" stopPropagation={false} />
+          <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" />
         </div>
 
         {/* Meaning */}
