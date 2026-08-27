@@ -87,12 +87,18 @@ export function generateSpellingMissing(word: Word): {
       }
     }
   } else {
-    // Default: blank alternate letters
+    // Default: blank alternate letters. Deliberately leave `tricky` empty —
+    // there's no single tricky substring to call out here (unlike the
+    // double/ei-ie/silent cases above), so the "Tricky: ..." hint should
+    // stay hidden rather than have something pushed into it just to have a
+    // value; the previous placeholder ("letters") wasn't a real substring
+    // of the word, so highlightTricky's regex never matched it and the
+    // component rendered the *entire unblanked word* next to "Tricky:" —
+    // as an answer-reveal for every word without a recognised spelling tip.
     blanked = full
       .split("")
       .map((c, i) => (i % 2 === 1 ? "_" : c))
       .join("");
-    tricky.push("letters");
   }
 
   return { blanked, tricky, full, tip };
@@ -106,23 +112,33 @@ export function validateSpelling(answer: string, word: string): boolean {
 }
 
 /**
- * Highlight tricky letters in syllables
+ * Split syllables into segments marking which parts are "tricky", for the
+ * caller to render as real elements (e.g. wrapping tricky segments in
+ * <mark>). Previously this built an HTML string with literal <mark> tags
+ * and returned it for interpolation into JSX text — React escapes strings,
+ * so the tags rendered as visible "<mark>...</mark>" text rather than
+ * actual highlighting.
  */
 export function highlightTricky(
   syllables: string,
   tricky: string[]
-): { highlighted: string; plain: string } {
+): { segments: Array<{ text: string; tricky: boolean }>; plain: string } {
   const plain = syllables;
-  let highlighted = syllables;
-
-  for (const t of tricky) {
-    highlighted = highlighted.replace(
-      new RegExp(`(${t})`, "gi"),
-      "<mark>$1</mark>"
-    );
+  if (tricky.length === 0) {
+    return { segments: [{ text: syllables, tricky: false }], plain };
   }
 
-  return { highlighted, plain };
+  const escaped = tricky.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`(${escaped.join("|")})`, "gi");
+  const isTrickyMatch = (part: string) =>
+    escaped.some((t) => new RegExp(`^${t}$`, "i").test(part));
+
+  const segments = syllables
+    .split(pattern)
+    .filter((part) => part.length > 0)
+    .map((part) => ({ text: part, tricky: isTrickyMatch(part) }));
+
+  return { segments, plain };
 }
 
 // Helper: generate decoy letters

@@ -14,7 +14,11 @@ const MAX_ATTEMPTS = 3; // first try + up to 2 retries
 export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
   const spelling = generateSpellingMissing(word);
   const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState<"" | "correct" | "wrong">();
+  // Was `useState<"" | "correct" | "wrong">()` with no initial value, so
+  // this started as `undefined` — and `disabled={feedback !== ""}` below
+  // then evaluated `undefined !== ""` as true, disabling the input before
+  // any interaction at all.
+  const [feedback, setFeedback] = useState<"" | "correct" | "wrong">("");
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
 
   const handleSubmit = () => {
@@ -37,7 +41,7 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
     }
   };
 
-  const { highlighted } = highlightTricky(word.syllables || word.word, spelling.tricky);
+  const { segments } = highlightTricky(word.syllables || word.word, spelling.tricky);
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -55,7 +59,20 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
       <div className="text-center">
         <p className="text-sm text-ink/50 mb-2">Sound it out</p>
         <p className="text-2xl font-bold text-ink">{word.syllables || word.word}</p>
-        <div className="text-sm text-accent-dark font-semibold mt-2">Tricky: {highlighted}</div>
+        {spelling.tricky.length > 0 && (
+          <div className="text-sm text-accent-dark font-semibold mt-2">
+            Tricky:{" "}
+            {segments.map((seg, i) =>
+              seg.tricky ? (
+                <mark key={i} className="bg-accent-light text-accent-dark px-0.5 rounded">
+                  {seg.text}
+                </mark>
+              ) : (
+                <span key={i}>{seg.text}</span>
+              )
+            )}
+          </div>
+        )}
       </div>
 
       {/* Missing letter template */}

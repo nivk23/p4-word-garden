@@ -14,7 +14,11 @@ const MAX_ATTEMPTS = 3; // first try + up to 2 retries
 
 export default function SpellType({ word, onCorrect, onWrong }: Props) {
   const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState<"" | "correct" | "wrong">();
+  // Was `useState<"" | "correct" | "wrong">()` with no initial value, so
+  // this started as `undefined` — and `disabled={feedback !== ""}` below
+  // then evaluated `undefined !== ""` as true, disabling the input before
+  // any interaction at all (same bug as SpellMissing.tsx).
+  const [feedback, setFeedback] = useState<"" | "correct" | "wrong">("");
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
 
   const handleSubmit = () => {
