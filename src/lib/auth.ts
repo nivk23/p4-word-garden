@@ -88,6 +88,8 @@ export function describeAuthError(error: unknown): string {
       return "Email or password is incorrect.";
     case "auth/too-many-requests":
       return "Too many attempts — please wait a bit and try again.";
+    case "auth/operation-not-allowed":
+      return "Email/password sign-in isn't turned on for this app yet — enable it in the Firebase Console under Authentication → Sign-in method.";
     default:
       return "Something went wrong. Please try again.";
   }

@@ -104,6 +104,7 @@ describe("describeAuthError", () => {
     expect(describeAuthError({ code: "auth/invalid-email" })).toMatch(/valid email/i);
     expect(describeAuthError({ code: "auth/wrong-password" })).toMatch(/incorrect/i);
     expect(describeAuthError({ code: "auth/too-many-requests" })).toMatch(/wait/i);
+    expect(describeAuthError({ code: "auth/operation-not-allowed" })).toMatch(/firebase console/i);
   });
 
   it("falls back to a generic message for unknown codes", () => {
