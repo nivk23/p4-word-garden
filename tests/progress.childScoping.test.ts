@@ -34,6 +34,17 @@ vi.mock("firebase/firestore", () => {
     return { path };
   }
   async function setDoc(ref: { path: string }, data: unknown, opts?: { merge?: boolean }) {
+    // Real Firestore throws on any field with a literal `undefined` value
+    // ("Unsupported field value: undefined") — mirror that here so tests
+    // relying on this fake actually catch that class of bug, instead of
+    // silently accepting whatever's passed.
+    if (data && typeof data === "object") {
+      for (const [key, value] of Object.entries(data as object)) {
+        if (value === undefined) {
+          throw new Error(`Function setDoc() called with invalid data. Unsupported field value: undefined (found in field ${key})`);
+        }
+      }
+    }
     const existing = firestoreStore.map.get(ref.path);
     firestoreStore.map.set(
       ref.path,
@@ -247,6 +258,37 @@ describe("child profiles + scoped paths", () => {
       firebaseAvailable = true;
       mockAuthState.currentUser = null;
       expect(await getChildRawData("whatever")).toMatchObject(empty);
+    });
+  });
+
+  describe("saveSchedulerItem (regression: a literal undefined field must not crash the write)", () => {
+    it("saves a grammar item with no spellBox without throwing, and doesn't store an undefined field", async () => {
+      const child = await createChild("Ava");
+      setActiveChildId(child.id);
+
+      // Mirrors what markCorrect() used to produce for a grammar item
+      // before its fix: an explicit `spellBox: undefined` key, which real
+      // Firestore's setDoc() rejects outright (see the fake's setDoc
+      // above). This should no longer reach Firestore at all.
+      await saveSchedulerItem({
+        itemId: "lesson_1",
+        type: "grammar",
+        introducedOn: "2026-01-01",
+        box: 1,
+        correct: 1,
+        wrong: 0,
+        streak: 1,
+        lastSeen: "2026-01-01",
+        nextDue: "2026-01-02",
+        spellBox: undefined,
+      } as any);
+
+      const stored = firestoreStore.map.get(`users/parent-uid/children/${child.id}/items/lesson_1`);
+      expect(stored).toBeTruthy();
+      expect("spellBox" in (stored as object)).toBe(false);
+
+      const items = await getSchedulerItems();
+      expect(items.find((i) => i.itemId === "lesson_1")).toBeTruthy();
     });
   });
 });

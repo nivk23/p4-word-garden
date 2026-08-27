@@ -48,7 +48,15 @@ export function markCorrect(
   return {
     ...item,
     box: newBox,
-    spellBox: newSpellBox,
+    // Grammar items never have a spellBox (only words do), so newSpellBox
+    // is `undefined` here — spreading `{ spellBox: undefined }` explicitly
+    // sets the field to `undefined` on the returned object. Firestore's
+    // setDoc() rejects any field with a literal `undefined` value outright
+    // ("Unsupported field value: undefined"), so saving a grammar item's
+    // correct answer always threw, silently fell back to local-only
+    // storage on that device, and never synced. Only include the key when
+    // there's an actual value.
+    ...(newSpellBox !== undefined ? { spellBox: newSpellBox } : {}),
     correct: item.correct + 1,
     spellCorrect: (item.spellCorrect || 0) + 1,
     streak: item.streak + 1,

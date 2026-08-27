@@ -291,6 +291,25 @@ export async function getUserProfile(): Promise<UserProfile> {
 }
 
 /**
+ * Firestore's setDoc() rejects any field with a literal `undefined` value
+ * outright ("Unsupported field value: undefined"), which SchedulerItem's
+ * several optional fields (spellBox, sayCorrect, ...) can end up holding
+ * after a spread — see markCorrect() in lib/scheduler.ts for the concrete
+ * bug this was written for. Applied at the write boundary so any future
+ * optional field added to SchedulerItem is covered automatically, instead
+ * of relying on every scheduler.ts function to remember to omit the key.
+ */
+function stripUndefinedFields<T extends object>(obj: T): T {
+  const result = {} as T;
+  for (const key of Object.keys(obj) as (keyof T)[]) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  }
+  return result;
+}
+
+/**
  * Save scheduler item
  */
 export async function saveSchedulerItem(item: SchedulerItem): Promise<void> {
@@ -311,7 +330,7 @@ export async function saveSchedulerItem(item: SchedulerItem): Promise<void> {
   const itemDoc = doc(db!, `${basePath}/items/${item.itemId}`);
 
   try {
-    await setDoc(itemDoc, item, { merge: true });
+    await setDoc(itemDoc, stripUndefinedFields(item), { merge: true });
   } catch (error) {
     console.error("Failed to save scheduler item:", error);
     // Fall back to localStorage

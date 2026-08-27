@@ -48,6 +48,27 @@ describe("Scheduler", () => {
       const updated = markCorrect(item, "2024-01-02");
       expect(updated.box).toBe(5);
     });
+
+    it("regression: does not add a spellBox key at all for an item that never had one (e.g. a grammar item) — a literal `undefined` value crashes Firestore's setDoc()", () => {
+      const grammarItem: SchedulerItem = { ...createItem("lesson_1", 0), type: "grammar" };
+      expect("spellBox" in grammarItem).toBe(false);
+
+      const updated = markCorrect(grammarItem, "2024-01-02");
+
+      expect("spellBox" in updated).toBe(false);
+      // A stronger check than `=== undefined`: JSON.stringify drops keys
+      // whose value is undefined but would still include one explicitly
+      // set to `undefined` as... nothing, since JSON has no `undefined` —
+      // so round-tripping is a reasonable proxy for "Firestore would
+      // accept this", but the `in` check above is the direct assertion.
+      expect(JSON.parse(JSON.stringify(updated))).not.toHaveProperty("spellBox");
+    });
+
+    it("still increments spellBox normally for a word item that has one", () => {
+      const item: SchedulerItem = { ...createItem("huge", 0), spellBox: 2 };
+      const updated = markCorrect(item, "2024-01-02");
+      expect(updated.spellBox).toBe(3);
+    });
   });
 
   describe("markWrong", () => {
