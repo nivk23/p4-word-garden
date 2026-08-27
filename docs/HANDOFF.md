@@ -66,14 +66,21 @@ NodeSource (jsdom's undici needs Node ≥22). A fresh session may need to redo t
 `npm test`/`npm run build` will work.
 
 ## Likely next asks
-- The full "word garden" visual redesign is still outstanding (see above) — mist/soil/leaf/
-  marigold/sky/petal palette, Fredoka 600 headings, Atkinson Hyperlegible body, SVG Garden
-  bed on Home. This is a large, subjective, visually-driven task; since the agent can't see
-  a rendered browser and the user reviews on a tablet, expect an iterative loop (agent
-  implements from the brief → user screenshots/describes from tablet → agent adjusts).
-- Push the current commit (`git push`, GitHub Pages) and deploy (`npm run deploy`, Firebase)
-  once the user's happy for the fixes to go live — not done automatically since these affect
-  shared/live systems.
+- First pass of the "word garden" redesign landed (commit "Word Garden redesign:
+  Fredoka/Atkinson typography + SVG garden bed on Home"): new mist/soil/leaf/marigold/sky/
+  petal theme tokens in `src/index.css`, Fredoka 600 for headings + hero word displays,
+  Atkinson Hyperlegible for body text app-wide, and a new `GardenBed` component on Home
+  (each learned word is a seed/sprout/flower plant, stage read from the existing
+  `isMastered`/box mastery rule, capped+scaled for large word counts). Verified with a
+  local-only Playwright screenshot pass (no visual-review channel in this session) — screens
+  looked coherent and on-brief in that check, but this is a scoped first pass, **not** a full
+  re-skin of every screen's colours (most pages still use the pre-existing accent/secondary
+  palette from the "word-as-hero redesign" commit). Real next step: get the user's eyes on it
+  on the actual tablet and decide whether/how far to extend the palette further.
+- Push the current commits (`git push`, GitHub Pages) and deploy (`npm run deploy`, Firebase)
+  once the user's happy for this to go live — not done automatically since these affect
+  shared/live systems, and this sandbox has no GitHub/Firebase credentials configured anyway
+  (push/deploy will need to happen from an environment that has them).
 - User feedback from the tablet on the new design.
 - Change PIN; optional Google sign-in for cross-device sync (currently anonymous per device,
   with a one-time localStorage→Firestore migration in `store/progress.ts`).
