@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { allWords } from "../content/allWords";
-import { speak } from "../lib/tts";
 import SpellTiles from "../components/SpellTiles";
 import {
   getSchedulerItems,
@@ -11,6 +10,7 @@ import {
 import { getTodayKey } from "../lib/dates";
 import { markSpellingCorrect, markSpellingWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
+import { Page, PageTitle, Loading, Card, Button, ProgressDots, SpeakButton } from "../components/ui";
 
 export default function SpellIt() {
   const navigate = useNavigate();
@@ -36,27 +36,18 @@ export default function SpellIt() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (spellingItems.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Spell It</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">No words to spell today.</p>
-          <button
-            onClick={() => navigate("/grammar")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Continue →
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Spell It</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">No words to spell today.</p>
+          <Button onClick={() => navigate("/grammar")}>Continue →</Button>
+        </Card>
+      </Page>
     );
   }
 
@@ -65,18 +56,13 @@ export default function SpellIt() {
 
   if (!word) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Spell It</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700">Word not found.</p>
-          <button
-            onClick={() => navigate("/grammar")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Continue →
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Spell It</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">Word not found.</p>
+          <Button onClick={() => navigate("/grammar")}>Continue →</Button>
+        </Card>
+      </Page>
     );
   }
 
@@ -103,47 +89,27 @@ export default function SpellIt() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-600">Spell It</h1>
+    <Page>
+      <PageTitle>Spell It</PageTitle>
+      <ProgressDots total={spellingItems.length} current={currentWordIdx} />
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="text-center mb-6">
-          <p className="text-lg text-gray-600 mb-2">
-            Word {currentWordIdx + 1} of {spellingItems.length}
-          </p>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{
-                width: `${(((currentWordIdx + 1) / spellingItems.length) * 100)}%`,
-              }}
-            />
-          </div>
+      <Card>
+        <div className="flex flex-col items-center text-center gap-3 mb-6">
+          <div className="text-6xl">{word.emoji}</div>
+          <p className="text-sm font-semibold text-ink/50">Listen carefully</p>
+          <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" />
         </div>
 
-        <div className="text-center mb-6">
-          <div className="text-6xl mb-3">{word.emoji}</div>
-          <p className="text-lg text-gray-600 mb-2">Listen carefully:</p>
-          <button
-            onClick={() => speak(word.word)}
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            🔊 Hear the word
-          </button>
-        </div>
+        <SpellTiles
+          word={word}
+          onCorrect={handleSpellingCorrect}
+          onWrong={handleSpellingWrong}
+        />
 
-        <div className="mb-6">
-          <SpellTiles
-            word={word}
-            onCorrect={handleSpellingCorrect}
-            onWrong={handleSpellingWrong}
-          />
-        </div>
-
-        <div className="text-center text-sm text-gray-600 mt-6">
-          <p>Tap the letter tiles in the correct order.</p>
-        </div>
-      </div>
-    </div>
+        <p className="text-center text-sm text-ink/40 mt-6">
+          Tap the letter tiles in the correct order.
+        </p>
+      </Card>
+    </Page>
   );
 }

@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { allWords } from "../content/allWords";
-import { speak } from "../lib/tts";
 import SayIt from "../components/SayIt";
 import {
   getSchedulerItems,
@@ -9,6 +8,7 @@ import {
 } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import type { SchedulerItem } from "../lib/scheduler";
+import { Page, PageTitle, Loading, Card, Button, ProgressDots, SpeakButton } from "../components/ui";
 
 export default function SayItStep() {
   const navigate = useNavigate();
@@ -32,27 +32,18 @@ export default function SayItStep() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (sayItems.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Say It</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">No words to practice.</p>
-          <button
-            onClick={() => navigate("/grammar")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Continue →
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Say It</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">No words to practice.</p>
+          <Button onClick={() => navigate("/grammar")}>Continue →</Button>
+        </Card>
+      </Page>
     );
   }
 
@@ -61,18 +52,13 @@ export default function SayItStep() {
 
   if (!word) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Say It</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700">Word not found.</p>
-          <button
-            onClick={() => navigate("/grammar")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Continue →
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Say It</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">Word not found.</p>
+          <Button onClick={() => navigate("/grammar")}>Continue →</Button>
+        </Card>
+      </Page>
     );
   }
 
@@ -93,48 +79,30 @@ export default function SayItStep() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-600">Say It</h1>
+    <Page>
+      <PageTitle>Say It</PageTitle>
+      <ProgressDots total={sayItems.length} current={currentWordIdx} />
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="text-center mb-6">
-          <p className="text-lg text-gray-600 mb-2">
-            Word {currentWordIdx + 1} of {sayItems.length}
-          </p>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{
-                width: `${(((currentWordIdx + 1) / sayItems.length) * 100)}%`,
-              }}
-            />
+      <Card>
+        <div className="flex flex-col items-center text-center gap-2 mb-6">
+          <div className="text-6xl">{word.emoji}</div>
+          <h2 className="text-4xl font-extrabold text-secondary-dark">{word.word}</h2>
+          <p className="text-lg text-ink/70">{word.kidMeaning}</p>
+          <div className="mt-2">
+            <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" />
           </div>
         </div>
 
-        <div className="text-center mb-6">
-          <div className="text-6xl mb-3">{word.emoji}</div>
-          <h2 className="text-3xl font-bold text-purple-600 mb-4">{word.word}</h2>
-          <button
-            onClick={() => speak(word.word)}
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg mb-4"
-          >
-            🔊 Listen
-          </button>
-          <p className="text-lg text-gray-600 mb-4">{word.kidMeaning}</p>
-        </div>
+        <SayIt
+          word={word}
+          onCorrect={handleSayCorrect}
+          onWrong={handleSayWrong}
+        />
 
-        <div className="mb-6">
-          <SayIt
-            word={word}
-            onCorrect={handleSayCorrect}
-            onWrong={handleSayWrong}
-          />
-        </div>
-
-        <div className="text-center text-sm text-gray-600 mt-6">
-          <p>Up to 3 tries. You can skip if it's hard — it never blocks your progress.</p>
-        </div>
-      </div>
-    </div>
+        <p className="text-center text-sm text-ink/40 mt-6">
+          Up to 3 tries. You can skip if it's hard — it never blocks your progress.
+        </p>
+      </Card>
+    </Page>
   );
 }

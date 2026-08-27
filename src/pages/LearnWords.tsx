@@ -4,6 +4,7 @@ import { allWords } from "../content/allWords";
 import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
+import { Page, PageTitle, Loading, Card, Chip, Button, SpeakButton, ProgressDots, HighlightedText } from "../components/ui";
 
 export default function LearnWords() {
   const navigate = useNavigate();
@@ -80,103 +81,103 @@ export default function LearnWords() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading words for today...</p>
-      </div>
-    );
+    return <Loading label="Loading words for today…" />;
   }
 
   if (learningWords.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">No More Words</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">You've learned all available words!</p>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Back Home
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>No More Words</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">You've learned all available words!</p>
+          <Button onClick={() => navigate("/")}>Back Home</Button>
+        </Card>
+      </Page>
     );
   }
 
   const word = learningWords[currentWord];
+  const syllableDisplay = (word.syllables || word.word).split("-").join(" · ");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-      <h1 className="text-4xl font-bold text-blue-600">Learn Words</h1>
+    <Page>
+      <PageTitle>Learn Words</PageTitle>
+      <ProgressDots total={learningWords.length} current={currentWord} />
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="text-center mb-6">
-          <p className="text-lg text-gray-600 mb-2">Word {currentWord + 1} of {learningWords.length}</p>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{ width: `${((currentWord + 1) / learningWords.length) * 100}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="text-center mb-8">
-          <div className="text-7xl mb-4">{word.emoji}</div>
-          <h2 className="text-4xl font-bold text-purple-600 mb-2">{word.word}</h2>
-          <p className="text-sm text-gray-600 mb-4 italic">{word.pos}</p>
-
-          <button
-            onClick={() => speak(word.word)}
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg mb-6"
+      <Card>
+        {/* Hero word */}
+        <div
+          className="flex flex-col items-center text-center gap-1 cursor-pointer select-none"
+          role="button"
+          tabIndex={0}
+          onClick={() => speak(word.word)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") speak(word.word);
+          }}
+          aria-label={`Hear ${word.word}`}
+        >
+          <div className="text-6xl mb-1">{word.emoji}</div>
+          <h2
+            className="font-extrabold text-secondary-dark leading-tight"
+            style={{ fontSize: "clamp(3.5rem, 8vw + 1.2rem, 5rem)", wordBreak: "break-word", overflowWrap: "anywhere" }}
           >
-            🔊 Hear
-          </button>
+            {word.word}
+          </h2>
+          <p className="text-lg sm:text-xl text-ink/40 tracking-wide font-semibold">{syllableDisplay}</p>
         </div>
 
-        <div className="mb-8 p-6 bg-blue-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-blue-700 mb-2">It means:</h3>
-          <p className="text-xl text-gray-800">{word.kidMeaning}</p>
+        <div className="flex justify-center mt-4 mb-8">
+          <SpeakButton text={word.word} label={`Hear ${word.word}`} size="lg" stopPropagation={false} />
         </div>
 
-        <div className="mb-8">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">Examples:</h3>
+        {/* Meaning */}
+        <div className="mb-6 rounded-2xl bg-secondary-light p-6">
+          <p className="text-sm font-bold uppercase tracking-wide text-secondary-dark mb-2">It means</p>
+          <p className="text-[22px] sm:text-2xl leading-snug text-ink font-semibold">{word.kidMeaning}</p>
+        </div>
+
+        {/* Examples */}
+        <div className="flex flex-col gap-3 mb-6">
           {word.examples.map((example, idx) => (
-            <div key={idx} className="mb-4 p-4 bg-gray-50 rounded-lg">
-              <p className="text-lg text-gray-800 mb-2">{example}</p>
-              <button
-                onClick={() => speak(example)}
-                className="text-orange-500 hover:text-orange-600 font-semibold text-sm"
-              >
+            <button
+              key={idx}
+              type="button"
+              onClick={() => speak(example)}
+              className="w-full flex items-center gap-3 rounded-2xl bg-gray-50 border border-gray-100 p-4 text-left hover:bg-accent-light/40 transition-colors"
+            >
+              <span className="flex-shrink-0 w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center text-base">
                 🔊
-              </button>
-            </div>
+              </span>
+              <span className="text-base sm:text-lg text-ink/90 leading-snug">
+                <HighlightedText text={example} word={word.word} />
+              </span>
+            </button>
           ))}
         </div>
 
+        {/* Spelling tip — subtle chip */}
         {word.spellingTip && (
-          <div className="mb-6 p-4 bg-green-50 rounded-lg border-2 border-green-500">
-            <p className="text-sm font-semibold text-green-700">Spelling tip:</p>
-            <p className="text-green-700">{word.spellingTip}</p>
+          <div className="mb-6 flex justify-center">
+            <Chip tone="accent">✏️ Tip: {word.spellingTip}</Chip>
           </div>
         )}
 
-        <div className="flex gap-4">
-          <button
-            onClick={() => setCurrentWord(Math.max(0, currentWord - 1))}
-            disabled={currentWord === 0}
-            className="flex-1 bg-gray-300 hover:bg-gray-400 disabled:opacity-50 text-gray-800 font-bold py-3 px-4 rounded-lg text-lg"
-          >
-            ← Previous
-          </button>
-          <button
-            onClick={handleNext}
-            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-lg"
-          >
-            {currentWord < learningWords.length - 1 ? "Next →" : "Done ✓"}
-          </button>
-        </div>
-      </div>
-    </div>
+        {/* Navigation */}
+        <Button onClick={handleNext}>
+          {currentWord < learningWords.length - 1 ? "Next →" : "Continue →"}
+        </Button>
+        {currentWord > 0 && (
+          <div className="flex justify-center mt-3">
+            <Button
+              variant="ghost"
+              full={false}
+              onClick={() => setCurrentWord(Math.max(0, currentWord - 1))}
+            >
+              ← Previous
+            </Button>
+          </div>
+        )}
+      </Card>
+    </Page>
   );
 }

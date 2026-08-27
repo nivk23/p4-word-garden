@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { generateSpellingTiles } from "../lib/spelling";
 import type { Word } from "../content/words";
+import { Button, SpeakButton } from "./ui";
 
 interface Props {
   word: Word;
@@ -43,14 +44,19 @@ export default function SpellTiles({ word, onCorrect, onWrong }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-2xl font-bold text-purple-600">Tap the letters in order</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-secondary-dark text-center">
+        Tap the letters in order
+      </h2>
 
-      <div className="text-lg text-gray-700 mb-4">Word: {word.emoji} {word.word}</div>
+      <div className="flex items-center gap-2 text-lg text-ink/70">
+        <span className="text-3xl">{word.emoji}</span>
+        <SpeakButton text={word.word} size="sm" />
+      </div>
 
       {/* Selected so far */}
-      <div className="bg-green-100 border-2 border-green-500 rounded-lg p-6 min-h-16 w-full max-w-md">
-        <p className="text-gray-600 text-sm mb-2">Your spelling:</p>
-        <p className="text-3xl font-bold tracking-widest text-green-700">
+      <div className="bg-secondary-light rounded-2xl p-6 min-h-16 w-full">
+        <p className="text-ink/50 text-sm mb-2">Your spelling</p>
+        <p className="text-3xl font-extrabold tracking-widest text-secondary-dark">
           {selected.length === 0 ? "_".repeat(correctOrder.length) : selected.join("")}
         </p>
       </div>
@@ -61,7 +67,7 @@ export default function SpellTiles({ word, onCorrect, onWrong }: Props) {
           <button
             key={idx}
             onClick={() => handleTapTile(tile, idx)}
-            className="w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white text-2xl font-bold rounded-lg"
+            className="w-14 h-14 sm:w-16 sm:h-16 bg-accent hover:bg-accent-dark active:scale-95 transition-transform text-white text-2xl font-bold rounded-2xl"
           >
             {tile.toUpperCase()}
           </button>
@@ -69,27 +75,16 @@ export default function SpellTiles({ word, onCorrect, onWrong }: Props) {
       </div>
 
       {/* Controls */}
-      <div className="flex gap-3">
-        <button
-          onClick={handleUndo}
-          disabled={selected.length === 0}
-          className="bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50 text-white font-bold py-2 px-4 rounded"
-        >
+      <div className="flex gap-3 w-full">
+        <Button variant="ghost" full={false} onClick={handleUndo} disabled={selected.length === 0}>
           ← Undo
-        </button>
-        <button
-          onClick={handleClear}
-          disabled={selected.length === 0}
-          className="bg-gray-500 hover:bg-gray-600 disabled:opacity-50 text-white font-bold py-2 px-4 rounded"
-        >
+        </Button>
+        <Button variant="ghost" full={false} onClick={handleClear} disabled={selected.length === 0}>
           Clear
-        </button>
-        <button
-          onClick={handleGiveUp}
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Give Up
-        </button>
+        </Button>
+        <Button variant="ghost" full={false} onClick={handleGiveUp} className="ml-auto text-red-500 hover:text-red-600">
+          Give up
+        </Button>
       </div>
     </div>
   );

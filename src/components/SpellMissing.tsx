@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { generateSpellingMissing, validateSpelling, highlightTricky } from "../lib/spelling";
-import { speak } from "../lib/tts";
 import type { Word } from "../content/words";
+import { Button, Chip, SpeakButton, FeedbackBanner } from "./ui";
 
 interface Props {
   word: Word;
@@ -37,33 +37,27 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-2xl font-bold text-purple-600">Fill in the missing letters</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-secondary-dark text-center">
+        Fill in the missing letters
+      </h2>
 
-      <div className="text-lg text-gray-700">
-        {word.emoji} {word.word}
+      <div className="flex items-center gap-2 text-lg text-ink/70">
+        <span className="text-3xl">{word.emoji}</span>
       </div>
 
-      {/* Spelling tip */}
-      {word.spellingTip && (
-        <div className="bg-blue-50 border-2 border-blue-500 p-4 rounded-lg">
-          <p className="text-sm font-semibold text-blue-700">Tip:</p>
-          <p className="text-blue-700">{word.spellingTip}</p>
-        </div>
-      )}
+      {word.spellingTip && <Chip tone="accent">✏️ {word.spellingTip}</Chip>}
 
       {/* Syllables with tricky highlighted */}
       <div className="text-center">
-        <p className="text-sm text-gray-600 mb-2">Sound it out:</p>
-        <p className="text-2xl font-bold text-gray-800">
-          {word.syllables || word.word}
-        </p>
-        <div className="text-sm text-red-600 mt-2">Tricky: {highlighted}</div>
+        <p className="text-sm text-ink/50 mb-2">Sound it out</p>
+        <p className="text-2xl font-bold text-ink">{word.syllables || word.word}</p>
+        <div className="text-sm text-accent-dark font-semibold mt-2">Tricky: {highlighted}</div>
       </div>
 
       {/* Missing letter template */}
-      <div className="bg-yellow-50 border-2 border-yellow-500 p-4 rounded-lg text-center">
-        <p className="text-sm text-gray-600 mb-2">Type the missing:</p>
-        <p className="text-2xl font-mono font-bold text-yellow-700 tracking-widest">
+      <div className="bg-secondary-light rounded-2xl p-4 text-center w-full">
+        <p className="text-sm text-ink/50 mb-2">Type the missing letters</p>
+        <p className="text-2xl font-mono font-bold text-secondary-dark tracking-widest">
           {spelling.blanked}
         </p>
       </div>
@@ -76,35 +70,24 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
         onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
         placeholder="Type the missing letters"
         disabled={feedback !== ""}
-        className="w-full max-w-md px-4 py-3 border-2 border-gray-300 rounded-lg text-lg font-mono"
+        className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl text-lg font-mono min-h-[56px] focus:outline-none focus:border-accent"
       />
 
       {/* Feedback */}
-      {feedback === "correct" && (
-        <div className="bg-green-100 border-2 border-green-500 p-4 rounded-lg text-green-700 font-bold">
-          ✓ Correct!
-        </div>
-      )}
+      {feedback === "correct" && <FeedbackBanner tone="correct">Correct!</FeedbackBanner>}
       {feedback === "wrong" && (
-        <div className="bg-red-100 border-2 border-red-500 p-4 rounded-lg text-red-700 font-bold">
-          ✗ Wrong. Try again! ({triesLeft} left)
-          <button
-            onClick={() => speak(word.word)}
-            className="ml-2 text-orange-500 hover:text-orange-600"
-          >
-            🔊
-          </button>
+        <div className="w-full flex items-center gap-3">
+          <div className="flex-1">
+            <FeedbackBanner tone="wrong">{`Not quite. Try again! (${triesLeft} left)`}</FeedbackBanner>
+          </div>
+          <SpeakButton text={word.word} size="sm" />
         </div>
       )}
 
       {/* Submit */}
-      <button
-        onClick={handleSubmit}
-        disabled={!answer || feedback !== ""}
-        className="w-full max-w-md bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-bold py-3 rounded-lg text-lg"
-      >
+      <Button onClick={handleSubmit} disabled={!answer || feedback !== ""}>
         Check
-      </button>
+      </Button>
     </div>
   );
 }

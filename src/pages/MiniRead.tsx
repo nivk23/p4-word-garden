@@ -5,6 +5,7 @@ import { getTodayKey, getYesterdayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { useState, useEffect } from "react";
 import type { Passage } from "../content/passages";
+import { Page, PageTitle, Loading, Card, Button, ProgressDots, SpeakButton, FeedbackBanner } from "../components/ui";
 
 export default function MiniRead() {
   const navigate = useNavigate();
@@ -49,27 +50,18 @@ export default function MiniRead() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading passage...</p>
-      </div>
-    );
+    return <Loading label="Loading passage…" />;
   }
 
   if (!passage) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Oops</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">No passage found.</p>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Back Home
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Oops</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">No passage found.</p>
+          <Button onClick={() => navigate("/")}>Back Home</Button>
+        </Card>
+      </Page>
     );
   }
 
@@ -99,64 +91,53 @@ export default function MiniRead() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-600">Mini Reading</h1>
+    <Page>
+      <PageTitle>Mini Reading</PageTitle>
+      <ProgressDots total={passage.questions.length} current={selectedQuestion} />
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="mb-8 p-6 bg-green-50 rounded-lg border-2 border-green-500">
-          <p className="text-xl text-gray-800 leading-relaxed mb-4">{passage.text}</p>
-          <button
-            onClick={() => speak(passage.text)}
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg"
-          >
-            🔊 Read Aloud
-          </button>
+      <Card>
+        <div className="mb-8 rounded-2xl bg-secondary-light p-6">
+          <p className="text-xl leading-relaxed text-ink font-semibold mb-4">{passage.text}</p>
+          <SpeakButton text={passage.text} label="Read aloud" size="md" />
         </div>
 
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-purple-600 mb-4">Question {selectedQuestion + 1}:</h2>
-          <p className="text-xl font-semibold text-gray-800 mb-6">{question.question}</p>
+        <div className="mb-6">
+          <p className="text-2xl font-bold text-secondary-dark mb-6">{question.question}</p>
 
           {wrongAnswer && (
-            <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg border-2 border-red-500 text-center font-semibold">
-              ✗ {wrongAnswerText}
+            <div className="mb-6">
+              <FeedbackBanner tone="wrong">{wrongAnswerText}</FeedbackBanner>
             </div>
           )}
 
           <div className="space-y-3">
-            {question.options.map((option, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleAnswer(idx)}
-                className={`w-full p-4 text-left text-lg font-semibold rounded-lg border-2 transition-all ${
-                  wrongAnswer && idx === question.correctAnswer
-                    ? "bg-green-100 border-green-500 text-green-700 ring-2 ring-green-400"
-                    : wrongAnswer && idx !== question.correctAnswer
-                    ? "bg-white border-gray-300 text-gray-800"
-                    : "bg-white border-gray-300 text-gray-800 hover:border-blue-500 hover:bg-blue-50"
-                }`}
-              >
-                {option}
-              </button>
-            ))}
+            {question.options.map((option, idx) => {
+              const showAsCorrect = wrongAnswer && idx === question.correctAnswer;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => handleAnswer(idx)}
+                  className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl border-2 transition-colors ${
+                    showAsCorrect
+                      ? "bg-green-50 border-green-500 text-green-700"
+                      : "bg-white border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30"
+                  }`}
+                >
+                  {option}
+                </button>
+              );
+            })}
           </div>
+
+          {selectedQuestion === passage.questions.length - 1 && !wrongAnswer && (
+            <div className="flex justify-center mt-6">
+              <Button variant="ghost" full={false} onClick={() => navigate("/quiz")}>
+                Skip to quiz →
+              </Button>
+            </div>
+          )}
         </div>
-
-        {selectedQuestion < passage.questions.length - 1 && !wrongAnswer && (
-          <p className="text-sm text-gray-600 text-center">
-            {selectedQuestion + 1} of {passage.questions.length} questions answered
-          </p>
-        )}
-
-        {selectedQuestion === passage.questions.length - 1 && !wrongAnswer && (
-          <button
-            onClick={() => navigate("/quiz")}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg text-lg"
-          >
-            Start Quiz
-          </button>
-        )}
-      </div>
-    </div>
+      </Card>
+    </Page>
   );
 }

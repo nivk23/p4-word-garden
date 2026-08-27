@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Home from "./pages/Home";
+import { Loading } from "./components/ui";
 
 // Lazy load pages for code splitting
 const LazyLearnWords = lazy(() => import("./pages/LearnWords"));
@@ -13,19 +14,11 @@ const LazyDone = lazy(() => import("./pages/Done"));
 const LazyInsights = lazy(() => import("./pages/Insights"));
 import PinGate from "./pages/PinGate";
 
-function LoadingSpinner() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p className="text-xl text-gray-600">Loading...</p>
-    </div>
-  );
-}
-
 function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50" style={{ fontFamily: "Nunito, sans-serif" }}>
-        <Suspense fallback={<LoadingSpinner />}>
+      <div className="min-h-screen">
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/learn-words" element={<LazyLearnWords />} />

@@ -21,6 +21,7 @@ import SpellType from "../components/SpellType";
 import SayIt from "../components/SayIt";
 import type { Question } from "../lib/questions";
 import type { SchedulerItem } from "../lib/scheduler";
+import { Page, PageTitle, Loading, Card, Button, SpeakButton, FeedbackBanner } from "../components/ui";
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function Quiz() {
   const [schedulerItems, setSchedulerItems] = useState<SchedulerItem[]>([]);
   const [startTime, setStartTime] = useState<number>(0);
   const [dayRecord, setDayRecord] = useState<any>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   useEffect(() => {
     async function loadQuiz() {
@@ -98,55 +100,51 @@ export default function Quiz() {
     loadQuiz();
   }, [navigate]);
 
+  // Reset the tapped-option state whenever we move to a new question
+  useEffect(() => {
+    setSelectedIdx(null);
+  }, [currentQuestionIdx, showMeaning]);
+
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading quiz...</p>
-      </div>
-    );
+    return <Loading label="Loading quiz…" />;
   }
 
   if (questions.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Quiz</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">No quiz available today.</p>
-          <button
-            onClick={() => navigate("/done")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Continue →
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Quiz</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">No quiz available today.</p>
+          <Button onClick={() => navigate("/done")}>Continue →</Button>
+        </Card>
+      </Page>
     );
   }
 
   const currentQuestion = questions[currentQuestionIdx];
   if (!currentQuestion) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Quiz Complete!</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-xl text-gray-700 mb-4">
+      <Page>
+        <PageTitle>Quiz Complete!</PageTitle>
+        <Card className="text-center">
+          <p className="text-xl text-ink/80 mb-6">
             Score: {score} / {questions.length}
           </p>
-          <button
-            onClick={() => navigate("/done", { state: { score, total: questions.length } })}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
+          <Button onClick={() => navigate("/done", { state: { score, total: questions.length } })}>
             Done
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Card>
+      </Page>
     );
   }
 
   const word = allWords.find((w) => w.word === currentQuestion.itemId);
   const schedulerItem = schedulerItems.find((i) => i.itemId === currentQuestion.itemId);
+  const isWordHeroType = !showMeaning && !!word && [
+    "spell_tiles", "spell_missing", "spell_type", "say_word"
+  ].indexOf(currentQuestion.type) === -1;
 
-  const handleAnswer = async (selectedIdx: number, isCorrect?: boolean) => {
+  const handleAnswer = async (selectedIdxArg: number, isCorrect?: boolean, skipSpeak?: boolean) => {
     if (showMeaning) {
       // After showing meaning, move to next
       setShowMeaning(false);
@@ -154,7 +152,7 @@ export default function Quiz() {
       return;
     }
 
-    const actuallyCorrect = isCorrect !== undefined ? isCorrect : (selectedIdx === currentQuestion.correctAnswer);
+    const actuallyCorrect = isCorrect !== undefined ? isCorrect : (selectedIdxArg === currentQuestion.correctAnswer);
 
     if (actuallyCorrect && !currentQuestion.practiceOnly) {
       setScore(score + 1);
@@ -194,7 +192,7 @@ export default function Quiz() {
     } else if (!actuallyCorrect && !currentQuestion.practiceOnly) {
       // Wrong answer: show meaning + audio, then re-queue as practiceOnly
       setShowMeaning(true);
-      speak(word?.kidMeaning || "");
+      if (!skipSpeak) speak(word?.kidMeaning || "");
 
       // Record failure
       if (schedulerItem) {
@@ -233,6 +231,21 @@ export default function Quiz() {
       setAnsweredCount(answeredCount + 1);
       goToNext();
     }
+  };
+
+  // Tap an option: show its correct/wrong state briefly, then run the real
+  // answer logic (which may show the meaning panel or advance). The meaning
+  // audio for a wrong answer is fired synchronously here — inside the click
+  // handler — because iOS only allows speechSynthesis to start as a direct
+  // result of a user gesture, not from inside a setTimeout callback.
+  const handleOptionTap = (idx: number) => {
+    if (selectedIdx !== null) return;
+    setSelectedIdx(idx);
+    const justCorrect = idx === currentQuestion.correctAnswer;
+    if (!justCorrect) {
+      speak(word?.kidMeaning || "");
+    }
+    setTimeout(() => handleAnswer(idx, undefined, !justCorrect), justCorrect ? 500 : 900);
   };
 
   const handleSayCorrect = async () => {
@@ -287,44 +300,39 @@ export default function Quiz() {
       : { options: [] };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-600">Quiz</h1>
+    <Page>
+      <PageTitle>Quiz</PageTitle>
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <div className="mb-6">
-          <div className="text-lg text-gray-600 mb-2">
-            Question {currentQuestionIdx + 1} of {questions.length}
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{
-                width: `${(((currentQuestionIdx + 1) / questions.length) * 100)}%`,
-              }}
-            />
-          </div>
+      <div className="w-full max-w-2xl">
+        <div className="w-full h-2 rounded-full bg-gray-200 overflow-hidden mb-1">
+          <div
+            className="h-full bg-accent rounded-full transition-all"
+            style={{ width: `${((currentQuestionIdx + 1) / questions.length) * 100}%` }}
+          />
         </div>
+        <p className="text-center text-sm text-ink/40 font-semibold">
+          Question {currentQuestionIdx + 1} of {questions.length} &middot; Score {score}/{answeredCount}
+        </p>
+      </div>
 
+      <Card>
         {showMeaning && word ? (
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-purple-600 mb-4">{word.word}</h2>
-            <div className="text-6xl mb-4">{word.emoji}</div>
-            <div className="bg-blue-50 p-6 rounded-lg mb-6">
-              <p className="text-xl text-gray-800 font-semibold">It means:</p>
-              <p className="text-2xl text-purple-600 mt-2">{word.kidMeaning}</p>
+            <div className="text-6xl mb-3">{word.emoji}</div>
+            <h2
+              className="font-extrabold text-secondary-dark mb-4"
+              style={{ fontSize: "clamp(2.5rem, 6vw + 1rem, 3.5rem)" }}
+            >
+              {word.word}
+            </h2>
+            <div className="rounded-2xl bg-secondary-light p-6 mb-6">
+              <p className="text-sm font-bold uppercase tracking-wide text-secondary-dark mb-2">It means</p>
+              <p className="text-2xl font-semibold text-ink">{word.kidMeaning}</p>
             </div>
-            <button
-              onClick={() => speak(word.kidMeaning)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg mb-4"
-            >
-              🔊 Hear again
-            </button>
-            <button
-              onClick={() => handleAnswer(0)}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-            >
-              Continue →
-            </button>
+            <div className="flex justify-center mb-6">
+              <SpeakButton text={word.kidMeaning} label="Hear again" size="lg" />
+            </div>
+            <Button onClick={() => handleAnswer(0)}>Continue →</Button>
           </div>
         ) : currentQuestion.type === "spell_tiles" && word ? (
           <SpellTiles
@@ -352,35 +360,63 @@ export default function Quiz() {
           />
         ) : (
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-8">{currentQuestion.question}</h2>
+            {isWordHeroType && word && (
+              <div className="flex flex-col items-center text-center gap-1 mb-6">
+                <div className="text-5xl mb-1">{word.emoji}</div>
+                <h2
+                  className="font-extrabold text-secondary-dark leading-tight"
+                  style={{ fontSize: "clamp(2.25rem, 6vw + 0.8rem, 3rem)" }}
+                >
+                  {word.word}
+                </h2>
+              </div>
+            )}
 
-            <button
-              onClick={() => speak(currentQuestion.question)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg mb-6"
-            >
-              🔊 Hear Question
-            </button>
+            <div className="flex items-start gap-3 mb-6">
+              <p className="flex-1 text-xl font-bold text-ink leading-snug">{currentQuestion.question}</p>
+              <SpeakButton text={currentQuestion.question} label="Hear question" size="sm" />
+            </div>
 
             <div className="space-y-3">
-              {shuffledOptions.map((option, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleAnswer(idx)}
-                  className="w-full p-4 text-left text-lg font-semibold bg-white border-2 border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 text-gray-800 transition-colors"
-                >
-                  {option}
-                </button>
-              ))}
+              {shuffledOptions.map((option, idx) => {
+                const isSelected = selectedIdx === idx;
+                const isCorrectOption = idx === currentQuestion.correctAnswer;
+                let stateClass =
+                  "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
+                if (selectedIdx !== null) {
+                  if (isSelected && isCorrectOption) {
+                    stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
+                  } else if (isSelected && !isCorrectOption) {
+                    stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
+                  } else {
+                    stateClass = "bg-white border-2 border-gray-200 text-ink/40";
+                  }
+                }
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => handleOptionTap(idx)}
+                    disabled={selectedIdx !== null}
+                    className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl transition-colors disabled:cursor-not-allowed flex items-center gap-2 ${stateClass}`}
+                  >
+                    {isSelected && isCorrectOption && <span>✓</span>}
+                    {isSelected && !isCorrectOption && <span>✗</span>}
+                    {option}
+                  </button>
+                );
+              })}
             </div>
+
+            {selectedIdx !== null && (
+              <div className="mt-5">
+                <FeedbackBanner tone={selectedIdx === currentQuestion.correctAnswer ? "correct" : "wrong"}>
+                  {selectedIdx === currentQuestion.correctAnswer ? "Nice one!" : "Not quite — let's look at it together."}
+                </FeedbackBanner>
+              </div>
+            )}
           </div>
         )}
-
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            Score: {score}/{answeredCount}
-          </p>
-        </div>
-      </div>
-    </div>
+      </Card>
+    </Page>
   );
 }

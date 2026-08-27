@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getUserProfile } from "../store/progress";
 import type { ReactNode } from "react";
+import { Page, PageTitle, Card, Button } from "../components/ui";
 
 function hashPin(pin: string): string {
   let hash = 0;
@@ -33,35 +34,34 @@ export default function PinGate({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-      <h1 className="text-4xl font-bold text-purple-600">Parent Access</h1>
+    <Page>
+      <div className="text-4xl mt-6">🔒</div>
+      <PageTitle>Parent Access</PageTitle>
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <p className="text-gray-700 mb-6 text-center">
+      <Card>
+        <p className="text-ink/70 mb-6 text-center">
           Enter the 4-digit PIN to access parent insights.
         </p>
 
         <input
           type="password"
+          inputMode="numeric"
           maxLength={4}
           value={pin}
           onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ""))}
+          onKeyDown={(e) => e.key === "Enter" && pin.length === 4 && handleSubmit()}
           placeholder="****"
-          className="w-full text-4xl text-center tracking-widest p-4 border-2 border-gray-300 rounded-lg mb-4 font-mono"
+          className="w-full text-4xl text-center tracking-[0.5em] p-4 border-2 border-gray-200 rounded-2xl mb-4 font-mono min-h-[56px] focus:outline-none focus:border-accent"
         />
 
         {error && <p className="text-red-600 font-semibold mb-4 text-center">{error}</p>}
 
-        <button
-          onClick={handleSubmit}
-          disabled={pin.length !== 4}
-          className="w-full bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-bold py-3 px-6 rounded-lg text-lg"
-        >
+        <Button onClick={handleSubmit} disabled={pin.length !== 4}>
           Unlock
-        </button>
+        </Button>
 
-        <p className="text-xs text-gray-500 text-center mt-4">Default PIN: 1234</p>
-      </div>
-    </div>
+        <p className="text-xs text-ink/40 text-center mt-4">Default PIN: 1234</p>
+      </Card>
+    </Page>
   );
 }

@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { getTodayKey } from "../lib/dates";
 import { getUserProfile, getDayRecord, calculateStreak } from "../store/progress";
 import type { DayRecord } from "../store/progress";
+import { Page, Card, Button, Chip } from "../components/ui";
 
 export default function Home() {
   const navigate = useNavigate();
   const [todayRecord, setTodayRecord] = useState<DayRecord | null>(null);
   const [streak, setStreak] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
@@ -30,53 +32,60 @@ export default function Home() {
       const records = results.filter((r) => r !== null);
       const calculatedStreak = calculateStreak(records);
       setStreak(calculatedStreak);
+      setIsLoading(false);
     }
     loadData();
   }, []);
 
+  const isDone = !!(todayRecord && todayRecord.completed);
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-4">
-      <h1 className="text-5xl font-bold text-purple-600">P4 Word Garden</h1>
+    <Page>
+      <div className="text-center mt-4">
+        <div className="text-5xl mb-2">🌱</div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-secondary-dark tracking-tight">
+          P4 Word Garden
+        </h1>
+      </div>
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <h2 className="text-3xl font-bold mb-6 text-blue-600">Today's Lesson</h2>
-
-        <div className="mb-6 text-center">
-          <div className="text-lg font-semibold text-gray-700 mb-2">Streak</div>
-          <div className="text-5xl font-bold text-orange-500">{streak}</div>
-          <div className="text-sm text-gray-600">days in a row</div>
+      <Card className="text-center">
+        <p className="text-sm font-bold uppercase tracking-wide text-ink/40 mb-1">Streak</p>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <span className="text-6xl">🔥</span>
+          <span className="text-6xl font-extrabold text-accent">{streak}</span>
         </div>
 
-        {todayRecord && todayRecord.completed ? (
-          <div className="bg-green-50 p-4 rounded-lg mb-6 border-2 border-green-500">
-            <p className="text-green-700 font-semibold text-lg">✓ Today is done!</p>
-            <p className="text-sm text-gray-600 mt-2">You can do extra practice quiz.</p>
-            <button
-              onClick={() => navigate("/quiz")}
-              className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg w-full"
-            >
-              Extra Practice
-            </button>
-          </div>
+        {isLoading ? (
+          <p className="text-ink/50 font-semibold">Loading today's plan…</p>
+        ) : isDone ? (
+          <>
+            <Chip tone="secondary" className="mb-4">✓ Today is done</Chip>
+            <p className="text-base text-ink/70 mb-6">
+              Great work today! You can do extra practice, or come back tomorrow for a new lesson.
+            </p>
+            <Button variant="primary" onClick={() => navigate("/quiz")}>
+              Extra practice
+            </Button>
+            <p className="text-sm text-ink/50 mt-4">See you tomorrow! 🌙</p>
+          </>
         ) : (
           <>
-            <p className="text-gray-600 mb-6">Learn 3 new words + 1 grammar step, then take a quiz!</p>
-            <button
-              onClick={() => navigate("/learn-words")}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg text-2xl w-full"
-            >
-              Start Lesson
-            </button>
+            <p className="text-lg text-ink/70 mb-6">
+              Learn 3 new words + 1 grammar step, then take a quiz!
+            </p>
+            <Button variant="primary" onClick={() => navigate("/learn-words")}>
+              Start today
+            </Button>
           </>
         )}
-      </div>
+      </Card>
 
       <button
         onClick={() => navigate("/insights")}
-        className="text-blue-600 hover:text-blue-800 underline font-semibold"
+        className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4 mt-2"
       >
-        📊 Parent Insights
+        🔒 Parent insights
       </button>
-    </div>
+    </Page>
   );
 }

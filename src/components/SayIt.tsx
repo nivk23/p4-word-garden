@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { speak, cancelPendingTimeouts, speakAfter } from "../lib/tts";
 import { isSupported, startListening, matchesWord, homophones } from "../lib/speech";
 import type { Word } from "../content/words";
+import { Button, FeedbackBanner } from "./ui";
 
 interface Props {
   word: Word;
@@ -73,19 +74,18 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
 
   if (!supported) {
     return (
-      <div className="flex flex-col items-center gap-6 p-6">
-        <h2 className="text-2xl font-bold text-purple-600">Say It</h2>
-        <div className="bg-gray-100 border-2 border-gray-400 p-6 rounded-lg text-center text-gray-700">
+      <div className="flex flex-col items-center gap-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-secondary-dark">Say It</h2>
+        <div className="bg-gray-50 rounded-2xl p-6 text-center text-ink/70">
           <p className="mb-2">Speech recognition is not supported in your browser.</p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink/50">
             This works in Chrome, Edge, and Safari with microphone permission.
           </p>
-          <button
-            onClick={handleSkip}
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Skip
-          </button>
+          <div className="mt-4">
+            <Button variant="secondary" full={false} onClick={handleSkip}>
+              Skip
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -93,22 +93,22 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h2 className="text-2xl font-bold text-purple-600">Say It</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-secondary-dark text-center">Say It</h2>
 
-      <div className="text-lg text-gray-700 mb-4">
-        {word.emoji} {word.word}
+      <div className="flex items-center gap-2 text-lg text-ink/70">
+        <span className="text-3xl">{word.emoji}</span>
+        <span className="font-extrabold text-2xl text-secondary-dark">{word.word}</span>
       </div>
 
       {/* Model pronunciation */}
-      <div className="bg-blue-50 border-2 border-blue-500 p-6 rounded-lg w-full max-w-md">
-        <button
-          onClick={() => speak(word.word)}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg text-lg mb-4"
-        >
-          🔊 Hear Model (Normal)
-        </button>
+      <div className="bg-secondary-light rounded-2xl p-6 w-full flex flex-col gap-3">
+        <Button variant="secondary" onClick={() => speak(word.word)}>
+          🔊 Hear model (normal)
+        </Button>
 
-        <button
+        <Button
+          variant="secondary"
+          className="opacity-90"
           onClick={() => {
             cancelPendingTimeouts();
             const syllables = (word.syllables || word.word).split("-");
@@ -116,59 +116,49 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
               speakAfter(syllables[i], i * 400);
             }
           }}
-          className="w-full bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-4 rounded-lg text-lg"
         >
-          🔊 Hear Model (Slow - each syllable)
-        </button>
+          🔊 Hear model (slow — each syllable)
+        </Button>
       </div>
 
       {/* Microphone / Recognition */}
-      <div className="bg-green-50 border-2 border-green-500 p-6 rounded-lg w-full max-w-md text-center">
-        <p className="text-sm font-semibold text-green-700 mb-3">Now you try:</p>
+      <div className="bg-accent-light/60 rounded-2xl p-6 w-full text-center flex flex-col items-center gap-4">
+        <p className="text-sm font-bold text-accent-dark">Now you try</p>
 
         {status === "idle" || status === "listening" || status === "processing" ? (
           <button
             onClick={handleStartListening}
             disabled={status === "listening" || status === "processing"}
-            className={`w-full py-4 px-6 rounded-lg text-lg font-bold text-white ${
+            className={`w-full min-h-[56px] py-4 px-6 rounded-2xl text-lg font-bold text-white transition-colors ${
               status === "listening" || status === "processing"
-                ? "bg-red-500 hover:bg-red-600"
-                : "bg-green-500 hover:bg-green-600"
+                ? "bg-red-500"
+                : "bg-accent hover:bg-accent-dark"
             }`}
           >
-            {status === "listening" ? "🎤 Listening..." : status === "processing" ? "Processing..." : "🎤 Tap to Record"}
+            {status === "listening" ? "🎤 Listening…" : status === "processing" ? "Processing…" : "🎤 Tap to record"}
           </button>
         ) : null}
 
         {transcript && (
-          <div className="mt-4 p-3 bg-white border border-green-300 rounded">
-            <p className="text-sm text-gray-600">You said:</p>
-            <p className="text-lg font-semibold text-gray-800 italic">"{transcript}"</p>
+          <div className="w-full p-3 bg-white rounded-xl">
+            <p className="text-sm text-ink/50">You said</p>
+            <p className="text-lg font-semibold text-ink italic">"{transcript}"</p>
           </div>
         )}
 
-        {status === "correct" && (
-          <div className="mt-4 p-3 bg-green-200 border-2 border-green-600 rounded">
-            <p className="text-lg font-bold text-green-700">✓ Correct!</p>
-          </div>
-        )}
+        {status === "correct" && <FeedbackBanner tone="correct">Correct!</FeedbackBanner>}
 
         {status === "wrong" && (
-          <div className="mt-4 p-3 bg-red-200 border-2 border-red-600 rounded">
-            <p className="text-lg font-bold text-red-700">✗ Not quite. Try again! ({triesLeft} left)</p>
-          </div>
+          <FeedbackBanner tone="wrong">{`Not quite. Try again! (${triesLeft} left)`}</FeedbackBanner>
         )}
       </div>
 
       {/* Skip button */}
-      <button
-        onClick={handleSkip}
-        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded text-lg"
-      >
-        Skip (Practice Later)
-      </button>
+      <Button variant="ghost" full={false} onClick={handleSkip}>
+        Skip (practice later)
+      </Button>
 
-      <p className="text-xs text-gray-500 text-center max-w-md">
+      <p className="text-xs text-ink/40 text-center">
         Tip: Speak clearly and naturally. The app matches words with some flexibility for accents.
       </p>
     </div>

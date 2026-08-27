@@ -26,6 +26,17 @@ import {
   findHardToSayWords,
 } from "../lib/insights";
 import { allWords } from "../content/allWords";
+import { Card, Button, Loading } from "../components/ui";
+
+function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-sm p-5">
+      <p className="text-sm text-ink/50 font-semibold">{label}</p>
+      <p className="text-3xl font-extrabold text-secondary-dark">{value}</p>
+      {sub && <p className="text-xs text-ink/40 mt-1">{sub}</p>}
+    </div>
+  );
+}
 
 export default function Insights() {
   const navigate = useNavigate();
@@ -166,120 +177,79 @@ export default function Insights() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   const noData = masteredCount === 0 && learnedCount === 0;
 
   return (
-    <div className="flex flex-col min-h-screen gap-6 px-4 py-8 bg-gradient-to-b from-blue-50 to-purple-50">
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-purple-600">Parent Insights</h1>
+    <div className="min-h-screen w-full px-4 py-6 sm:py-8">
+      <div className="max-w-4xl mx-auto w-full flex flex-col gap-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-secondary-dark tracking-tight">
+            Parent Insights
+          </h1>
           <button
             onClick={() => navigate("/")}
-            className="text-blue-600 hover:text-blue-800 text-sm font-semibold"
+            className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4"
           >
             Back to Home
           </button>
         </div>
 
         {noData ? (
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-            <p className="text-gray-600 text-lg mb-4">
+          <Card className="text-center">
+            <p className="text-ink/70 text-lg mb-6">
               No data yet. Your child needs to complete some lessons first!
             </p>
-            <button
-              onClick={() => navigate("/")}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg"
-            >
-              Go to Home
-            </button>
-          </div>
+            <Button onClick={() => navigate("/")}>Go to Home</Button>
+          </Card>
         ) : (
           <>
             {/* Main Headline: Words Mastered */}
-            <div className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow-lg p-8 text-white mb-8">
-              <h2 className="text-2xl font-bold mb-4">Words Mastered</h2>
-              <div className="text-5xl font-bold mb-4">{masteredCount}</div>
-              <div className="text-lg mb-4">out of {totalWords} total words</div>
-              <div className="w-full bg-white/20 rounded-full h-4 mb-4">
+            <div className="rounded-3xl shadow-md p-8 text-white bg-secondary">
+              <h2 className="text-lg font-bold mb-3 opacity-90">Words Mastered</h2>
+              <div className="text-5xl font-extrabold mb-3">{masteredCount}</div>
+              <div className="text-base mb-4 opacity-90">out of {totalWords} total words</div>
+              <div className="w-full bg-white/20 rounded-full h-3 mb-4">
                 <div
-                  className="bg-white h-4 rounded-full transition-all"
+                  className="bg-white h-3 rounded-full transition-all"
                   style={{
                     width: totalWords > 0 ? `${(masteredCount / totalWords) * 100}%` : "0%",
                   }}
                 />
               </div>
-              <p className="text-sm opacity-90">
-                Mastered = streak ≥ 5, correct on ≥ 3 days, ≥ 2 question types
+              <p className="text-sm opacity-80">
+                Mastered = streak &ge; 5, correct on &ge; 3 days, &ge; 2 question types
               </p>
             </div>
 
             {/* Quick Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Words Learned</p>
-                <p className="text-3xl font-bold text-blue-600">{learnedCount}</p>
-              </div>
-              <div className="bg-green-50 border-2 border-green-500 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Being Learned</p>
-                <p className="text-3xl font-bold text-green-600">{beingLearnedCount}</p>
-              </div>
-              <div className="bg-yellow-50 border-2 border-yellow-500 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Spelling Mastered</p>
-                <p className="text-3xl font-bold text-yellow-600">{spellingMasteredCount}</p>
-              </div>
-              <div className="bg-orange-50 border-2 border-orange-500 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Streak</p>
-                <p className="text-3xl font-bold text-orange-600">{streak}</p>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StatCard label="Words Learned" value={learnedCount} />
+              <StatCard label="Being Learned" value={beingLearnedCount} />
+              <StatCard label="Spelling Mastered" value={spellingMasteredCount} />
+              <StatCard label="Streak" value={streak} sub="days in a row" />
             </div>
 
             {/* Accuracy Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">Overall Accuracy</p>
-                <p className="text-4xl font-bold text-purple-600">{overallAccuracy}%</p>
-                <p className="text-xs text-gray-500">All time</p>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">7-Day Accuracy</p>
-                <p className="text-4xl font-bold text-blue-600">{accuracy7d}%</p>
-                <p className="text-xs text-gray-500">Last week</p>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">30-Day Accuracy</p>
-                <p className="text-4xl font-bold text-green-600">{accuracy30d}%</p>
-                <p className="text-xs text-gray-500">Last month</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <StatCard label="Overall Accuracy" value={`${overallAccuracy}%`} sub="All time" />
+              <StatCard label="7-Day Accuracy" value={`${accuracy7d}%`} sub="Last week" />
+              <StatCard label="30-Day Accuracy" value={`${accuracy30d}%`} sub="Last month" />
             </div>
 
             {/* More Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">Days Completed</p>
-                <p className="text-4xl font-bold text-indigo-600">{daysCompleted}</p>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">Comprehension Accuracy</p>
-                <p className="text-4xl font-bold text-teal-600">{comprehensionAccuracy}%</p>
-                <p className="text-xs text-gray-500">(Understanding)</p>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-600 text-sm">Spelling Accuracy</p>
-                <p className="text-4xl font-bold text-pink-600">{spellingAccuracy}%</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <StatCard label="Days Completed" value={daysCompleted} />
+              <StatCard label="Comprehension Accuracy" value={`${comprehensionAccuracy}%`} sub="Understanding" />
+              <StatCard label="Spelling Accuracy" value={`${spellingAccuracy}%`} />
             </div>
 
             {/* Charts */}
             {dailyAccuracies.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Accuracy Per Day</h3>
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">Accuracy Per Day</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={dailyAccuracies}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -289,38 +259,38 @@ export default function Insights() {
                     <Line
                       type="monotone"
                       dataKey="accuracy"
-                      stroke="#7C3AED"
+                      stroke="#1f8a8c"
                       dot={{ r: 4 }}
                       isAnimationActive={false}
                     />
                   </LineChart>
                 </ResponsiveContainer>
-              </div>
+              </Card>
             )}
 
             {dailyQuestionCounts.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Questions Per Day</h3>
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">Questions Per Day</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={dailyQuestionCounts}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="count" fill="#3B82F6" isAnimationActive={false} />
+                    <Bar dataKey="count" fill="#f2994a" isAnimationActive={false} />
                   </BarChart>
                 </ResponsiveContainer>
-              </div>
+              </Card>
             )}
 
             {/* Trouble Words */}
             {troubleWords.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Trouble Words</h3>
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">Trouble Words</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b-2 border-gray-300">
+                      <tr className="border-b-2 border-gray-200">
                         <th className="text-left py-2">Word</th>
                         <th className="text-center py-2">Correct</th>
                         <th className="text-center py-2">Wrong</th>
@@ -329,40 +299,38 @@ export default function Insights() {
                     </thead>
                     <tbody>
                       {troubleWords.map((item, idx) => (
-                        <tr key={idx} className="border-b border-gray-200 hover:bg-gray-50">
-                          <td className="py-3 font-semibold text-purple-600">{item.itemId}</td>
+                        <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
+                          <td className="py-3 font-semibold text-secondary-dark">{item.itemId}</td>
                           <td className="text-center py-3 text-green-600">{item.correct}</td>
                           <td className="text-center py-3 text-red-600 font-bold">{item.wrong}</td>
-                          <td className="py-3 text-gray-600">{item.lastSeen}</td>
+                          <td className="py-3 text-ink/60">{item.lastSeen}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-              </div>
+              </Card>
             )}
 
             {/* Grammar Accuracy */}
             {grammarAccuracy.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Grammar Rules</h3>
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">Grammar Rules</h3>
                 <div className="space-y-2">
                   {grammarAccuracy.map((item, idx) => (
                     <div
                       key={idx}
-                      className={`p-3 rounded-lg ${
+                      className={`p-3 rounded-xl ${
                         item.accuracy < 60
-                          ? "bg-red-50 border-l-4 border-red-500"
+                          ? "bg-red-50 border-l-4 border-red-400"
                           : "bg-gray-50"
                       }`}
                     >
                       <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-800">{item.grammarId}</span>
+                        <span className="font-semibold text-ink">{item.grammarId}</span>
                         <span
                           className={`font-bold ${
-                            item.accuracy < 60
-                              ? "text-red-600"
-                              : "text-green-600"
+                            item.accuracy < 60 ? "text-red-600" : "text-secondary-dark"
                           }`}
                         >
                           {item.accuracy}%
@@ -374,87 +342,80 @@ export default function Insights() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
             )}
 
             {/* Pronunciation */}
             {pronunciationAccuracy > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">
                   Pronunciation Accuracy: {pronunciationAccuracy}%
                 </h3>
                 {hardToSayWords.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-sm text-gray-600 mb-3">Hard to Say:</p>
+                    <p className="text-sm text-ink/60 mb-3">Hard to Say:</p>
                     <div className="space-y-2">
                       {hardToSayWords.map((item, idx) => (
-                        <div key={idx} className="bg-gray-50 p-2 rounded text-sm">
+                        <div key={idx} className="bg-gray-50 p-2 rounded-lg text-sm">
                           <span className="font-semibold">{item.itemId}</span>
-                          <span className="text-gray-600 ml-2">
-                            {item.correct}✓ {item.wrong}✗
+                          <span className="text-ink/60 ml-2">
+                            {item.correct}&#10003; {item.wrong}&#10007;
                           </span>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
-              </div>
+              </Card>
             )}
 
             {/* Tricky Spellings */}
             {trickySpellings.length > 0 && (
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Tricky Spellings</h3>
+              <Card>
+                <h3 className="text-xl font-bold text-ink mb-4">Tricky Spellings</h3>
                 <div className="space-y-2">
                   {trickySpellings.map((item, idx) => (
-                    <div key={idx} className="bg-gray-50 p-3 rounded">
+                    <div key={idx} className="bg-gray-50 p-3 rounded-xl">
                       <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-800">{item.itemId}</span>
-                        <span className="text-sm text-gray-600">
-                          {item.correct}✓ {item.wrong}✗
+                        <span className="font-semibold text-ink">{item.itemId}</span>
+                        <span className="text-sm text-ink/60">
+                          {item.correct}&#10003; {item.wrong}&#10007;
                         </span>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
             )}
 
             {/* Change PIN */}
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Change PIN</h3>
+            <Card>
+              <h3 className="text-xl font-bold text-ink mb-4">Change PIN</h3>
               <div className="flex gap-2">
                 <input
                   type="password"
+                  inputMode="numeric"
                   maxLength={4}
                   value={newPin}
                   onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="New 4-digit PIN"
-                  className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+                  className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-accent min-h-[48px]"
                 />
-                <button
-                  onClick={handleChangePIN}
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg"
-                >
+                <Button variant="secondary" full={false} onClick={handleChangePIN} className="px-6">
                   Update
-                </button>
+                </Button>
               </div>
               {pinMessage && (
                 <p className={`text-sm mt-2 ${pinMessage.includes("success") ? "text-green-600" : "text-red-600"}`}>
                   {pinMessage}
                 </p>
               )}
-            </div>
+            </Card>
 
             {/* Export Button */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <button
-                onClick={handleExportJSON}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-              >
-                📥 Export Data as JSON
-              </button>
-            </div>
+            <Card>
+              <Button onClick={handleExportJSON}>📥 Export data as JSON</Button>
+            </Card>
           </>
         )}
       </div>

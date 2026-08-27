@@ -6,6 +6,7 @@ import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { markCorrect, markWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
+import { Page, PageTitle, Loading, Card, Button, SpeakButton, FeedbackBanner } from "../components/ui";
 
 export default function GrammarLesson() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function GrammarLesson() {
   const [isLoading, setIsLoading] = useState(true);
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [feedbackType, setFeedbackType] = useState<"correct" | "wrong" | "">("");
+  const [answered, setAnswered] = useState<{ idx: number; option: string } | null>(null);
 
   useEffect(() => {
     async function loadLesson() {
@@ -63,14 +65,15 @@ export default function GrammarLesson() {
     loadLesson();
   }, [navigate]);
 
-  const handleAnswer = async (_itemIndex: number, selectedOption: string, correctAnswer: string | number) => {
+  const handleAnswer = async (itemIndex: number, selectedOption: string, correctAnswer: string | number) => {
     if (!lesson || !schedulerItem) return;
 
     const isCorrect = selectedOption === String(correctAnswer);
     const today = getTodayKey();
+    setAnswered({ idx: itemIndex, option: selectedOption });
 
     if (isCorrect) {
-      setFeedbackMessage("✓ Correct!");
+      setFeedbackMessage("Correct!");
       setFeedbackType("correct");
 
       // Mark as correct and save
@@ -91,9 +94,10 @@ export default function GrammarLesson() {
       setTimeout(() => {
         setFeedbackMessage("");
         setFeedbackType("");
+        setAnswered(null);
       }, 1500);
     } else {
-      setFeedbackMessage("✗ Not quite right. Try again!");
+      setFeedbackMessage("Not quite right. Try again!");
       setFeedbackType("wrong");
 
       // Mark as wrong and save
@@ -114,110 +118,110 @@ export default function GrammarLesson() {
       setTimeout(() => {
         setFeedbackMessage("");
         setFeedbackType("");
+        setAnswered(null);
       }, 1500);
     }
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl text-gray-600">Loading lesson...</p>
-      </div>
-    );
+    return <Loading label="Loading lesson…" />;
   }
 
   if (!lesson || !schedulerItem) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-        <h1 className="text-4xl font-bold text-blue-600">Oops</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full text-center">
-          <p className="text-lg text-gray-700 mb-4">Lesson not found.</p>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg"
-          >
-            Back Home
-          </button>
-        </div>
-      </div>
+      <Page>
+        <PageTitle>Oops</PageTitle>
+        <Card className="text-center">
+          <p className="text-lg text-ink/80 mb-6">Lesson not found.</p>
+          <Button onClick={() => navigate("/")}>Back Home</Button>
+        </Card>
+      </Page>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 px-4 py-8">
-      <h1 className="text-4xl font-bold text-blue-600">Grammar Lesson</h1>
+    <Page>
+      <PageTitle>{lesson.title}</PageTitle>
 
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
-        <h2 className="text-3xl font-bold text-purple-600 mb-4">{lesson.title}</h2>
+      <Card>
+        <div className="mb-6 rounded-2xl bg-secondary-light/60 px-5 py-4">
+          <p className="text-base text-ink/90 leading-snug">{lesson.description}</p>
+        </div>
 
-        <p className="text-lg text-gray-700 mb-6 bg-blue-50 p-4 rounded-lg">
-          {lesson.description}
-        </p>
-
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4">Examples:</h3>
+        <div className="flex flex-col gap-3 mb-6">
           {lesson.examples.map((example, idx) => (
-            <div key={idx} className="mb-3 p-4 bg-gray-50 rounded-lg">
-              <p className="text-lg text-gray-800 mb-2">{example}</p>
-              <button
-                onClick={() => speak(example)}
-                className="text-orange-500 hover:text-orange-600 font-semibold text-sm"
-              >
+            <button
+              key={idx}
+              type="button"
+              onClick={() => speak(example)}
+              className="w-full flex items-center gap-3 rounded-2xl bg-gray-50 border border-gray-100 p-4 text-left hover:bg-accent-light/40 transition-colors"
+            >
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">
                 🔊
-              </button>
-            </div>
+              </span>
+              <span className="text-base text-ink/90 leading-snug">{example}</span>
+            </button>
           ))}
         </div>
 
         {feedbackMessage && (
-          <div className={`mb-6 p-4 rounded-lg text-center text-lg font-bold ${
-            feedbackType === "correct" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}>
-            {feedbackMessage}
+          <div className="mb-6">
+            <FeedbackBanner tone={feedbackType === "correct" ? "correct" : "wrong"}>
+              {feedbackMessage}
+            </FeedbackBanner>
           </div>
         )}
 
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4">Practice:</h3>
+        <div className="flex flex-col gap-5 mb-8">
           {lesson.practiceItems.map((item, idx) => (
-            <div key={idx} className="mb-4 p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
-              <p className="font-semibold text-gray-800 mb-3">{item.question}</p>
+            <div key={idx} className="rounded-2xl bg-secondary-light/40 p-5">
+              <p className="font-bold text-ink mb-3">{item.question}</p>
               {item.sentence && (
-                <p className="text-lg text-blue-700 mb-3 font-semibold italic">
-                  {item.sentence}
-                  <button
-                    onClick={() => speak(item.sentence || "")}
-                    className="ml-2 text-orange-500"
-                  >
-                    🔊
-                  </button>
-                </p>
+                <div className="flex items-center gap-2 mb-4">
+                  <p className="text-lg text-secondary-dark font-semibold italic">{item.sentence}</p>
+                  <SpeakButton text={item.sentence} size="sm" />
+                </div>
               )}
               {item.options && (
-                <div className="space-y-2">
-                  {item.options.map((option, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleAnswer(idx, option, item.correctAnswer)}
-                      disabled={feedbackMessage !== ""}
-                      className="w-full p-3 text-left bg-white border-2 border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {option}
-                    </button>
-                  ))}
+                <div className="space-y-2.5">
+                  {item.options.map((option, i) => {
+                    const isThisAnswered = answered && answered.idx === idx;
+                    const isSelected = isThisAnswered && answered.option === option;
+                    const isCorrectOption = option === String(item.correctAnswer);
+                    let stateClass =
+                      "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
+                    if (isThisAnswered) {
+                      if (isSelected && isCorrectOption) {
+                        stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
+                      } else if (isSelected && !isCorrectOption) {
+                        stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
+                      } else if (isCorrectOption) {
+                        stateClass = "bg-green-50 border-2 border-green-300 text-green-700";
+                      } else {
+                        stateClass = "bg-white border-2 border-gray-200 text-ink/50";
+                      }
+                    }
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleAnswer(idx, option, item.correctAnswer)}
+                        disabled={feedbackMessage !== ""}
+                        className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl transition-colors disabled:cursor-not-allowed flex items-center gap-2 ${stateClass}`}
+                      >
+                        {isThisAnswered && isSelected && isCorrectOption && <span>✓</span>}
+                        {isThisAnswered && isSelected && !isCorrectOption && <span>✗</span>}
+                        {option}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        <button
-          onClick={() => navigate("/read")}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg text-lg"
-        >
-          Continue to Reading
-        </button>
-      </div>
-    </div>
+        <Button onClick={() => navigate("/read")}>Continue to Reading</Button>
+      </Card>
+    </Page>
   );
 }
