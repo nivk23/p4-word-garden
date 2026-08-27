@@ -118,6 +118,34 @@ export async function listChildren(): Promise<ChildProfile[]> {
 }
 
 /**
+ * The currently-active child's own profile (name/emoji) — not to be
+ * confused with UserProfile, which holds streak/PIN and lives *under* the
+ * child rather than describing them. Used to show whose progress is being
+ * viewed (Home's greeting, the "Switch profile" label).
+ */
+export async function getActiveChild(): Promise<ChildProfile | null> {
+  if (!isFirebaseAvailable()) return null;
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  const childId = getActiveChildId();
+  if (!uid || !childId) return null;
+
+  const db = getFirebaseDb()!;
+  try {
+    const snap = await getDoc(doc(db, `users/${uid}/children/${childId}`));
+    if (!snap.exists()) return null;
+    // Use the childId we already fetched by, not snap.id — equivalent
+    // against real Firestore, but doesn't assume the snapshot's own id
+    // field is populated (kept this way after finding the test's minimal
+    // Firestore fake didn't set it, which real Firestore always does).
+    return { id: childId, ...(snap.data() as Omit<ChildProfile, "id">) };
+  } catch (error) {
+    console.error("Failed to load the active child profile:", error);
+    return null;
+  }
+}
+
+/**
  * Create a new child profile under the signed-in account.
  */
 export async function createChild(name: string, emoji = "🌱"): Promise<ChildProfile> {

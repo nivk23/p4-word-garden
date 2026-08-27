@@ -71,6 +71,7 @@ vi.mock("../src/firebase", () => ({
 import {
   listChildren,
   createChild,
+  getActiveChild,
   getActiveChildId,
   setActiveChildId,
   clearActiveChild,
@@ -122,6 +123,32 @@ describe("child profiles + scoped paths", () => {
     it("listChildren returns an empty array in local-only mode", async () => {
       firebaseAvailable = false;
       expect(await listChildren()).toEqual([]);
+    });
+  });
+
+  describe("getActiveChild", () => {
+    it("returns the active child's own profile (name/emoji), not another child's", async () => {
+      const alice = await createChild("Alice", "🌸");
+      const bob = await createChild("Bob", "🐝");
+
+      setActiveChildId(bob.id);
+      expect(await getActiveChild()).toMatchObject({ id: bob.id, name: "Bob", emoji: "🐝" });
+
+      setActiveChildId(alice.id);
+      expect(await getActiveChild()).toMatchObject({ id: alice.id, name: "Alice", emoji: "🌸" });
+    });
+
+    it("returns null when no child is active, or none is signed in, or in local-only mode", async () => {
+      expect(await getActiveChild()).toBeNull();
+
+      const child = await createChild("Ava");
+      setActiveChildId(child.id);
+      mockAuthState.currentUser = null;
+      expect(await getActiveChild()).toBeNull();
+
+      mockAuthState.currentUser = { uid: "parent-uid" };
+      firebaseAvailable = false;
+      expect(await getActiveChild()).toBeNull();
     });
   });
 

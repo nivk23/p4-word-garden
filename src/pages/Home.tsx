@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTodayKey } from "../lib/dates";
-import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems, clearActiveChild } from "../store/progress";
-import type { DayRecord } from "../store/progress";
+import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems, clearActiveChild, getActiveChild } from "../store/progress";
+import type { DayRecord, ChildProfile } from "../store/progress";
 import { isMastered } from "../lib/scheduler";
 import { isFirebaseAvailable } from "../firebase";
 import { signOutUser } from "../lib/auth";
@@ -15,10 +15,12 @@ export default function Home() {
   const [streak, setStreak] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [garden, setGarden] = useState({ seeds: 0, sprouts: 0, flowers: 0 });
+  const [activeChild, setActiveChild] = useState<ChildProfile | null>(null);
 
   useEffect(() => {
     async function loadData() {
       await getUserProfile();
+      setActiveChild(await getActiveChild());
 
       const today = getTodayKey();
       const record = await getDayRecord(today);
@@ -65,6 +67,11 @@ export default function Home() {
         <h1 className="font-display text-3xl sm:text-4xl font-semibold text-secondary-dark tracking-tight">
           P4 Word Garden
         </h1>
+        {activeChild && (
+          <p className="font-hand text-2xl text-ink/50 mt-1">
+            {activeChild.emoji} hi, {activeChild.name}!
+          </p>
+        )}
       </div>
 
       {!isLoading && (garden.seeds + garden.sprouts + garden.flowers > 0) && (
@@ -123,7 +130,7 @@ export default function Home() {
             }}
             className="text-secondary-dark/50 hover:text-secondary-dark text-xs font-semibold underline decoration-2 underline-offset-4"
           >
-            👤 Switch profile
+            {activeChild ? `${activeChild.emoji} ${activeChild.name} · Switch profile` : "👤 Switch profile"}
           </button>
           <button
             onClick={async () => {
