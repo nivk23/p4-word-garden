@@ -59,6 +59,13 @@ export default function Home() {
   }, []);
 
   const isDone = !!(todayRecord && todayRecord.completed);
+  // A DayRecord for today already exists (LearnWords already ran and
+  // created it + today's scheduler items) but the quiz hasn't finished it
+  // yet — e.g. she closed the tab partway through. Routing back to
+  // "Start today" → /learn-words in this state would pick a *new* set of 3
+  // words and overwrite today's DayRecord (saveDayRecord keys by date), so
+  // this needs its own "continue" path instead of re-running Learn Words.
+  const inProgress = !!todayRecord && !todayRecord.completed;
 
   return (
     <Page>
@@ -97,6 +104,15 @@ export default function Home() {
             </Button>
             <p className="text-sm text-ink/50 mt-4">See you tomorrow! 🌙</p>
           </>
+        ) : inProgress ? (
+          <>
+            <p className="text-lg text-ink/70 mb-6">
+              You're partway through today's lesson — pick up where you left off!
+            </p>
+            <Button variant="primary" onClick={() => navigate("/spell-it")}>
+              Continue today
+            </Button>
+          </>
         ) : (
           <>
             <p className="text-lg text-ink/70 mb-6">
@@ -123,7 +139,10 @@ export default function Home() {
               // Switching profiles doesn't change auth state, so AuthGate's
               // onAuthStateChanged subscription won't re-fire on its own —
               // a reload is the simplest way to make it re-check which
-              // child is active.
+              // child is active. force_child_picker tells ChildPicker to
+              // show itself even if there's only one profile (otherwise
+              // there'd be no way back to "Add profile").
+              sessionStorage.setItem("force_child_picker", "1");
               clearActiveChild();
               window.location.reload();
             }}

@@ -35,7 +35,9 @@ export default function GrammarLesson() {
   useEffect(() => {
     async function loadLesson() {
       const today = getTodayKey();
-      const dayRecord = await getDayRecord(today);
+      // getSchedulerItems() doesn't depend on today's DayRecord — fetch
+      // both concurrently instead of one after the other.
+      const [dayRecord, items] = await Promise.all([getDayRecord(today), getSchedulerItems()]);
 
       if (!dayRecord) {
         navigate("/");
@@ -53,7 +55,6 @@ export default function GrammarLesson() {
       setLesson(lessonData);
 
       // Get or create scheduler item for this grammar lesson
-      const items = await getSchedulerItems();
       let item = items.find(i => i.type === "grammar" && i.itemId === grammarId);
 
       if (!item) {

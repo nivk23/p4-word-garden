@@ -17,6 +17,7 @@ describe("ChildPicker", () => {
   beforeEach(() => {
     cleanup();
     vi.clearAllMocks();
+    sessionStorage.clear();
   });
 
   it("shows tiles for existing children; picking one selects it and calls onChildSelected", async () => {
@@ -41,6 +42,38 @@ describe("ChildPicker", () => {
 
     await waitFor(() => expect(onChildSelected).toHaveBeenCalledTimes(1));
     expect(setActiveChildId).toHaveBeenCalledWith("only-child");
+  });
+
+  it("regression: shows the picker (with 'Add profile' reachable) even with one child, when force_child_picker is set — otherwise there was no way back to add a second profile once one existed", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([{ id: "only-child", name: "Cleo", emoji: "🐝", createdAt: "now" }]);
+    const onChildSelected = vi.fn();
+    render(<ChildPicker onChildSelected={onChildSelected} />);
+
+    await waitFor(() => screen.getByText("Cleo"));
+    expect(onChildSelected).not.toHaveBeenCalled();
+    expect(setActiveChildId).not.toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: /add profile/i })).toBeTruthy();
+
+    // Picking the existing tile still works normally from here.
+    fireEvent.click(screen.getByText("Cleo"));
+    expect(setActiveChildId).toHaveBeenCalledWith("only-child");
+    expect(onChildSelected).toHaveBeenCalledTimes(1);
+  });
+
+  it("consumes the force_child_picker flag — a later normal load with one child still auto-selects", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([{ id: "only-child", name: "Cleo", emoji: "🐝", createdAt: "now" }]);
+    const { unmount } = render(<ChildPicker onChildSelected={vi.fn()} />);
+    await waitFor(() => screen.getByText("Cleo"));
+    unmount();
+    cleanup();
+    vi.clearAllMocks();
+
+    listChildren.mockResolvedValueOnce([{ id: "only-child", name: "Cleo", emoji: "🐝", createdAt: "now" }]);
+    const onChildSelected = vi.fn();
+    render(<ChildPicker onChildSelected={onChildSelected} />);
+    await waitFor(() => expect(onChildSelected).toHaveBeenCalledTimes(1));
   });
 
   it("creates a new profile and selects it", async () => {

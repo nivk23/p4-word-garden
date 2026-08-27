@@ -14,10 +14,19 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
 
   useEffect(() => {
     let cancelled = false;
+    // Home's "Switch profile" sets this flag before reloading specifically
+    // so this screen shows even with one profile — otherwise there was no
+    // way to ever reach "Add profile" again once a first profile existed,
+    // since the auto-select-if-only-one-profile behaviour below would
+    // always skip straight past this screen.
+    const forced = sessionStorage.getItem("force_child_picker") === "1";
+    sessionStorage.removeItem("force_child_picker");
+
     listChildren().then((list) => {
       if (cancelled) return;
-      // Exactly one profile: skip the picker entirely, just use it.
-      if (list.length === 1) {
+      // Exactly one profile and we weren't asked to force the picker:
+      // skip it entirely, just use it (the normal post-login case).
+      if (list.length === 1 && !forced) {
         setActiveChildId(list[0].id);
         onChildSelected();
         return;
