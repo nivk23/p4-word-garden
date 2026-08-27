@@ -39,8 +39,19 @@ export default function Quiz() {
   useEffect(() => {
     async function loadQuiz() {
       const today = getTodayKey();
-      const record = await getDayRecord(today);
-      const allItems = await getSchedulerItems();
+      const yesterday = getYesterdayKey();
+
+      // These three reads are independent — fetching them one at a time
+      // (each an awaited Firestore round-trip) was the main reason quiz
+      // loading felt slow, especially on mobile networks. Run them
+      // concurrently instead; yesterday's record is fetched even when it
+      // turns out not to be needed (extra-practice quizzes), which costs
+      // nothing since it's already in flight alongside the other two.
+      const [record, allItems, yesterdayRecord] = await Promise.all([
+        getDayRecord(today),
+        getSchedulerItems(),
+        getDayRecord(yesterday),
+      ]);
 
       if (!record) {
         // No day started yet
@@ -59,8 +70,6 @@ export default function Quiz() {
         schedulerItemsForQuiz = buildDailyQuiz(today, allItems, [], 6);
       } else {
         // Regular daily quiz: yesterday's items + due items + random
-        const yesterday = getYesterdayKey();
-        const yesterdayRecord = await getDayRecord(yesterday);
         const yesterdayItemIds = yesterdayRecord ? yesterdayRecord.wordIds : [];
         schedulerItemsForQuiz = buildDailyQuiz(today, allItems, yesterdayItemIds, 10);
       }

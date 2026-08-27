@@ -38,16 +38,6 @@ export interface Question {
 export function generateWordQuestions(word: Word, askSeed?: number): Question[] {
   const questions: Question[] = [];
 
-  // picture_pick: "Which emoji shows this word?"
-  questions.push({
-    id: `${word.word}_picture`,
-    type: "picture_pick",
-    itemId: word.word,
-    question: `Which emoji shows "${word.word}"?`,
-    options: [word.emoji, getRandomEmojis(3)].flat(),
-    correctAnswer: 0, // shuffle would change this
-  });
-
   // meaning: "What does X mean?"
   const meaningsSeed = askSeed !== undefined ? askSeed * 31 + 1 : undefined;
   const meanings = [word.kidMeaning, ...getRandomMeanings(3, word.word, meaningsSeed)];
@@ -147,11 +137,6 @@ export function selectDailyPassage(): { passage: string; questions: Array<{ q: s
 }
 
 // Helper functions
-
-function getRandomEmojis(count: number): string[] {
-  const emojis = ["🎉", "🎨", "🎭", "🎪", "🎸", "🎮", "🏀", "⚽", "🐶", "🐱"];
-  return shuffleArray(emojis).slice(0, count);
-}
 
 function getRandomMeanings(count: number, excludeWord: string, seed?: number): string[] {
   const candidates = allWords.filter((w) => w.word !== excludeWord);

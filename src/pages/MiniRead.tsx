@@ -20,8 +20,10 @@ export default function MiniRead() {
       const today = getTodayKey();
       const yesterday = getYesterdayKey();
 
-      const todayRecord = await getDayRecord(today);
-      const yesterdayRecord = await getDayRecord(yesterday);
+      const [todayRecord, yesterdayRecord] = await Promise.all([
+        getDayRecord(today),
+        getDayRecord(yesterday),
+      ]);
 
       const targetWordIds = new Set<string>();
 

@@ -23,9 +23,11 @@ export default function SpellIt() {
   useEffect(() => {
     async function load() {
       const today = getTodayKey();
-      const dayRecord = await getDayRecord(today);
+      const [dayRecord, items] = await Promise.all([
+        getDayRecord(today),
+        getSchedulerItems(),
+      ]);
       if (dayRecord) {
-        const items = await getSchedulerItems();
         const items3 = items.filter((i) =>
           dayRecord.wordIds.includes(i.itemId)
         );

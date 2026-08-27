@@ -48,10 +48,16 @@ describe("Questions", () => {
       const questions = generateWordQuestions(testWord);
       const types = new Set(questions.map((q) => q.type));
 
-      expect(types.has("picture_pick")).toBe(true);
       expect(types.has("meaning")).toBe(true);
       expect(types.has("situation")).toBe(true);
       expect(types.has("listen_pick")).toBe(true);
+    });
+
+    it("should not generate the emoji-picking question type (removed from the quiz)", () => {
+      const questions = generateWordQuestions(testWord);
+      const types = new Set(questions.map((q) => q.type));
+
+      expect(types.has("picture_pick")).toBe(false);
     });
 
     it("should not have duplicate question IDs", () => {
