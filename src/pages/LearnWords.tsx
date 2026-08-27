@@ -37,31 +37,40 @@ export default function LearnWords() {
     if (currentWord < learningWords.length - 1) {
       setCurrentWord(currentWord + 1);
     } else {
-      // Create scheduler items for the 3 new words
+      // Create scheduler items for the 3 new words. These 3 writes plus the
+      // read below are all independent of each other (the read is counting
+      // existing *grammar* items, unrelated to the *word* items being
+      // written) — run them concurrently instead of one at a time, which
+      // was 4 sequential Firestore round-trips on this exact transition
+      // (the reported ~2.7s delay after tapping the final "Continue").
       const today = getTodayKey();
-      for (const word of learningWords) {
-        await saveSchedulerItem({
-          itemId: word.word,
-          type: "word",
-          introducedOn: today,
-          box: 0,
-          spellBox: 0,
-          correct: 0,
-          wrong: 0,
-          spellCorrect: 0,
-          spellWrong: 0,
-          streak: 0,
-          lastSeen: today,
-          nextDue: today,
-          correctDays: [],
-          correctTypes: [],
-          sayCorrect: 0,
-          sayWrong: 0,
-        });
-      }
+      const [, schedulerItems] = await Promise.all([
+        Promise.all(
+          learningWords.map((word) =>
+            saveSchedulerItem({
+              itemId: word.word,
+              type: "word",
+              introducedOn: today,
+              box: 0,
+              spellBox: 0,
+              correct: 0,
+              wrong: 0,
+              spellCorrect: 0,
+              spellWrong: 0,
+              streak: 0,
+              lastSeen: today,
+              nextDue: today,
+              correctDays: [],
+              correctTypes: [],
+              sayCorrect: 0,
+              sayWrong: 0,
+            })
+          )
+        ),
+        getSchedulerItems(),
+      ]);
 
       // Select next grammar lesson
-      const schedulerItems = await getSchedulerItems();
       const taughtGrammarIds = new Set(schedulerItems.filter(i => i.type === "grammar").map(i => i.itemId));
       const grammarId = `lesson_${taughtGrammarIds.size + 1}`; // Next lesson number
 

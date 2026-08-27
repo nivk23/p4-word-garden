@@ -71,6 +71,49 @@ describe("CompareChildren", () => {
     expect(getChildRawData).toHaveBeenCalledWith("bob");
   });
 
+  it("regression: renders a 'Words known' column distinct from 'Words mastered' (the value was computed but never actually rendered in the table)", async () => {
+    listChildren.mockResolvedValueOnce([
+      { id: "alice", name: "Alice", emoji: "🌸", createdAt: "now" },
+      { id: "bob", name: "Bob", emoji: "🌿", createdAt: "now" },
+    ]);
+    // A word that's started (box >= 1, so it counts as "known") but far
+    // short of the mastery bar (streak >= 5, correct on >= 3 days, >= 2
+    // question types) — known and mastered must differ for this to be a
+    // meaningful check.
+    const startedButNotMastered = {
+      itemId: "huge",
+      type: "word" as const,
+      introducedOn: "2026-01-01",
+      box: 1,
+      correct: 1,
+      wrong: 0,
+      streak: 1,
+      lastSeen: "2026-01-01",
+      nextDue: "2026-01-02",
+      correctDays: ["2026-01-01"],
+      correctTypes: ["meaning"],
+    };
+    getChildRawData.mockImplementation(async () => ({
+      items: [startedButNotMastered],
+      dayRecords: [],
+      logs: [],
+      profile: { name: "Learner", createdAt: "now", streak: 0, lastCompletedDay: "", pinHash: "" },
+    }));
+
+    render(
+      <MemoryRouter>
+        <CompareChildren />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => screen.getByText(/known/i));
+    expect(screen.getByText(/mastered/i)).toBeTruthy();
+
+    const table = screen.getByRole("table");
+    expect(table.textContent).toMatch(/1\s*\/\s*\d+/); // "1 / N" (known)
+    expect(table.textContent).toMatch(/0\s*\/\s*\d+/); // "0 / N" (mastered)
+  });
+
   it("shows a message when there are no child profiles at all", async () => {
     listChildren.mockResolvedValueOnce([]);
 

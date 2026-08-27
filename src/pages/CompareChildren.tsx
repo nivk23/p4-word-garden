@@ -92,6 +92,9 @@ export default function CompareChildren() {
                     Child
                   </th>
                   <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
+                    Words known
+                  </th>
+                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
                     Words mastered
                   </th>
                   <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
@@ -115,10 +118,13 @@ export default function CompareChildren() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map(({ child, mastered, streak, daysCompleted, accuracy, comprehension, spelling, pronunciation }) => (
+                {rows.map(({ child, known, mastered, streak, daysCompleted, accuracy, comprehension, spelling, pronunciation }) => (
                   <tr key={child.id} className="border-t border-secondary/15">
                     <td className="sticky left-0 bg-cream py-3 pr-4 font-display font-semibold text-ink whitespace-nowrap">
                       {child.emoji} {child.name}
+                    </td>
+                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
+                      {known} / {totalWords}
                     </td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
                       {mastered} / {totalWords}
