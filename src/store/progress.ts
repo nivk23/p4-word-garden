@@ -67,7 +67,7 @@ export function createUserProfile(): UserProfile {
 /**
  * Simple hash function for PIN (not cryptographic, just for basic obfuscation)
  */
-function hashPin(pin: string): string {
+export function hashPin(pin: string): string {
   let hash = 0;
   for (let i = 0; i < pin.length; i++) {
     const char = pin.charCodeAt(i);

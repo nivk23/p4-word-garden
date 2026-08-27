@@ -1,17 +1,7 @@
 import { useState } from "react";
-import { getUserProfile } from "../store/progress";
+import { getUserProfile, hashPin } from "../store/progress";
 import type { ReactNode } from "react";
 import { Page, PageTitle, Card, Button } from "../components/ui";
-
-function hashPin(pin: string): string {
-  let hash = 0;
-  for (let i = 0; i < pin.length; i++) {
-    const char = pin.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash).toString(16);
-}
 
 export default function PinGate({ children }: { children: ReactNode }) {
   const [pin, setPin] = useState("");

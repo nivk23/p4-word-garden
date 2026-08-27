@@ -6,6 +6,7 @@ import {
   getSchedulerItems,
   getUserProfile,
   saveUserProfile,
+  hashPin,
 } from "../store/progress";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import {
@@ -26,13 +27,13 @@ import {
   findHardToSayWords,
 } from "../lib/insights";
 import { allWords } from "../content/allWords";
-import { Card, Button, Loading } from "../components/ui";
+import { PageTitle, Card, Button, Loading } from "../components/ui";
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5">
+    <div className="bg-cream border border-secondary/20 rounded-2xl p-5 shadow-[0_4px_0_-2px_rgba(107,66,41,0.15)]">
       <p className="text-sm text-ink/50 font-semibold">{label}</p>
-      <p className="text-3xl font-extrabold text-secondary-dark">{value}</p>
+      <p className="font-display text-3xl font-semibold text-secondary-dark">{value}</p>
       {sub && <p className="text-xs text-ink/40 mt-1">{sub}</p>}
     </div>
   );
@@ -131,14 +132,7 @@ export default function Insights() {
     }
 
     const profile = await getUserProfile();
-    // Simple hash (same as in progress.ts)
-    let hash = 0;
-    for (let i = 0; i < newPin.length; i++) {
-      const char = newPin.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash;
-    }
-    profile.pinHash = Math.abs(hash).toString(16);
+    profile.pinHash = hashPin(newPin);
     await saveUserProfile(profile);
     setPinMessage("PIN changed successfully!");
     setNewPin("");
@@ -183,12 +177,13 @@ export default function Insights() {
   const noData = masteredCount === 0 && learnedCount === 0;
 
   return (
-    <div className="min-h-screen w-full px-4 py-6 sm:py-8">
+    <div
+      className="min-h-screen w-full px-4 py-6 sm:py-8"
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 24px)" }}
+    >
       <div className="max-w-4xl mx-auto w-full flex flex-col gap-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-secondary-dark tracking-tight">
-            Parent Insights
-          </h1>
+          <PageTitle>Parent Insights</PageTitle>
           <div className="flex flex-col items-end gap-1">
             <button
               onClick={() => navigate("/compare-children")}
@@ -215,22 +210,22 @@ export default function Insights() {
         ) : (
           <>
             {/* Main Headline: Words Mastered */}
-            <div className="rounded-3xl shadow-md p-8 text-white bg-secondary">
-              <h2 className="text-lg font-bold mb-3 opacity-90">Words Mastered</h2>
-              <div className="text-5xl font-extrabold mb-3">{masteredCount}</div>
-              <div className="text-base mb-4 opacity-90">out of {totalWords} total words</div>
-              <div className="w-full bg-white/20 rounded-full h-3 mb-4">
+            <Card className="text-center">
+              <p className="font-hand text-2xl text-ink/50 -mb-1">words mastered</p>
+              <div className="font-display text-6xl font-semibold text-secondary-dark mb-2">{masteredCount}</div>
+              <p className="text-base text-ink/60 mb-4">out of {totalWords} total words</p>
+              <div className="w-full bg-secondary-light rounded-full h-3 mb-4">
                 <div
-                  className="bg-white h-3 rounded-full transition-all"
+                  className="bg-secondary h-3 rounded-full transition-all"
                   style={{
                     width: totalWords > 0 ? `${(masteredCount / totalWords) * 100}%` : "0%",
                   }}
                 />
               </div>
-              <p className="text-sm opacity-80">
+              <p className="text-sm text-ink/40">
                 Mastered = streak &ge; 5, correct on &ge; 3 days, &ge; 2 question types
               </p>
-            </div>
+            </Card>
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -257,7 +252,7 @@ export default function Insights() {
             {/* Charts */}
             {dailyAccuracies.length > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">Accuracy Per Day</h3>
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Accuracy Per Day</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={dailyAccuracies}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -278,7 +273,7 @@ export default function Insights() {
 
             {dailyQuestionCounts.length > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">Questions Per Day</h3>
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Questions Per Day</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={dailyQuestionCounts}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -294,7 +289,7 @@ export default function Insights() {
             {/* Trouble Words */}
             {troubleWords.length > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">Trouble Words</h3>
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Trouble Words</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
@@ -323,7 +318,7 @@ export default function Insights() {
             {/* Grammar Accuracy */}
             {grammarAccuracy.length > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">Grammar Rules</h3>
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Grammar Rules</h3>
                 <div className="space-y-2">
                   {grammarAccuracy.map((item, idx) => (
                     <div
@@ -356,7 +351,7 @@ export default function Insights() {
             {/* Pronunciation */}
             {pronunciationAccuracy > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">
                   Pronunciation Accuracy: {pronunciationAccuracy}%
                 </h3>
                 {hardToSayWords.length > 0 && (
@@ -380,7 +375,7 @@ export default function Insights() {
             {/* Tricky Spellings */}
             {trickySpellings.length > 0 && (
               <Card>
-                <h3 className="text-xl font-bold text-ink mb-4">Tricky Spellings</h3>
+                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Tricky Spellings</h3>
                 <div className="space-y-2">
                   {trickySpellings.map((item, idx) => (
                     <div key={idx} className="bg-gray-50 p-3 rounded-xl">
@@ -398,7 +393,7 @@ export default function Insights() {
 
             {/* Change PIN */}
             <Card>
-              <h3 className="text-xl font-bold text-ink mb-4">Change PIN</h3>
+              <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">Change PIN</h3>
               <div className="flex gap-2">
                 <input
                   type="password"
