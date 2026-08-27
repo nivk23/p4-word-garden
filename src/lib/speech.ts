@@ -52,7 +52,15 @@ export function startListening(
   };
   recognition.onend = () => {};
 
-  recognition.start();
+  try {
+    recognition.start();
+  } catch (e) {
+    // start() throws synchronously (InvalidStateError) if a recognition
+    // session is already active — surface it the same way as any other
+    // failure instead of leaving the caller hanging.
+    onError("start-failed");
+    return () => {};
+  }
 
   return () => {
     try {
@@ -61,6 +69,27 @@ export function startListening(
       // Already stopped
     }
   };
+}
+
+/**
+ * Turn a SpeechRecognition error code into a message a parent/child can act
+ * on, instead of the mic button just silently doing nothing (which is what
+ * happened before this existed — errors only ever reached the console).
+ */
+export function describeSpeechError(error: string): string {
+  switch (error) {
+    case "not-allowed":
+    case "service-not-allowed":
+      return "Please allow microphone access for this site, then try again.";
+    case "audio-capture":
+      return "No microphone was found on this device.";
+    case "no-speech":
+      return "Didn't hear anything — try again and speak clearly.";
+    case "network":
+      return "No internet connection — this needs the internet to work.";
+    default:
+      return "Something went wrong with the microphone. Try again.";
+  }
 }
 
 /**

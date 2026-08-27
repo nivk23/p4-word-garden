@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { speak, cancelPendingTimeouts, speakAfter } from "../lib/tts";
-import { isSupported, startListening, matchesWord, homophones } from "../lib/speech";
+import { isSupported, startListening, matchesWord, homophones, describeSpeechError } from "../lib/speech";
 import type { Word } from "../content/words";
 import { Button, FeedbackBanner } from "./ui";
 
@@ -14,6 +14,7 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
   const [status, setStatus] = useState<"idle" | "listening" | "processing" | "correct" | "wrong">("idle");
   const [transcript, setTranscript] = useState("");
   const [triesLeft, setTriesLeft] = useState(3);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const stopListeningRef = useRef<() => void>(() => {});
   const supported = isSupported();
 
@@ -32,6 +33,7 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
 
     setStatus("listening");
     setTranscript("");
+    setErrorMessage(null);
 
     stopListeningRef.current = startListening(
       (text, isFinal) => {
@@ -43,12 +45,14 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
       (error) => {
         console.error("Speech error:", error);
         setStatus("idle");
+        setErrorMessage(describeSpeechError(error));
       }
     );
   };
 
   const checkAnswer = (text: string) => {
     setStatus("processing");
+    setErrorMessage(null);
     const isCorrect = matchesWord(text, word.word, homophones);
 
     if (isCorrect) {
@@ -150,6 +154,10 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
 
         {status === "wrong" && (
           <FeedbackBanner tone="wrong">{`Not quite. Try again! (${triesLeft} left)`}</FeedbackBanner>
+        )}
+
+        {status === "idle" && errorMessage && (
+          <FeedbackBanner tone="wrong">{errorMessage}</FeedbackBanner>
         )}
       </div>
 
