@@ -109,7 +109,7 @@ export default function LearnWords() {
         <div className="flex flex-col items-center text-center gap-1">
           <div className="text-6xl mb-1">{word.emoji}</div>
           <h2
-            className="font-extrabold text-secondary-dark leading-tight"
+            className="font-display font-semibold text-secondary-dark leading-tight"
             style={{ fontSize: "clamp(3.5rem, 8vw + 1.2rem, 5rem)", wordBreak: "break-word", overflowWrap: "anywhere" }}
           >
             {word.word}

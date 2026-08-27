@@ -97,7 +97,7 @@ export default function SayIt({ word, onCorrect, onWrong }: Props) {
 
       <div className="flex items-center gap-2 text-lg text-ink/70">
         <span className="text-3xl">{word.emoji}</span>
-        <span className="font-extrabold text-2xl text-secondary-dark">{word.word}</span>
+        <span className="font-display font-semibold text-2xl text-secondary-dark">{word.word}</span>
       </div>
 
       {/* Model pronunciation */}

@@ -96,7 +96,7 @@ export default function SpellTiles({ word, onCorrect, onWrong }: Props) {
       {/* Selected so far */}
       <div className="bg-secondary-light rounded-2xl p-6 min-h-16 w-full">
         <p className="text-ink/50 text-sm mb-2">Your spelling</p>
-        <p className="text-3xl font-extrabold tracking-widest text-secondary-dark">
+        <p className="font-display text-3xl font-semibold tracking-widest text-secondary-dark">
           {selected.length === 0 ? "_".repeat(correctOrder.length) : selected.join("")}
         </p>
       </div>

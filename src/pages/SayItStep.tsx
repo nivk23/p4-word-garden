@@ -109,7 +109,7 @@ export default function SayItStep() {
       <Card>
         <div className="flex flex-col items-center text-center gap-2 mb-6">
           <div className="text-6xl">{word.emoji}</div>
-          <h2 className="text-4xl font-extrabold text-secondary-dark">{word.word}</h2>
+          <h2 className="font-display text-4xl font-semibold text-secondary-dark">{word.word}</h2>
           <p className="text-lg text-ink/70">{word.kidMeaning}</p>
         </div>
 

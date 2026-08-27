@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTodayKey } from "../lib/dates";
-import { getUserProfile, getDayRecord, calculateStreak } from "../store/progress";
+import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems } from "../store/progress";
 import type { DayRecord } from "../store/progress";
+import { isMastered } from "../lib/scheduler";
 import { Page, Card, Button, Chip } from "../components/ui";
+import GardenBed from "../components/GardenBed";
 
 export default function Home() {
   const navigate = useNavigate();
   const [todayRecord, setTodayRecord] = useState<DayRecord | null>(null);
   const [streak, setStreak] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [garden, setGarden] = useState({ seeds: 0, sprouts: 0, flowers: 0 });
 
   useEffect(() => {
     async function loadData() {
@@ -32,6 +35,21 @@ export default function Home() {
       const records = results.filter((r) => r !== null);
       const calculatedStreak = calculateStreak(records);
       setStreak(calculatedStreak);
+
+      // Every learned word is a plant in the garden bed, growth stage
+      // mirroring the scheduler's own mastery rule.
+      const schedulerItems = await getSchedulerItems();
+      const words = schedulerItems.filter((i) => i.type === "word");
+      let seeds = 0;
+      let sprouts = 0;
+      let flowers = 0;
+      for (const item of words) {
+        if (isMastered(item)) flowers++;
+        else if (item.box >= 1) sprouts++;
+        else seeds++;
+      }
+      setGarden({ seeds, sprouts, flowers });
+
       setIsLoading(false);
     }
     loadData();
@@ -42,11 +60,14 @@ export default function Home() {
   return (
     <Page>
       <div className="text-center mt-4">
-        <div className="text-5xl mb-2">🌱</div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-secondary-dark tracking-tight">
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-secondary-dark tracking-tight">
           P4 Word Garden
         </h1>
       </div>
+
+      {!isLoading && (garden.seeds + garden.sprouts + garden.flowers > 0) && (
+        <GardenBed seeds={garden.seeds} sprouts={garden.sprouts} flowers={garden.flowers} />
+      )}
 
       <Card className="text-center">
         <p className="text-sm font-bold uppercase tracking-wide text-ink/40 mb-1">Streak</p>

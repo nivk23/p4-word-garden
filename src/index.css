@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,9 +6,15 @@
 
 /* Design tokens — single warm accent + one calm secondary, kept out of the
    rainbow-of-cards trap. Feedback colours (green/red) are reserved for
-   correct/wrong states only, never used as decoration. */
+   correct/wrong states only, never used as decoration.
+
+   "Word Garden" palette: mist/soil/leaf/marigold/sky/petal are used for the
+   garden-themed elements (the Home garden bed, mastery indicators) — they
+   sit alongside, not instead of, the existing accent/secondary tokens
+   already used throughout the app. */
 @theme {
-  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Atkinson Hyperlegible', 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fredoka', 'Nunito', ui-sans-serif, system-ui, sans-serif;
 
   --color-cream: #fffaf3;
   --color-cream-deep: #fef2e2;
@@ -22,6 +28,20 @@
   --color-secondary-light: #dcf3f2;
 
   --color-ink: #3a3226;
+
+  /* Word Garden palette */
+  --color-mist: #eef3f4;
+  --color-mist-dark: #c9d8da;
+  --color-soil: #8a5a3b;
+  --color-soil-dark: #6b4229;
+  --color-leaf: #4f9d5c;
+  --color-leaf-dark: #367a42;
+  --color-marigold: #f2a63a;
+  --color-marigold-dark: #d6871a;
+  --color-sky: #7ec4e8;
+  --color-sky-dark: #4f9fca;
+  --color-petal: #f2879c;
+  --color-petal-dark: #db5f79;
 }
 
 * {
@@ -34,7 +54,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-sans);
   background: linear-gradient(to bottom, var(--color-cream), var(--color-cream-deep));
   color: var(--color-ink);
   min-height: 100vh;
@@ -45,7 +65,7 @@ body {
 }
 
 button {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Large touch targets everywhere by default */

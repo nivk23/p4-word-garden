@@ -314,7 +314,7 @@ export default function Quiz() {
           <div className="text-center">
             <div className="text-6xl mb-3">{word.emoji}</div>
             <h2
-              className="font-extrabold text-secondary-dark mb-4"
+              className="font-display font-semibold text-secondary-dark mb-4"
               style={{ fontSize: "clamp(2.5rem, 6vw + 1rem, 3.5rem)" }}
             >
               {word.word}
@@ -358,7 +358,7 @@ export default function Quiz() {
               <div className="flex flex-col items-center text-center gap-1 mb-6">
                 <div className="text-5xl mb-1">{word.emoji}</div>
                 <h2
-                  className="font-extrabold text-secondary-dark leading-tight"
+                  className="font-display font-semibold text-secondary-dark leading-tight"
                   style={{ fontSize: "clamp(2.25rem, 6vw + 0.8rem, 3rem)" }}
                 >
                   {word.word}

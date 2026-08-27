@@ -6,7 +6,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Nunito', 'sans-serif'],
+        sans: ['Atkinson Hyperlegible', 'Nunito', 'sans-serif'],
+        display: ['Fredoka', 'Nunito', 'sans-serif'],
       },
     },
   },

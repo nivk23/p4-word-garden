@@ -33,7 +33,7 @@ export function Page({
 
 export function PageTitle({ children }: { children: ReactNode }) {
   return (
-    <h1 className="text-2xl sm:text-3xl font-extrabold text-secondary-dark text-center tracking-tight">
+    <h1 className="font-display text-2xl sm:text-3xl font-semibold text-secondary-dark text-center tracking-tight">
       {children}
     </h1>
   );
