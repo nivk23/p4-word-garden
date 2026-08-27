@@ -66,17 +66,34 @@ NodeSource (jsdom's undici needs Node ≥22). A fresh session may need to redo t
 `npm test`/`npm run build` will work.
 
 ## Likely next asks
-- First pass of the "word garden" redesign landed (commit "Word Garden redesign:
-  Fredoka/Atkinson typography + SVG garden bed on Home"): new mist/soil/leaf/marigold/sky/
-  petal theme tokens in `src/index.css`, Fredoka 600 for headings + hero word displays,
-  Atkinson Hyperlegible for body text app-wide, and a new `GardenBed` component on Home
-  (each learned word is a seed/sprout/flower plant, stage read from the existing
-  `isMastered`/box mastery rule, capped+scaled for large word counts). Verified with a
-  local-only Playwright screenshot pass (no visual-review channel in this session) — screens
-  looked coherent and on-brief in that check, but this is a scoped first pass, **not** a full
-  re-skin of every screen's colours (most pages still use the pre-existing accent/secondary
-  palette from the "word-as-hero redesign" commit). Real next step: get the user's eyes on it
-  on the actual tablet and decide whether/how far to extend the palette further.
+- User said the first "word garden" pass (above) still looked ugly. Root cause turned out to
+  be a real, live production bug, not just a colour-taste problem: `src/index.css` used the
+  legacy `@tailwind base/components/utilities` directives, which in the installed
+  tailwindcss 4.3.3 **never load Tailwind's default spacing/radius/font-size/container
+  scale** — only utilities backed by our own `@theme` tokens (colours, fonts) worked. Every
+  `p-*`/`px-*`/`gap-*`/`rounded-2xl`/`text-lg`/`max-w-2xl` class across the whole app was
+  silently dropped from the built CSS, so every screen rendered edge-to-edge with zero
+  padding/rounding — reproduced even with the pre-redesign index.css, so this predates this
+  session entirely and is presumably also wrong on the live site right now. Fixed by
+  switching to `@import "tailwindcss";` (commit "Fix broken Tailwind theme scale + redo
+  visual design as a garden journal"). **If a future session touches `src/index.css`, do not
+  revert to `@tailwind base/components/utilities` — verify `dist/assets/index-*.css` actually
+  contains e.g. `.p-6{` after any build config change.**
+- With that fixed, redid the visual design using the `frontend-design` plugin (installed
+  this session from the official Anthropic marketplace as `frontend-design@claude-plugins-official`
+  — needs a session restart to be invokable via the Skill tool; this session read its
+  SKILL.md directly and followed it manually instead of waiting). New concept: a child's
+  garden journal of seed packets and plant tags, replacing the generic "pastel SaaS card"
+  look. Rust accent + moss-green secondary (same token names, so every page repaints without
+  per-page edits), Fredoka 600 headings/hero words, Atkinson Hyperlegible body, Caveat
+  (handwriting face) used sparingly for two journal-style captions. Signature carried via
+  shared `ui.tsx` primitives: `Card` = seed packet (dashed border, soil-toned shadow, leaf
+  flourish), `Button` = chunky plant-stake tab (pressable colour shadow slab). One motion
+  moment: Learn Words hero word grows in (reduced-motion respected). `GardenBed` from the
+  first pass kept as-is.
+- Verified with local-only Playwright screenshots (Home, Learn Words, Spell It, Parent
+  Access) — no visual-review channel in this session, so this is still unseen on a real
+  device. Get the user's eyes on it on the actual tablet next.
 - Push the current commits (`git push`, GitHub Pages) and deploy (`npm run deploy`, Firebase)
   once the user's happy for this to go live — not done automatically since these affect
   shared/live systems, and this sandbox has no GitHub/Firebase credentials configured anyway
