@@ -8,6 +8,25 @@ import { markCorrect, markWrong } from "../lib/scheduler";
 import type { SchedulerItem } from "../lib/scheduler";
 import { Page, PageTitle, Loading, Card, Button, SpeakButton, FeedbackBanner } from "../components/ui";
 
+/**
+ * `correctAnswer` is a 0-based index into `options` for multiple-choice
+ * items (pick_word/choose_form), but a literal word for sentence-tap items
+ * (tag_noun/tag_verb/tag_adjective, which have no `options`). Resolve both
+ * shapes to the actual expected string once, instead of comparing an option
+ * *string* against a stringified *index* (which never matches).
+ */
+function resolvePracticeAnswer(item: { options?: string[]; correctAnswer: string | number }): string {
+  if (item.options && typeof item.correctAnswer === "number") {
+    return item.options[item.correctAnswer];
+  }
+  return String(item.correctAnswer);
+}
+
+/** Strip leading/trailing punctuation so a tapped word like "mat." matches "mat". */
+function stripPunctuation(word: string): string {
+  return word.replace(/^[.,!?;:"'()]+|[.,!?;:"'()]+$/g, "");
+}
+
 export default function GrammarLesson() {
   const navigate = useNavigate();
   const [lesson, setLesson] = useState<typeof grammarLessons[0] | null>(null);
@@ -65,10 +84,10 @@ export default function GrammarLesson() {
     loadLesson();
   }, [navigate]);
 
-  const handleAnswer = async (itemIndex: number, selectedOption: string, correctAnswer: string | number) => {
+  const handleAnswer = async (itemIndex: number, selectedOption: string, expectedAnswer: string) => {
     if (!lesson || !schedulerItem) return;
 
-    const isCorrect = selectedOption === String(correctAnswer);
+    const isCorrect = selectedOption === expectedAnswer;
     const today = getTodayKey();
     setAnswered({ idx: itemIndex, option: selectedOption });
 
@@ -185,9 +204,10 @@ export default function GrammarLesson() {
               {item.options && (
                 <div className="space-y-2.5">
                   {item.options.map((option, i) => {
+                    const expected = resolvePracticeAnswer(item);
                     const isThisAnswered = answered && answered.idx === idx;
                     const isSelected = isThisAnswered && answered.option === option;
-                    const isCorrectOption = option === String(item.correctAnswer);
+                    const isCorrectOption = option === expected;
                     let stateClass =
                       "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
                     if (isThisAnswered) {
@@ -204,13 +224,48 @@ export default function GrammarLesson() {
                     return (
                       <button
                         key={i}
-                        onClick={() => handleAnswer(idx, option, item.correctAnswer)}
+                        onClick={() => handleAnswer(idx, option, expected)}
                         disabled={feedbackMessage !== ""}
                         className={`w-full min-h-[56px] p-4 text-left text-lg font-semibold rounded-2xl transition-colors disabled:cursor-not-allowed flex items-center gap-2 ${stateClass}`}
                       >
                         {isThisAnswered && isSelected && isCorrectOption && <span>✓</span>}
                         {isThisAnswered && isSelected && !isCorrectOption && <span>✗</span>}
                         {option}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {item.sentence && !item.options && (
+                <div className="flex flex-wrap gap-2">
+                  {item.sentence.split(" ").map((token, i) => {
+                    const cleaned = stripPunctuation(token);
+                    const expected = resolvePracticeAnswer(item);
+                    const isThisAnswered = answered && answered.idx === idx;
+                    const isSelected = isThisAnswered && answered.option === cleaned;
+                    const isCorrectToken = cleaned.toLowerCase() === expected.toLowerCase();
+                    let stateClass =
+                      "bg-white border-2 border-gray-200 text-ink hover:border-accent hover:bg-accent-light/30";
+                    if (isThisAnswered) {
+                      if (isSelected && isCorrectToken) {
+                        stateClass = "bg-green-50 border-2 border-green-500 text-green-700";
+                      } else if (isSelected && !isCorrectToken) {
+                        stateClass = "bg-red-50 border-2 border-red-500 text-red-700";
+                      } else if (isCorrectToken) {
+                        stateClass = "bg-green-50 border-2 border-green-300 text-green-700";
+                      } else {
+                        stateClass = "bg-white border-2 border-gray-200 text-ink/50";
+                      }
+                    }
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleAnswer(idx, cleaned, expected)}
+                        disabled={feedbackMessage !== ""}
+                        className={`px-4 py-2.5 text-lg font-semibold rounded-xl transition-colors disabled:cursor-not-allowed ${stateClass}`}
+                      >
+                        {token}
                       </button>
                     );
                   })}
