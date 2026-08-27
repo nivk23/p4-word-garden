@@ -2,10 +2,15 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { speak } from "../lib/tts";
 
 /**
- * Shared visual system for P4 Word Garden.
- * One warm accent (orange) + one calm secondary (teal), light cream
- * background, rounded/friendly shapes, big touch targets. Feedback
- * colours (green/red) are reserved for correct/wrong states only.
+ * Shared visual system for P4 Word Garden — a child's garden journal, not a
+ * generic dashboard. Two signature moves carry the whole app:
+ *   1. Cards are seed packets: warm paper, a dashed "perforated" edge, a
+ *      soil-toned shadow (not the default flat grey card shadow).
+ *   2. Buttons are chunky plant-stake tabs: a solid colour slab shadow you
+ *      visibly press down on tap, instead of a soft box-shadow.
+ * Everything else (chips, banners, dots) stays quiet and just inherits the
+ * rust/moss palette. Feedback colours (green/red) are reserved for
+ * correct/wrong states only, never decoration.
  */
 
 // ---------------------------------------------------------------------------
@@ -64,15 +69,29 @@ export function Card({
   as?: "div" | "button";
   onClick?: () => void;
 }) {
-  const base = `bg-white rounded-3xl shadow-md w-full p-6 sm:p-8 ${className}`;
+  const base = `relative bg-cream border-2 border-dashed border-secondary/25 rounded-[28px] shadow-[0_10px_0_-4px_rgba(107,66,41,0.18),0_14px_28px_-10px_rgba(107,66,41,0.35)] w-full p-6 sm:p-8 ${className}`;
+  const flourish = (
+    <span
+      aria-hidden="true"
+      className="absolute -top-3 -right-2 text-2xl rotate-12 select-none pointer-events-none"
+    >
+      🌿
+    </span>
+  );
   if (Tag === "button") {
     return (
       <button type="button" onClick={onClick} className={`${base} text-left`}>
+        {flourish}
         {children}
       </button>
     );
   }
-  return <div className={base}>{children}</div>;
+  return (
+    <div className={base}>
+      {flourish}
+      {children}
+    </div>
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -120,17 +139,19 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
+  // Plant-stake tab: a solid colour slab sits under the button; pressing it
+  // pushes the button down into the slab, like pressing a tab into soil.
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition-transform active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100";
+    "inline-flex items-center justify-center gap-2 rounded-2xl font-display font-semibold transition-all duration-100 disabled:opacity-50 disabled:pointer-events-none";
   const variantClass: Record<ButtonVariant, string> = {
     primary:
-      "bg-accent text-white shadow-sm hover:bg-accent-dark text-lg px-6 py-4 min-h-[56px]",
+      "bg-accent text-white shadow-[0_4px_0_0_var(--color-accent-dark)] active:translate-y-1 active:shadow-none text-lg px-6 py-4 min-h-[56px]",
     secondary:
-      "bg-secondary text-white shadow-sm hover:bg-secondary-dark text-lg px-6 py-4 min-h-[56px]",
+      "bg-secondary text-white shadow-[0_4px_0_0_var(--color-secondary-dark)] active:translate-y-1 active:shadow-none text-lg px-6 py-4 min-h-[56px]",
     ghost:
-      "bg-transparent text-secondary-dark underline decoration-2 underline-offset-4 hover:text-secondary font-semibold text-base px-3 py-2 min-h-[44px]",
+      "bg-transparent text-secondary-dark underline decoration-2 underline-offset-4 hover:text-secondary text-base px-3 py-2 min-h-[44px]",
     danger:
-      "bg-white text-red-600 border-2 border-red-200 hover:bg-red-50 text-base px-5 py-3 min-h-[48px]",
+      "bg-white text-red-600 border-2 border-red-200 shadow-[0_4px_0_0_var(--color-red-200)] active:translate-y-1 active:shadow-none text-base px-5 py-3 min-h-[48px]",
   };
   return (
     <button

@@ -259,7 +259,7 @@ export default function Insights() {
                     <Line
                       type="monotone"
                       dataKey="accuracy"
-                      stroke="#1f8a8c"
+                      stroke="#4c7a46"
                       dot={{ r: 4 }}
                       isAnimationActive={false}
                     />
@@ -277,7 +277,7 @@ export default function Insights() {
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="count" fill="#f2994a" isAnimationActive={false} />
+                    <Bar dataKey="count" fill="#c1602a" isAnimationActive={false} />
                   </BarChart>
                 </ResponsiveContainer>
               </Card>

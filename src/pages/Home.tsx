@@ -70,7 +70,7 @@ export default function Home() {
       )}
 
       <Card className="text-center">
-        <p className="text-sm font-bold uppercase tracking-wide text-ink/40 mb-1">Streak</p>
+        <p className="font-hand text-2xl text-ink/50 -mb-1">my growing streak</p>
         <div className="flex items-center justify-center gap-2 mb-6">
           <span className="text-6xl">🔥</span>
           <span className="text-6xl font-extrabold text-accent">{streak}</span>

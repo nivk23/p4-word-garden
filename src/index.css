@@ -1,47 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Design tokens — single warm accent + one calm secondary, kept out of the
-   rainbow-of-cards trap. Feedback colours (green/red) are reserved for
-   correct/wrong states only, never used as decoration.
-
-   "Word Garden" palette: mist/soil/leaf/marigold/sky/petal are used for the
-   garden-themed elements (the Home garden bed, mastery indicators) — they
-   sit alongside, not instead of, the existing accent/secondary tokens
-   already used throughout the app. */
+/* Design system: "garden journal" — a child's field notebook of seed packets
+   and plant tags, not a generic pastel SaaS card. One warm rust accent, one
+   moss-green secondary, everything else (soil/leaf/marigold/sky/petal) is
+   reserved for the garden bed + mastery indicators. Feedback colours
+   (green/red) are reserved for correct/wrong states only, never decoration. */
 @theme {
   --font-sans: 'Atkinson Hyperlegible', 'Nunito', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Fredoka', 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  /* Used sparingly — small journal-style tags/captions only, never body text. */
+  --font-hand: 'Caveat', cursive;
 
-  --color-cream: #fffaf3;
-  --color-cream-deep: #fef2e2;
+  --color-cream: #fbf1e0;
+  --color-cream-deep: #f0dfb8;
 
-  --color-accent: #f2994a;
-  --color-accent-dark: #dd7a1f;
-  --color-accent-light: #ffead0;
+  --color-accent: #c1602a;
+  --color-accent-dark: #96461b;
+  --color-accent-light: #f5dcc7;
 
-  --color-secondary: #1f8a8c;
-  --color-secondary-dark: #146567;
-  --color-secondary-light: #dcf3f2;
+  --color-secondary: #4c7a46;
+  --color-secondary-dark: #35592f;
+  --color-secondary-light: #dcebd6;
 
-  --color-ink: #3a3226;
+  --color-ink: #2e4433;
 
-  /* Word Garden palette */
-  --color-mist: #eef3f4;
-  --color-mist-dark: #c9d8da;
+  /* Word Garden palette (Home garden bed + mastery indicators) */
+  --color-mist: #eaf1f0;
+  --color-mist-dark: #c9d8d4;
   --color-soil: #8a5a3b;
   --color-soil-dark: #6b4229;
-  --color-leaf: #4f9d5c;
-  --color-leaf-dark: #367a42;
-  --color-marigold: #f2a63a;
-  --color-marigold-dark: #d6871a;
+  --color-leaf: #5c8a54;
+  --color-leaf-dark: #3f6b39;
+  --color-marigold: #e8a83c;
+  --color-marigold-dark: #c68a24;
   --color-sky: #7ec4e8;
   --color-sky-dark: #4f9fca;
-  --color-petal: #f2879c;
-  --color-petal-dark: #db5f79;
+  --color-petal: #b44b63;
+  --color-petal-dark: #8c3a4b;
 }
 
 * {
@@ -72,4 +69,23 @@ button {
 button, a[role="button"] {
   min-height: 48px;
   min-width: 48px;
+}
+
+/* The one motion moment: a new word settles in like a seedling unfurling.
+   Used once, on the Learn Words hero word — not scattered everywhere. */
+@keyframes grow-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .grow-in {
+    animation: grow-in 0.45s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  }
 }

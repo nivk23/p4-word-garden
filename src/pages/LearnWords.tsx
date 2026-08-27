@@ -105,8 +105,8 @@ export default function LearnWords() {
       <ProgressDots total={learningWords.length} current={currentWord} />
 
       <Card>
-        {/* Hero word */}
-        <div className="flex flex-col items-center text-center gap-1">
+        {/* Hero word — remounted per word so the grow-in animation replays */}
+        <div key={word.word} className="grow-in flex flex-col items-center text-center gap-1">
           <div className="text-6xl mb-1">{word.emoji}</div>
           <h2
             className="font-display font-semibold text-secondary-dark leading-tight"
@@ -114,7 +114,7 @@ export default function LearnWords() {
           >
             {word.word}
           </h2>
-          <p className="text-lg sm:text-xl text-ink/40 tracking-wide font-semibold">{syllableDisplay}</p>
+          <p className="font-hand text-2xl sm:text-3xl text-ink/50 tracking-wide">{syllableDisplay}</p>
         </div>
 
         <div className="flex justify-center mt-4 mb-8">
