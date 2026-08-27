@@ -1,0 +1,12 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "answers",
+      "fields": [
+        {"fieldPath": "day", "order": "ASCENDING"},
+        {"fieldPath": "ts", "order": "DESCENDING"}
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(to bottom, #f0f9ff, #faf5ff);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  padding: 16px;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Large touch targets */
+button, a[role="button"] {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Readable font sizes */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.text-large {
+  font-size: 1.25rem;
+}
+
+.text-xlarge {
+  font-size: 1.5rem;
+}

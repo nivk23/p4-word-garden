@@ -1,0 +1,10 @@
+Placeholder icon files needed for PWA:
+- icon-192.png (192x192 PNG)
+- icon-512.png (512x512 PNG)
+- icon-192-maskable.png (192x192 PNG with padding for maskable variant)
+- icon-512-maskable.png (512x512 PNG with padding for maskable variant)
+- screenshot-1.png (540x720 PNG)
+- screenshot-2.png (540x720 PNG)
+
+These are referenced in manifest.json and should be created for full PWA support.
+For now, the app will work without these files; they're optional for PWA installation.
