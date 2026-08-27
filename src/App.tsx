@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Home from "./pages/Home";
 import { Loading } from "./components/ui";
+import AuthGate from "./components/AuthGate";
 
 // Lazy load pages for code splitting
 const LazyLearnWords = lazy(() => import("./pages/LearnWords"));
@@ -18,19 +19,21 @@ function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen">
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/learn-words" element={<LazyLearnWords />} />
-            <Route path="/spell-it" element={<LazySpellIt />} />
-            <Route path="/say-it" element={<LazySayItStep />} />
-            <Route path="/grammar" element={<LazyGrammarLesson />} />
-            <Route path="/read" element={<LazyMiniRead />} />
-            <Route path="/quiz" element={<LazyQuiz />} />
-            <Route path="/done" element={<LazyDone />} />
-            <Route path="/insights" element={<PinGate><LazyInsights /></PinGate>} />
-          </Routes>
-        </Suspense>
+        <AuthGate>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/learn-words" element={<LazyLearnWords />} />
+              <Route path="/spell-it" element={<LazySpellIt />} />
+              <Route path="/say-it" element={<LazySayItStep />} />
+              <Route path="/grammar" element={<LazyGrammarLesson />} />
+              <Route path="/read" element={<LazyMiniRead />} />
+              <Route path="/quiz" element={<LazyQuiz />} />
+              <Route path="/done" element={<LazyDone />} />
+              <Route path="/insights" element={<PinGate><LazyInsights /></PinGate>} />
+            </Routes>
+          </Suspense>
+        </AuthGate>
       </div>
     </Router>
   );

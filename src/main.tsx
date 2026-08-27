@@ -3,9 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { initFirebase } from './firebase'
-import { migrateLocalToCloud } from './store/progress'
 
-initFirebase().then(() => migrateLocalToCloud().catch(console.error)).then(() => {
+initFirebase().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />

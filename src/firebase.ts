@@ -1,5 +1,5 @@
 import { initializeApp, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth, signInAnonymously } from "firebase/auth";
+import { getAuth, type Auth } from "firebase/auth";
 import {
   getFirestore,
   type Firestore,
@@ -21,7 +21,12 @@ const firebaseConfig = {
 
 /**
  * Initialize Firebase
- * If env vars are missing, falls back to local-only mode using localStorage
+ * If env vars are missing, falls back to local-only mode using localStorage.
+ *
+ * This only connects the SDK — it does not sign anyone in. Whether a real
+ * account is signed in is handled reactively by AuthGate (src/components/AuthGate.tsx)
+ * via onAuthStateChanged, since the app now requires a real email/password
+ * account rather than auto-creating an anonymous one.
  */
 export async function initFirebase(): Promise<void> {
   if (app) return;
@@ -42,9 +47,7 @@ export async function initFirebase(): Promise<void> {
     // Enable offline persistence
     await enableIndexedDbPersistence(db);
 
-    // Sign in anonymously
-    await signInAnonymously(auth);
-    console.log("Firebase initialized. Signed in anonymously.");
+    console.log("Firebase initialized.");
   } catch (error) {
     console.error("Failed to initialize Firebase:", error);
     app = null;

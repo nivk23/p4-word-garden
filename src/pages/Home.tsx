@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTodayKey } from "../lib/dates";
-import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems } from "../store/progress";
+import { getUserProfile, getDayRecord, calculateStreak, getSchedulerItems, clearActiveChild } from "../store/progress";
 import type { DayRecord } from "../store/progress";
 import { isMastered } from "../lib/scheduler";
+import { isFirebaseAvailable } from "../firebase";
+import { signOutUser } from "../lib/auth";
 import { Page, Card, Button, Chip } from "../components/ui";
 import GardenBed from "../components/GardenBed";
 
@@ -107,6 +109,33 @@ export default function Home() {
       >
         🔒 Parent insights
       </button>
+
+      {isFirebaseAvailable() && (
+        <div className="flex gap-4 mt-1">
+          <button
+            onClick={() => {
+              // Switching profiles doesn't change auth state, so AuthGate's
+              // onAuthStateChanged subscription won't re-fire on its own —
+              // a reload is the simplest way to make it re-check which
+              // child is active.
+              clearActiveChild();
+              window.location.reload();
+            }}
+            className="text-secondary-dark/50 hover:text-secondary-dark text-xs font-semibold underline decoration-2 underline-offset-4"
+          >
+            👤 Switch profile
+          </button>
+          <button
+            onClick={async () => {
+              clearActiveChild();
+              await signOutUser();
+            }}
+            className="text-secondary-dark/50 hover:text-secondary-dark text-xs font-semibold underline decoration-2 underline-offset-4"
+          >
+            Sign out
+          </button>
+        </div>
+      )}
     </Page>
   );
 }
