@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { allWords } from "../content/allWords";
-import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
+import { getSchedulerItems, saveSchedulerItem, saveDayRecord, getAllDayRecords } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
+import { NEW_WORDS_PER_BATCH, canLearnExtraWords } from "../lib/scheduler";
 import { Page, PageTitle, Loading, Card, Chip, Button, SpeakButton, ProgressDots, HighlightedText } from "../components/ui";
 
 export default function LearnWords() {
@@ -11,82 +12,129 @@ export default function LearnWords() {
   const [currentWord, setCurrentWord] = useState(0);
   const [learningWords, setLearningWords] = useState<typeof allWords>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [taughtWordIds, setTaughtWordIds] = useState<Set<string>>(new Set());
+  const [canOfferMore, setCanOfferMore] = useState(false);
+  const [showMorePrompt, setShowMorePrompt] = useState(false);
 
   useEffect(() => {
     async function loadWordsForToday() {
-      const schedulerItems = await getSchedulerItems();
-      const taughtWordIds = new Set(schedulerItems.filter(i => i.type === "word").map(i => i.itemId));
+      const [schedulerItems, dayRecords] = await Promise.all([
+        getSchedulerItems(),
+        getAllDayRecords(),
+      ]);
+      const taught = new Set(schedulerItems.filter(i => i.type === "word").map(i => i.itemId));
 
-      // Find first 3 untaught words from allWords
+      // Not a hard 3-word ceiling — a well-performing child can keep going.
+      // Gate the *offer* to learn more on the most recently completed day's
+      // quiz accuracy (today's own record doesn't exist yet at this point),
+      // so pacing loosens only once there's real evidence it's working; a
+      // first-ever day (no completed records) keeps the safe default of 3.
+      const mostRecentCompleted = dayRecords
+        .filter(d => d.completed)
+        .sort((a, b) => (a.date < b.date ? 1 : -1))[0];
+      setCanOfferMore(canLearnExtraWords(mostRecentCompleted ? mostRecentCompleted.accuracy : null));
+
       const newWords = [];
       for (const word of allWords) {
-        if (!taughtWordIds.has(word.word)) {
+        if (!taught.has(word.word)) {
           newWords.push(word);
-          if (newWords.length === 3) break;
+          if (newWords.length === NEW_WORDS_PER_BATCH) break;
         }
       }
 
       setLearningWords(newWords);
+      setTaughtWordIds(taught);
       setIsLoading(false);
     }
 
     loadWordsForToday();
   }, []);
 
+  const finishLearning = async () => {
+    // Create scheduler items for every new word learned today (whether
+    // that's the default 3 or several extended batches). These writes plus
+    // the read below are all independent of each other (the read is
+    // counting existing *grammar* items, unrelated to the *word* items
+    // being written) — run them concurrently instead of one at a time,
+    // which was 4 sequential Firestore round-trips on this exact transition
+    // (the reported ~2.7s delay after tapping the final "Continue").
+    const today = getTodayKey();
+    const [, schedulerItems] = await Promise.all([
+      Promise.all(
+        learningWords.map((word) =>
+          saveSchedulerItem({
+            itemId: word.word,
+            type: "word",
+            introducedOn: today,
+            box: 0,
+            spellBox: 0,
+            correct: 0,
+            wrong: 0,
+            spellCorrect: 0,
+            spellWrong: 0,
+            streak: 0,
+            lastSeen: today,
+            nextDue: today,
+            correctDays: [],
+            correctTypes: [],
+            sayCorrect: 0,
+            sayWrong: 0,
+          })
+        )
+      ),
+      getSchedulerItems(),
+    ]);
+
+    // Select next grammar lesson
+    const taughtGrammarIds = new Set(schedulerItems.filter(i => i.type === "grammar").map(i => i.itemId));
+    const grammarId = `lesson_${taughtGrammarIds.size + 1}`; // Next lesson number
+
+    // Save DayRecord
+    await saveDayRecord({
+      date: today,
+      wordIds: learningWords.map(w => w.word),
+      grammarId,
+      completed: false,
+      quizResults: [],
+      accuracy: 0,
+      durationSec: 0,
+    });
+
+    navigate("/spell-it");
+  };
+
+  const hasMoreWordsAvailable = () =>
+    allWords.some(w => !taughtWordIds.has(w.word) && !learningWords.some(lw => lw.word === w.word));
+
   const handleNext = async () => {
     if (currentWord < learningWords.length - 1) {
       setCurrentWord(currentWord + 1);
-    } else {
-      // Create scheduler items for the 3 new words. These 3 writes plus the
-      // read below are all independent of each other (the read is counting
-      // existing *grammar* items, unrelated to the *word* items being
-      // written) — run them concurrently instead of one at a time, which
-      // was 4 sequential Firestore round-trips on this exact transition
-      // (the reported ~2.7s delay after tapping the final "Continue").
-      const today = getTodayKey();
-      const [, schedulerItems] = await Promise.all([
-        Promise.all(
-          learningWords.map((word) =>
-            saveSchedulerItem({
-              itemId: word.word,
-              type: "word",
-              introducedOn: today,
-              box: 0,
-              spellBox: 0,
-              correct: 0,
-              wrong: 0,
-              spellCorrect: 0,
-              spellWrong: 0,
-              streak: 0,
-              lastSeen: today,
-              nextDue: today,
-              correctDays: [],
-              correctTypes: [],
-              sayCorrect: 0,
-              sayWrong: 0,
-            })
-          )
-        ),
-        getSchedulerItems(),
-      ]);
-
-      // Select next grammar lesson
-      const taughtGrammarIds = new Set(schedulerItems.filter(i => i.type === "grammar").map(i => i.itemId));
-      const grammarId = `lesson_${taughtGrammarIds.size + 1}`; // Next lesson number
-
-      // Save DayRecord
-      await saveDayRecord({
-        date: today,
-        wordIds: learningWords.map(w => w.word),
-        grammarId,
-        completed: false,
-        quizResults: [],
-        accuracy: 0,
-        durationSec: 0,
-      });
-
-      navigate("/spell-it");
+      return;
     }
+
+    // Finished the current batch. Offer another batch only to a child with
+    // a recent track record of getting most answers right, and only if
+    // there's anything left to teach — never automatic, so the child (or
+    // parent) always chooses whether to keep going or stop for today.
+    if (canOfferMore && hasMoreWordsAvailable()) {
+      setShowMorePrompt(true);
+      return;
+    }
+
+    await finishLearning();
+  };
+
+  const handleLearnMore = () => {
+    const nextBatch = [];
+    for (const word of allWords) {
+      if (!taughtWordIds.has(word.word) && !learningWords.some(lw => lw.word === word.word)) {
+        nextBatch.push(word);
+        if (nextBatch.length === NEW_WORDS_PER_BATCH) break;
+      }
+    }
+    setLearningWords([...learningWords, ...nextBatch]);
+    setCurrentWord(currentWord + 1);
+    setShowMorePrompt(false);
   };
 
   if (isLoading) {
@@ -100,6 +148,28 @@ export default function LearnWords() {
         <Card className="text-center">
           <p className="text-lg text-ink/80 mb-6">You've learned all available words!</p>
           <Button onClick={() => navigate("/")}>Back Home</Button>
+        </Card>
+      </Page>
+    );
+  }
+
+  if (showMorePrompt) {
+    return (
+      <Page>
+        <PageTitle>Learn Words</PageTitle>
+        <Card className="text-center">
+          <div className="text-6xl mb-3">🌟</div>
+          <p className="text-xl font-bold text-ink mb-2">You're doing great!</p>
+          <p className="text-ink/70 mb-6">
+            Want to learn {NEW_WORDS_PER_BATCH} more words now, or stop here for today?
+            You can always pick up more tomorrow.
+          </p>
+          <Button onClick={handleLearnMore}>📚 Learn {NEW_WORDS_PER_BATCH} more</Button>
+          <div className="flex justify-center mt-3">
+            <Button variant="ghost" full={false} onClick={finishLearning}>
+              ✅ That's enough for today →
+            </Button>
+          </div>
         </Card>
       </Page>
     );

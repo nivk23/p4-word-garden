@@ -219,3 +219,21 @@ export function isMastered(item: SchedulerItem): boolean {
     (item.correctTypes?.length ?? 0) >= 2
   );
 }
+
+/** Default number of new words introduced in one LearnWords batch. */
+export const NEW_WORDS_PER_BATCH = 3;
+
+/** Recent quiz accuracy (%) at or above which a child may opt into an extra batch of new words. */
+export const STRONG_PERFORMANCE_ACCURACY_THRESHOLD = 80;
+
+/**
+ * Whether today's learner has earned the *option* to learn another batch of
+ * new words beyond the default 3, based on their most recently completed
+ * day's quiz accuracy. Deliberately never automatic — LearnWords.tsx still
+ * asks before extending, so pacing stays a choice rather than a forced
+ * longer session. `null` (no completed day yet, e.g. day one) keeps the
+ * default pace.
+ */
+export function canLearnExtraWords(mostRecentAccuracy: number | null): boolean {
+  return mostRecentAccuracy !== null && mostRecentAccuracy >= STRONG_PERFORMANCE_ACCURACY_THRESHOLD;
+}
