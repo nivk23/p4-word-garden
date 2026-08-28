@@ -59,15 +59,18 @@ vi.mock("firebase/firestore", () => {
   }
   async function getDocs(ref: { path: string }) {
     const prefix = ref.path + "/";
-    const docs: Array<{ id: string; data: () => unknown }> = [];
+    const docs: Array<{ id: string; ref: { path: string }; data: () => unknown }> = [];
     for (const [path, data] of firestoreStore.map.entries()) {
       if (path.startsWith(prefix) && !path.slice(prefix.length).includes("/")) {
-        docs.push({ id: path.slice(prefix.length), data: () => data });
+        docs.push({ id: path.slice(prefix.length), ref: { path }, data: () => data });
       }
     }
     return { empty: docs.length === 0, size: docs.length, docs };
   }
-  return { doc, collection, setDoc, getDoc, getDocs };
+  async function deleteDoc(ref: { path: string }) {
+    firestoreStore.map.delete(ref.path);
+  }
+  return { doc, collection, setDoc, getDoc, getDocs, deleteDoc };
 });
 
 const mockAuthState: { currentUser: { uid: string } | null } = { currentUser: { uid: "parent-uid" } };
@@ -82,6 +85,7 @@ vi.mock("../src/firebase", () => ({
 import {
   listChildren,
   createChild,
+  deleteChild,
   getActiveChild,
   getActiveChildId,
   setActiveChildId,
@@ -139,6 +143,73 @@ describe("child profiles + scoped paths", () => {
     it("listChildren returns an empty array in local-only mode", async () => {
       firebaseAvailable = false;
       expect(await listChildren()).toEqual([]);
+    });
+  });
+
+  describe("deleteChild", () => {
+    it("removes the child's profile doc, its items/days/answers, and leaves other children untouched", async () => {
+      const toDelete = await createChild("QA Bot", "🌱");
+      const keep = await createChild("Chloe", "🌸");
+
+      setActiveChildId(toDelete.id);
+      await saveSchedulerItem({
+        itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
+        correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
+        lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
+        sayCorrect: 0, sayWrong: 0,
+      });
+      await saveDayRecord({
+        date: "2024-01-01", wordIds: ["huge"], grammarId: "lesson_1",
+        completed: false, quizResults: [], accuracy: 0, durationSec: 0,
+      });
+      await logAnswer({ day: "2024-01-01", itemId: "huge", qType: "meaning", correct: true, ts: 1 });
+
+      setActiveChildId(keep.id);
+      await saveSchedulerItem({
+        itemId: "tiny", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
+        correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
+        lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
+        sayCorrect: 0, sayWrong: 0,
+      });
+
+      await deleteChild(toDelete.id);
+
+      const remaining = await listChildren();
+      expect(remaining.map((c) => c.id)).toEqual([keep.id]);
+
+      // Nothing under the deleted child's path survives.
+      for (const [path] of firestoreStore.map.entries()) {
+        expect(path.startsWith(`users/parent-uid/children/${toDelete.id}`)).toBe(false);
+      }
+
+      // The other child's data is untouched.
+      setActiveChildId(keep.id);
+      const keptItems = await getSchedulerItems();
+      expect(keptItems.map((i) => i.itemId)).toEqual(["tiny"]);
+    });
+
+    it("clears the active child on this device if the deleted child was active", async () => {
+      const child = await createChild("QA Bot");
+      setActiveChildId(child.id);
+
+      await deleteChild(child.id);
+
+      expect(getActiveChildId()).toBeNull();
+    });
+
+    it("leaves the active child alone when deleting a different child", async () => {
+      const active = await createChild("Chloe");
+      const other = await createChild("QA Bot");
+      setActiveChildId(active.id);
+
+      await deleteChild(other.id);
+
+      expect(getActiveChildId()).toBe(active.id);
+    });
+
+    it("throws when there's no signed-in account", async () => {
+      mockAuthState.currentUser = null;
+      await expect(deleteChild("some-id")).rejects.toThrow();
     });
   });
 

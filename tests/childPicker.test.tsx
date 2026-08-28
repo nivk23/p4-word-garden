@@ -2,15 +2,17 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import ChildPicker from "../src/pages/ChildPicker";
 
-const { listChildren, createChild, setActiveChildId } = vi.hoisted(() => ({
+const { listChildren, createChild, setActiveChildId, deleteChild } = vi.hoisted(() => ({
   listChildren: vi.fn(),
   createChild: vi.fn(),
   setActiveChildId: vi.fn(),
+  deleteChild: vi.fn(),
 }));
 vi.mock("../src/store/progress", () => ({
   listChildren: (...args: unknown[]) => listChildren(...args),
   createChild: (...args: unknown[]) => createChild(...args),
   setActiveChildId: (...args: unknown[]) => setActiveChildId(...args),
+  deleteChild: (...args: unknown[]) => deleteChild(...args),
 }));
 
 describe("ChildPicker", () => {
@@ -89,5 +91,61 @@ describe("ChildPicker", () => {
     await waitFor(() => expect(onChildSelected).toHaveBeenCalledTimes(1));
     expect(createChild).toHaveBeenCalledWith("Dee", "🌱");
     expect(setActiveChildId).toHaveBeenCalledWith("new-child");
+  });
+
+  it("regression: a delete control is hidden until 'Manage profiles' is tapped, so a stray tap on the picker can't wipe a profile", async () => {
+    sessionStorage.setItem("force_child_picker", "1"); // reach the picker even with one child
+    listChildren.mockResolvedValueOnce([
+      { id: "qa-bot", name: "QA Bot", emoji: "🌱", createdAt: "now" },
+    ]);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("QA Bot"));
+    expect(screen.queryByLabelText(/delete qa bot/i)).toBeNull();
+
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    expect(screen.getByLabelText(/delete qa bot/i)).toBeTruthy();
+  });
+
+  it("regression: deleting a profile requires an explicit confirm step, and only removes that one profile", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "qa-bot", name: "QA Bot", emoji: "🌱", createdAt: "now" },
+      { id: "chloe", name: "Chloe", emoji: "🌸", createdAt: "now" },
+    ]);
+    deleteChild.mockResolvedValueOnce(undefined);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("QA Bot"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/delete qa bot/i));
+
+    // Tapping the trash icon only arms a confirmation — nothing is deleted yet.
+    expect(deleteChild).not.toHaveBeenCalled();
+    await waitFor(() => screen.getByText(/delete .*qa bot.*and all their progress/i));
+
+    fireEvent.click(screen.getByRole("button", { name: /yes, delete forever/i }));
+
+    await waitFor(() => expect(deleteChild).toHaveBeenCalledWith("qa-bot"));
+    await waitFor(() => expect(screen.queryByText("QA Bot")).toBeNull());
+    expect(screen.getByText("Chloe")).toBeTruthy(); // untouched
+  });
+
+  it("regression: Cancel on the delete confirmation leaves the profile alone", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "qa-bot", name: "QA Bot", emoji: "🌱", createdAt: "now" },
+    ]);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("QA Bot"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/delete qa bot/i));
+
+    await waitFor(() => screen.getByRole("button", { name: /cancel/i }));
+    fireEvent.click(screen.getByRole("button", { name: /cancel/i }));
+
+    expect(deleteChild).not.toHaveBeenCalled();
+    expect(screen.getByText("QA Bot")).toBeTruthy();
   });
 });

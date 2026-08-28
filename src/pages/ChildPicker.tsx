@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listChildren, createChild, setActiveChildId } from "../store/progress";
+import { listChildren, createChild, setActiveChildId, deleteChild } from "../store/progress";
 import type { ChildProfile } from "../store/progress";
 import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
 
@@ -11,6 +11,13 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
   const [addingEmoji, setAddingEmoji] = useState(EMOJI_OPTIONS[0]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  // Off by default and behind an explicit "Manage profiles" tap — this
+  // screen is what the child taps through every morning, so a delete
+  // control can't just sit next to the profile buttons where a stray tap
+  // could wipe someone's progress.
+  const [manageMode, setManageMode] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -44,6 +51,21 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     onChildSelected();
   };
 
+  const handleDelete = async (id: string) => {
+    setDeletingId(id);
+    setError("");
+    try {
+      await deleteChild(id);
+      setChildren((prev) => (prev || []).filter((c) => c.id !== id));
+      setConfirmDeleteId(null);
+    } catch (error) {
+      console.error("Failed to delete child profile:", error);
+      setError("Couldn't delete the profile. Please try again.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const handleAdd = async () => {
     if (!addingName.trim()) return;
     setBusy(true);
@@ -71,19 +93,72 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
 
       <Card>
         {children.length > 0 && (
-          <div className="flex flex-col gap-3 mb-6">
-            {children.map((child) => (
-              <button
-                key={child.id}
-                type="button"
-                onClick={() => handlePick(child.id)}
-                className="w-full flex items-center gap-3 rounded-2xl border-2 border-secondary/25 bg-white/60 px-4 py-3 text-left hover:border-accent transition-colors min-h-[56px]"
-              >
-                <span className="text-3xl">{child.emoji}</span>
-                <span className="font-display font-semibold text-lg text-ink">{child.name}</span>
-              </button>
-            ))}
+          <div className="flex flex-col gap-3 mb-4">
+            {children.map((child) =>
+              confirmDeleteId === child.id ? (
+                <div
+                  key={child.id}
+                  className="w-full rounded-2xl border-2 border-red-300 bg-red-50 px-4 py-3"
+                >
+                  <p className="text-red-700 font-semibold mb-3">
+                    Delete {child.emoji} {child.name} and all their progress? This can't be undone.
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      full={false}
+                      onClick={() => setConfirmDeleteId(null)}
+                      disabled={deletingId === child.id}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="danger"
+                      full={false}
+                      onClick={() => handleDelete(child.id)}
+                      disabled={deletingId === child.id}
+                    >
+                      {deletingId === child.id ? "Deleting…" : "Yes, delete forever"}
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div key={child.id} className="w-full flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handlePick(child.id)}
+                    className="flex-1 flex items-center gap-3 rounded-2xl border-2 border-secondary/25 bg-white/60 px-4 py-3 text-left hover:border-accent transition-colors min-h-[56px]"
+                  >
+                    <span className="text-3xl">{child.emoji}</span>
+                    <span className="font-display font-semibold text-lg text-ink">{child.name}</span>
+                  </button>
+                  {manageMode && (
+                    <button
+                      type="button"
+                      aria-label={`Delete ${child.name}`}
+                      onClick={() => setConfirmDeleteId(child.id)}
+                      className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                      🗑️
+                    </button>
+                  )}
+                </div>
+              )
+            )}
           </div>
+        )}
+
+        {children.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              setManageMode(!manageMode);
+              setConfirmDeleteId(null);
+            }}
+            className="text-sm text-ink/40 underline mb-6"
+          >
+            {manageMode ? "Done managing" : "Manage profiles"}
+          </button>
         )}
 
         <p className="font-hand text-2xl text-ink/50 mb-2">add a new profile</p>

@@ -9,6 +9,7 @@ import {
   setDoc,
   getDoc,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import type { SchedulerItem } from "../lib/scheduler";
 import { getTodayKey } from "../lib/dates";
@@ -210,6 +211,43 @@ export async function createChild(name: string, emoji = "🌱"): Promise<ChildPr
   };
   await setDoc(newDoc, { name: child.name, emoji: child.emoji, createdAt: child.createdAt });
   return child;
+}
+
+/**
+ * Permanently delete a child profile and all of its progress data
+ * (scheduler items, day records, answer logs). The Firestore JS SDK has no
+ * recursive delete, so the subcollections are cleared doc-by-doc before the
+ * child doc itself. If the deleted child was active on this device, clears
+ * that so the app falls back to the picker instead of pointing at a child
+ * that no longer exists.
+ */
+export async function deleteChild(childId: string): Promise<void> {
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  if (!isFirebaseAvailable() || !uid) {
+    throw new Error("Cannot delete a child profile without a signed-in account.");
+  }
+
+  const db = getFirebaseDb()!;
+  const basePath = `users/${uid}/children/${childId}`;
+
+  const [itemsSnap, daysSnap, answersSnap] = await Promise.all([
+    getDocs(collection(db, `${basePath}/items`)),
+    getDocs(collection(db, `${basePath}/days`)),
+    getDocs(collection(db, `${basePath}/answers`)),
+  ]);
+
+  await Promise.all([
+    ...itemsSnap.docs.map((d) => deleteDoc(d.ref)),
+    ...daysSnap.docs.map((d) => deleteDoc(d.ref)),
+    ...answersSnap.docs.map((d) => deleteDoc(d.ref)),
+  ]);
+
+  await deleteDoc(doc(db, basePath));
+
+  if (getActiveChildId() === childId) {
+    clearActiveChild();
+  }
 }
 
 /**
