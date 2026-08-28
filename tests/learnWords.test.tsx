@@ -99,6 +99,52 @@ describe("LearnWords (regression: parallelizing the 3 word saves + grammar-count
     expect(todayRecord).toBeTruthy();
   });
 
+  it("regression: stops offering more once 15 new words have been learned today, even if there are more untaught words and the child keeps saying yes", async () => {
+    render(
+      <MemoryRouter>
+        <LearnWords />
+      </MemoryRouter>
+    );
+
+    // Click through 2 "Next"s + a final "Continue" for one batch of 3, then
+    // "Learn 3 more" at the resulting prompt.
+    const clickThroughBatchAndLearnMore = async () => {
+      await waitFor(() => screen.getByRole("button", { name: /next/i }));
+      fireEvent.click(screen.getByRole("button", { name: /next/i }));
+      await waitFor(() => screen.getByRole("button", { name: /next/i }));
+      fireEvent.click(screen.getByRole("button", { name: /next/i }));
+      fireEvent.click(await screen.findByRole("button", { name: /continue/i }));
+      await waitFor(() => screen.getByText(/you're doing great/i));
+      fireEvent.click(screen.getByRole("button", { name: /learn 3 more/i }));
+    };
+
+    // 4 batches of 3 = 12 words, each followed by an accepted "learn more" offer.
+    await clickThroughBatchAndLearnMore(); // 3 -> 6
+    await clickThroughBatchAndLearnMore(); // 6 -> 9
+    await clickThroughBatchAndLearnMore(); // 9 -> 12
+    await clickThroughBatchAndLearnMore(); // 12 -> 15
+
+    // The 5th batch (words 13-15) reaches the 15-word ceiling: no further
+    // offer, even though there are plenty more untaught words in the app.
+    await waitFor(() => screen.getByRole("button", { name: /next/i }));
+    fireEvent.click(screen.getByRole("button", { name: /next/i }));
+    await waitFor(() => screen.getByRole("button", { name: /next/i }));
+    fireEvent.click(screen.getByRole("button", { name: /next/i }));
+    fireEvent.click(await screen.findByRole("button", { name: /continue/i }));
+
+    expect(screen.queryByText(/you're doing great/i)).toBeNull();
+
+    await waitFor(async () => {
+      const items = await getSchedulerItems();
+      const wordItems = items.filter((i) => i.type === "word");
+      expect(wordItems).toHaveLength(15);
+    });
+
+    const dayRecords = await getAllDayRecords();
+    const todayRecord = dayRecords.find((d) => d.wordIds.length === 15);
+    expect(todayRecord).toBeTruthy();
+  });
+
   it("regression: a child can stop at the very first prompt instead of learning more, saving just the default batch", async () => {
     render(
       <MemoryRouter>

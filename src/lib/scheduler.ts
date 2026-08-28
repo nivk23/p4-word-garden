@@ -222,3 +222,6 @@ export function isMastered(item: SchedulerItem): boolean {
 
 /** Default number of new words introduced in one LearnWords batch. */
 export const NEW_WORDS_PER_BATCH = 3;
+
+/** Hard ceiling on new words introduced in a single day, however many batches the child opts into. */
+export const MAX_NEW_WORDS_PER_DAY = 15;

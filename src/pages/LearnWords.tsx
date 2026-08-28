@@ -4,7 +4,7 @@ import { allWords } from "../content/allWords";
 import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
-import { NEW_WORDS_PER_BATCH } from "../lib/scheduler";
+import { NEW_WORDS_PER_BATCH, MAX_NEW_WORDS_PER_DAY } from "../lib/scheduler";
 import { Page, PageTitle, Loading, Card, Chip, Button, SpeakButton, ProgressDots, HighlightedText } from "../components/ui";
 
 export default function LearnWords() {
@@ -99,10 +99,11 @@ export default function LearnWords() {
     }
 
     // Finished the current batch. Always offer another one if there's
-    // anything left to teach — no performance gate, since pacing is the
-    // child's (or parent's) choice, not something to restrict. Never
-    // automatic: this still asks rather than just piling on more words.
-    if (hasMoreWordsAvailable()) {
+    // anything left to teach and today's hard ceiling hasn't been hit —
+    // no performance gate, since pacing below that ceiling is the child's
+    // (or parent's) choice, not something to restrict. Never automatic:
+    // this still asks rather than just piling on more words.
+    if (learningWords.length < MAX_NEW_WORDS_PER_DAY && hasMoreWordsAvailable()) {
       setShowMorePrompt(true);
       return;
     }
