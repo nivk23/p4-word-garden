@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { allWords } from "../content/allWords";
-import { getSchedulerItems, saveSchedulerItem, saveDayRecord, getAllDayRecords } from "../store/progress";
+import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
-import { NEW_WORDS_PER_BATCH, canLearnExtraWords } from "../lib/scheduler";
+import { NEW_WORDS_PER_BATCH } from "../lib/scheduler";
 import { Page, PageTitle, Loading, Card, Chip, Button, SpeakButton, ProgressDots, HighlightedText } from "../components/ui";
 
 export default function LearnWords() {
@@ -13,26 +13,12 @@ export default function LearnWords() {
   const [learningWords, setLearningWords] = useState<typeof allWords>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [taughtWordIds, setTaughtWordIds] = useState<Set<string>>(new Set());
-  const [canOfferMore, setCanOfferMore] = useState(false);
   const [showMorePrompt, setShowMorePrompt] = useState(false);
 
   useEffect(() => {
     async function loadWordsForToday() {
-      const [schedulerItems, dayRecords] = await Promise.all([
-        getSchedulerItems(),
-        getAllDayRecords(),
-      ]);
+      const schedulerItems = await getSchedulerItems();
       const taught = new Set(schedulerItems.filter(i => i.type === "word").map(i => i.itemId));
-
-      // Not a hard 3-word ceiling — a well-performing child can keep going.
-      // Gate the *offer* to learn more on the most recently completed day's
-      // quiz accuracy (today's own record doesn't exist yet at this point),
-      // so pacing loosens only once there's real evidence it's working; a
-      // first-ever day (no completed records) keeps the safe default of 3.
-      const mostRecentCompleted = dayRecords
-        .filter(d => d.completed)
-        .sort((a, b) => (a.date < b.date ? 1 : -1))[0];
-      setCanOfferMore(canLearnExtraWords(mostRecentCompleted ? mostRecentCompleted.accuracy : null));
 
       const newWords = [];
       for (const word of allWords) {
@@ -112,11 +98,11 @@ export default function LearnWords() {
       return;
     }
 
-    // Finished the current batch. Offer another batch only to a child with
-    // a recent track record of getting most answers right, and only if
-    // there's anything left to teach — never automatic, so the child (or
-    // parent) always chooses whether to keep going or stop for today.
-    if (canOfferMore && hasMoreWordsAvailable()) {
+    // Finished the current batch. Always offer another one if there's
+    // anything left to teach — no performance gate, since pacing is the
+    // child's (or parent's) choice, not something to restrict. Never
+    // automatic: this still asks rather than just piling on more words.
+    if (hasMoreWordsAvailable()) {
       setShowMorePrompt(true);
       return;
     }

@@ -8,7 +8,6 @@ import {
   buildDailyQuiz,
   addDays,
   isMastered,
-  canLearnExtraWords,
   SchedulerItem,
 } from "../src/lib/scheduler";
 
@@ -263,21 +262,6 @@ describe("Scheduler", () => {
       const updated = markWrong(item, "2024-01-04");
       expect(updated.correctDays).toEqual([]);
       expect(updated.correctTypes).toEqual([]);
-    });
-  });
-
-  describe("canLearnExtraWords", () => {
-    it("keeps the safe default pace with no completed day yet", () => {
-      expect(canLearnExtraWords(null)).toBe(false);
-    });
-
-    it("does not offer more below the 80% threshold", () => {
-      expect(canLearnExtraWords(79)).toBe(false);
-    });
-
-    it("offers more at or above the 80% threshold", () => {
-      expect(canLearnExtraWords(80)).toBe(true);
-      expect(canLearnExtraWords(100)).toBe(true);
     });
   });
 });
