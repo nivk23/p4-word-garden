@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { generateSpellingMissing, validateSpelling, highlightTricky } from "../lib/spelling";
+import { generateSpellingMissing, validateSpelling } from "../lib/spelling";
+import { speak } from "../lib/tts";
 import type { Word } from "../content/words";
 import { Button, Chip, SpeakButton, FeedbackBanner } from "./ui";
 
@@ -56,8 +57,6 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
     }
   };
 
-  const { segments } = highlightTricky(word.syllables || word.word, spelling.tricky);
-
   return (
     <div className="flex flex-col items-center gap-6">
       <h2 className="text-xl sm:text-2xl font-bold text-secondary-dark text-center">
@@ -70,24 +69,26 @@ export default function SpellMissing({ word, onCorrect, onWrong }: Props) {
 
       {word.spellingTip && <Chip tone="accent">✏️ {word.spellingTip}</Chip>}
 
-      {/* Syllables with tricky highlighted */}
-      <div className="text-center">
-        <p className="text-sm text-ink/50 mb-2">Sound it out</p>
-        <p className="text-2xl font-bold text-ink">{word.syllables || word.word}</p>
-        {spelling.tricky.length > 0 && (
-          <div className="text-sm text-accent-dark font-semibold mt-2">
-            Tricky:{" "}
-            {segments.map((seg, i) =>
-              seg.tricky ? (
-                <mark key={i} className="bg-accent-light text-accent-dark px-0.5 rounded">
-                  {seg.text}
-                </mark>
-              ) : (
-                <span key={i}>{seg.text}</span>
-              )
-            )}
-          </div>
-        )}
+      {/* Listen first, then spell it. This used to print the whole
+          unblanked word here as plain text (highlighted further for words
+          with a spelling tip) — showing the exact answer right above a
+          "type the missing letters" spelling challenge. */}
+      <div className="bg-secondary-light rounded-2xl p-6 w-full flex flex-col gap-3">
+        <Button variant="secondary" onClick={() => speak(word.word)}>
+          🔊 Hear word (normal)
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            const syllables = (word.syllables || word.word).split("-");
+            for (const syl of syllables) {
+              setTimeout(() => speak(syl), 200);
+            }
+          }}
+          className="opacity-90"
+        >
+          🔊 Hear word (slow)
+        </Button>
       </div>
 
       {/* Missing letter template */}

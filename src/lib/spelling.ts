@@ -111,36 +111,6 @@ export function validateSpelling(answer: string, word: string): boolean {
   return answer.toLowerCase().trim() === word.toLowerCase();
 }
 
-/**
- * Split syllables into segments marking which parts are "tricky", for the
- * caller to render as real elements (e.g. wrapping tricky segments in
- * <mark>). Previously this built an HTML string with literal <mark> tags
- * and returned it for interpolation into JSX text — React escapes strings,
- * so the tags rendered as visible "<mark>...</mark>" text rather than
- * actual highlighting.
- */
-export function highlightTricky(
-  syllables: string,
-  tricky: string[]
-): { segments: Array<{ text: string; tricky: boolean }>; plain: string } {
-  const plain = syllables;
-  if (tricky.length === 0) {
-    return { segments: [{ text: syllables, tricky: false }], plain };
-  }
-
-  const escaped = tricky.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  const pattern = new RegExp(`(${escaped.join("|")})`, "gi");
-  const isTrickyMatch = (part: string) =>
-    escaped.some((t) => new RegExp(`^${t}$`, "i").test(part));
-
-  const segments = syllables
-    .split(pattern)
-    .filter((part) => part.length > 0)
-    .map((part) => ({ text: part, tricky: isTrickyMatch(part) }));
-
-  return { segments, plain };
-}
-
 // Helper: generate decoy letters
 function generateDecoyLetters(word: string, count: number): string[] {
   const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");

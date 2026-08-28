@@ -33,14 +33,18 @@ describe("SpellMissing", () => {
     expect(input.value).toBe("ug");
   });
 
-  it("regression: does not reveal the full word next to 'Tricky' for a word with no matching spelling tip", () => {
+  it("regression: does not print the full unblanked word as text — it used to show it plainly under 'Sound it out', right above the fill-in-the-blank challenge", () => {
     render(<SpellMissing word={huge} onCorrect={vi.fn()} onWrong={vi.fn()} />);
-    expect(screen.queryByText(/tricky/i)).toBeNull();
+    expect(screen.queryByText(huge.word)).toBeNull();
+    expect(screen.queryByText(/sound it out/i)).toBeNull();
+    expect(screen.getByText(/hear word \(normal\)/i)).toBeTruthy();
+    expect(screen.getByText(/hear word \(slow\)/i)).toBeTruthy();
   });
 
-  it("shows a real tricky-letter hint (not the whole word) for a word with a 'double' spelling tip", () => {
+  it("regression: does not print the full unblanked word as text even for a word with a spelling tip (previously highlighted, not blanked, next to 'Tricky:')", () => {
     render(<SpellMissing word={carried} onCorrect={vi.fn()} onWrong={vi.fn()} />);
-    expect(screen.getByText(/tricky/i)).toBeTruthy();
+    expect(screen.queryByText(carried.word)).toBeNull();
+    expect(screen.queryByText(/tricky/i)).toBeNull();
   });
 
   it("regression: resets when Quiz.tsx reuses this component instance for the next spell_missing word", () => {
