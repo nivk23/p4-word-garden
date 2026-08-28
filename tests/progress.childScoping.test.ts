@@ -88,6 +88,9 @@ import {
   deleteChild,
   resetChildProgress,
   updateChild,
+  setChildPin,
+  hashPin,
+  DEFAULT_CHILD_PIN,
   getActiveChild,
   getActiveChildId,
   setActiveChildId,
@@ -301,6 +304,34 @@ describe("child profiles + scoped paths", () => {
     it("throws when there's no signed-in account", async () => {
       mockAuthState.currentUser = null;
       await expect(updateChild("some-id", { name: "X" })).rejects.toThrow();
+    });
+  });
+
+  describe("createChild + setChildPin (per-child entry PIN, separate from the parent's Insights PIN)", () => {
+    it("defaults a new child's PIN hash to hashPin(DEFAULT_CHILD_PIN)", async () => {
+      const child = await createChild("Chloe", "🌸");
+      expect(child.profilePinHash).toBe(hashPin(DEFAULT_CHILD_PIN));
+
+      const list = await listChildren();
+      expect(list[0].profilePinHash).toBe(hashPin(DEFAULT_CHILD_PIN));
+    });
+
+    it("setChildPin updates only that child's profilePinHash", async () => {
+      const chloe = await createChild("Chloe");
+      const other = await createChild("QA Bot");
+
+      await setChildPin(chloe.id, "5678");
+
+      const list = await listChildren();
+      const updatedChloe = list.find((c) => c.id === chloe.id)!;
+      const untouchedOther = list.find((c) => c.id === other.id)!;
+      expect(updatedChloe.profilePinHash).toBe(hashPin("5678"));
+      expect(untouchedOther.profilePinHash).toBe(hashPin(DEFAULT_CHILD_PIN));
+    });
+
+    it("throws when there's no signed-in account", async () => {
+      mockAuthState.currentUser = null;
+      await expect(setChildPin("some-id", "5678")).rejects.toThrow();
     });
   });
 

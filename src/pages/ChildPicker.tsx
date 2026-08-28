@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
-import { listChildren, createChild, setActiveChildId, deleteChild, resetChildProgress, updateChild } from "../store/progress";
+import {
+  listChildren,
+  createChild,
+  setActiveChildId,
+  deleteChild,
+  resetChildProgress,
+  updateChild,
+  setChildPin,
+  hashPin,
+  DEFAULT_CHILD_PIN,
+} from "../store/progress";
 import type { ChildProfile } from "../store/progress";
 import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
 
@@ -12,9 +22,9 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   // Off by default and behind an explicit "Manage profiles" tap — this
-  // screen is what the child taps through every morning, so these controls
-  // can't just sit next to the profile buttons where a stray tap could
-  // rename, wipe, or delete someone's progress.
+  // screen is what a child taps through, so these controls can't just sit
+  // next to the profile buttons where a stray tap could rename, wipe, or
+  // delete someone's progress.
   const [manageMode, setManageMode] = useState(false);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -24,6 +34,14 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
   const [editName, setEditName] = useState("");
   const [editEmoji, setEditEmoji] = useState(EMOJI_OPTIONS[0]);
   const [savingEdit, setSavingEdit] = useState(false);
+  const [resettingPinId, setResettingPinId] = useState<string | null>(null);
+  const [pinResetMessage, setPinResetMessage] = useState("");
+  // Entering a profile (picking its tile) asks for that child's own PIN —
+  // separate from the parent's Insights PIN — so one sibling can't just tap
+  // into another's profile from the picker.
+  const [pinEntryId, setPinEntryId] = useState<string | null>(null);
+  const [pinInput, setPinInput] = useState("");
+  const [pinError, setPinError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -38,7 +56,9 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     listChildren().then((list) => {
       if (cancelled) return;
       // Exactly one profile and we weren't asked to force the picker:
-      // skip it entirely, just use it (the normal post-login case).
+      // skip it entirely, just use it (the normal post-login case) — this
+      // is effectively still "this device's own child", not a switch
+      // between siblings, so it doesn't need a PIN prompt.
       if (list.length === 1 && !forced) {
         setActiveChildId(list[0].id);
         onChildSelected();
@@ -52,15 +72,30 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handlePick = (id: string) => {
-    setActiveChildId(id);
-    onChildSelected();
-  };
-
   const closeAllPanels = () => {
     setConfirmDeleteId(null);
     setConfirmResetId(null);
     setEditingId(null);
+    setPinEntryId(null);
+    setPinInput("");
+    setPinError("");
+    setPinResetMessage("");
+  };
+
+  const startPinEntry = (child: ChildProfile) => {
+    closeAllPanels();
+    setPinEntryId(child.id);
+  };
+
+  const submitPin = (child: ChildProfile) => {
+    const requiredHash = child.profilePinHash || hashPin(DEFAULT_CHILD_PIN);
+    if (hashPin(pinInput) === requiredHash) {
+      setActiveChildId(child.id);
+      onChildSelected();
+      return;
+    }
+    setPinError("Wrong PIN — try again.");
+    setPinInput("");
   };
 
   const handleDelete = async (id: string) => {
@@ -89,6 +124,24 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
       setError("Couldn't reset progress. Please try again.");
     } finally {
       setResettingId(null);
+    }
+  };
+
+  const handleResetPin = async (child: ChildProfile) => {
+    setResettingPinId(child.id);
+    setError("");
+    setPinResetMessage("");
+    try {
+      await setChildPin(child.id, DEFAULT_CHILD_PIN);
+      setChildren((prev) =>
+        (prev || []).map((c) => (c.id === child.id ? { ...c, profilePinHash: hashPin(DEFAULT_CHILD_PIN) } : c))
+      );
+      setPinResetMessage(`${child.name}'s PIN was reset to ${DEFAULT_CHILD_PIN}.`);
+    } catch (error) {
+      console.error("Failed to reset child PIN:", error);
+      setError("Couldn't reset the PIN. Please try again.");
+    } finally {
+      setResettingPinId(null);
     }
   };
 
@@ -146,6 +199,40 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
         {children.length > 0 && (
           <div className="flex flex-col gap-3 mb-4">
             {children.map((child) => {
+              if (pinEntryId === child.id) {
+                return (
+                  <div key={child.id} className="w-full rounded-2xl border-2 border-accent bg-accent-light/30 px-4 py-3">
+                    <p className="font-display font-semibold text-lg text-ink mb-3">
+                      {child.emoji} {child.name}'s PIN
+                    </p>
+                    <input
+                      type="password"
+                      inputMode="numeric"
+                      autoComplete="off"
+                      maxLength={4}
+                      value={pinInput}
+                      onChange={(e) => {
+                        setPinInput(e.target.value.replace(/\D/g, "").slice(0, 4));
+                        setPinError("");
+                      }}
+                      onKeyDown={(e) => e.key === "Enter" && submitPin(child)}
+                      placeholder="Enter 4-digit PIN"
+                      autoFocus
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl text-lg text-center tracking-[0.5em] min-h-[56px] mb-3 focus:outline-none focus:border-accent"
+                    />
+                    {pinError && <p className="text-red-600 font-semibold mb-3 text-center">{pinError}</p>}
+                    <div className="flex gap-2">
+                      <Button variant="ghost" full={false} onClick={closeAllPanels}>
+                        Cancel
+                      </Button>
+                      <Button full={false} onClick={() => submitPin(child)} disabled={pinInput.length !== 4}>
+                        Enter
+                      </Button>
+                    </div>
+                  </div>
+                );
+              }
+
               if (confirmDeleteId === child.id) {
                 return (
                   <div
@@ -228,48 +315,62 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
               }
 
               return (
-                <div key={child.id} className="w-full flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handlePick(child.id)}
-                    className="flex-1 flex items-center gap-3 rounded-2xl border-2 border-secondary/25 bg-white/60 px-4 py-3 text-left hover:border-accent transition-colors min-h-[56px]"
-                  >
-                    <span className="text-3xl">{child.emoji}</span>
-                    <span className="font-display font-semibold text-lg text-ink">{child.name}</span>
-                  </button>
-                  {manageMode && (
-                    <>
-                      <button
-                        type="button"
-                        aria-label={`Edit ${child.name}`}
-                        onClick={() => startEdit(child)}
-                        className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-secondary/30 text-secondary-dark hover:bg-secondary-light/40 transition-colors"
-                      >
-                        ✏️
-                      </button>
-                      <button
-                        type="button"
-                        aria-label={`Reset progress for ${child.name}`}
-                        onClick={() => {
-                          closeAllPanels();
-                          setConfirmResetId(child.id);
-                        }}
-                        className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-accent/40 text-secondary-dark hover:bg-accent-light/40 transition-colors"
-                      >
-                        🔄
-                      </button>
-                      <button
-                        type="button"
-                        aria-label={`Delete ${child.name}`}
-                        onClick={() => {
-                          closeAllPanels();
-                          setConfirmDeleteId(child.id);
-                        }}
-                        className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-red-200 text-red-600 hover:bg-red-50 transition-colors"
-                      >
-                        🗑️
-                      </button>
-                    </>
+                <div key={child.id}>
+                  <div className="w-full flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => startPinEntry(child)}
+                      className="flex-1 flex items-center gap-3 rounded-2xl border-2 border-secondary/25 bg-white/60 px-4 py-3 text-left hover:border-accent transition-colors min-h-[56px]"
+                    >
+                      <span className="text-3xl">{child.emoji}</span>
+                      <span className="font-display font-semibold text-lg text-ink">{child.name}</span>
+                    </button>
+                    {manageMode && (
+                      <>
+                        <button
+                          type="button"
+                          aria-label={`Edit ${child.name}`}
+                          onClick={() => startEdit(child)}
+                          className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-secondary/30 text-secondary-dark hover:bg-secondary-light/40 transition-colors"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          type="button"
+                          aria-label={`Reset PIN for ${child.name}`}
+                          onClick={() => handleResetPin(child)}
+                          disabled={resettingPinId === child.id}
+                          className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-secondary/30 text-secondary-dark hover:bg-secondary-light/40 transition-colors disabled:opacity-50"
+                        >
+                          🔑
+                        </button>
+                        <button
+                          type="button"
+                          aria-label={`Reset progress for ${child.name}`}
+                          onClick={() => {
+                            closeAllPanels();
+                            setConfirmResetId(child.id);
+                          }}
+                          className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-accent/40 text-secondary-dark hover:bg-accent-light/40 transition-colors"
+                        >
+                          🔄
+                        </button>
+                        <button
+                          type="button"
+                          aria-label={`Delete ${child.name}`}
+                          onClick={() => {
+                            closeAllPanels();
+                            setConfirmDeleteId(child.id);
+                          }}
+                          className="flex-shrink-0 w-11 h-11 rounded-2xl border-2 border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          🗑️
+                        </button>
+                      </>
+                    )}
+                  </div>
+                  {manageMode && pinResetMessage.startsWith(child.name) && (
+                    <p className="text-secondary-dark text-sm font-semibold mt-1 ml-1">{pinResetMessage}</p>
                   )}
                 </div>
               );

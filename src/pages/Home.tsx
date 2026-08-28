@@ -132,6 +132,15 @@ export default function Home() {
         🔒 Parent insights
       </button>
 
+      {activeChild && (
+        <button
+          onClick={() => navigate("/my-profile")}
+          className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4 mt-1"
+        >
+          👤 My profile
+        </button>
+      )}
+
       {isFirebaseAvailable() && (
         <div className="flex gap-4 mt-1">
           <button

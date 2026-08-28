@@ -27,7 +27,15 @@ export interface ChildProfile {
   name: string;
   emoji: string;
   createdAt: string;
+  // The child's own 4-digit PIN, guarding entry into their profile from the
+  // picker — separate from UserProfile.pinHash, which gates the *parent's*
+  // Insights page. Optional so older profiles created before this field
+  // existed still type-check; treat a missing value as the same "1234"
+  // default a brand-new profile gets.
+  profilePinHash?: string;
 }
+
+export const DEFAULT_CHILD_PIN = "1234";
 
 export interface DayRecord {
   date: string;
@@ -208,9 +216,31 @@ export async function createChild(name: string, emoji = "🌱"): Promise<ChildPr
     name,
     emoji,
     createdAt: new Date().toISOString(),
+    profilePinHash: hashPin(DEFAULT_CHILD_PIN),
   };
-  await setDoc(newDoc, { name: child.name, emoji: child.emoji, createdAt: child.createdAt });
+  await setDoc(newDoc, {
+    name: child.name,
+    emoji: child.emoji,
+    createdAt: child.createdAt,
+    profilePinHash: child.profilePinHash,
+  });
   return child;
+}
+
+/**
+ * Set (or reset) a child's own profile-entry PIN. Used both for the child's
+ * own "My profile" self-service change and for the parent's "reset PIN"
+ * control in Manage profiles (called with DEFAULT_CHILD_PIN).
+ */
+export async function setChildPin(childId: string, pin: string): Promise<void> {
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  if (!isFirebaseAvailable() || !uid) {
+    throw new Error("Cannot set a child's PIN without a signed-in account.");
+  }
+
+  const db = getFirebaseDb()!;
+  await setDoc(doc(db, `users/${uid}/children/${childId}`), { profilePinHash: hashPin(pin) }, { merge: true });
 }
 
 /**

@@ -14,6 +14,7 @@ const LazyQuiz = lazy(() => import("./pages/Quiz"));
 const LazyDone = lazy(() => import("./pages/Done"));
 const LazyInsights = lazy(() => import("./pages/Insights"));
 const LazyCompareChildren = lazy(() => import("./pages/CompareChildren"));
+const LazyMyProfile = lazy(() => import("./pages/MyProfile"));
 import PinGate from "./pages/PinGate";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/done" element={<LazyDone />} />
               <Route path="/insights" element={<PinGate><LazyInsights /></PinGate>} />
               <Route path="/compare-children" element={<PinGate><LazyCompareChildren /></PinGate>} />
+              <Route path="/my-profile" element={<LazyMyProfile />} />
             </Routes>
           </Suspense>
         </AuthGate>
