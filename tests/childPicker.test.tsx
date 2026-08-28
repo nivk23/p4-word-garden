@@ -1,18 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, cleanup, within } from "@testing-library/react";
 import ChildPicker from "../src/pages/ChildPicker";
 
-const { listChildren, createChild, setActiveChildId, deleteChild } = vi.hoisted(() => ({
+const { listChildren, createChild, setActiveChildId, deleteChild, resetChildProgress, updateChild } = vi.hoisted(() => ({
   listChildren: vi.fn(),
   createChild: vi.fn(),
   setActiveChildId: vi.fn(),
   deleteChild: vi.fn(),
+  resetChildProgress: vi.fn(),
+  updateChild: vi.fn(),
 }));
 vi.mock("../src/store/progress", () => ({
   listChildren: (...args: unknown[]) => listChildren(...args),
   createChild: (...args: unknown[]) => createChild(...args),
   setActiveChildId: (...args: unknown[]) => setActiveChildId(...args),
   deleteChild: (...args: unknown[]) => deleteChild(...args),
+  resetChildProgress: (...args: unknown[]) => resetChildProgress(...args),
+  updateChild: (...args: unknown[]) => updateChild(...args),
 }));
 
 describe("ChildPicker", () => {
@@ -147,5 +151,88 @@ describe("ChildPicker", () => {
 
     expect(deleteChild).not.toHaveBeenCalled();
     expect(screen.getByText("QA Bot")).toBeTruthy();
+  });
+
+  it("regression: reset progress requires an explicit confirm step and keeps the profile (name/emoji unchanged)", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "chloe", name: "Chloe", emoji: "🌸", createdAt: "now" },
+    ]);
+    resetChildProgress.mockResolvedValueOnce(undefined);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("Chloe"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/reset progress for chloe/i));
+
+    expect(resetChildProgress).not.toHaveBeenCalled();
+    await waitFor(() => screen.getByText(/reset all progress for.*chloe/i));
+
+    fireEvent.click(screen.getByRole("button", { name: /yes, reset progress/i }));
+
+    await waitFor(() => expect(resetChildProgress).toHaveBeenCalledWith("chloe"));
+    // Profile itself stays — still listed, name/emoji untouched.
+    expect(screen.getByText("Chloe")).toBeTruthy();
+  });
+
+  it("regression: Cancel on the reset confirmation does not reset anything", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "chloe", name: "Chloe", emoji: "🌸", createdAt: "now" },
+    ]);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("Chloe"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/reset progress for chloe/i));
+
+    await waitFor(() => screen.getByRole("button", { name: /cancel/i }));
+    fireEvent.click(screen.getByRole("button", { name: /cancel/i }));
+
+    expect(resetChildProgress).not.toHaveBeenCalled();
+  });
+
+  it("regression: editing a profile's name and avatar saves via updateChild and updates the displayed tile", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "chloe", name: "Chloe", emoji: "🌸", createdAt: "now" },
+    ]);
+    updateChild.mockResolvedValueOnce(undefined);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("Chloe"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/edit chloe/i));
+
+    await waitFor(() => screen.getAllByPlaceholderText("Child's name"));
+    const nameInput = screen.getAllByPlaceholderText("Child's name")[0]; // edit panel's, not the add-new-profile one
+    const editPanel = nameInput.closest("div")!;
+    fireEvent.change(nameInput, { target: { value: "Chloe Bear" } });
+    fireEvent.click(within(editPanel).getByLabelText("Choose 🦋"));
+    fireEvent.click(within(editPanel).getByRole("button", { name: /^save$/i }));
+
+    await waitFor(() => expect(updateChild).toHaveBeenCalledWith("chloe", { name: "Chloe Bear", emoji: "🦋" }));
+    await waitFor(() => screen.getByText("Chloe Bear"));
+  });
+
+  it("regression: Cancel on the edit panel discards changes", async () => {
+    sessionStorage.setItem("force_child_picker", "1");
+    listChildren.mockResolvedValueOnce([
+      { id: "chloe", name: "Chloe", emoji: "🌸", createdAt: "now" },
+    ]);
+    render(<ChildPicker onChildSelected={vi.fn()} />);
+
+    await waitFor(() => screen.getByText("Chloe"));
+    fireEvent.click(screen.getByText(/manage profiles/i));
+    fireEvent.click(screen.getByLabelText(/edit chloe/i));
+
+    await waitFor(() => screen.getAllByPlaceholderText("Child's name"));
+    const nameInput = screen.getAllByPlaceholderText("Child's name")[0]; // edit panel's, not the add-new-profile one
+    fireEvent.change(nameInput, { target: { value: "Someone Else" } });
+    fireEvent.click(screen.getByRole("button", { name: /cancel/i }));
+
+    expect(updateChild).not.toHaveBeenCalled();
+    expect(screen.getByText("Chloe")).toBeTruthy();
+    expect(screen.queryByText("Someone Else")).toBeNull();
   });
 });

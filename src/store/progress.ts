@@ -214,12 +214,30 @@ export async function createChild(name: string, emoji = "🌱"): Promise<ChildPr
 }
 
 /**
+ * Delete every doc in a child's items/days/answers subcollections. Shared by
+ * deleteChild (which also removes the child doc itself) and
+ * resetChildProgress (which keeps the child doc, just empties its history).
+ * The Firestore JS SDK has no recursive delete, so this is doc-by-doc.
+ */
+async function clearChildSubcollections(db: ReturnType<typeof getFirebaseDb>, basePath: string): Promise<void> {
+  const [itemsSnap, daysSnap, answersSnap] = await Promise.all([
+    getDocs(collection(db!, `${basePath}/items`)),
+    getDocs(collection(db!, `${basePath}/days`)),
+    getDocs(collection(db!, `${basePath}/answers`)),
+  ]);
+
+  await Promise.all([
+    ...itemsSnap.docs.map((d) => deleteDoc(d.ref)),
+    ...daysSnap.docs.map((d) => deleteDoc(d.ref)),
+    ...answersSnap.docs.map((d) => deleteDoc(d.ref)),
+  ]);
+}
+
+/**
  * Permanently delete a child profile and all of its progress data
- * (scheduler items, day records, answer logs). The Firestore JS SDK has no
- * recursive delete, so the subcollections are cleared doc-by-doc before the
- * child doc itself. If the deleted child was active on this device, clears
- * that so the app falls back to the picker instead of pointing at a child
- * that no longer exists.
+ * (scheduler items, day records, answer logs). If the deleted child was
+ * active on this device, clears that so the app falls back to the picker
+ * instead of pointing at a child that no longer exists.
  */
 export async function deleteChild(childId: string): Promise<void> {
   const auth = getFirebaseAuth();
@@ -231,23 +249,50 @@ export async function deleteChild(childId: string): Promise<void> {
   const db = getFirebaseDb()!;
   const basePath = `users/${uid}/children/${childId}`;
 
-  const [itemsSnap, daysSnap, answersSnap] = await Promise.all([
-    getDocs(collection(db, `${basePath}/items`)),
-    getDocs(collection(db, `${basePath}/days`)),
-    getDocs(collection(db, `${basePath}/answers`)),
-  ]);
-
-  await Promise.all([
-    ...itemsSnap.docs.map((d) => deleteDoc(d.ref)),
-    ...daysSnap.docs.map((d) => deleteDoc(d.ref)),
-    ...answersSnap.docs.map((d) => deleteDoc(d.ref)),
-  ]);
-
+  await clearChildSubcollections(db, basePath);
   await deleteDoc(doc(db, basePath));
 
   if (getActiveChildId() === childId) {
     clearActiveChild();
   }
+}
+
+/**
+ * Wipe a child's progress (scheduler items, day records, answer logs, streak)
+ * without deleting the profile itself — name, emoji, and PIN are preserved.
+ */
+export async function resetChildProgress(childId: string): Promise<void> {
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  if (!isFirebaseAvailable() || !uid) {
+    throw new Error("Cannot reset progress without a signed-in account.");
+  }
+
+  const db = getFirebaseDb()!;
+  const basePath = `users/${uid}/children/${childId}`;
+
+  const [, childSnap] = await Promise.all([
+    clearChildSubcollections(db, basePath),
+    getDoc(doc(db, basePath)),
+  ]);
+
+  const existingProfile = (childSnap.exists() && childSnap.data().profile) || createUserProfile();
+  const resetProfile: UserProfile = { ...existingProfile, streak: 0, lastCompletedDay: "" };
+  await setDoc(doc(db, basePath), { profile: resetProfile }, { merge: true });
+}
+
+/**
+ * Update a child's own name and/or emoji (not their UserProfile).
+ */
+export async function updateChild(childId: string, updates: { name?: string; emoji?: string }): Promise<void> {
+  const auth = getFirebaseAuth();
+  const uid = auth?.currentUser?.uid;
+  if (!isFirebaseAvailable() || !uid) {
+    throw new Error("Cannot update a child profile without a signed-in account.");
+  }
+
+  const db = getFirebaseDb()!;
+  await setDoc(doc(db, `users/${uid}/children/${childId}`), updates, { merge: true });
 }
 
 /**

@@ -86,6 +86,8 @@ import {
   listChildren,
   createChild,
   deleteChild,
+  resetChildProgress,
+  updateChild,
   getActiveChild,
   getActiveChildId,
   setActiveChildId,
@@ -93,6 +95,7 @@ import {
   saveSchedulerItem,
   getSchedulerItems,
   saveDayRecord,
+  getDayRecord,
   logAnswer,
   saveUserProfile,
   getUserProfile,
@@ -210,6 +213,94 @@ describe("child profiles + scoped paths", () => {
     it("throws when there's no signed-in account", async () => {
       mockAuthState.currentUser = null;
       await expect(deleteChild("some-id")).rejects.toThrow();
+    });
+  });
+
+  describe("resetChildProgress", () => {
+    it("clears items/days/answers and resets streak, but keeps name/emoji/PIN", async () => {
+      const child = await createChild("Chloe", "🌸");
+      setActiveChildId(child.id);
+
+      await saveSchedulerItem({
+        itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 3, spellBox: 0,
+        correct: 5, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 5,
+        lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
+        sayCorrect: 0, sayWrong: 0,
+      });
+      await saveDayRecord({
+        date: "2024-01-01", wordIds: ["huge"], grammarId: "lesson_1",
+        completed: true, quizResults: [], accuracy: 90, durationSec: 60,
+      });
+      await logAnswer({ day: "2024-01-01", itemId: "huge", qType: "meaning", correct: true, ts: 1 });
+
+      const profile = await getUserProfile();
+      profile.streak = 7;
+      profile.lastCompletedDay = "2024-01-01";
+      profile.pinHash = "custom-pin-hash";
+      await saveUserProfile(profile);
+
+      await resetChildProgress(child.id);
+
+      expect(await getSchedulerItems()).toEqual([]);
+      expect(await getDayRecord("2024-01-01")).toBeNull();
+
+      const resetProfile = await getUserProfile();
+      expect(resetProfile.streak).toBe(0);
+      expect(resetProfile.lastCompletedDay).toBe("");
+      expect(resetProfile.pinHash).toBe("custom-pin-hash"); // not wiped
+
+      // The profile doc itself (name/emoji) survives untouched.
+      const list = await listChildren();
+      expect(list).toContainEqual(expect.objectContaining({ id: child.id, name: "Chloe", emoji: "🌸" }));
+    });
+
+    it("leaves another child's data untouched", async () => {
+      const toReset = await createChild("QA Bot");
+      const other = await createChild("Chloe");
+
+      setActiveChildId(other.id);
+      await saveSchedulerItem({
+        itemId: "tiny", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
+        correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
+        lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
+        sayCorrect: 0, sayWrong: 0,
+      });
+
+      await resetChildProgress(toReset.id);
+
+      setActiveChildId(other.id);
+      const items = await getSchedulerItems();
+      expect(items.map((i) => i.itemId)).toEqual(["tiny"]);
+    });
+
+    it("throws when there's no signed-in account", async () => {
+      mockAuthState.currentUser = null;
+      await expect(resetChildProgress("some-id")).rejects.toThrow();
+    });
+  });
+
+  describe("updateChild", () => {
+    it("updates name and emoji without touching progress", async () => {
+      const child = await createChild("Chloe", "🌸");
+      setActiveChildId(child.id);
+      await saveSchedulerItem({
+        itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
+        correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
+        lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
+        sayCorrect: 0, sayWrong: 0,
+      });
+
+      await updateChild(child.id, { name: "Chloe Bear", emoji: "🦋" });
+
+      const list = await listChildren();
+      expect(list).toContainEqual(expect.objectContaining({ id: child.id, name: "Chloe Bear", emoji: "🦋" }));
+      const items = await getSchedulerItems();
+      expect(items).toHaveLength(1); // untouched
+    });
+
+    it("throws when there's no signed-in account", async () => {
+      mockAuthState.currentUser = null;
+      await expect(updateChild("some-id", { name: "X" })).rejects.toThrow();
     });
   });
 
