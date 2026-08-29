@@ -48,8 +48,6 @@ async function seedWordQuiz() {
     nextDue: today,
     correctDays: [],
     correctTypes: [],
-    sayCorrect: 0,
-    sayWrong: 0,
   });
 }
 

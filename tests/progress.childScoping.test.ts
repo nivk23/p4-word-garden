@@ -162,7 +162,6 @@ describe("child profiles + scoped paths", () => {
         itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
         correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
         lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
-        sayCorrect: 0, sayWrong: 0,
       });
       await saveDayRecord({
         date: "2024-01-01", wordIds: ["huge"], grammarId: "lesson_1",
@@ -175,7 +174,6 @@ describe("child profiles + scoped paths", () => {
         itemId: "tiny", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
         correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
         lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
-        sayCorrect: 0, sayWrong: 0,
       });
 
       await deleteChild(toDelete.id);
@@ -228,7 +226,6 @@ describe("child profiles + scoped paths", () => {
         itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 3, spellBox: 0,
         correct: 5, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 5,
         lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
-        sayCorrect: 0, sayWrong: 0,
       });
       await saveDayRecord({
         date: "2024-01-01", wordIds: ["huge"], grammarId: "lesson_1",
@@ -266,7 +263,6 @@ describe("child profiles + scoped paths", () => {
         itemId: "tiny", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
         correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
         lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
-        sayCorrect: 0, sayWrong: 0,
       });
 
       await resetChildProgress(toReset.id);
@@ -290,7 +286,6 @@ describe("child profiles + scoped paths", () => {
         itemId: "huge", type: "word", introducedOn: "2024-01-01", box: 1, spellBox: 0,
         correct: 1, wrong: 0, spellCorrect: 0, spellWrong: 0, streak: 1,
         lastSeen: "2024-01-01", nextDue: "2024-01-02", correctDays: [], correctTypes: [],
-        sayCorrect: 0, sayWrong: 0,
       });
 
       await updateChild(child.id, { name: "Chloe Bear", emoji: "🦋" });

@@ -22,9 +22,7 @@ import {
   calculateGrammarAccuracy,
   calculateComprehensionAccuracy,
   calculateSpellingAccuracy,
-  calculatePronunciationAccuracy,
   findTrickySpellings,
-  findHardToSayWords,
 } from "../lib/insights";
 import { allWords } from "../content/allWords";
 import { PageTitle, Card, Button, Loading } from "../components/ui";
@@ -58,8 +56,6 @@ export default function Insights() {
   const [comprehensionAccuracy, setComprehensionAccuracy] = useState(0);
   const [spellingAccuracy, setSpellingAccuracy] = useState(0);
   const [trickySpellings, setTrickySpellings] = useState<any[]>([]);
-  const [pronunciationAccuracy, setPronunciationAccuracy] = useState(0);
-  const [hardToSayWords, setHardToSayWords] = useState<any[]>([]);
   const [newPin, setNewPin] = useState("");
   const [pinMessage, setPinMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -97,8 +93,6 @@ export default function Insights() {
       const comp_acc = calculateComprehensionAccuracy(logs);
       const spell_acc = calculateSpellingAccuracy(items);
       const tricky = findTrickySpellings(items, 10);
-      const pron_acc = calculatePronunciationAccuracy(items);
-      const hardToSay = findHardToSayWords(items, 10);
 
       setMasteredCount(mastered);
       setLearnedCount(learned);
@@ -117,8 +111,6 @@ export default function Insights() {
       setComprehensionAccuracy(comp_acc);
       setSpellingAccuracy(spell_acc);
       setTrickySpellings(tricky);
-      setPronunciationAccuracy(pron_acc);
-      setHardToSayWords(hardToSay);
 
       setIsLoading(false);
     }
@@ -153,10 +145,8 @@ export default function Insights() {
       overallAccuracy,
       comprehensionAccuracy,
       spellingAccuracy,
-      pronunciationAccuracy,
       troubleWords,
       trickySpellings,
-      hardToSayWords,
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -345,30 +335,6 @@ export default function Insights() {
                     </div>
                   ))}
                 </div>
-              </Card>
-            )}
-
-            {/* Pronunciation */}
-            {pronunciationAccuracy > 0 && (
-              <Card>
-                <h3 className="font-display text-xl font-semibold text-secondary-dark mb-4">
-                  Pronunciation Accuracy: {pronunciationAccuracy}%
-                </h3>
-                {hardToSayWords.length > 0 && (
-                  <div className="mt-4">
-                    <p className="text-sm text-ink/60 mb-3">Hard to Say:</p>
-                    <div className="space-y-2">
-                      {hardToSayWords.map((item, idx) => (
-                        <div key={idx} className="bg-gray-50 p-2 rounded-lg text-sm">
-                          <span className="font-semibold">{item.itemId}</span>
-                          <span className="text-ink/60 ml-2">
-                            {item.correct}&#10003; {item.wrong}&#10007;
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </Card>
             )}
 

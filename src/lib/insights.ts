@@ -213,31 +213,6 @@ export function calculateSpellingAccuracy(
 }
 
 /**
- * Calculate pronunciation accuracy
- */
-export function calculatePronunciationAccuracy(
-  items: SchedulerItem[]
-): number {
-  const wordItems = items.filter((item) => item.type === "word");
-  if (wordItems.length === 0) return 0;
-
-  let totalSayAttempts = 0;
-  let totalSayCorrect = 0;
-
-  for (const item of wordItems) {
-    const correct = item.sayCorrect ?? 0;
-    const wrong = item.sayWrong ?? 0;
-    if (correct + wrong > 0) {
-      totalSayAttempts += correct + wrong;
-      totalSayCorrect += correct;
-    }
-  }
-
-  if (totalSayAttempts === 0) return 0;
-  return Math.round((totalSayCorrect / totalSayAttempts) * 100);
-}
-
-/**
  * Find tricky spellings: words with lowest spelling accuracy
  */
 export function findTrickySpellings(
@@ -259,32 +234,6 @@ export function findTrickySpellings(
         a.correct / (a.correct + a.wrong);
       const bAccuracy =
         b.correct / (b.correct + b.wrong);
-      return aAccuracy - bAccuracy;
-    })
-    .slice(0, limit);
-}
-
-/**
- * Find hard to say words: lowest pronunciation accuracy
- */
-export function findHardToSayWords(
-  items: SchedulerItem[],
-  limit: number = 10
-): Array<{ itemId: string; correct: number; wrong: number }> {
-  return items
-    .filter(
-      (item) =>
-        item.type === "word" &&
-        ((item.sayCorrect ?? 0) + (item.sayWrong ?? 0) > 0)
-    )
-    .map((item) => ({
-      itemId: item.itemId,
-      correct: item.sayCorrect ?? 0,
-      wrong: item.sayWrong ?? 0,
-    }))
-    .sort((a, b) => {
-      const aAccuracy = a.correct / (a.correct + a.wrong);
-      const bAccuracy = b.correct / (b.correct + b.wrong);
       return aAccuracy - bAccuracy;
     })
     .slice(0, limit);

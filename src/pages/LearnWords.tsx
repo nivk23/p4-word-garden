@@ -63,8 +63,6 @@ export default function LearnWords() {
             nextDue: today,
             correctDays: [],
             correctTypes: [],
-            sayCorrect: 0,
-            sayWrong: 0,
           })
         )
       ),

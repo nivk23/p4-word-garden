@@ -10,7 +10,7 @@ import {
   saveUserProfile,
 } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
-import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong, markSayCorrect, markSayWrong } from "../lib/scheduler";
+import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong } from "../lib/scheduler";
 import { buildDailyQuizWithSpelling, shuffleOptionsWithCorrect, createPracticeOnlyRetry, generateWordQuestions, generateGrammarQuestions, stripPunctuation } from "../lib/questions";
 import { allWords } from "../content/allWords";
 import { grammarLessons } from "../content/grammar";
@@ -18,7 +18,6 @@ import { speak } from "../lib/tts";
 import SpellTiles from "../components/SpellTiles";
 import SpellMissing from "../components/SpellMissing";
 import SpellType from "../components/SpellType";
-import SayIt from "../components/SayIt";
 import type { Question } from "../lib/questions";
 import type { SchedulerItem } from "../lib/scheduler";
 import { Page, PageTitle, Loading, Card, Button, SpeakButton, FeedbackBanner } from "../components/ui";
@@ -98,7 +97,7 @@ export default function Quiz() {
         }
       }
 
-      // Add spelling and say_word items
+      // Add spelling items
       const quizWithSpelling = buildDailyQuizWithSpelling(realQuestions, allItems);
 
       setQuestions(quizWithSpelling);
@@ -168,7 +167,7 @@ export default function Quiz() {
   const word = allWords.find((w) => w.word === currentQuestion.itemId);
   const schedulerItem = schedulerItems.find((i) => i.itemId === currentQuestion.itemId);
   const isWordHeroType = !showMeaning && !!word && [
-    "spell_tiles", "spell_missing", "spell_type", "say_word"
+    "spell_tiles", "spell_missing", "spell_type"
   ].indexOf(currentQuestion.type) === -1;
 
   const handleAnswer = async (selectedIdxArg: number, isCorrect?: boolean, skipSpeak?: boolean) => {
@@ -195,11 +194,6 @@ export default function Quiz() {
         // Handle spelling tracking
         if (currentQuestion.type.includes("spell") && schedulerItem.type === "word") {
           updated = markSpellingCorrect(updated);
-        }
-
-        // Handle say tracking
-        if (currentQuestion.type === "say_word" && schedulerItem.type === "word") {
-          updated = markSayCorrect(updated);
         }
 
         await saveSchedulerItem(updated);
@@ -230,11 +224,6 @@ export default function Quiz() {
         // Handle spelling tracking
         if (currentQuestion.type.includes("spell") && schedulerItem.type === "word") {
           updated = markSpellingWrong(updated);
-        }
-
-        // Handle say tracking
-        if (currentQuestion.type === "say_word" && schedulerItem.type === "word") {
-          updated = markSayWrong(updated);
         }
 
         await saveSchedulerItem(updated);
@@ -287,14 +276,6 @@ export default function Quiz() {
       speak(currentQuestion.context || "");
     }
     setTimeout(() => handleAnswer(idx, justCorrect, !justCorrect), justCorrect ? 500 : 900);
-  };
-
-  const handleSayCorrect = async () => {
-    handleAnswer(0, true);
-  };
-
-  const handleSayWrong = async () => {
-    handleAnswer(0, false);
   };
 
   // Callers that just called setScore/setAnsweredCount must pass the new
@@ -424,12 +405,6 @@ export default function Quiz() {
             word={word}
             onCorrect={() => handleAnswer(0, true)}
             onWrong={() => handleAnswer(0, false)}
-          />
-        ) : currentQuestion.type === "say_word" && word ? (
-          <SayIt
-            word={word}
-            onCorrect={handleSayCorrect}
-            onWrong={handleSayWrong}
           />
         ) : (
           <div>

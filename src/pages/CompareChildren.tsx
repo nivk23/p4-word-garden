@@ -8,7 +8,6 @@ import {
   calculateAccuracy,
   calculateComprehensionAccuracy,
   calculateSpellingAccuracy,
-  calculatePronunciationAccuracy,
 } from "../lib/insights";
 import { allWords } from "../content/allWords";
 import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
@@ -22,7 +21,6 @@ interface ChildRow {
   accuracy: number;
   comprehension: number;
   spelling: number;
-  pronunciation: number;
 }
 
 export default function CompareChildren() {
@@ -48,7 +46,6 @@ export default function CompareChildren() {
             accuracy: calculateAccuracy(logs),
             comprehension: calculateComprehensionAccuracy(logs),
             spelling: calculateSpellingAccuracy(items),
-            pronunciation: calculatePronunciationAccuracy(items),
           };
         })
       );
@@ -112,13 +109,10 @@ export default function CompareChildren() {
                   <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
                     Spelling
                   </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Pronunciation
-                  </th>
                 </tr>
               </thead>
               <tbody>
-                {rows.map(({ child, known, mastered, streak, daysCompleted, accuracy, comprehension, spelling, pronunciation }) => (
+                {rows.map(({ child, known, mastered, streak, daysCompleted, accuracy, comprehension, spelling }) => (
                   <tr key={child.id} className="border-t border-secondary/15">
                     <td className="sticky left-0 bg-cream py-3 pr-4 font-display font-semibold text-ink whitespace-nowrap">
                       {child.emoji} {child.name}
@@ -134,7 +128,6 @@ export default function CompareChildren() {
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{accuracy}%</td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{comprehension}%</td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{spelling}%</td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{pronunciation}%</td>
                   </tr>
                 ))}
               </tbody>

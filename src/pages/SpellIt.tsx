@@ -83,7 +83,7 @@ export default function SpellIt() {
     if (currentWordIdx < spellingItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
     } else {
-      navigate("/say-it");
+      navigate("/grammar");
     }
   };
 
@@ -101,7 +101,7 @@ export default function SpellIt() {
     if (currentWordIdx < spellingItems.length - 1) {
       setCurrentWordIdx(currentWordIdx + 1);
     } else {
-      navigate("/say-it");
+      navigate("/grammar");
     }
   };
 

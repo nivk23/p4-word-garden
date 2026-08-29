@@ -14,9 +14,7 @@ import {
   calculateGrammarAccuracy,
   calculateComprehensionAccuracy,
   calculateSpellingAccuracy,
-  calculatePronunciationAccuracy,
   findTrickySpellings,
-  findHardToSayWords,
 } from "../src/lib/insights";
 
 const createItem = (
@@ -157,18 +155,6 @@ describe("Insights", () => {
     });
   });
 
-  describe("calculatePronunciationAccuracy", () => {
-    it("should calculate pronunciation accuracy", () => {
-      const item1 = createItem("word1", "word");
-      item1.sayCorrect = 3;
-      item1.sayWrong = 1;
-
-      const items = [item1];
-      // 3/4 = 75%
-      expect(calculatePronunciationAccuracy(items)).toBe(75);
-    });
-  });
-
   describe("calculateComprehensionAccuracy", () => {
     it("should calculate accuracy for comprehension question types", () => {
       const logs: AnswerLog[] = [
@@ -240,23 +226,6 @@ describe("Insights", () => {
       const tricky = findTrickySpellings(items);
       expect(tricky[0].itemId).toBe("word1");
       expect(tricky[1].itemId).toBe("word2");
-    });
-  });
-
-  describe("findHardToSayWords", () => {
-    it("should return words sorted by pronunciation accuracy (lowest first)", () => {
-      const items = [
-        createItem("word1", "word"),
-        createItem("word2", "word"),
-      ];
-      items[0].sayCorrect = 0;
-      items[0].sayWrong = 2; // 0% accuracy
-      items[1].sayCorrect = 2;
-      items[1].sayWrong = 1; // 67% accuracy
-
-      const hardToSay = findHardToSayWords(items);
-      expect(hardToSay[0].itemId).toBe("word1");
-      expect(hardToSay[1].itemId).toBe("word2");
     });
   });
 

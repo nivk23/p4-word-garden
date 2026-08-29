@@ -44,8 +44,6 @@ describe('Integration: Daily Flow', () => {
         nextDue: today,
         correctDays: [],
         correctTypes: [],
-        sayCorrect: 0,
-        sayWrong: 0,
       });
     }
 
@@ -107,8 +105,6 @@ describe('Integration: Daily Flow', () => {
         nextDue: today,
         correctDays: [yesterday],
         correctTypes: ['meaning'],
-        sayCorrect: 0,
-        sayWrong: 0,
       });
     }
 
@@ -130,8 +126,6 @@ describe('Integration: Daily Flow', () => {
         nextDue: today,
         correctDays: [],
         correctTypes: [],
-        sayCorrect: 0,
-        sayWrong: 0,
       });
     }
 
@@ -195,8 +189,6 @@ describe('Integration: Daily Flow', () => {
       nextDue: today,
       correctDays: [today],
       correctTypes: ['meaning'],
-      sayCorrect: 0,
-      sayWrong: 0,
     };
 
     await saveSchedulerItem(item);
@@ -235,8 +227,6 @@ describe('Integration: Daily Flow', () => {
         nextDue: today,
         correctDays: [],
         correctTypes: [],
-        sayCorrect: 0,
-        sayWrong: 0,
       });
     }
 
@@ -298,8 +288,6 @@ describe('Integration: Daily Flow', () => {
         nextDue: today,
         correctDays: [yesterday],
         correctTypes: ['meaning'],
-        sayCorrect: 0,
-        sayWrong: 0,
       });
     }
 

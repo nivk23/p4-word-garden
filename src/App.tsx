@@ -7,7 +7,6 @@ import AuthGate from "./components/AuthGate";
 // Lazy load pages for code splitting
 const LazyLearnWords = lazy(() => import("./pages/LearnWords"));
 const LazySpellIt = lazy(() => import("./pages/SpellIt"));
-const LazySayItStep = lazy(() => import("./pages/SayItStep"));
 const LazyGrammarLesson = lazy(() => import("./pages/GrammarLesson"));
 const LazyMiniRead = lazy(() => import("./pages/MiniRead"));
 const LazyQuiz = lazy(() => import("./pages/Quiz"));
@@ -27,7 +26,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/learn-words" element={<LazyLearnWords />} />
               <Route path="/spell-it" element={<LazySpellIt />} />
-              <Route path="/say-it" element={<LazySayItStep />} />
               <Route path="/grammar" element={<LazyGrammarLesson />} />
               <Route path="/read" element={<LazyMiniRead />} />
               <Route path="/quiz" element={<LazyQuiz />} />

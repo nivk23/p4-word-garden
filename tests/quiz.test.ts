@@ -50,7 +50,7 @@ describe("Quiz Integration", () => {
       expect(spellingQuestions.length).toBeLessThanOrEqual(3);
     });
 
-    it("should include at most 1 say_word item", () => {
+    it("regression: never adds a say_word item (the pronunciation step was removed)", () => {
       const mainQuiz = [
         createQuestion("huge"),
         createQuestion("tiny"),
@@ -64,8 +64,8 @@ describe("Quiz Integration", () => {
 
       const quiz = buildDailyQuizWithSpelling(mainQuiz, items);
 
-      const sayWordQuestions = quiz.filter((q) => q.type === "say_word");
-      expect(sayWordQuestions.length).toBeLessThanOrEqual(1);
+      const sayWordQuestions = quiz.filter((q) => (q.type as string) === "say_word");
+      expect(sayWordQuestions.length).toBe(0);
     });
 
     it("should use spell_tiles for spellBox 0-1", () => {

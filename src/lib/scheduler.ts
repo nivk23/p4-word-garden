@@ -15,8 +15,6 @@ export interface SchedulerItem {
   nextDue: string;
   correctDays?: string[]; // days on which answered correctly
   correctTypes?: string[]; // question types on which answered correctly
-  sayCorrect?: number; // pronunciation attempts correct
-  sayWrong?: number; // pronunciation attempts wrong
 }
 
 const boxIntervals = [1, 2, 4, 7, 14, 30]; // days
@@ -88,26 +86,6 @@ export function markSpellingWrong(item: SchedulerItem): SchedulerItem {
     ...item,
     spellBox: newSpellBox,
     spellWrong: (item.spellWrong || 0) + 1,
-  };
-}
-
-/**
- * Mark a pronunciation (Say It) attempt as correct
- */
-export function markSayCorrect(item: SchedulerItem): SchedulerItem {
-  return {
-    ...item,
-    sayCorrect: (item.sayCorrect || 0) + 1,
-  };
-}
-
-/**
- * Mark a pronunciation (Say It) attempt as wrong
- */
-export function markSayWrong(item: SchedulerItem): SchedulerItem {
-  return {
-    ...item,
-    sayWrong: (item.sayWrong || 0) + 1,
   };
 }
 

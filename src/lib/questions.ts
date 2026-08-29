@@ -21,8 +21,7 @@ export type QuestionType =
   | "editing"
   | "spell_tiles"
   | "spell_missing"
-  | "spell_type"
-  | "say_word";
+  | "spell_type";
 
 export interface Question {
   id: string;
@@ -301,8 +300,8 @@ export function shuffleOptionsWithCorrect(
 }
 
 /**
- * Build a daily quiz with spelling and say_word items
- * Includes 2-3 spelling items per review quiz, ≤ 1 say_word item
+ * Build a daily quiz with spelling items
+ * Includes 2-3 spelling items per review quiz
  */
 export function buildDailyQuizWithSpelling(
   mainQuiz: Question[],
@@ -334,24 +333,6 @@ export function buildDailyQuizWithSpelling(
     if (spellQuestion) {
       quiz.push(spellQuestion);
       spellingCount++;
-    }
-  }
-
-  // Add ≤ 1 say_word item
-  const sayItem = wordItems.find(
-    (i) => i.box >= 1 && !quiz.some((q) => q.itemId === i.itemId && q.type.includes("spell"))
-  );
-  if (sayItem) {
-    const word = allWords.find((w) => w.word === sayItem.itemId);
-    if (word) {
-      quiz.push({
-        id: `${word.word}_say`,
-        type: "say_word",
-        itemId: word.word,
-        question: `Say this word: "${word.word}"`,
-        options: [],
-        correctAnswer: 0,
-      });
     }
   }
 

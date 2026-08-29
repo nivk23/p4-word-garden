@@ -406,7 +406,7 @@ export async function getUserProfile(): Promise<UserProfile> {
 /**
  * Firestore's setDoc() rejects any field with a literal `undefined` value
  * outright ("Unsupported field value: undefined"), which SchedulerItem's
- * several optional fields (spellBox, sayCorrect, ...) can end up holding
+ * several optional fields (spellBox, spellCorrect, ...) can end up holding
  * after a spread — see markCorrect() in lib/scheduler.ts for the concrete
  * bug this was written for. Applied at the write boundary so any future
  * optional field added to SchedulerItem is covered automatically, instead

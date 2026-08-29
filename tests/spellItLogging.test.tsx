@@ -55,8 +55,6 @@ async function seedToday() {
     nextDue: today,
     correctDays: [],
     correctTypes: [],
-    sayCorrect: 0,
-    sayWrong: 0,
   });
 }
 

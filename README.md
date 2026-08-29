@@ -19,13 +19,10 @@ anonymous Auth). Works fully offline in local-only mode if Firebase is not confi
   rules like question tags, comparatives, passive, uncountable nouns…).
 - **Spelling track** – letter tiles → missing letters → type-from-audio, unlocked only after
   the meaning is known.
-- **Pronunciation ("Say it")** – model audio (normal + slow syllable-by-syllable), microphone
-  check via the browser's speech recognition, record-and-compare. Falls back gracefully when
-  unsupported.
 - **Review quiz** – 6–10 items: yesterday's items always included, everything due today, then
   weighted random picks where wrongly-answered words appear far more often. 11 question types
   (picture pick, meaning, situation, read-and-answer, fill blank, pick sentence, listen pick,
-  grammar tag, word order, choose form, exam-style editing) plus spelling and say-word items.
+  grammar tag, word order, choose form, exam-style editing) plus spelling items.
 - **Anti-guessing mastery** – a word is *mastered* only after 5 correct in a row across at
   least 3 different days and 2 different question types; any wrong answer resets it. Options
   are reshuffled and distractors vary every time; a wrong answer is re-asked later in the same
@@ -91,12 +88,11 @@ src/
     scheduler.ts       Leitner boxes, mastery rule, daily quiz builder
     questions.ts       question generators + distractors
     spelling.ts        tiles / missing-letter / type generators
-    speech.ts          SpeechRecognition wrapper + fuzzy matcher
     tts.ts             speechSynthesis wrapper
     insights.ts        pure aggregation functions for the Insights page
     dates.ts           local day keys, ?day= override
   store/progress.ts    Firestore with localStorage fallback
-  pages/               Home, LearnWords, SpellIt, SayItStep, GrammarLesson, MiniRead,
+  pages/               Home, LearnWords, SpellIt, GrammarLesson, MiniRead,
                        Quiz, Done, PinGate, Insights
   components/          SpellTiles, SpellMissing, SpellType, SayIt
 tests/                 Vitest suites
@@ -126,5 +122,5 @@ users/{uid}
 
 ## Browser support
 
-Chrome / Edge / Android Chrome give the full experience (speech recognition + TTS).
-Safari and Firefox get TTS and everything except the microphone check. Installable as a PWA.
+Every modern browser gets the full experience — the app needs only `speechSynthesis` for the
+🔊 buttons, which Chrome, Edge, Safari and Firefox all support. Installable as a PWA.

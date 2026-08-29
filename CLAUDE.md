@@ -27,7 +27,7 @@ python scripts/audit_content.py   # content audit → audit_report.json (delete 
 ## Architecture in one paragraph
 
 Pages under `src/pages/` implement the daily flow in this fixed order:
-`Home → LearnWords → SpellIt → SayItStep → GrammarLesson → MiniRead → Quiz → Done`.
+`Home → LearnWords → SpellIt → GrammarLesson → MiniRead → Quiz → Done`.
 `store/progress.ts` is the only persistence layer (Firestore with automatic localStorage
 fallback; always `await` writes before navigating). `lib/scheduler.ts` owns Leitner boxes,
 the **mastery rule** and `buildDailyQuiz`; `lib/questions.ts` turns items into questions;
@@ -46,7 +46,8 @@ under `src/content/`; `allWords.ts` merges `words.ts` (400 core, taught first) w
   scheduler). Always pass `qType` to `markCorrect`.
 - New words unlock only once per calendar day; a second visit offers extra practice only.
 - Spelling questions only when the word's meaning box ≥ 1; type chosen by `spellBox`.
-- Say-word items: "Try again" is not a correct answer; max 3 tries; never blocks progress.
+- No pronunciation/microphone feature: the "Say it" step, `say_word` questions and
+  `SpeechRecognition` were removed on 2026-08-29 — don't reintroduce them. 🔊 TTS stays.
 - Every word/sentence rendered for the child gets a 🔊 button.
 - Insights headline is **Words mastered / total** using the mastery rule above.
 

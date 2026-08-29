@@ -76,18 +76,12 @@ Spelling questions are only offered once the word's meaning box ≥ 1, and diffi
 - Feedback shows the word split into syllables with the tricky part highlighted (post·PONED, re·CEI·pt).
 - Insights: separate spelling accuracy line + "Tricky spellings" list (most-missed words + which letters).
 
-## Pronunciation module ("Say it")
-- `src/lib/speech.ts`: wrapper over Web Speech API `SpeechRecognition` (Chrome/Edge/Android Chrome; `lang`
-  en-GB, alternatives 5). Feature-detect; if unavailable, fall back to listen-and-repeat with self-recording.
-- Word card gets a **Say it** button: 1) 🔊 model pronunciation (normal), 2) 🔊 slow + syllable-by-syllable
-  (uses `syllables` field), 3) 🎤 she says it → recognised transcript compared to target (exact or fuzzy match on
-  any alternative, plus homophone list e.g. idle/idol, principal/principle) → ✅ "Great!" or ↻ "Try again —
-  listen to the middle part" with the mismatched syllable highlighted and replayed.
-- `MediaRecorder` capture with **play back my voice** next to **play the model** so she can compare.
-- Daily flow: after Learn Words, a short "Say it" step for today's 3 words (max 3 attempts each, never blocks
-  progress). Review quiz can include 1 `say_word` item per day (scored lightly; recognition is imperfect).
-- Each word tracks `sayCorrect`/`sayWrong`; Insights shows a pronunciation accuracy line and "Hard to say" list.
-- Microphone permission requested only when she taps 🎤; clear message if denied.
+## Pronunciation module ("Say it") — REMOVED 2026-08-29
+Built, then dropped at the user's request. The "Say it" step, the microphone/`SpeechRecognition`
+check (`src/lib/speech.ts`), the `say_word` question type, the `sayCorrect`/`sayWrong` item
+fields and the Insights pronunciation line are all gone. Do not re-add them without being
+asked. **Text-to-speech is unaffected** — every word and sentence still gets a 🔊 button; only
+the "child speaks into the mic" half was removed.
 
 ## Spaced-repetition / scheduler (the core logic)
 Each learned item (word or grammar rule) has a Firestore doc with:
