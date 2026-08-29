@@ -80,6 +80,7 @@ src/
   content/
     words.ts           400 core words (taught first)
     words-extra/       band1..band7 – further high-frequency words by theme
+    dictionary.ts      one WordNet definition per word (generated, see scripts/)
     allWords.ts        merged + de-duplicated word list used by the app
     grammar.ts         micro-lessons
     passages.ts        mini-read passages with comprehension questions

@@ -643,7 +643,7 @@ export const band3: Word[] = [
   {
     word: "police",
     pos: "noun",
-    kidMeaning: "Person who helps people.",
+    kidMeaning: "The people who keep everyone safe.",
     examples: ["The police helps.", "Police are brave."],
     emoji: "👮",
     syllables: "po-lice",

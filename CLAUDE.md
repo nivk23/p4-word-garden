@@ -61,6 +61,10 @@ under `src/content/`; `allWords.ts` merges `words.ts` (400 core, taught first) w
 - Correct Standard **British** English: 3rd-person singular verbs take -s, plurals take -s/-es,
   correct past tense; colour/favourite/mum/maths/grey/organise/realise/centre/cosy.
 - No word may appear in more than one content file (the merge dedupes, but keep files clean).
+- After adding or renaming any word, regenerate `src/content/dictionary.ts` (one real
+  dictionary definition per word, from WordNet):
+  `python scripts/build_dictionary.py --wordnet ./dict` — see the script header for the
+  one-line WordNet download. `tests/dictionary.test.ts` fails if a word has no definition.
 - Nothing sexual, no reproductive anatomy, no drugs/alcohol, no violence-glorifying words.
 - Save content files as UTF-8 **without BOM**; mojibake (`ðŸ…`) means the file was re-saved
   in the wrong codepage — fix the emoji, don't escape it.

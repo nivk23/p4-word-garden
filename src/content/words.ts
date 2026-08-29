@@ -1156,7 +1156,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "pranks",
     pos: "noun",
-    kidMeaning: "Playful trick to make someone laugh or surprise them.",
+    kidMeaning: "Playful tricks that make other people laugh.",
     examples: ["The boy plays pranks on his sister.", "They laugh at the pranks."],
     emoji: "😆",
     syllables: "pranks",
@@ -1174,7 +1174,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "refrigerator",
     pos: "noun",
-    kidMeaning: "A machine that keep food cold.",
+    kidMeaning: "A machine that keeps food cold.",
     examples: ["She put the milk in the refrigerator.", "The refrigerator keeps food fresh."],
     emoji: "🧊",
     spellingTip: "ref-rig-er-a-tor: sounds like 'rih-frij-uh-ray-tur'",
@@ -1888,7 +1888,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "inventor",
     pos: "noun",
-    kidMeaning: "A person who create or invent something new.",
+    kidMeaning: "A person who makes something new.",
     examples: ["The inventor of the light bulb is famous.", "She is an inventor of new game."],
     emoji: "💡",
     spellingTip: "in-vent-or: '-or' person noun",
@@ -1909,7 +1909,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "resident",
     pos: "noun",
-    kidMeaning: "A person who live in a place.",
+    kidMeaning: "A person who lives in a place.",
     examples: ["The residents of the town know each other.", "She is a resident of Singapore."],
     emoji: "🏘️",
     spellingTip: "res-i-dent: '-ent' ending",
@@ -2232,7 +2232,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "spiky",
     pos: "adjective",
-    kidMeaning: "Have sharp point sticking out.",
+    kidMeaning: "Having sharp points that stick out.",
     examples: ["The spiky ball is sharp.", "A spiky cactus grow in the desert."],
     emoji: "🌵",
     spellingTip: "spi-ky: drop 'e' before -y",
@@ -2991,7 +2991,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "spicy",
     pos: "adjective",
-    kidMeaning: "Food that make your mouth hot.",
+    kidMeaning: "Food that makes your mouth feel hot.",
     examples: ["The spicy food makes her cough.", "He likes spicy thing."],
     emoji: "🌶️",
     syllables: "spi-cy",
@@ -3576,7 +3576,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sharp",
     pos: "adjective",
-    kidMeaning: "Have a thin edge or point that cut easily.",
+    kidMeaning: "Having a thin edge or point that cuts easily.",
     examples: ["The sharp knife is dangerous.", "The sharp pencil point is fine."],
     emoji: "🔪",
     syllables: "sharp",
@@ -3783,7 +3783,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "clinic",
     pos: "noun",
-    kidMeaning: "A small hospital for doctor visit.",
+    kidMeaning: "A small place where a doctor sees you.",
     examples: ["He goes to the clinic when sick.", "The clinic is near the school."],
     emoji: "⚕️",
     syllables: "clin-ic",
@@ -3819,7 +3819,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "museum",
     pos: "noun",
-    kidMeaning: "A place with old and interesting thing to see.",
+    kidMeaning: "A place with old and interesting things to see.",
     examples: ["He visit the museum.", "The museum has many paintings."],
     emoji: "🎨",
     syllables: "mu-se-um",

@@ -28,3 +28,7 @@ dist-preview
 # local
 .env
 audit_report.json
+
+# python bytecode from scripts/
+__pycache__/
+*.pyc
