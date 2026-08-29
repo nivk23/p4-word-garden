@@ -1,16 +1,14 @@
 import re, json, sys, io
 from collections import defaultdict, Counter
 
-BASE = r"C:\Users\Nikk\src\p4_english\src\content"
-FILES = {
-    "words.ts": BASE + r"\words.ts",
-    "band1.ts": BASE + r"\words-extra\band1.ts",
-    "band2.ts": BASE + r"\words-extra\band2.ts",
-    "band3.ts": BASE + r"\words-extra\band3.ts",
-    "band4.ts": BASE + r"\words-extra\band4.ts",
-    "band5.ts": BASE + r"\words-extra\band5.ts",
-    "band6.ts": BASE + r"\words-extra\band6.ts",
-}
+import os, glob
+
+# Resolve content relative to this script so the audit runs anywhere (it used to hardcode
+# one machine's Windows path and crashed everywhere else).
+BASE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src", "content")
+FILES = {"words.ts": os.path.join(BASE, "words.ts")}
+for _band in sorted(glob.glob(os.path.join(BASE, "words-extra", "band*.ts"))):
+    FILES[os.path.basename(_band)] = _band
 
 # Regex to capture one word object roughly - objects are like:
 # {
@@ -338,9 +336,9 @@ cross_dupes = [w for w, c in all_words_seen.items() if c > 1]
 # quoted string literals in each file (not just parsed Word objects), so it also covers passages.ts
 # and grammar.ts, which have a different shape (prose text, question/option strings).
 THREE_FILES = {
-    "words.ts": BASE + r"\words.ts",
-    "passages.ts": BASE + r"\passages.ts",
-    "grammar.ts": BASE + r"\grammar.ts",
+    "words.ts": os.path.join(BASE, "words.ts"),
+    "passages.ts": os.path.join(BASE, "passages.ts"),
+    "grammar.ts": os.path.join(BASE, "grammar.ts"),
 }
 
 string_lit_re = re.compile(r'"((?:[^"\\]|\\.)*)"')

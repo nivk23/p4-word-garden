@@ -33,7 +33,7 @@ fallback; always `await` writes before navigating). `lib/scheduler.ts` owns Leit
 the **mastery rule** and `buildDailyQuiz`; `lib/questions.ts` turns items into questions;
 `lib/insights.ts` holds pure aggregation functions for the parent page. Content is plain data
 under `src/content/`; `allWords.ts` merges `words.ts` (400 core, taught first) with
-`words-extra/band1..6.ts` and de-duplicates case-insensitively.
+`words-extra/band1..7.ts` and de-duplicates case-insensitively.
 
 ## Rules that must not regress
 
@@ -66,7 +66,8 @@ under `src/content/`; `allWords.ts` merges `words.ts` (400 core, taught first) w
   in the wrong codepage — fix the emoji, don't escape it.
 - Bands have themes to avoid overlap: 1 = most common everyday words; 2 = people, places,
   transport, shopping, time; 3 = school, home, family, daily life; 4 = general mid-frequency;
-  5 = nature & simple science; 6 = feelings, character, story words.
+  5 = nature & simple science; 6 = feelings, character, story words; 7 = work, money,
+  media, measurement and civic life.
 - Before finishing any content change: run the audit script and get 0 for `sva_error_count`,
   `american_spelling_count`, `examples_missing_word_count`, missing fields and duplicates for
   the files you touched; then `npm test` and `npx tsc --noEmit`.

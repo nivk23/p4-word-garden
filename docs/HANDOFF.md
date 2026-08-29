@@ -4,7 +4,7 @@ Read this first in a new session, then `CLAUDE.md` (rules) and `docs/PLAN.md` (s
 
 ## What this is
 A daily English app for the user's daughter (Primary 4, Singapore, 9–10, can read words but
-does not understand them). Each day: 3 new words → spell it → say it → 1 grammar rule →
+does not understand them). Each day: 3 new words → spell it → 1 grammar rule →
 mini-read → review quiz. Strict anti-guessing mastery, spaced repetition, parent Insights.
 
 ## Where things live
@@ -26,7 +26,7 @@ mini-read → review quiz. Strict anti-guessing mastery, spaced repetition, pare
 
 ## State of the build
 - Build, `tsc`, 85+ tests green at last check. Content: 400 core words (every P4 word from
-  *Editing for Spelling and Grammar Explained! P4* worksheets 1–41) + 6 themed bands ≈ 2,250
+  *Editing for Spelling and Grammar Explained! P4* worksheets 1–41) + 7 themed bands = 2,565
   unique words; 71 grammar lessons; 41 passages. `scripts/audit_content.py` must report 0
   SVA/American/missing/duplicate flags before content is "done" (a few known false positives
   in words.ts/band4: "apartment", "Tom and Ali play").
@@ -101,7 +101,8 @@ NodeSource (jsdom's undici needs Node ≥22). A fresh session may need to redo t
 - User feedback from the tablet on the new design.
 - Change PIN; optional Google sign-in for cross-device sync (currently anonymous per device,
   with a one-time localStorage→Firestore migration in `store/progress.ts`).
-- Possibly a band 7 (rank 3,001–3,500) much later; user chose to stop at ~2,500 for now.
+- Band 7 (311 words: work, money, media, measurement, civic life) was added on 2026-08-29,
+  taking the bank to 2,565. A band 8 is possible later but has not been asked for.
 
 ## Gotchas
 - Git Bash mangles `/p4-word-garden/` paths; set `MSYS_NO_PATHCONV=1` when building with `VITE_BASE`.

@@ -12,9 +12,9 @@ anonymous Auth). Works fully offline in local-only mode if Firebase is not confi
 
 - **Meaning first** – each word has an emoji, a 5–10-word "kid meaning", two example sentences
   and 🔊 audio on everything (browser text-to-speech, en-GB).
-- **Word bank** – ~2,250 words in total: 400 core words (all P4 words from *Editing for Spelling and Grammar
-  Explained! P4*, worksheets 1–41, plus easy everyday words) followed by ~1,850 more
-  high-frequency words in six themed bands. Core words are taught first.
+- **Word bank** – 2,565 words in total: 400 core words (all P4 words from *Editing for Spelling and Grammar
+  Explained! P4*, worksheets 1–41, plus easy everyday words) followed by ~2,165 more
+  high-frequency words in seven themed bands. Core words are taught first.
 - **Grammar** – 71 one-rule-per-day micro-lessons (nouns → tenses → prepositions → P4 exam
   rules like question tags, comparatives, passive, uncountable nouns…).
 - **Spelling track** – letter tiles → missing letters → type-from-audio, unlocked only after
@@ -79,7 +79,7 @@ src/
   firebase.ts          Firebase init + anonymous sign-in (no-op without env vars)
   content/
     words.ts           400 core words (taught first)
-    words-extra/       band1..band6 – further high-frequency words by theme
+    words-extra/       band1..band7 – further high-frequency words by theme
     allWords.ts        merged + de-duplicated word list used by the app
     grammar.ts         micro-lessons
     passages.ts        mini-read passages with comprehension questions

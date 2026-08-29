@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { words } from '../src/content/words';
+import { band7 } from '../src/content/words-extra/band7';
+import { allWords } from '../src/content/allWords';
 
 describe('words.ts', () => {
   // Basic structure tests
@@ -154,5 +156,53 @@ describe('words.ts', () => {
       expect(word.distractorGroup).toBeTruthy();
       expect(word.distractorGroup.length).toBeGreaterThan(0);
     });
+  });
+});
+
+describe('band7.ts (work, money, media, measurement and civic life)', () => {
+  it('should have every required field on every entry', () => {
+    band7.forEach((word) => {
+      expect(word.word).toBeTruthy();
+      expect(['noun', 'verb', 'adjective', 'adverb', 'preposition', 'pronoun']).toContain(word.pos);
+      expect(word.kidMeaning).toBeTruthy();
+      expect(word.examples.length).toBe(2);
+      expect(word.emoji).toBeTruthy();
+      expect(word.syllables).toBeTruthy();
+      expect(word.distractorGroup).toBeTruthy();
+    });
+  });
+
+  it('should keep every kid meaning to 5-10 simple words', () => {
+    band7.forEach((word) => {
+      const count = word.kidMeaning.trim().split(/\s+/).length;
+      expect(count, `${word.word}: "${word.kidMeaning}"`).toBeGreaterThanOrEqual(5);
+      expect(count, `${word.word}: "${word.kidMeaning}"`).toBeLessThanOrEqual(10);
+    });
+  });
+
+  it('should use the headword (or an inflection) in both examples', () => {
+    band7.forEach((word) => {
+      const stem = word.word.slice(0, Math.max(3, word.word.length - 2)).toLowerCase();
+      word.examples.forEach((example) => {
+        expect(example.toLowerCase(), `${word.word}: "${example}"`).toContain(stem);
+      });
+    });
+  });
+
+  it('should have syllables that spell the headword', () => {
+    band7.forEach((word) => {
+      expect(word.syllables.replace(/-/g, '').toLowerCase()).toBe(word.word.toLowerCase());
+    });
+  });
+});
+
+describe('allWords', () => {
+  it('should contain no duplicate words across every content file', () => {
+    const names = allWords.map((w) => w.word.toLowerCase());
+    expect(new Set(names).size).toBe(names.length);
+  });
+
+  it('should teach the 400 core words before any band word', () => {
+    expect(allWords.slice(0, 400).map((w) => w.word)).toEqual(words.map((w) => w.word));
   });
 });
