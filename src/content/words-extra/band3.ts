@@ -778,8 +778,8 @@ export const band3: Word[] = [
   {
     word: "security",
     pos: "noun",
-    kidMeaning: "Person who protects places.",
-    examples: ["The security watches.", "Security guards are alert."],
+    kidMeaning: "Being safe from danger or harm.",
+    examples: ["The security of the school comes first.", "Security guards check every bag."],
     emoji: "🔒",
     syllables: "se-cur-i-ty",
     distractorGroup: "people",
@@ -2794,7 +2794,7 @@ export const band3: Word[] = [
   {
     word: "daycare",
     pos: "noun",
-    kidMeaning: "Place to watch children during day",
+    kidMeaning: "Care for young children while parents work.",
     examples: ["She goes to daycare.", "Daycare is fun."],
     emoji: "🏠",
     syllables: "day-care",

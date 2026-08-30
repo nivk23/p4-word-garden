@@ -35,10 +35,19 @@ class WordNet:
                 head, _, gloss = line.partition("|")
                 fields = head.split()
                 offset, lexnum = fields[0], int(fields[1])
+                w_cnt = int(fields[3], 16)
+                lemmas = [fields[4 + 2 * i].replace("_", " ") for i in range(w_cnt)]
+                rest = fields[4 + 2 * w_cnt:]
+                p_cnt = int(rest[0]) if rest else 0
+                hypernyms = []
+                for i in range(p_cnt):
+                    sym, off, pos_char = rest[1 + 4 * i], rest[2 + 4 * i], rest[3 + 4 * i]
+                    if sym in ("@", "@i"):
+                        hypernyms.append((pos_char, off))
                 gloss = gloss.strip()
                 examples = re.findall(r'"([^"]*)"', gloss)
                 definition = re.split(r';\s*"', gloss)[0].strip().rstrip(";").strip()
-                self.data[(pos, offset)] = (definition, examples, lexnum)
+                self.data[(pos, offset)] = (definition, examples, lexnum, lemmas, hypernyms)
 
     def _load_exc(self, pos, name):
         path = os.path.join(self.dir, f"{name}.exc")
@@ -79,7 +88,7 @@ class WordNet:
         return uniq
 
     def senses(self, lemma, pos):
-        """[(definition, [examples], lexnum)] in WordNet sense order (most common first)."""
+        """[(definition, [examples], lexnum, [lemmas], [hypernyms])], most common sense first."""
         for form in self.forms(lemma, pos):
             offsets = self.index.get((form, pos))
             if offsets:
@@ -88,3 +97,11 @@ class WordNet:
 
     def any_pos(self, lemma):
         return [p for p in "nvar" if self.senses(lemma, p)]
+
+    def gloss_of(self, pos, offset):
+        entry = self.data.get((pos, offset))
+        return entry[0] if entry else ""
+
+    def lemmas_of(self, pos, offset):
+        entry = self.data.get((pos, offset))
+        return entry[3] if entry else []

@@ -454,7 +454,7 @@ export const band2: Word[] = [
   {
     word: "butcher",
     pos: "noun",
-    kidMeaning: "A shop that sells meat.",
+    kidMeaning: "A person who cuts and sells meat.",
     examples: ["The butcher cuts the meat.", "She buys chicken at the butcher."],
     emoji: "🥩",
     syllables: "butch-er",

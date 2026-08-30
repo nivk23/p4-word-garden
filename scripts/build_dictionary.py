@@ -172,6 +172,15 @@ MANUAL = {
     "spiky": "having sharp points sticking out",
     # WordNet is American and lacks the British "study again" sense
     "revise": "read work through again in order to remember it, especially before an exam",
+    # WordNet has no sense matching the one we teach for these
+    "survey": "a set of questions put to many people to gather facts or opinions",
+    "inspired": "filled with the urge or the ability to do something creative",
+    "frustrated": "feeling annoyed or discouraged because you cannot do what you want",
+    "form": "a printed sheet with blank spaces to be filled in",
+    "wholesale": "selling goods in large amounts, usually to shops rather than to people",
+    # WordNet defines these as half-siblings, which is a different relationship
+    "stepsister": "the daughter of your stepparent by an earlier marriage",
+    "stepbrother": "the son of your stepparent by an earlier marriage",
 }
 
 # WordNet's first sense is not always the one we teach ("escalator" leads with a clause in a
@@ -194,10 +203,65 @@ SENSE_OVERRIDE = {
     "practice": 2,      # learn by repetition, not "carry out a profession"
     "favourite": 2,     # preferred above all others, not "popular"
     "ferret": 2,        # the domesticated one, not the near-extinct wild species
+    "bank": 2,          # the financial institution, not a piggy bank or a river bank
+    "creator": 2,       # a person who makes things, not the Judeo-Christian God
+    "pirate": 2,        # the robber at sea, not a plagiarist or the ship itself
+    "argument": 2,      # a quarrel, not a premise offered as evidence
+    "snake": 1,         # the reptile, not "something snake-like"
+    "touch": 2,         # the sense itself, not "the feel of mechanical action"
+    "cashier": 2,       # the one at a shop till, not a bank employee
+    "cleaner": 3,       # the person, not a dry-cleaning proprietor or a cleaning fluid
+    "witch": 1,         # a female magician, not the devil-derived being
+    "bitter": 1,        # resentful — the sense our examples teach, not the taste
+    "brave": 1,         # courageous, not "brightly coloured and showy"
+    "fruit": 1,         # the thing that grows on a tree, not "an amount of a product"
+    "glass": 1,         # the material, not "glassware collectively"
+    "wheel": 1,         # the round thing that turns, not a bicycle
+    "sit": 1,           # be seated, not "show someone to a seat"
+    "bad": 1,           # undesirable, not "physically unsound or diseased"
+    "hide": 1,          # conceal something, not "go into hiding" yourself
+    "puzzle": 2,        # the game, not "a baffling problem"
+    "taste": 1,         # what the tongue senses, not "a strong liking"
+    "identify": 1,      # recognise what something is, not "consider to be equal"
+    "inform": 1,        # tell someone a fact, not "give character to"
+    "succeed": 1,       # do well, not "be the successor of"
+    "caption": 3,       # the words under a picture, not "a captious quibble"
+    "guideline": 3,     # a rule that guides, not a lettering line
+    "instruction": 1,   # a step telling you what to do, not "the teaching profession"
+    "notification": 2,  # informing by words, not a grand jury accusation
+    "monument": 1,      # erected to commemorate, not a burial vault
+    "gently": 2,        # in a gentle manner, not "in a gradual manner"
+    "suspicious": 1,    # openly distrustful, not "not as expected"
+    "medicine": 2,      # what treats an illness, not the branch of science
+    "application": 2,   # the form you send, not "a diligent effort"
+    "model": 4,         # a small representation, not "a hypothetical description"
+    "knight": 1,        # the armoured warrior, not the chess piece
+    "mystery": 1,       # something unexplained, not a crime novel
+    "chunk": 1,         # a compact mass, not "a substantial amount"
+    "common": 4,        # commonly encountered, not "belonging to a community"
+    "comparison": 1,    # the act of examining resemblances
+    "document": 1,      # writing that provides information
+    "nature": 1,        # the essential qualities of something
+    "form": 0,          # see MANUAL — WordNet has no "printed form to fill in" sense
+    "soft": 1,          # yielding to pressure, not the phonetics sense
+    "sport": 1,         # the game, not "verbal wit or mockery"
+    "read": 1,          # interpret writing, not "have a certain wording"
+    "approximate": 1,   # not quite exact, not "located close together"
+    "single": 3,        # one only, not the botanical "one whorl of petals"
+    "push": 1,          # move with force, not "press without moving"
+    "keeps": 3,         # retain possession of, not "retain rights to"
+    "inches": 1,        # length, not the advertising-space unit of the same name
 }
 
 # Words WordNet indexes under a different lemma than the sense we teach.
-ALIAS = {"jam": "traffic jam"}
+ALIAS = {
+    "jam": "traffic jam",
+    "account": "bank account",   # the money sense, not "a narrative of past events"
+    "wages": "wage",             # plural is only "the wages of sin" in WordNet
+    "occasions": "occasion",     # the plural entry is an unrelated idiom
+    "skates": "roller skate",    # bare "skate" leads with the edible ray
+    "inches": "inch",            # the plural entry is the advertising-space unit
+}
 
 obj_re = re.compile(r"\{\s*word:\s*\"(?P<word>[^\"]*)\".*?\},", re.S)
 STOP = set(
@@ -238,6 +302,29 @@ def tokens(text):
         out.add(tok)
     return out
 
+
+
+def synset_context(wn, pos, offset, depth=2):
+    """Words from a synset's own names and gloss, plus those of its hypernyms.
+
+    Matching only against the gloss misses the obvious: "brave" is glossed
+    "possessing or displaying courage", but "sit" is "be seated" — too short to
+    overlap with anything. The chain above a synset ("change posture" -> "move")
+    is what actually says which sense a plain-language meaning is describing.
+    """
+    bag, frontier = set(), [(pos, offset)]
+    for _ in range(depth + 1):
+        nxt = []
+        for p, o in frontier:
+            entry = wn.data.get((p, o))
+            if not entry:
+                continue
+            definition, examples, _lex, lemmas, hypernyms = entry
+            bag |= tokens(definition) | tokens(" ".join(examples))
+            bag |= {w for lemma in lemmas for w in re.findall(r"[a-z]+", lemma.lower())}
+            nxt += hypernyms
+        frontier = nxt
+    return bag
 
 def expected_categories(kid_meaning):
     wanted = set()
@@ -312,9 +399,14 @@ def main():
         wanted = expected_categories(entry["kidMeaning"])
 
         best, best_score, best_idx = None, -99, 0
-        for idx, (definition, examples, lexnum) in enumerate(senses):
+        for idx, (definition, examples, lexnum, lemmas, hypernyms) in enumerate(senses):
             gloss = tokens(definition) | tokens(" ".join(examples))
+            gloss |= {w for lemma in lemmas for w in re.findall(r"[a-z]+", lemma.lower())}
+            wider = set(gloss)
+            for hpos, hoff in hypernyms:
+                wider |= synset_context(wn, hpos, hoff, 2)
             score = len(gloss & ours) + 2 * len(gloss & kid)
+            score += 1.5 * len((wider - gloss) & kid) + 0.5 * len((wider - gloss) & ours)
             if wanted:
                 score += 3 if lexnum in wanted else 0
             score -= 0.05 * idx      # nudge towards WordNet's own frequency order

@@ -38,3 +38,36 @@ describe('dictionary', () => {
     expect(getDictionaryMeaning('jam')).toContain('vehicles');
   });
 });
+
+describe('dictionary senses we had to pin', () => {
+  // Each of these picked a plausible-but-wrong sense before it was pinned in
+  // scripts/build_dictionary.py. They are the regression guard for that table.
+  const expected: Record<string, RegExp> = {
+    brave: /courage/,
+    bank: /financial institution/,
+    plane: /aircraft/,
+    party: /social interaction|celebration|assemble/,
+    sit: /seated/,
+    fruit: /seed plant/,
+    glass: /brittle transparent solid/,
+    wheel: /circular frame/,
+    snake: /reptile/,
+    pirate: /robs at sea/,
+    creator: /grows or makes or invents/,
+    argument: /dispute|contentious/,
+    cashier: /receiving payments/,
+    witch: /sorcerer|magician/,
+    inches: /one twelfth of a foot/,
+    sport: /physical exertion/,
+    read: /interpret something that is written/,
+    monument: /commemorate/,
+    knight: /noble birth/,
+    medicine: /treats or prevents/,
+    stepsister: /stepparent/,
+  };
+  Object.entries(expected).forEach(([word, pattern]) => {
+    it(`should define "${word}" as the sense we teach`, () => {
+      expect(getDictionaryMeaning(word)).toMatch(pattern);
+    });
+  });
+});
