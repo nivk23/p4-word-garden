@@ -54,10 +54,10 @@ BRIT_AM = {
 
 # ...and the glosses come back American, so put them back into British spelling.
 AM_BRIT = [
-    (r"\bcolor(s|ed|ing|less)?\b", r"colour\1"), (r"\bfavor(s|ed|ing|ite|able)?\b", r"favour\1"),
+    (r"\bcolor(s|ed|ing|less|ful|fully)?\b", r"colour\1"), (r"\bfavor(s|ed|ing|ite|able)?\b", r"favour\1"),
     (r"\bhonor(s|ed|ing|able)?\b", r"honour\1"), (r"\bhumor(s|ous)?\b", r"humour\1"),
     (r"\bneighbor(s|hood|ing)?\b", r"neighbour\1"), (r"\bbehavior(s|al)?\b", r"behaviour\1"),
-    (r"\bflavor(s|ed|ing)?\b", r"flavour\1"), (r"\blabor(s|ed|ing|er|ers)?\b", r"labour\1"),
+    (r"\bflavor(s|ed|ing|ful|less)?\b", r"flavour\1"), (r"\blabor(s|ed|ing|er|ers)?\b", r"labour\1"),
     (r"\bharbor(s|ed)?\b", r"harbour\1"), (r"\brumor(s)?\b", r"rumour\1"),
     (r"\bvapor(s)?\b", r"vapour\1"), (r"\bodor(s|less)?\b", r"odour\1"),
     (r"\barmor(s|ed)?\b", r"armour\1"), (r"\bcenter(s|ed)?\b", r"centre\1"),
@@ -251,6 +251,7 @@ SENSE_OVERRIDE = {
     "push": 1,          # move with force, not "press without moving"
     "keeps": 3,         # retain possession of, not "retain rights to"
     "inches": 1,        # length, not the advertising-space unit of the same name
+    "party": 2,         # a gathering for pleasure, not a political organisation
 }
 
 # Words WordNet indexes under a different lemma than the sense we teach.

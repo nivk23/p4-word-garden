@@ -76,6 +76,8 @@ AMERICAN_WORDS = [
     "organize","organizes","organized","organizing","organization","realize","realizes","realized",
     "recognize","recognizes","recognized","practice", # ambiguous but per spec include word 'practice' only if verb; noted
     "check","program","math","specialty","gotten",
+    "colorful","colorless","flavorful","flavorless","odorless","humorless","favorable","neighborly",
+    "behavioral","colorfully","honorable","laborer","laborers",
     "airplane","flashlight","candy","cookie","sidewalk","truck","vacation","soccer","mom","costume","diaper",
     "sneakers","garbage","trash","faucet","elevator","apartment","yard","zip code","license plate",
     "spelled","spelt", # spelt is British actually - skip, minor

@@ -46,7 +46,7 @@ describe('dictionary senses we had to pin', () => {
     brave: /courage/,
     bank: /financial institution/,
     plane: /aircraft/,
-    party: /social interaction|celebration|assemble/,
+    party: /gathered together for pleasure/,
     sit: /seated/,
     fruit: /seed plant/,
     glass: /brittle transparent solid/,
