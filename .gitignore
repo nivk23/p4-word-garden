@@ -32,3 +32,6 @@ audit_report.json
 # python bytecode from scripts/
 __pycache__/
 *.pyc
+
+# Merriam-Webster API key — never commit
+.mw-key
