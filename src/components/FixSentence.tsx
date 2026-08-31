@@ -28,9 +28,14 @@ export default function FixSentence({
   const strip = (w: string) => w.replace(/[.,!?;:]+$/, "");
   const revealed = taps >= 2;
 
-  const tapWord = (word: string) => {
+  const isTheMistake = (word: string, index: number) =>
+    item.wrongIndex !== undefined
+      ? index === item.wrongIndex
+      : strip(word) === strip(item.wrong);
+
+  const tapWord = (word: string, index: number) => {
     if (foundWord) return;
-    if (strip(word) === strip(item.wrong)) {
+    if (isTheMistake(word, index)) {
       setFoundWord(true);
       setNudge("");
       return;
@@ -63,12 +68,12 @@ export default function FixSentence({
 
       <p className="text-2xl leading-relaxed mb-4">
         {words.map((word, i) => {
-          const isWrong = strip(word) === strip(item.wrong);
+          const isWrong = isTheMistake(word, i);
           return (
             <button
               key={i}
               type="button"
-              onClick={() => tapWord(word)}
+              onClick={() => tapWord(word, i)}
               disabled={foundWord}
               className={`inline-block mr-2 mb-2 rounded-xl px-2 py-1 transition-colors ${
                 foundWord && isWrong

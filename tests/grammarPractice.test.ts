@@ -10,12 +10,21 @@ describe('grammar practice content', () => {
     ruleTeachings.forEach((t) => expect(lessonIds.has(t.lessonId), t.lessonId).toBe(true));
   });
 
-  it('should contain the wrong word exactly once in each sentence', () => {
+  it('should point at exactly one word, pinning the position when it repeats', () => {
     editingItems.forEach((item) => {
-      const words = item.sentence.split(' ').map((w) => w.replace(/[.,!?;:]+$/, ''));
+      const raw = item.sentence.split(' ');
+      const words = raw.map((w) => w.replace(/[.,!?;:]+$/, ''));
       const target = item.wrong.replace(/[.,!?;:]+$/, '');
       const hits = words.filter((w) => w === target).length;
-      expect(hits, `${item.lessonId}: "${item.wrong}" in "${item.sentence}"`).toBe(1);
+      const where = `${item.lessonId}: "${item.wrong}" in "${item.sentence}"`;
+      expect(hits, where).toBeGreaterThanOrEqual(1);
+      if (hits > 1) {
+        // question tags repeat the verb, so the item must say which one is wrong
+        expect(item.wrongIndex, `${where} repeats and needs wrongIndex`).toBeDefined();
+      }
+      if (item.wrongIndex !== undefined) {
+        expect(words[item.wrongIndex], `${where} wrongIndex points elsewhere`).toBe(target);
+      }
     });
   });
 
@@ -25,6 +34,9 @@ describe('grammar practice content', () => {
       expect(item.options.length, item.sentence).toBe(3);
       expect(new Set(item.options).size, `duplicate options: ${item.sentence}`).toBe(3);
       expect(item.options, `${item.sentence} offers the mistake as a choice`).not.toContain(item.wrong);
+      item.options.forEach((o) =>
+        expect(o.trim().length, `blank option in "${item.sentence}"`).toBeGreaterThan(0)
+      );
     });
   });
 
