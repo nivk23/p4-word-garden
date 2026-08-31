@@ -110,7 +110,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "reindeer",
     pos: "noun",
-    kidMeaning: "A big animal like a deer that pulls Santa's sleigh.",
+    kidMeaning: "A deer with antlers that pulls Santa's sleigh.",
     examples: ["The reindeer pull Santa's sleigh.", "Reindeer have big horns."],
     emoji: "🦌",
     spellingTip: "rein-deer: one word, not 'raindeer'",
@@ -360,7 +360,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "stomach",
     pos: "noun",
-    kidMeaning: "The part inside you that turn food into energy.",
+    kidMeaning: "The part inside you that turns food into energy.",
     examples: ["My stomach hurt when I eat too much.", "He holds his stomach when he laugh."],
     emoji: "🤢",
     spellingTip: "stom-ach: 'tum' is the sound we use often",
@@ -380,7 +380,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "grieved",
     pos: "verb",
-    kidMeaning: "Felt very sad about something bad that happen.",
+    kidMeaning: "Felt very sad about something bad that happened.",
     examples: ["She grieved when her pet died.", "The family grieved together."],
     emoji: "😢",
     spellingTip: "griev-ed: i before e",
@@ -639,7 +639,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "priest",
     pos: "noun",
-    kidMeaning: "A person who lead people in church.",
+    kidMeaning: "A person who leads worship in a church.",
     examples: ["The priest gives a speech.", "She speaks with the priest."],
     emoji: "⛪",
     spellingTip: "priest: i before e",
@@ -659,7 +659,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "minute",
     pos: "noun",
-    kidMeaning: "60 second; a short time.",
+    kidMeaning: "Sixty seconds; a very short time.",
     examples: ["Wait a minute.", "The class is 45 minutes long."],
     emoji: "⏱️",
     syllables: "min-ute",
@@ -708,7 +708,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "efficient",
     pos: "adjective",
-    kidMeaning: "Do something well and fast without waste.",
+    kidMeaning: "Doing something well and quickly, without waste.",
     examples: ["She works in an efficient way.", "The efficient system saves time."],
     emoji: "⚡",
     spellingTip: "ef-fi-cient: 'ci' sounds like 'sh'",
@@ -878,7 +878,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "chandelier",
     pos: "noun",
-    kidMeaning: "A big light that hang from the ceiling.",
+    kidMeaning: "A big light that hangs from the ceiling.",
     examples: ["The chandelier light up the room.", "The fancy chandelier has many bulbs."],
     emoji: "💡",
     spellingTip: "chan-de-lier: 'ch' sounds like 'sh'",
@@ -908,7 +908,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "shone",
     pos: "verb",
-    kidMeaning: "Past tense of shine; make bright light.",
+    kidMeaning: "Gave out a bright light.",
     examples: ["The sun shone brightly.", "The light shone in her eye."],
     emoji: "☀️",
     spellingTip: "shone: not 'shined', but 'shone' or 'shined' both ok",
@@ -978,7 +978,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "recipes",
     pos: "noun",
-    kidMeaning: "Instructions for cooking food.",
+    kidMeaning: "Steps that tell you how to cook something.",
     examples: ["She follows recipes from the book.", "The recipes are easy to make."],
     emoji: "👨‍🍳",
     spellingTip: "rec-i-pes: three sounds",
@@ -1037,7 +1037,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "containers",
     pos: "noun",
-    kidMeaning: "Something you put things inside.",
+    kidMeaning: "Things you put other things inside.",
     examples: ["The containers hold the food.", "She organise her room with containers."],
     emoji: "📦",
     spellingTip: "con-tain-ers: three sounds",
@@ -1076,7 +1076,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "seated",
     pos: "adjective",
-    kidMeaning: "Sitting down.",
+    kidMeaning: "Sitting down in a seat.",
     examples: ["Everyone is seated at the table.", "They were seated when the show started."],
     emoji: "🪑",
     spellingTip: "seat-ed: 'e' + 'd' for past",
@@ -1096,7 +1096,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "volcanoes",
     pos: "noun",
-    kidMeaning: "A mountain that erupt and shoot hot lava.",
+    kidMeaning: "Mountains that erupt and shoot out hot lava.",
     examples: ["The volcanoes erupt sometimes.", "We study volcanoes in class."],
     emoji: "🌋",
     spellingTip: "vol-ca-noes: plural with -es after 'o'",
@@ -1136,7 +1136,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "archaeologists",
     pos: "noun",
-    kidMeaning: "People who study old things and past civilisations.",
+    kidMeaning: "People who dig up things from long ago.",
     examples: ["Archaeologists dig up old artefacts.", "She wants to be an archaeologist."],
     emoji: "🏺",
     spellingTip: "ar-chae-ol-o-gists: sounds like 'ar-kee-ol-uh-jists'",
@@ -1204,7 +1204,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "patterns",
     pos: "noun",
-    kidMeaning: "A repeated design or arrangement.",
+    kidMeaning: "Designs or shapes that repeat again and again.",
     examples: ["The patterns on the wall are pretty.", "She notice the patterns."],
     emoji: "🎨",
     spellingTip: "pat-terns: two sounds",
@@ -1224,7 +1224,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "occasions",
     pos: "noun",
-    kidMeaning: "Special time or event.",
+    kidMeaning: "Special times or important events.",
     examples: ["On special occasions, we have a party.", "She remembers happy occasions."],
     emoji: "🎊",
     spellingTip: "oc-ca-sions: double 'c', 's' at end",
@@ -1244,7 +1244,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "studio",
     pos: "noun",
-    kidMeaning: "A room where an artist work or where show are record.",
+    kidMeaning: "A room where an artist works or shows are recorded.",
     examples: ["The artist works in a studio.", "The dance studio is nice."],
     emoji: "🎨",
     spellingTip: "stu-di-o: three sounds",
@@ -1264,7 +1264,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "assembly",
     pos: "noun",
-    kidMeaning: "A group of people gather together at school.",
+    kidMeaning: "A group of people gathered together at school.",
     examples: ["We have assembly in the morning.", "Everyone goes to assembly."],
     emoji: "🏫",
     spellingTip: "as-sem-bly: double 's', 'm'",
@@ -1304,7 +1304,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "trend",
     pos: "noun",
-    kidMeaning: "The general direction or way thing are going.",
+    kidMeaning: "The general direction things are going in.",
     examples: ["Fashion trends change every year.", "The trend now is bright colour."],
     emoji: "📈",
     syllables: "trend",
@@ -1343,7 +1343,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "particularly",
     pos: "adverb",
-    kidMeaning: "Especially; more than other.",
+    kidMeaning: "Especially; more than the others.",
     examples: ["He particularly likes ice cream.", "She particularly enjoys reading."],
     emoji: "✨",
     spellingTip: "par-tic-u-lar-ly: five sounds",
@@ -1392,7 +1392,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "success",
     pos: "noun",
-    kidMeaning: "Achieve or do well at something.",
+    kidMeaning: "Doing well at something you tried to do.",
     examples: ["She achieves success in her study.", "His success makes his parents proud."],
     emoji: "🏆",
     spellingTip: "suc-cess: double 'c', double 's'",
@@ -1402,7 +1402,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "stationery",
     pos: "noun",
-    kidMeaning: "Thing use for writing like pen and paper.",
+    kidMeaning: "Things used for writing, like pens and paper.",
     examples: ["She buys stationery at the shop.", "The stationery store has many items."],
     emoji: "✏️",
     spellingTip: "sta-tion-er-y: ends with '-ery' not '-ary'",
@@ -1413,7 +1413,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "arrived",
     pos: "verb",
-    kidMeaning: "Come to a place; get there.",
+    kidMeaning: "Came to a place; got there.",
     examples: ["The bus arrived on time.", "She arrived at school late."],
     emoji: "🚌",
     spellingTip: "ar-rived: double 'r' before -ed",
@@ -1463,7 +1463,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "memorable",
     pos: "adjective",
-    kidMeaning: "Something you remember for a long time.",
+    kidMeaning: "Easy to remember for a long time.",
     examples: ["It was a memorable trip.", "The memorable moment stays in her heart."],
     emoji: "💭",
     spellingTip: "mem-o-ra-ble: four sounds",
@@ -1493,7 +1493,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "fascinating",
     pos: "adjective",
-    kidMeaning: "Very interesting; hold your interest.",
+    kidMeaning: "Very interesting; it holds your attention.",
     examples: ["The fascinating book keeps her reading.", "She has a fascinating hobby."],
     emoji: "📖",
     spellingTip: "fas-ci-nat-ing: drop 'e' before -ing",
@@ -1503,7 +1503,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "spent",
     pos: "verb",
-    kidMeaning: "Use money or time for something.",
+    kidMeaning: "Used money or time on something.",
     examples: ["She spent all her money.", "He spent the afternoon reading."],
     emoji: "⏰",
     syllables: "spent",
@@ -1512,7 +1512,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "farewell",
     pos: "noun",
-    kidMeaning: "A goodbye; say goodbye to someone.",
+    kidMeaning: "A goodbye said when someone leaves.",
     examples: ["She says farewell to her friend.", "The farewell party is sad."],
     emoji: "👋",
     spellingTip: "fare-well: 'fare' + 'well'",
@@ -1522,7 +1522,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "promised",
     pos: "verb",
-    kidMeaning: "Say you will definitely do something.",
+    kidMeaning: "Said you would definitely do something.",
     examples: ["He promised to come tomorrow.", "She promised to help."],
     emoji: "🤝",
     spellingTip: "prom-ised: 'e' + 'd'",
@@ -1552,7 +1552,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "inches",
     pos: "noun",
-    kidMeaning: "A unit of measurement; small distance.",
+    kidMeaning: "Units of length; twelve make one foot.",
     examples: ["The book is ten inches long.", "She grows two inches this year."],
     emoji: "📏",
     spellingTip: "inch-es: add '-es' after 'ch'",
@@ -1562,7 +1562,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "unique",
     pos: "adjective",
-    kidMeaning: "One of a kind; different from all other.",
+    kidMeaning: "One of a kind; unlike all the others.",
     examples: ["Her dress is unique.", "Each person has a unique talent."],
     emoji: "✨",
     spellingTip: "u-nique: sounds like 'yoo-neek'",
@@ -1572,7 +1572,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "disturbed",
     pos: "adjective",
-    kidMeaning: "Interrupt or prevent from sleeping or working.",
+    kidMeaning: "Interrupted while sleeping or working.",
     examples: ["She is disturbed during her study.", "The noise disturbed the sleeping baby."],
     emoji: "😑",
     spellingTip: "dis-turbed: disturb + ed",
@@ -1613,7 +1613,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
     word: "creaked",
     pos: "verb",
     kidMeaning: "To make a sound like old wood or an old stair.",
-    examples: ["The floor creaked when she walked.", "The door creaked open slowly."],
+    examples: ["The floor creaked when she walked.", "The old door creaked as it opened."],
     emoji: "🚪",
     spellingTip: "creak-ed: 'e' + 'd'",
     syllables: "creaked",
@@ -1641,7 +1641,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "attempt",
     pos: "noun",
-    kidMeaning: "Try to do something.",
+    kidMeaning: "A try at doing something difficult.",
     examples: ["She makes an attempt to climb the tree.", "He attempts to solve the problem."],
     emoji: "🎯",
     syllables: "at-tempt",
@@ -1700,7 +1700,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "dazed",
     pos: "adjective",
-    kidMeaning: "Confused and not aware of thing around you.",
+    kidMeaning: "Confused and not aware of things around you.",
     examples: ["He looks dazed after the accident.", "She feels dazed and tired."],
     emoji: "😵",
     spellingTip: "daz-ed: drop 'e' before -ed",
@@ -1779,7 +1779,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "problems",
     pos: "noun",
-    kidMeaning: "A difficult thing that needs to be solved.",
+    kidMeaning: "Difficult things that need to be solved.",
     examples: ["She solve maths problems.", "The problems are very hard."],
     emoji: "🤔",
     syllables: "prob-lems",
@@ -1868,7 +1868,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "achievements",
     pos: "noun",
-    kidMeaning: "Things you achieve or accomplish successfully.",
+    kidMeaning: "Things you have done well after trying hard.",
     examples: ["Her achievements make her proud.", "He celebrates his many achievements."],
     emoji: "🏆",
     spellingTip: "a-chieve-ments: '-ment' noun ending",
@@ -1878,7 +1878,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "involved",
     pos: "adjective",
-    kidMeaning: "Taking part in; participate in.",
+    kidMeaning: "Taking part in something with others.",
     examples: ["She is involved in the project.", "Many people are involved in the event."],
     emoji: "🤝",
     spellingTip: "in-volved: drop 'e' before -ed",
@@ -1929,7 +1929,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "cores",
     pos: "noun",
-    kidMeaning: "The central or most important parts.",
+    kidMeaning: "The central, most important parts.",
     examples: ["The cores of apples are hard.", "The cores of the planets are very hot."],
     emoji: "🍎",
     confusedWith: "course (class or path)",
@@ -1939,7 +1939,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "dining",
     pos: "verb",
-    kidMeaning: "Having a meal or eating.",
+    kidMeaning: "Eating a meal, often at a table.",
     examples: ["They are dining together at the table.", "She enjoys dining out at restaurant."],
     emoji: "🍽️",
     spellingTip: "din-ing: drop the e from 'dine' before -ing",
@@ -1969,7 +1969,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "quieter",
     pos: "adjective",
-    kidMeaning: "More quiet than before; comparative of quiet.",
+    kidMeaning: "Making less noise than before.",
     examples: ["Please be quieter.", "This room is quieter than that one."],
     emoji: "🤫",
     syllables: "qui-et-er",
@@ -1978,7 +1978,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "religious",
     pos: "adjective",
-    kidMeaning: "About believe in God and faith.",
+    kidMeaning: "About belief in God and faith.",
     examples: ["She comes from a religious family.", "He attend religious school."],
     emoji: "⛪",
     spellingTip: "re-li-gious: sounds like 'ruh-lij-us'",
@@ -2007,7 +2007,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "popular",
     pos: "adjective",
-    kidMeaning: "Like by many people; well-like.",
+    kidMeaning: "Liked by very many people.",
     examples: ["She is a popular student.", "This song is popular."],
     emoji: "⭐",
     spellingTip: "pop-u-lar: one 'p'",
@@ -2037,7 +2037,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "easier",
     pos: "adjective",
-    kidMeaning: "More easy; comparative of easy.",
+    kidMeaning: "Less hard to do than before.",
     examples: ["This problem is easier.", "It is easier with help."],
     emoji: "✅",
     spellingTip: "eas-i-er: y changes to i before '-er'",
@@ -2057,7 +2057,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "lost",
     pos: "verb",
-    kidMeaning: "Cannot find something or someone.",
+    kidMeaning: "Could not find something you had.",
     examples: ["She lost her toy.", "He lost the game."],
     emoji: "😞",
     confusedWith: "loss (a noun meaning something that is gone)",
@@ -2087,7 +2087,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "natural",
     pos: "adjective",
-    kidMeaning: "Come from nature; not make by people.",
+    kidMeaning: "Coming from nature, not made by people.",
     examples: ["Natural light is good.", "The natural world is beautiful."],
     emoji: "🌿",
     spellingTip: "nat-u-ral: three sounds",
@@ -2116,7 +2116,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "films",
     pos: "noun",
-    kidMeaning: "Movie; a story shown on screen.",
+    kidMeaning: "Movies; stories shown on a screen.",
     examples: ["She watches films on the weekend.", "The films are very exciting."],
     emoji: "🎬",
     syllables: "films",
@@ -2192,7 +2192,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "formed",
     pos: "verb",
-    kidMeaning: "Made or create something.",
+    kidMeaning: "Made or created something new.",
     examples: ["They formed a new group.", "The cloud formed in the sky."],
     emoji: "☁️",
     spellingTip: "form-ed: 'e' + 'd'",
@@ -2222,8 +2222,8 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "guided",
     pos: "adjective",
-    kidMeaning: "Led or direct by someone.",
-    examples: ["The guided tour helps us learn.", "A guided walk through the park is fun."],
+    kidMeaning: "Led or directed by someone else.",
+    examples: ["The guided tour helps us learn.", "They joined a guided walk through the park."],
     emoji: "🧭",
     spellingTip: "guid-ed: drop 'e' before -ed",
     syllables: "guid-ed",
@@ -2242,7 +2242,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "nickname",
     pos: "noun",
-    kidMeaning: "A name that is not your real name but used by friend.",
+    kidMeaning: "A short name your friends call you.",
     examples: ["Her nickname is 'Sunny'.", "His friends call him by his nickname."],
     emoji: "📛",
     spellingTip: "nick-name: 'ck' before 'n'",
@@ -2272,7 +2272,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "habitat",
     pos: "noun",
-    kidMeaning: "The place where an animal live naturally.",
+    kidMeaning: "The place where an animal naturally lives.",
     examples: ["The panda's habitat is the forest.", "Fish habitat is the ocean."],
     emoji: "🐼",
     spellingTip: "hab-i-tat: ends with 't'",
@@ -2312,7 +2312,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "gave",
     pos: "verb",
-    kidMeaning: "Past tense of give; hand something to someone.",
+    kidMeaning: "Handed something to someone else.",
     examples: ["She gave a gift to her friend.", "He gave his toy away."],
     emoji: "🎁",
     syllables: "gave",
@@ -2331,7 +2331,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "largest",
     pos: "adjective",
-    kidMeaning: "The most big; superlative of large.",
+    kidMeaning: "The biggest of them all.",
     examples: ["The largest animal is the whale.", "The largest building in town."],
     emoji: "🏔️",
     syllables: "larg-est",
@@ -2370,7 +2370,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "extinct",
     pos: "adjective",
-    kidMeaning: "No longer exist; all of the animal or plant gone.",
+    kidMeaning: "No longer living anywhere on earth.",
     examples: ["The dodo bird is extinct.", "Dinosaur are extinct."],
     emoji: "🦕",
     syllables: "ex-tinct",
@@ -2419,7 +2419,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "led",
     pos: "verb",
-    kidMeaning: "Past tense of lead; go in front to show the way.",
+    kidMeaning: "Went in front to show the way.",
     examples: ["She led the group home.", "He led the horse to the stable."],
     emoji: "👣",
     syllables: "led",
@@ -2499,7 +2499,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "past",
     pos: "noun",
-    kidMeaning: "Time before now; what happen before.",
+    kidMeaning: "The time before now; what happened before.",
     examples: ["Think about the past.", "The past is gone."],
     emoji: "⏳",
     confusedWith: "passed (go by)",
@@ -2538,7 +2538,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "meant",
     pos: "verb",
-    kidMeaning: "Past tense of mean; intend to do or say something.",
+    kidMeaning: "Intended to do or say something.",
     examples: ["I meant to call you.", "She meant what she said."],
     emoji: "💭",
     spellingTip: "meant: '-t' past form, not '-ed'",
@@ -2548,7 +2548,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "thrived",
     pos: "verb",
-    kidMeaning: "Grow strong and healthy.",
+    kidMeaning: "Grew strong and healthy over time.",
     examples: ["The plant thrived in the sun.", "The child thrived with good care."],
     emoji: "🌱",
     spellingTip: "thrived: 'th' at start, 'e' + 'd'",
@@ -2558,7 +2558,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "withering",
     pos: "verb",
-    kidMeaning: "Slowly dying and drying up.",
+    kidMeaning: "Slowly drying up and dying.",
     examples: ["The flower is withering in the heat.", "A withering plant needs water."],
     emoji: "🥀",
     spellingTip: "wither-ing: 'th' in middle, drop 'e' before -ing",
@@ -2569,7 +2569,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
     word: "needless",
     pos: "adjective",
     kidMeaning: "Not needed; unnecessary.",
-    examples: ["That is needless worry.", "Needless to say, she is happy."],
+    examples: ["That worry was needless.", "Needless to say, she is happy."],
     emoji: "❌",
     spellingTip: "need-less: '-less' means 'without'",
     confusedWith: "needles (plural of needle)",
@@ -2579,7 +2579,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "fragrance",
     pos: "noun",
-    kidMeaning: "A pleasant smell.",
+    kidMeaning: "A sweet or pleasant scent.",
     examples: ["The fragrance of the flower is nice.", "She wear fragrance every day."],
     emoji: "🌸",
     spellingTip: "fra-grance: 'gr' sound, '-ance' ending",
@@ -2609,7 +2609,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "crystal",
     pos: "noun",
-    kidMeaning: "Clear and hard clear glass or mineral.",
+    kidMeaning: "Clear hard glass, or a shiny mineral.",
     examples: ["The crystal glass shines brightly.", "Crystal form in rock."],
     emoji: "💎",
     syllables: "crys-tal",
@@ -2629,7 +2629,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "held",
     pos: "verb",
-    kidMeaning: "Past tense of hold; kept something in your hands.",
+    kidMeaning: "Kept something in your hands.",
     examples: ["She held the baby gently.", "He held the rope tightly."],
     emoji: "🤲",
     syllables: "held",
@@ -2638,7 +2638,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "loved",
     pos: "verb",
-    kidMeaning: "Past tense of love; had strong feeling for someone.",
+    kidMeaning: "Had a strong warm feeling for someone.",
     examples: ["She loved her grandmother very much.", "They loved the movie."],
     emoji: "❤️",
     syllables: "loved",
@@ -2675,7 +2675,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "dozed",
     pos: "verb",
-    kidMeaning: "Slept lightly; past tense of doze.",
+    kidMeaning: "Slept lightly for a short time.",
     examples: ["He dozed off during the movie.", "The cat dozed in the sun."],
     emoji: "😴",
     syllables: "dozed",
@@ -2693,7 +2693,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "wandered",
     pos: "verb",
-    kidMeaning: "Walked slowly and aimlessly; past tense of wander.",
+    kidMeaning: "Walked slowly with nowhere particular to go.",
     examples: ["He wandered through the forest.", "She wandered around the city."],
     emoji: "🚶",
     syllables: "wan-dered",
@@ -2703,7 +2703,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "puzzled",
     pos: "adjective",
-    kidMeaning: "Confused or not understanding something.",
+    kidMeaning: "Confused, and not sure what is happening.",
     examples: ["The puzzled student asked for help.", "He looked puzzled by the question."],
     emoji: "🧩",
     syllables: "puz-zled",
@@ -2919,7 +2919,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "stapler",
     pos: "noun",
-    kidMeaning: "A tool to join papers with metal clip.",
+    kidMeaning: "A tool that joins papers with metal clips.",
     examples: ["She use the stapler.", "The stapler is on the desk."],
     emoji: "📎",
     syllables: "sta-pler",
@@ -2928,7 +2928,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "timetable",
     pos: "noun",
-    kidMeaning: "A list showing when thing happen.",
+    kidMeaning: "A list showing when things happen.",
     examples: ["The timetable shows the class time.", "She checks the timetable."],
     emoji: "📅",
     syllables: "time-ta-ble",
@@ -3000,7 +3000,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sour",
     pos: "adjective",
-    kidMeaning: "Taste like lemon; not sweet.",
+    kidMeaning: "Tasting sharp, like a lemon.",
     examples: ["The sour apple tastes bad.", "The lemon is sour."],
     emoji: "🍋",
     syllables: "sour",
@@ -3009,7 +3009,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "crunchy",
     pos: "adjective",
-    kidMeaning: "Make a hard sound when you bite it.",
+    kidMeaning: "Making a hard sound when you bite it.",
     examples: ["The crunchy apple is good.", "He likes crunchy thing."],
     emoji: "🥬",
     syllables: "crunch-y",
@@ -3018,7 +3018,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "juicy",
     pos: "adjective",
-    kidMeaning: "Have lots of juice inside.",
+    kidMeaning: "Having lots of juice inside it.",
     examples: ["The juicy orange is good.", "She likes juicy fruit."],
     emoji: "🍊",
     syllables: "jui-cy",
@@ -3027,7 +3027,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "delicious",
     pos: "adjective",
-    kidMeaning: "Taste very good.",
+    kidMeaning: "Tasting very good indeed to eat.",
     examples: ["The delicious food makes everyone happy.", "She thinks the cake is delicious."],
     emoji: "😋",
     syllables: "de-li-cious",
@@ -3045,7 +3045,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "knee",
     pos: "noun",
-    kidMeaning: "The joint in your leg where it bend.",
+    kidMeaning: "The joint in your leg where it bends.",
     examples: ["She hurt her knee.", "The knee is in the middle of the leg."],
     emoji: "🦵",
     syllables: "knee",
@@ -3054,7 +3054,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "cough",
     pos: "verb",
-    kidMeaning: "Make a sound from your throat when sick.",
+    kidMeaning: "To make a sharp sound from your throat.",
     examples: ["He cough when he is sick.", "She cough all night."],
     emoji: "😷",
     syllables: "cough",
@@ -3063,7 +3063,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sneeze",
     pos: "verb",
-    kidMeaning: "Push air quickly from your nose and mouth.",
+    kidMeaning: "To push air quickly from your nose.",
     examples: ["He sneeze in the morning.", "She sneeze when there is dust."],
     emoji: "🤧",
     syllables: "sneeze",
@@ -3072,7 +3072,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "dizzy",
     pos: "adjective",
-    kidMeaning: "Feel like everything spin around.",
+    kidMeaning: "Feeling like everything spins around you.",
     examples: ["He feels dizzy when he spin.", "She feels dizzy on the ride."],
     emoji: "🤪",
     syllables: "diz-zy",
@@ -3081,7 +3081,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "itchy",
     pos: "adjective",
-    kidMeaning: "Feel like you want to scratch.",
+    kidMeaning: "Feeling like you want to scratch.",
     examples: ["His skin is itchy.", "The itchy shirt makes him unhappy."],
     emoji: "😫",
     syllables: "itch-y",
@@ -3090,7 +3090,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "hungry",
     pos: "adjective",
-    kidMeaning: "Want to eat food.",
+    kidMeaning: "Wanting to eat some food.",
     examples: ["He feels hungry after playing.", "The hungry boy eats a lot."],
     emoji: "🤤",
     syllables: "hun-gry",
@@ -3099,7 +3099,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "thirsty",
     pos: "adjective",
-    kidMeaning: "Want to drink something.",
+    kidMeaning: "Wanting something cool to drink.",
     examples: ["She feels thirsty in the heat.", "The thirsty child drinks water."],
     emoji: "💧",
     syllables: "thirs-ty",
@@ -3108,7 +3108,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "tired",
     pos: "adjective",
-    kidMeaning: "Want to sleep; having no energy.",
+    kidMeaning: "Wanting to sleep; having no energy.",
     examples: ["He feels tired after work.", "The tired child sleeps early."],
     emoji: "😴",
     syllables: "tir-ed",
@@ -3117,7 +3117,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "nervous",
     pos: "adjective",
-    kidMeaning: "Feel worried or afraid.",
+    kidMeaning: "Feeling worried or a little afraid.",
     examples: ["She feels nervous before the test.", "The nervous boy shakes."],
     emoji: "😰",
     syllables: "ner-vous",
@@ -3126,7 +3126,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "proud",
     pos: "adjective",
-    kidMeaning: "Feel good about what you do.",
+    kidMeaning: "Feeling good about what you did.",
     examples: ["She feels proud of her work.", "The proud boy show everyone."],
     emoji: "😊",
     syllables: "proud",
@@ -3135,7 +3135,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "lonely",
     pos: "adjective",
-    kidMeaning: "Feel sad because you are alone.",
+    kidMeaning: "Feeling sad because you are alone.",
     examples: ["He feels lonely without friend.", "The lonely child wants to play."],
     emoji: "😢",
     syllables: "lone-ly",
@@ -3144,7 +3144,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "excited",
     pos: "adjective",
-    kidMeaning: "Feel very happy and interested.",
+    kidMeaning: "Feeling very happy and interested.",
     examples: ["She feels excited about the party.", "The excited child jumps."],
     emoji: "🤩",
     syllables: "ex-cit-ed",
@@ -3153,7 +3153,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "worried",
     pos: "adjective",
-    kidMeaning: "Feel scared something bad happen.",
+    kidMeaning: "Feeling scared that something bad may happen.",
     examples: ["He feels worried about the test.", "The worried mother waits."],
     emoji: "😟",
     syllables: "wor-ried",
@@ -3162,7 +3162,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "scared",
     pos: "adjective",
-    kidMeaning: "Feel afraid.",
+    kidMeaning: "Feeling afraid of something or someone.",
     examples: ["She feels scared of the dark.", "The scared child cries."],
     emoji: "😨",
     syllables: "scared",
@@ -3171,7 +3171,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "cheerful",
     pos: "adjective",
-    kidMeaning: "Feel happy and smile a lot.",
+    kidMeaning: "Feeling happy and smiling a lot.",
     examples: ["She has a cheerful face.", "The cheerful boy sings."],
     emoji: "😄",
     syllables: "cheer-ful",
@@ -3180,7 +3180,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "upset",
     pos: "adjective",
-    kidMeaning: "Feel sad or angry.",
+    kidMeaning: "Feeling sad or angry about something.",
     examples: ["He feels upset about the loss.", "The upset girl cries."],
     emoji: "😞",
     syllables: "up-set",
@@ -3189,7 +3189,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "grateful",
     pos: "adjective",
-    kidMeaning: "Feel thankful.",
+    kidMeaning: "Feeling thankful for something good.",
     examples: ["She feels grateful for the gift.", "The grateful boy says thank you."],
     emoji: "🙏",
     syllables: "grate-ful",
@@ -3198,7 +3198,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "cloudy",
     pos: "adjective",
-    kidMeaning: "Full of cloud; not sunny.",
+    kidMeaning: "Full of clouds; not sunny.",
     examples: ["The cloudy day is grey.", "It looks cloudy today."],
     emoji: "☁️",
     syllables: "cloud-y",
@@ -3207,7 +3207,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "thunder",
     pos: "noun",
-    kidMeaning: "Loud sound during a storm.",
+    kidMeaning: "The loud sound you hear during a storm.",
     examples: ["The thunder is very loud.", "She hears the thunder."],
     emoji: "⛈️",
     syllables: "thun-der",
@@ -3216,7 +3216,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "lightning",
     pos: "noun",
-    kidMeaning: "Bright light during a storm.",
+    kidMeaning: "The bright flash of light in a storm.",
     examples: ["The lightning flashes across the sky.", "He sees the lightning."],
     emoji: "⚡",
     syllables: "light-ning",
@@ -3234,7 +3234,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "drizzle",
     pos: "noun",
-    kidMeaning: "Light rain with very small drop.",
+    kidMeaning: "Light rain with very small drops.",
     examples: ["The drizzle falls softly.", "She walks in the drizzle."],
     emoji: "🌧️",
     syllables: "driz-zle",
@@ -3243,7 +3243,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "humid",
     pos: "adjective",
-    kidMeaning: "Air that has lots of water; it feels wet.",
+    kidMeaning: "Air with lots of water; it feels wet.",
     examples: ["The humid weather makes you sweat.", "It is very humid today."],
     emoji: "💦",
     syllables: "hu-mid",
@@ -3261,7 +3261,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sunrise",
     pos: "noun",
-    kidMeaning: "When the sun come up in the morning.",
+    kidMeaning: "When the sun comes up in the morning.",
     examples: ["The sunrise is beautiful.", "He wakes up to see the sunrise."],
     emoji: "🌅",
     syllables: "sun-rise",
@@ -3270,7 +3270,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sunset",
     pos: "noun",
-    kidMeaning: "When the sun go down at night.",
+    kidMeaning: "When the sun goes down at night.",
     examples: ["The sunset is orange and pink.", "She loves to watch the sunset."],
     emoji: "🌇",
     syllables: "sun-set",
@@ -3333,7 +3333,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "mosquito",
     pos: "noun",
-    kidMeaning: "A small insect that bite and suck blood.",
+    kidMeaning: "A small insect that bites and sucks blood.",
     examples: ["The mosquito buzzes around.", "He swat the mosquito."],
     emoji: "🦟",
     syllables: "mos-qui-to",
@@ -3342,7 +3342,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "feather",
     pos: "noun",
-    kidMeaning: "Something light and soft that bird have.",
+    kidMeaning: "Something light and soft that birds have.",
     examples: ["The feather falls from the bird.", "She finds a white feather."],
     emoji: "🪶",
     syllables: "fea-ther",
@@ -3351,7 +3351,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "claw",
     pos: "noun",
-    kidMeaning: "Sharp pointed thing on an animal's foot.",
+    kidMeaning: "A sharp pointed part on an animal's foot.",
     examples: ["The cat has sharp claws.", "The bird's claw holds the branch."],
     emoji: "🐾",
     syllables: "claw",
@@ -3360,7 +3360,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "climb",
     pos: "verb",
-    kidMeaning: "Go up using your hand and foot.",
+    kidMeaning: "To go up using your hands and feet.",
     examples: ["He climbs the tree.", "She climbs the mountain."],
     emoji: "⛰️",
     syllables: "climb",
@@ -3369,7 +3369,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "crawl",
     pos: "verb",
-    kidMeaning: "Move slowly on your hand and knee.",
+    kidMeaning: "To move slowly on your hands and knees.",
     examples: ["The baby crawls on the floor.", "He crawl under the table."],
     emoji: "🐛",
     syllables: "crawl",
@@ -3396,7 +3396,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "skip",
     pos: "verb",
-    kidMeaning: "Jump over a rope or move with jump.",
+    kidMeaning: "To jump over a rope, or move with jumps.",
     examples: ["She skips the rope.", "He skips down the path."],
     emoji: "⏭️",
     syllables: "skip",
@@ -3405,7 +3405,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "kick",
     pos: "verb",
-    kidMeaning: "Hit something with your foot.",
+    kidMeaning: "To hit something with your foot.",
     examples: ["He kicks the ball.", "She kicks the door open."],
     emoji: "⚽",
     syllables: "kick",
@@ -3414,7 +3414,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "grab",
     pos: "verb",
-    kidMeaning: "Take something quickly with your hand.",
+    kidMeaning: "To take something quickly with your hands.",
     examples: ["He grabs the apple.", "She grabs his hand."],
     emoji: "✊",
     syllables: "grab",
@@ -3423,7 +3423,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "drop",
     pos: "verb",
-    kidMeaning: "Let something fall.",
+    kidMeaning: "To let something fall to the ground.",
     examples: ["He drops the book.", "She accidentally drops the cup."],
     emoji: "💥",
     syllables: "drop",
@@ -3432,7 +3432,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "lift",
     pos: "verb",
-    kidMeaning: "Raise something up.",
+    kidMeaning: "To raise something up higher.",
     examples: ["He lifts the heavy box.", "She lifts her hand."],
     emoji: "💪",
     syllables: "lift",
@@ -3495,7 +3495,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "lend",
     pos: "verb",
-    kidMeaning: "Give something to someone to use, then get back.",
+    kidMeaning: "To let someone use something, then get it back.",
     examples: ["She lends him her bike.", "He lends money to his friend."],
     emoji: "🤝",
     syllables: "lend",
@@ -3531,7 +3531,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "heavy",
     pos: "adjective",
-    kidMeaning: "Weigh a lot; hard to carry.",
+    kidMeaning: "Weighing a lot; hard to carry.",
     examples: ["The heavy box is hard to lift.", "She carries a heavy bag."],
     emoji: "🏋️",
     syllables: "heav-y",
@@ -3540,7 +3540,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "narrow",
     pos: "adjective",
-    kidMeaning: "Not wide; thin.",
+    kidMeaning: "Not wide; thin from side to side.",
     examples: ["The narrow path is hard to walk on.", "He walks through the narrow door."],
     emoji: "〰️",
     syllables: "nar-row",
@@ -3549,7 +3549,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "wide",
     pos: "adjective",
-    kidMeaning: "Measure a lot from side to side.",
+    kidMeaning: "Measuring a lot from side to side.",
     examples: ["The wide road has many cars.", "She has a wide smile."],
     emoji: "↔️",
     syllables: "wide",
@@ -3558,7 +3558,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "smooth",
     pos: "adjective",
-    kidMeaning: "Without bump or roughness.",
+    kidMeaning: "Without bumps or rough parts.",
     examples: ["The smooth table feels nice.", "Her smooth skin is soft."],
     emoji: "🧈",
     syllables: "smooth",
@@ -3567,7 +3567,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "rough",
     pos: "adjective",
-    kidMeaning: "Not smooth; have bump.",
+    kidMeaning: "Not smooth; having bumps and lumps.",
     examples: ["The rough rock hurt my hand.", "He has rough hand."],
     emoji: "🪨",
     syllables: "rough",
@@ -3585,7 +3585,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "blunt",
     pos: "adjective",
-    kidMeaning: "Not sharp; have a dull edge.",
+    kidMeaning: "Not sharp; having a dull edge.",
     examples: ["The blunt pencil cannot write well.", "He use a blunt knife."],
     emoji: "✏️",
     syllables: "blunt",
@@ -3594,7 +3594,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "shiny",
     pos: "adjective",
-    kidMeaning: "Reflect light; bright and polished.",
+    kidMeaning: "Reflecting light; bright and polished.",
     examples: ["The shiny car looks new.", "She has shiny hair."],
     emoji: "✨",
     syllables: "shin-y",
@@ -3603,7 +3603,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "dusty",
     pos: "adjective",
-    kidMeaning: "Have dust on it; not clean.",
+    kidMeaning: "Having dust on it; not clean.",
     examples: ["The dusty shelf needs cleaning.", "His dusty shoe needs a wash."],
     emoji: "💨",
     syllables: "dust-y",
@@ -3612,7 +3612,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "sticky",
     pos: "adjective",
-    kidMeaning: "Stick to things; not slippery.",
+    kidMeaning: "Sticking to things; not slippery.",
     examples: ["The sticky hand from sweets.", "The sticky floor needs cleaning."],
     emoji: "🍯",
     syllables: "stick-y",
@@ -3621,7 +3621,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "noisy",
     pos: "adjective",
-    kidMeaning: "Make lots of loud sound.",
+    kidMeaning: "Making lots of loud sounds.",
     examples: ["The noisy class is hard to teach.", "He is a noisy eater."],
     emoji: "🔊",
     syllables: "noi-sy",
@@ -3630,7 +3630,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "quiet",
     pos: "adjective",
-    kidMeaning: "Make no or very little sound.",
+    kidMeaning: "Making no sound, or very little.",
     examples: ["The quiet library is peaceful.", "She likes quiet place."],
     emoji: "🤫",
     syllables: "qui-et",
@@ -3639,7 +3639,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "crowded",
     pos: "adjective",
-    kidMeaning: "Have too many people or thing.",
+    kidMeaning: "Having too many people or things.",
     examples: ["The crowded bus is uncomfortable.", "The crowded market is busy."],
     emoji: "👥",
     syllables: "crowd-ed",
@@ -3675,7 +3675,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "careful",
     pos: "adjective",
-    kidMeaning: "Give attention to not make mistake.",
+    kidMeaning: "Giving attention so you make no mistakes.",
     examples: ["The careful student does good work.", "She is careful when she walks."],
     emoji: "👁️",
     syllables: "care-ful",
@@ -3684,7 +3684,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "careless",
     pos: "adjective",
-    kidMeaning: "Not careful; not give attention.",
+    kidMeaning: "Not careful; not giving proper attention.",
     examples: ["The careless boy makes mistakes.", "His careless mistake break the toy."],
     emoji: "🙈",
     syllables: "care-less",
@@ -3693,7 +3693,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "polite",
     pos: "adjective",
-    kidMeaning: "Have good manner; respect other.",
+    kidMeaning: "Having good manners; respecting other people.",
     examples: ["The polite girl says please and thank you.", "He is polite to everyone."],
     emoji: "🤝",
     syllables: "po-lite",
@@ -3702,7 +3702,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "rude",
     pos: "adjective",
-    kidMeaning: "Not polite; not respect other.",
+    kidMeaning: "Not polite; not respecting other people.",
     examples: ["The rude boy pushes others.", "She is rude to her mother."],
     emoji: "😤",
     syllables: "rude",
@@ -3711,7 +3711,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "fair",
     pos: "adjective",
-    kidMeaning: "Treat everyone the same; just.",
+    kidMeaning: "Treating everyone in the same way.",
     examples: ["The fair teacher treat all student same.", "She divide the sweets fair."],
     emoji: "⚖️",
     syllables: "fair",
@@ -3720,7 +3720,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "unfair",
     pos: "adjective",
-    kidMeaning: "Not just; not treat same.",
+    kidMeaning: "Not treating everyone in the same way.",
     examples: ["The unfair game makes him angry.", "That is unfair to him."],
     emoji: "❌",
     syllables: "un-fair",
@@ -3729,7 +3729,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "strict",
     pos: "adjective",
-    kidMeaning: "Have rule that must be follow.",
+    kidMeaning: "Having rules that must be followed.",
     examples: ["The strict teacher gives homework.", "He has strict parent."],
     emoji: "📋",
     syllables: "strict",
@@ -3774,7 +3774,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "market",
     pos: "noun",
-    kidMeaning: "A place to buy and sell thing.",
+    kidMeaning: "A place to buy and sell things.",
     examples: ["She buys vegetable at the market.", "The market has many stalls."],
     emoji: "🏬",
     syllables: "mar-ket",
@@ -3792,7 +3792,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "bakery",
     pos: "noun",
-    kidMeaning: "A shop where they make and sell bread and cake.",
+    kidMeaning: "A shop that makes and sells bread.",
     examples: ["She buys bread from the bakery.", "The bakery smells good."],
     emoji: "🍞",
     syllables: "bak-er-y",
@@ -3801,7 +3801,7 @@ export const words: Word[] = [  // Tier 1: Simple everyday words
   {
     word: "stadium",
     pos: "noun",
-    kidMeaning: "A big place where sport happen.",
+    kidMeaning: "A big place where sports are played.",
     examples: ["He watches the match at the stadium.", "The stadium is very big."],
     emoji: "🏟️",
     syllables: "sta-di-um",
