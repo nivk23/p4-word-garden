@@ -14,6 +14,7 @@ const LazyDone = lazy(() => import("./pages/Done"));
 const LazyInsights = lazy(() => import("./pages/Insights"));
 const LazyCompareChildren = lazy(() => import("./pages/CompareChildren"));
 const LazyMyProfile = lazy(() => import("./pages/MyProfile"));
+const LazyGrammarPractice = lazy(() => import("./pages/GrammarPractice"));
 import PinGate from "./pages/PinGate";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/insights" element={<PinGate><LazyInsights /></PinGate>} />
               <Route path="/compare-children" element={<PinGate><LazyCompareChildren /></PinGate>} />
               <Route path="/my-profile" element={<LazyMyProfile />} />
+              <Route path="/grammar-practice" element={<LazyGrammarPractice />} />
             </Routes>
           </Suspense>
         </AuthGate>

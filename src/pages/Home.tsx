@@ -125,6 +125,16 @@ export default function Home() {
         )}
       </Card>
 
+      <Card className="mt-5">
+        <h2 className="font-display text-xl font-semibold text-secondary-dark mb-1">Grammar practice</h2>
+        <p className="text-base text-ink/70 mb-4">
+          Fix wrong sentences, or practise one rule until it sticks.
+        </p>
+        <Button variant="secondary" onClick={() => navigate("/grammar-practice")}>
+          Open grammar practice
+        </Button>
+      </Card>
+
       <button
         onClick={() => navigate("/insights")}
         className="text-secondary-dark/70 hover:text-secondary-dark text-sm font-semibold underline decoration-2 underline-offset-4 mt-2"
