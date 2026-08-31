@@ -1689,7 +1689,7 @@ export const grammarLessons: GrammarLesson[] = [
         correctAnswer: 1,
       },
     ],
-  },,
+  },
   {
     id: "lesson_71",
     title: "There Is and There Are",
