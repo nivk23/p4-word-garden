@@ -267,11 +267,11 @@ export const grammarLessons: GrammarLesson[] = [
         type: "choose_form",
         question: "Which is correct?",
         options: [
-          "They are happy",
-          "They is happy",
           "They are happy.",
+          "They is happy.",
+          "They am happy.",
         ],
-        correctAnswer: 2,
+        correctAnswer: 0,
       },
     ],
   },
@@ -336,10 +336,10 @@ export const grammarLessons: GrammarLesson[] = [
     title: "Simple Present (-s with he/she/it)",
     description: "In the simple present, add -s to the verb when you use he, she, or it.",
     examples: [
-      "she play the piano. (wrong: she plays)",
-      "He like ice cream. (wrong: He likes)",
-      "It run very fast. (wrong: It runs)",
-      "I play the piano. (I - no -s)",
+      "She plays the piano.",
+      "He likes ice cream.",
+      "It runs very fast.",
+      "I play the piano. (I never takes -s)",
     ],
     practiceItems: [
       {
@@ -386,7 +386,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_15",
     title: "Simple Past (-ed)",
-    description: "To make the past tense, add -ed to the verb. play → played, walk → walked. You use it for things that already happen.",
+    description: "To make the past tense, add -ed to the verb. play → played, walk → walked. You use it for things that already happened.",
     examples: [
       "She played the piano.",
       "They walked in the park.",
@@ -593,9 +593,9 @@ export const grammarLessons: GrammarLesson[] = [
         type: "choose_form",
         question: "Which is correct?",
         options: [
-          "I like apples oranges and bananas",
-          "I like apples, oranges, and bananas",
+          "I like apples oranges and bananas.",
           "I like apples, oranges and bananas.",
+          "I like apples, oranges, and, bananas.",
         ],
         correctAnswer: 1,
       },
@@ -809,7 +809,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_34",
     title: "Irregular Plurals",
-    description: "Some plurals do not use -s or -es. One ox → oxen. One child → children. One hundred → hundreds of.",
+    description: "Some plurals do not use -s or -es. One ox → oxen. One child → children. One tooth → teeth.",
     examples: [
       "One ox, many oxen.",
       "One child, many children.",
@@ -966,11 +966,11 @@ export const grammarLessons: GrammarLesson[] = [
         type: "choose_form",
         question: "Which is polite?",
         options: [
-          "Give me tea",
-          "Would you like tea",
-          "Would you like tea?",
+          "Would you like some tea?",
+          "Would you like to drinking tea?",
+          "Would you liking some tea?",
         ],
-        correctAnswer: 2,
+        correctAnswer: 0,
       },
     ],
   },
@@ -1032,7 +1032,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_43",
     title: "Used To (Past Habit)",
-    description: "Used to + base verb show something you do in the past but not now. I used to play every day.",
+    description: "Used to + base verb shows something you did in the past but not now. I used to play every day.",
     examples: [
       "I used to play every day.",
       "She used to live in Paris.",
@@ -1054,7 +1054,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_44",
     title: "Plural -es After ch, x, o",
-    description: "When a noun end with ch, x, or o, add -es to make it plural. inch → inches. volcano → volcanoes.",
+    description: "When a noun ends with ch, x, or o, add -es to make it plural. inch → inches. volcano → volcanoes.",
     examples: [
       "One inch, many inches.",
       "One box, many boxes.",
@@ -1079,7 +1079,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_45",
     title: "Too + Adjective + To",
-    description: "Too + adjective + to + verb show something is too much or more than needed. She is too tired to play.",
+    description: "Too + adjective + to + verb shows something is too much or more than needed. She is too tired to play.",
     examples: [
       "She is too tired to play.",
       "The food is too hot to eat.",
@@ -1090,9 +1090,9 @@ export const grammarLessons: GrammarLesson[] = [
         type: "pick_word",
         question: "Which is correct?",
         options: [
-          "too tall to",
-          "too tall for",
-          "too tall and",
+          "The box is too heavy to lift.",
+          "The box is too heavy to lifting.",
+          "The box is too heavy for lift.",
         ],
         correctAnswer: 0,
       },
@@ -1235,7 +1235,7 @@ export const grammarLessons: GrammarLesson[] = [
     practiceItems: [
       {
         type: "pick_word",
-        question: "What follow 'keen'?",
+        question: "Which word follows 'keen'?",
         options: ["in", "on", "at"],
         correctAnswer: 1,
       },
@@ -1254,7 +1254,7 @@ export const grammarLessons: GrammarLesson[] = [
     practiceItems: [
       {
         type: "pick_word",
-        question: "Which adjective end with -ous?",
+        question: "Which adjective ends with -ous?",
         options: ["happy", "religious", "beautiful"],
         correctAnswer: 1,
       },
@@ -1306,7 +1306,7 @@ export const grammarLessons: GrammarLesson[] = [
     practiceItems: [
       {
         type: "pick_word",
-        question: "What do -less mean?",
+        question: "What does -less mean?",
         options: ["with", "without", "full of"],
         correctAnswer: 1,
       },
@@ -1315,7 +1315,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_55",
     title: "For + Purpose",
-    description: "Use 'for' to say why you do something. She goes to school for learning. He goes to the shop for milk.",
+    description: "Use 'for' to say why you do something. He goes to the shop for milk.",
     examples: [
       "She goes to school for learning.",
       "He goes to the shop for milk.",
@@ -1327,11 +1327,11 @@ export const grammarLessons: GrammarLesson[] = [
         type: "choose_form",
         question: "Which is correct?",
         options: [
-          "We go for play",
-          "We go to play",
-          "We go for playing",
+          "He goes to the shop for milk.",
+          "He goes to the shop of milk.",
+          "He goes to the shop with milk.",
         ],
-        correctAnswer: 2,
+        correctAnswer: 0,
       },
     ],
   },
@@ -1360,7 +1360,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_57",
     title: "One Of The + Plural",
-    description: "One of the + plural noun. He is one of the greatest player. She is one of the best student.",
+    description: "One of the is always followed by a plural noun. He is one of the greatest players.",
     examples: [
       "He is one of the greatest players.",
       "She is one of the best students.",
@@ -1437,7 +1437,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_60",
     title: "May + Base Verb (possibility)",
-    description: "May + base verb show something is possible. The colour may vary. The price may change.",
+    description: "May + base verb shows something is possible. The colour may vary. The price may change.",
     examples: [
       "The colour may vary.",
       "The price may change.",
@@ -1571,7 +1571,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_66",
     title: "Had Been + Past Participle",
-    description: "Had been + past participle show past passive. The money had been stolen. The letter had been lost.",
+    description: "Had been + past participle shows a past passive. The money had been stolen. The letter had been lost.",
     examples: [
       "The money had been stolen.",
       "The letter had been lost.",
@@ -1593,7 +1593,7 @@ export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_67",
     title: "Had + Past Participle (Past Perfect)",
-    description: "Had + past participle show something happen before. She had delivered the package.",
+    description: "Had + past participle shows something happened before. She had delivered the package.",
     examples: [
       "She had delivered the package.",
       "He had finished his work.",
@@ -1660,11 +1660,11 @@ export const grammarLessons: GrammarLesson[] = [
         type: "pick_word",
         question: "What is the past tense of 'learn'?",
         options: [
-          "learned",
           "learnt",
-          "both a and b",
+          "learning",
+          "learns",
         ],
-        correctAnswer: 2,
+        correctAnswer: 0,
       },
     ],
   },
@@ -1687,6 +1687,341 @@ export const grammarLessons: GrammarLesson[] = [
           "specialise on",
         ],
         correctAnswer: 1,
+      },
+    ],
+  },,
+  {
+    id: "lesson_71",
+    title: "There Is and There Are",
+    description: "Use 'there is' for one thing. Use 'there are' for more than one. There is a cat. There are two cats.",
+    examples: [
+      "There is a book on the table.",
+      "There are three books on the table.",
+      "There is some water in the jug.",
+      "There are many people at the market.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "There are a cat in the garden.",
+          "There is a cat in the garden.",
+          "There am a cat in the garden.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "There is five apples in the bowl.",
+          "There are five apples in the bowl.",
+          "There be five apples in the bowl.",
+        ],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_72",
+    title: "Relative Clauses (who, which, that)",
+    description: "Use 'who' for people and 'which' for things. 'That' can be used for both. The boy who won is my friend.",
+    examples: [
+      "The boy who won the race is my friend.",
+      "The book which fell is torn.",
+      "The girl that sits beside me is kind.",
+      "The house which stands on the hill is old.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "The boy which won the race is my friend.",
+          "The boy who won the race is my friend.",
+          "The boy what won the race is my friend.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which word goes with a thing?",
+        options: ["who", "which", "whose"],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_73",
+    title: "Reported Speech (said that)",
+    description: "When you tell what someone said, the tense usually steps back. 'I am tired,' she said. → She said that she was tired.",
+    examples: [
+      "\"I am tired,\" she said. → She said that she was tired.",
+      "\"I like cake,\" he said. → He said that he liked cake.",
+      "\"We are ready,\" they said. → They said that they were ready.",
+      "\"I will come,\" she said. → She said that she would come.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "She said that she is tired.",
+          "She said that she was tired.",
+          "She said that she are tired.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "He said that he likes cake.",
+          "He said that he liked cake.",
+          "He said that he liking cake.",
+        ],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_74",
+    title: "Modals: Can, Must, Should",
+    description: "Can shows ability. Must shows something necessary. Should gives advice. Each one is followed by the plain verb.",
+    examples: [
+      "She can swim very well.",
+      "You must wear a helmet.",
+      "You should drink more water.",
+      "He can play the piano.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: ["She can swims.", "She can swim.", "She can to swim."],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which word gives advice?",
+        options: ["can", "should", "must"],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_75",
+    title: "Adverbs of Frequency",
+    description: "Always, usually, often, sometimes and never say how often. They go before the main verb but after 'is' and 'are'.",
+    examples: [
+      "She always walks to school.",
+      "He never eats durian.",
+      "They are usually late.",
+      "I sometimes read before bed.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "She walks always to school.",
+          "She always walks to school.",
+          "Always she walks to school.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: ["He is never late.", "He never is late.", "Never he is late."],
+        correctAnswer: 0,
+      },
+    ],
+  },
+  {
+    id: "lesson_76",
+    title: "If Sentences (First Conditional)",
+    description: "If + present tense, then will + plain verb. If it rains, we will stay at home.",
+    examples: [
+      "If it rains, we will stay at home.",
+      "If you study, you will pass.",
+      "If she runs fast, she will win.",
+      "If he asks, I will help him.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "If it will rain, we will stay at home.",
+          "If it rains, we will stay at home.",
+          "If it raining, we will stay at home.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "If you study, you will pass.",
+          "If you will study, you pass.",
+          "If you studying, you will pass.",
+        ],
+        correctAnswer: 0,
+      },
+    ],
+  },
+  {
+    id: "lesson_77",
+    title: "So and Such … That",
+    description: "So + adjective + that. Such + a + adjective + noun + that. It was so hot that we stayed inside.",
+    examples: [
+      "It was so hot that we stayed inside.",
+      "It was such a hot day that we stayed inside.",
+      "She was so tired that she fell asleep.",
+      "He is such a kind boy that everyone likes him.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "It was such hot that we stayed inside.",
+          "It was so hot that we stayed inside.",
+          "It was so a hot that we stayed inside.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "He is so a kind boy that everyone likes him.",
+          "He is such a kind boy that everyone likes him.",
+          "He is such kind boy that everyone likes him.",
+        ],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_78",
+    title: "Either and Neither",
+    description: "Either … or means one of two. Neither … nor means not one and not the other. The verb matches the nearer subject.",
+    examples: [
+      "Either Ali or Sara will win.",
+      "Neither the cat nor the dog is hungry.",
+      "You may have either tea or coffee.",
+      "Neither answer was correct.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "Either Ali nor Sara will win.",
+          "Either Ali or Sara will win.",
+          "Either Ali and Sara will win.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "Neither the cat or the dog is hungry.",
+          "Neither the cat nor the dog is hungry.",
+          "Neither the cat and the dog is hungry.",
+        ],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_79",
+    title: "Collective Nouns",
+    description: "A collective noun names a group: a flock of birds, a bunch of bananas, a herd of cows.",
+    examples: [
+      "A flock of birds flew past.",
+      "She bought a bunch of bananas.",
+      "A herd of cows crossed the road.",
+      "The team was very happy.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "A herd of birds flew past.",
+          "A flock of birds flew past.",
+          "A bunch of birds flew past.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "What do you call a group of cows?",
+        options: ["a flock", "a herd", "a bunch"],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_80",
+    title: "Since and For with Time",
+    description: "Use 'since' for when something started: since Monday. Use 'for' for how long it lasted: for two hours.",
+    examples: [
+      "She has lived here since 2020.",
+      "She has lived here for six years.",
+      "He has been ill since Monday.",
+      "He has been ill for three days.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "She has lived here since six years.",
+          "She has lived here for six years.",
+          "She has lived here from six years.",
+        ],
+        correctAnswer: 1,
+      },
+      {
+        type: "pick_word",
+        question: "Which is correct?",
+        options: [
+          "He has been ill for Monday.",
+          "He has been ill since Monday.",
+          "He has been ill at Monday.",
+        ],
+        correctAnswer: 1,
+      },
+    ],
+  },
+  {
+    id: "lesson_81",
+    title: "Sequence Words (first, next, then, finally)",
+    description: "Sequence words put steps in order when you tell a story or explain how to do something.",
+    examples: [
+      "First, wash the rice.",
+      "Next, add the water.",
+      "Then, cook it for twenty minutes.",
+      "Finally, serve the rice hot.",
+    ],
+    practiceItems: [
+      {
+        type: "pick_word",
+        question: "Which word shows the last step?",
+        options: ["First", "Next", "Finally"],
+        correctAnswer: 2,
+      },
+      {
+        type: "pick_word",
+        question: "Which word shows the first step?",
+        options: ["First", "Then", "Finally"],
+        correctAnswer: 0,
       },
     ],
   },

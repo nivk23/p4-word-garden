@@ -670,6 +670,105 @@ export const ruleTeachings: RuleTeaching[] = [
     ],
     tip: "Specialise is always followed by in.",
   },
+  {
+    lessonId: "lesson_71",
+    steps: [
+      { show: "There is a cat. There are two cats.", explain: "Is goes with one thing; are goes with more than one." },
+      { show: "There is some water in the jug.", explain: "Uncountable things like water take is." },
+      { show: "There is five apples", explain: "This is wrong: five apples is more than one, so use there are." },
+    ],
+    tip: "Look at what comes after there: one thing is, many things are.",
+  },
+  {
+    lessonId: "lesson_72",
+    steps: [
+      { show: "the boy who won", explain: "Who points back to a person." },
+      { show: "the book which fell", explain: "Which points back to a thing." },
+      { show: "the boy which won", explain: "This is wrong: a boy is a person, so use who." },
+    ],
+    tip: "Who for people, which for things, that for either.",
+  },
+  {
+    lessonId: "lesson_73",
+    steps: [
+      { show: "\"I am tired,\" she said.", explain: "These are her exact words, inside speech marks." },
+      { show: "She said that she was tired.", explain: "When you report it, am steps back to was." },
+      { show: "She said that she is tired", explain: "This is wrong: reporting it moves the tense back." },
+    ],
+    tip: "Reporting what was said moves the tense one step back.",
+  },
+  {
+    lessonId: "lesson_74",
+    steps: [
+      { show: "She can swim. You must wait.", explain: "Can, must and should are always followed by the plain verb." },
+      { show: "You should drink more water.", explain: "Should gives advice about the best thing to do." },
+      { show: "She can swims", explain: "This is wrong: after can, drop the -s." },
+    ],
+    tip: "After can, must and should, the verb never changes.",
+  },
+  {
+    lessonId: "lesson_75",
+    steps: [
+      { show: "She always walks to school.", explain: "How-often words go before the main doing word." },
+      { show: "He is never late.", explain: "But they go after is, am and are." },
+      { show: "She walks always to school", explain: "This is wrong: always goes before walks." },
+    ],
+    tip: "Before the verb, but after is, am and are.",
+  },
+  {
+    lessonId: "lesson_76",
+    steps: [
+      { show: "If it rains, we will stay at home.", explain: "The if part uses the present, even about the future." },
+      { show: "If + present, will + plain verb", explain: "Only the second half takes will." },
+      { show: "If it will rain, we will stay", explain: "This is wrong: the if part never takes will." },
+    ],
+    tip: "No will in the if part — only in the other half.",
+  },
+  {
+    lessonId: "lesson_77",
+    steps: [
+      { show: "It was so hot that we stayed inside.", explain: "So goes straight in front of a describing word." },
+      { show: "It was such a hot day that we stayed inside.", explain: "Such goes in front of a + describing word + naming word." },
+      { show: "It was such hot that we stayed", explain: "This is wrong: with no naming word, use so hot." },
+    ],
+    tip: "So + describing word. Such + a + describing word + thing.",
+  },
+  {
+    lessonId: "lesson_78",
+    steps: [
+      { show: "Either Ali or Sara will win.", explain: "Either always pairs with or." },
+      { show: "Neither the cat nor the dog is hungry.", explain: "Neither always pairs with nor." },
+      { show: "Either Ali nor Sara", explain: "This is wrong: either takes or, never nor." },
+    ],
+    tip: "Either goes with or; neither goes with nor.",
+  },
+  {
+    lessonId: "lesson_79",
+    steps: [
+      { show: "a flock of birds, a herd of cows", explain: "A collective noun names a whole group at once." },
+      { show: "a bunch of bananas", explain: "Each group has its own word, so they must be learnt." },
+      { show: "a herd of birds", explain: "This is wrong: birds come in a flock, not a herd." },
+    ],
+    tip: "Flock of birds, herd of cows, bunch of bananas, shoal of fish.",
+  },
+  {
+    lessonId: "lesson_80",
+    steps: [
+      { show: "since Monday", explain: "Since marks when something started." },
+      { show: "for three days", explain: "For marks how long it has lasted." },
+      { show: "since three days", explain: "This is wrong: a length of time takes for." },
+    ],
+    tip: "Since points to a starting point; for measures a length.",
+  },
+  {
+    lessonId: "lesson_81",
+    steps: [
+      { show: "First, wash the rice.", explain: "First marks the step you do at the start." },
+      { show: "Next, then, after that", explain: "These carry the reader through the middle steps." },
+      { show: "Finally, serve the rice hot.", explain: "Finally marks the last step of all." },
+    ],
+    tip: "First, next, then, finally — in that order.",
+  },
 ];
 
 export const editingItems: EditingItem[] = [
@@ -1442,6 +1541,127 @@ export const editingItems: EditingItem[] = [
   { lessonId: "lesson_70", sentence: "The doctor specialises at children's illnesses.", wrong: "at",
     options: ["in", "on", "for"], correct: "in",
     why: "Specialise takes in before the subject." },
+
+  // lesson_71 — there is / there are
+  { lessonId: "lesson_71", sentence: "There is five apples in the bowl.", wrong: "is",
+    options: ["are", "was", "be"], correct: "are",
+    why: "Five apples is more than one, so use there are." },
+  { lessonId: "lesson_71", sentence: "There are a cat in the garden.", wrong: "are",
+    options: ["is", "were", "be"], correct: "is",
+    why: "One cat is just one, so use there is." },
+  { lessonId: "lesson_71", sentence: "There are some water left in the jug.", wrong: "are",
+    options: ["is", "were", "be"], correct: "is",
+    why: "Water cannot be counted, so use there is." },
+
+  // lesson_72 — relative clauses
+  { lessonId: "lesson_72", sentence: "The boy which won the race is my friend.", wrong: "which",
+    options: ["who", "whose", "whom"], correct: "who",
+    why: "A boy is a person, so use who." },
+  { lessonId: "lesson_72", sentence: "The book who fell off the shelf is torn.", wrong: "who",
+    options: ["which", "whose", "whom"], correct: "which",
+    why: "A book is a thing, so use which." },
+  { lessonId: "lesson_72", sentence: "The girl which sits beside me is kind.", wrong: "which",
+    options: ["who", "whose", "what"], correct: "who",
+    why: "A girl is a person, so use who." },
+
+  // lesson_73 — reported speech
+  { lessonId: "lesson_73", sentence: "She said that she is very tired.", wrong: "is",
+    options: ["was", "are", "be"], correct: "was",
+    why: "Reporting what she said moves is back to was." },
+  { lessonId: "lesson_73", sentence: "He said that he likes chocolate cake.", wrong: "likes",
+    options: ["liked", "liking", "like"], correct: "liked",
+    why: "Reported speech moves likes back to liked." },
+  { lessonId: "lesson_73", sentence: "They said that they are ready to go.", wrong: "are",
+    options: ["were", "is", "be"], correct: "were",
+    why: "Reporting it moves are back to were." },
+
+  // lesson_74 — modals
+  { lessonId: "lesson_74", sentence: "She can swims across the whole pool.", wrong: "swims",
+    options: ["swim", "swimming", "swam"], correct: "swim",
+    why: "After can, use the plain verb swim." },
+  { lessonId: "lesson_74", sentence: "You must to wear a helmet when cycling.", wrong: "to",
+    options: ["wear", "wearing", "wore"], correct: "wear",
+    why: "Must is followed by the plain verb, with no to." },
+  { lessonId: "lesson_74", sentence: "You should drinking more water each day.", wrong: "drinking",
+    options: ["drink", "drank", "drinks"], correct: "drink",
+    why: "After should, use the plain verb drink." },
+
+  // lesson_75 — adverbs of frequency
+  { lessonId: "lesson_75", sentence: "She sometimes walks to school every single day.", wrong: "sometimes",
+    options: ["always", "never", "rarely"], correct: "always",
+    why: "Every single day means always, not sometimes." },
+  { lessonId: "lesson_75", sentence: "He always eats durian, although he hates the smell.", wrong: "always",
+    options: ["never", "often", "usually"], correct: "never",
+    why: "Hating the smell means he never eats it." },
+  { lessonId: "lesson_75", sentence: "She is often at school on Sundays, when it is closed.", wrong: "often",
+    options: ["never", "always", "usually"], correct: "never",
+    why: "The school is closed, so she is never there." },
+
+  // lesson_76 — first conditional
+  { lessonId: "lesson_76", sentence: "If it will rain, we will stay at home.", wrong: "will", wrongIndex: 2,
+    options: ["rains", "rained", "raining"], correct: "rains",
+    why: "The if part uses the present: if it rains." },
+  { lessonId: "lesson_76", sentence: "If you will study hard, you will pass.", wrong: "will", wrongIndex: 2,
+    options: ["study", "studied", "studying"], correct: "study",
+    why: "Never use will in the if part of the sentence." },
+  { lessonId: "lesson_76", sentence: "If she runs fast, she wins the race.", wrong: "wins",
+    options: ["will win", "won", "winning"], correct: "will win",
+    why: "The second half looks ahead, so use will win." },
+
+  // lesson_77 — so / such … that
+  { lessonId: "lesson_77", sentence: "It was such hot that we stayed inside.", wrong: "such",
+    options: ["so", "very", "too"], correct: "so",
+    why: "With no naming word after it, use so hot." },
+  { lessonId: "lesson_77", sentence: "He is so a kind boy that everyone likes him.", wrong: "so",
+    options: ["such", "very", "too"], correct: "such",
+    why: "Before a + describing word + thing, use such." },
+  { lessonId: "lesson_77", sentence: "She was such tired that she fell asleep.", wrong: "such",
+    options: ["so", "very", "much"], correct: "so",
+    why: "Tired has no naming word after it, so use so." },
+
+  // lesson_78 — either / neither
+  { lessonId: "lesson_78", sentence: "Either Ali nor Sara will win the prize.", wrong: "nor",
+    options: ["or", "and", "but"], correct: "or",
+    why: "Either always pairs with or." },
+  { lessonId: "lesson_78", sentence: "Neither the cat or the dog is hungry.", wrong: "or",
+    options: ["nor", "and", "but"], correct: "nor",
+    why: "Neither always pairs with nor." },
+  { lessonId: "lesson_78", sentence: "You may have either tea nor coffee.", wrong: "nor",
+    options: ["or", "and", "with"], correct: "or",
+    why: "After either, the second choice takes or." },
+
+  // lesson_79 — collective nouns
+  { lessonId: "lesson_79", sentence: "A herd of birds flew over the field.", wrong: "herd",
+    options: ["flock", "bunch", "shoal"], correct: "flock",
+    why: "Birds together are called a flock." },
+  { lessonId: "lesson_79", sentence: "She bought a flock of bananas at the market.", wrong: "flock",
+    options: ["bunch", "herd", "shoal"], correct: "bunch",
+    why: "Bananas grow together in a bunch." },
+  { lessonId: "lesson_79", sentence: "A bunch of cows crossed the quiet road.", wrong: "bunch",
+    options: ["herd", "flock", "shoal"], correct: "herd",
+    why: "Cows together are called a herd." },
+
+  // lesson_80 — since / for
+  { lessonId: "lesson_80", sentence: "She has lived here since six years.", wrong: "since",
+    options: ["for", "from", "in"], correct: "for",
+    why: "Six years is a length of time, so use for." },
+  { lessonId: "lesson_80", sentence: "He has been ill for last Monday.", wrong: "for",
+    options: ["since", "from", "at"], correct: "since",
+    why: "Monday is when it started, so use since." },
+  { lessonId: "lesson_80", sentence: "They have waited since two hours already.", wrong: "since",
+    options: ["for", "from", "in"], correct: "for",
+    why: "Two hours is how long, so use for." },
+
+  // lesson_81 — sequence words
+  { lessonId: "lesson_81", sentence: "Finally, wash the rice before you cook.", wrong: "Finally",
+    options: ["First", "Then", "Next"], correct: "First",
+    why: "Washing comes at the start, so use first." },
+  { lessonId: "lesson_81", sentence: "First, serve the hot rice to everyone.", wrong: "First",
+    options: ["Finally", "Next", "Then"], correct: "Finally",
+    why: "Serving is the last step, so use finally." },
+  { lessonId: "lesson_81", sentence: "Finally, add the water to the pot.", wrong: "Finally",
+    options: ["Next", "First", "Lastly"], correct: "Next",
+    why: "Adding water is a middle step, so use next." },
 ];
 
 /** Every editing item for one rule. */

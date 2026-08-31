@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { allWords } from "../content/allWords";
+import { grammarLessons } from "../content/grammar";
 import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
@@ -69,9 +70,20 @@ export default function LearnWords() {
       getSchedulerItems(),
     ]);
 
-    // Select next grammar lesson
+    // Select next grammar lesson. Once every lesson has been taught, the day
+    // becomes a revision day on the rule she is weakest at, rather than asking
+    // for a lesson number that does not exist — which used to send her back to
+    // Home from the grammar step, with no way to finish the day.
     const taughtGrammarIds = new Set(schedulerItems.filter(i => i.type === "grammar").map(i => i.itemId));
-    const grammarId = `lesson_${taughtGrammarIds.size + 1}`; // Next lesson number
+    const nextNumber = taughtGrammarIds.size + 1;
+    let grammarId = `lesson_${nextNumber}`;
+    if (!grammarLessons.some(l => l.id === grammarId)) {
+      const taught = schedulerItems.filter(i => i.type === "grammar");
+      const weakest = [...taught].sort(
+        (a, b) => a.box - b.box || a.lastSeen.localeCompare(b.lastSeen)
+      )[0];
+      grammarId = weakest?.itemId ?? grammarLessons[0].id;
+    }
 
     // Save DayRecord
     await saveDayRecord({

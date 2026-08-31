@@ -76,3 +76,24 @@ describe('grammar practice content', () => {
     drilled.forEach((id) => expect(editingItemsFor(id).length, id).toBeGreaterThanOrEqual(3));
   });
 });
+
+describe('grammar coverage', () => {
+  it('should give every lesson practice content, so "practise my weakest rule" always works', () => {
+    const drilled = new Set(editingItems.map((i) => i.lessonId));
+    const uncovered = grammarLessons.filter((l) => !drilled.has(l.id)).map((l) => l.id);
+    expect(uncovered).toEqual([]);
+  });
+
+  it('should cover the areas a P4 paper tests', () => {
+    const blob = grammarLessons.map((l) => `${l.title} ${l.description}`).join(' ').toLowerCase();
+    const required = [
+      'noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'plural',
+      'capital', 'full stop', 'question mark', 'comma', 'contraction', 'possessive',
+      'comparative', 'superlative', 'countable', 'passive', 'phrasal', 'question tag',
+      'there is', 'who', 'said that', 'should', 'always', 'if ', 'such', 'neither',
+      'flock', 'since', 'finally',
+    ];
+    const missing = required.filter((area) => !blob.includes(area));
+    expect(missing).toEqual([]);
+  });
+});

@@ -42,6 +42,17 @@ export default function GrammarPractice() {
   const [answered, setAnswered] = useState(false);
   const [ruleId, setRuleId] = useState<string | null>(null);
   const [teachingStep, setTeachingStep] = useState(0);
+  /** Items she got wrong, re-queued until each one is answered correctly. */
+  const [retries, setRetries] = useState<EditingItem[]>([]);
+  const [reteach, setReteach] = useState<string | null>(null);
+  const [firstTry, setFirstTry] = useState(0);
+  const [asked, setAsked] = useState(0);
+  /**
+   * Bumped only when she moves on. FixSentence is keyed on it so that answering
+   * never remounts the card — an earlier version keyed on the retry count, which
+   * wiped her answer and the explanation the moment she got one wrong.
+   */
+  const [seq, setSeq] = useState(0);
 
   useEffect(() => {
     async function load() {
@@ -91,14 +102,29 @@ export default function GrammarPractice() {
     setIdx(0);
     setScore(0);
     setAnswered(false);
+    setRetries([]);
+    setReteach(null);
+    setFirstTry(0);
+    setAsked(0);
+    setSeq((s) => s + 1);
     setRuleId(lessonId ?? null);
     setTeachingStep(0);
     setMode(lessonId ? "rule" : "fix");
   };
 
-  const record = async (lessonId: string, correct: boolean) => {
+  const record = async (lessonId: string, correct: boolean, asked: EditingItem) => {
     setAnswered(true);
-    if (correct) setScore((s) => s + 1);
+    setAsked((a) => a + 1);
+    if (correct) {
+      setScore((s) => s + 1);
+      // only count it as known if she had not already missed it this session
+      if (!retries.some((r) => r.sentence === asked.sentence)) setFirstTry((f) => f + 1);
+      setRetries((r) => r.filter((q) => q.sentence !== asked.sentence));
+    } else {
+      // she gets the rule taught again, and the sentence comes back before the end
+      setReteach(lessonId);
+      setRetries((r) => (r.some((q) => q.sentence === asked.sentence) ? r : [...r, asked]));
+    }
     const today = getTodayKey();
     await logAnswer({ day: today, itemId: lessonId, qType: "grammar_edit", correct, ts: Date.now() });
     // Practice never introduces a rule the daily flow has not taught yet.
@@ -212,7 +238,8 @@ export default function GrammarPractice() {
   }
 
   // ------------------------------------------------------------- drilling
-  const current = queue[idx];
+  // Work through the queue, then keep re-asking anything she missed until it is right.
+  const current = queue[idx] ?? retries[0];
   if (!current) {
     return (
       <Page>
@@ -220,9 +247,13 @@ export default function GrammarPractice() {
         <Card className="text-center">
           <div className="text-5xl mb-3">{score === queue.length ? "🌟" : "🌱"}</div>
           <p className="font-display text-3xl font-semibold text-secondary-dark mb-1">
-            {score} / {queue.length || 0}
+            {firstTry} / {queue.length || 0}
           </p>
-          <p className="text-lg text-ink/70 mb-6">sentences fixed</p>
+          <p className="text-lg text-ink/70 mb-6">
+            {firstTry === queue.length
+              ? "right first time"
+              : `right first time — you fixed the rest after another look (${asked} tries in all)`}
+          </p>
           <Button onClick={() => setMode("hub")}>Back to practice</Button>
         </Card>
       </Page>
@@ -235,18 +266,48 @@ export default function GrammarPractice() {
       <ProgressDots total={queue.length} current={idx} />
       <div className="mt-4 space-y-5">
         <FixSentence
-          key={`${current.lessonId}-${idx}`}
+          key={`${current.sentence}-${seq}`}
           item={current}
-          onAnswered={(correct) => record(current.lessonId, correct)}
+          onAnswered={(correct) => record(current.lessonId, correct, current)}
         />
+
+        {reteach && (
+          <Card>
+            <p className="text-sm font-semibold uppercase tracking-wide text-ink/50 mb-3">
+              Let's look at the rule again
+            </p>
+            {(teachingFor(reteach)?.steps ?? []).slice(0, 2).map((step) => (
+              <div key={step.show} className="mb-4">
+                <div className="flex items-start justify-between gap-3 rounded-2xl bg-secondary-light/60 px-4 py-3">
+                  <p className="font-display text-xl text-secondary-dark">{step.show}</p>
+                  <SpeakButton text={step.show} size="sm" />
+                </div>
+                <p className="text-base text-ink/80 mt-2">{step.explain}</p>
+              </div>
+            ))}
+            <p className="text-base font-semibold text-secondary-dark">
+              💡 {teachingFor(reteach)?.tip}
+            </p>
+            <p className="text-base text-ink/60 mt-3">
+              You will see this sentence again before you finish.
+            </p>
+          </Card>
+        )}
+
         {answered && (
           <Button
             onClick={() => {
               setAnswered(false);
+              setReteach(null);
+              setSeq((s) => s + 1);
               setIdx((i) => i + 1);
             }}
           >
-            {idx === queue.length - 1 ? "See how I did →" : "Next sentence →"}
+            {idx >= queue.length - 1 && retries.length === 0
+              ? "See how I did →"
+              : retries.length > 0 && idx >= queue.length - 1
+              ? "Try that one again →"
+              : "Next sentence →"}
           </Button>
         )}
       </div>
