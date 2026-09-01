@@ -1,12 +1,12 @@
 # P4 Word Garden
 
 A short daily English routine for a Primary 4 child who can read words but struggles to
-understand them. Every day: **3 new words → spell them → say them → 1 grammar rule →
+understand them. Every day: **3 new words → spell them → 1 grammar rule →
 a mini-read → a review quiz**. About 10 minutes. Progress is tracked with spaced repetition
 and a parent **Insights** page shows what she has mastered.
 
 Built with React 19 + Vite + TypeScript + Tailwind, hosted on Firebase (Hosting + Firestore +
-anonymous Auth). Works fully offline in local-only mode if Firebase is not configured.
+Email/Password and anonymous Auth). Works fully offline in local-only mode if Firebase is not configured.
 
 ## Features
 
@@ -15,8 +15,11 @@ anonymous Auth). Works fully offline in local-only mode if Firebase is not confi
 - **Word bank** – 2,565 words in total: 400 core words (all P4 words from *Editing for Spelling and Grammar
   Explained! P4*, worksheets 1–41, plus easy everyday words) followed by ~2,165 more
   high-frequency words in seven themed bands. Core words are taught first.
-- **Grammar** – 71 one-rule-per-day micro-lessons (nouns → tenses → prepositions → P4 exam
+- **Grammar** – 81 one-rule-per-day micro-lessons (nouns → tenses → prepositions → P4 exam
   rules like question tags, comparatives, passive, uncountable nouns…).
+- **Grammar Practice** – a separate module off Home that teaches any one rule step by step and
+  drills it in her exam's editing format (81 rule teachings, 245 editing sentences), re-teaching
+  until she gets it right.
 - **Spelling track** – letter tiles → missing letters → type-from-audio, unlocked only after
   the meaning is known.
 - **Review quiz** – 6–10 items: yesterday's items always included, everything due today, then
@@ -29,7 +32,7 @@ anonymous Auth). Works fully offline in local-only mode if Firebase is not confi
   session as practice (not scored).
 - **Insights (parent, PIN-protected)** – words mastered / learning / spelling-mastered,
   streak, 7- and 30-day accuracy, charts, trouble words, grammar accuracy per rule,
-  comprehension vs recognition, tricky spellings, hard-to-say words, JSON export, change PIN.
+  comprehension vs recognition, tricky spellings, JSON export, change PIN.
   Default PIN: `1234`.
 
 **Live:** https://p4-word-garden.web.app (Firebase Hosting, deploy with `npm run deploy`). Mirror: https://nivk23.github.io/p4-word-garden/ (auto-deployed from `main` by GitHub Actions). Both use the Firebase backend for progress.
@@ -76,13 +79,14 @@ Dev helper: append `?day=YYYY-MM-DD` to the URL to simulate a different calendar
 ```
 src/
   App.tsx              routes (pages are lazy-loaded)
-  firebase.ts          Firebase init + anonymous sign-in (no-op without env vars)
+  firebase.ts          Firebase init + auth (no-op without env vars)
   content/
     words.ts           400 core words (taught first)
     words-extra/       band1..band7 – further high-frequency words by theme
     dictionary.ts      one WordNet definition per word (generated, see scripts/)
     allWords.ts        merged + de-duplicated word list used by the app
     grammar.ts         micro-lessons
+    grammarPractice.ts rule teachings + exam-format editing items
     passages.ts        mini-read passages with comprehension questions
     knownWords.ts      simple base vocabulary allowed in meanings
   lib/
@@ -94,8 +98,11 @@ src/
     dates.ts           local day keys, ?day= override
   store/progress.ts    Firestore with localStorage fallback
   pages/               Home, LearnWords, SpellIt, GrammarLesson, MiniRead,
-                       Quiz, Done, PinGate, Insights
-  components/          SpellTiles, SpellMissing, SpellType, SayIt
+                       Quiz, Done, PinGate, Insights, GrammarPractice,
+                       Login, SignUp, ForgotPassword, ChildPicker, MyProfile,
+                       CompareChildren
+  components/          AuthGate, SpellTiles, SpellMissing, SpellType,
+                       FixSentence, GardenBed, ui
 tests/                 Vitest suites
 scripts/               content audit script
 ```
@@ -113,10 +120,10 @@ present).
 ## Data model (Firestore / localStorage)
 
 ```
-users/{uid}
+users/{uid}/children/{childId}
   profile            streak, lastCompletedDay, pinHash, settings
   items/{itemId}     scheduler state per word/rule: box, spellBox, streak, correct, wrong,
-                     correctDays[], correctTypes[], sayCorrect, sayWrong, nextDue, lastSeen
+                     correctDays[], correctTypes[], nextDue, lastSeen
   days/{YYYY-MM-DD}  wordIds[3], grammarId, completed, accuracy
   answers/{id}       raw answer log (day, itemId, qType, correct) – feeds Insights
 ```
