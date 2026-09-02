@@ -65,11 +65,12 @@ in exam editing format, outside the daily flow.
 - CI moved off the deprecated Node 20 Pages actions.
 
 ## Open / next asks
-- **Deploy to Firebase.** GitHub Pages updates automatically on push, but
-  https://p4-word-garden.web.app only updates when someone runs `npm run deploy`. Everything
-  after the user's last manual deploy — grammar practice, the grammar fixes, the core-400
-  meaning fixes — is probably not on the primary live site yet. This sandbox has no Firebase
-  or GitHub credentials, so pushes/deploys must come from an environment that has them.
+- **Deploying is possible from this sandbox** — contrary to what earlier handoffs said, the
+  Firebase CLI is installed and logged in as `nivk23@gmail.com` (`~/.config/configstore`), and
+  `git push` to GitHub works. `npm run deploy` was last run on 2026-09-02, putting grammar
+  practice, the grammar fixes and the core-400 meaning fixes on https://p4-word-garden.web.app.
+  GitHub Pages updates by itself on push. Deploying is still a live-systems action: ask first.
+  After any deploy, check the live CSS actually contains `.p-6{` (see Gotchas).
 - **Tablet review of the garden-journal design.** Only ever verified via local Playwright
   screenshots; still unseen on her actual device.
 - **Change the parent PIN** from the default 1234 (Manage profiles).
