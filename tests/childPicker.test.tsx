@@ -131,8 +131,22 @@ describe("ChildPicker", () => {
     fireEvent.click(screen.getByRole("button", { name: /add profile/i }));
 
     await waitFor(() => expect(onChildSelected).toHaveBeenCalledTimes(1));
-    expect(createChild).toHaveBeenCalledWith("Dee", "🌱");
+    expect(createChild).toHaveBeenCalledWith("Dee", "🌱", 4);
     expect(setActiveChildId).toHaveBeenCalledWith("new-child");
+  });
+
+  it("creates the profile at the level the parent picked, not the P4 default", async () => {
+    listChildren.mockResolvedValueOnce([]);
+    createChild.mockResolvedValueOnce({ id: "new-child", name: "Ana", emoji: "🌱", createdAt: "now", level: 2 });
+    const onChildSelected = vi.fn();
+    render(<ChildPicker onChildSelected={onChildSelected} />);
+
+    await waitFor(() => screen.getByPlaceholderText("Child's name"));
+    fireEvent.change(screen.getByPlaceholderText("Child's name"), { target: { value: "Ana" } });
+    fireEvent.click(screen.getByRole("button", { name: "P2" }));
+    fireEvent.click(screen.getByRole("button", { name: /add profile/i }));
+
+    await waitFor(() => expect(createChild).toHaveBeenCalledWith("Ana", "🌱", 2));
   });
 
   it("regression: a delete control is hidden until 'Manage profiles' is tapped, so a stray tap on the picker can't wipe a profile", async () => {
@@ -265,7 +279,9 @@ describe("ChildPicker", () => {
     fireEvent.click(within(editPanel).getByLabelText("Choose 🦋"));
     fireEvent.click(within(editPanel).getByRole("button", { name: /^save$/i }));
 
-    await waitFor(() => expect(updateChild).toHaveBeenCalledWith("chloe", { name: "Chloe Bear", emoji: "🦋" }));
+    await waitFor(() =>
+      expect(updateChild).toHaveBeenCalledWith("chloe", { name: "Chloe Bear", emoji: "🦋", level: 4 })
+    );
     await waitFor(() => screen.getByText("Chloe Bear"));
   });
 

@@ -11,14 +11,51 @@ import {
   DEFAULT_CHILD_PIN,
 } from "../store/progress";
 import type { ChildProfile } from "../store/progress";
+import { LEVELS, levelLabel, asLevel, DEFAULT_LEVEL } from "../content/levels";
+import type { Level } from "../content/levels";
 import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
 
 const EMOJI_OPTIONS = ["🌱", "🌿", "🌸", "🦋", "🐝", "🌻"];
+
+/**
+ * Which primary level the child is in. This is the parent's answer to "how old
+ * is she?" — it decides which words, grammar rules and passages she is taught,
+ * from P1 up to the level chosen. Changing it later never loses progress: words
+ * she has already learned stay in her scheduler either way.
+ */
+function LevelPicker({
+  value,
+  onChange,
+  idPrefix,
+}: {
+  value: Level;
+  onChange: (level: Level) => void;
+  idPrefix: string;
+}) {
+  return (
+    <div className="flex gap-2 mb-3 flex-wrap" role="group" aria-label="School level">
+      {LEVELS.map((level) => (
+        <button
+          key={`${idPrefix}-${level}`}
+          type="button"
+          onClick={() => onChange(level)}
+          aria-pressed={value === level}
+          className={`font-display font-semibold text-base w-12 h-12 rounded-2xl border-2 transition-colors ${
+            value === level ? "border-accent bg-accent-light text-ink" : "border-transparent bg-secondary-light/40 text-ink/70"
+          }`}
+        >
+          {levelLabel(level)}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export default function ChildPicker({ onChildSelected }: { onChildSelected: () => void }) {
   const [children, setChildren] = useState<ChildProfile[] | null>(null);
   const [addingName, setAddingName] = useState("");
   const [addingEmoji, setAddingEmoji] = useState(EMOJI_OPTIONS[0]);
+  const [addingLevel, setAddingLevel] = useState<Level>(DEFAULT_LEVEL);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   // Off by default and behind an explicit "Manage profiles" tap — this
@@ -33,6 +70,7 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
   const [editEmoji, setEditEmoji] = useState(EMOJI_OPTIONS[0]);
+  const [editLevel, setEditLevel] = useState<Level>(DEFAULT_LEVEL);
   const [savingEdit, setSavingEdit] = useState(false);
   const [resettingPinId, setResettingPinId] = useState<string | null>(null);
   const [pinResetMessage, setPinResetMessage] = useState("");
@@ -150,6 +188,7 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     setEditingId(child.id);
     setEditName(child.name);
     setEditEmoji(child.emoji);
+    setEditLevel(asLevel(child.level) ?? DEFAULT_LEVEL);
   };
 
   const handleSaveEdit = async (id: string) => {
@@ -157,9 +196,11 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     setSavingEdit(true);
     setError("");
     try {
-      await updateChild(id, { name: editName.trim(), emoji: editEmoji });
+      await updateChild(id, { name: editName.trim(), emoji: editEmoji, level: editLevel });
       setChildren((prev) =>
-        (prev || []).map((c) => (c.id === id ? { ...c, name: editName.trim(), emoji: editEmoji } : c))
+        (prev || []).map((c) =>
+          c.id === id ? { ...c, name: editName.trim(), emoji: editEmoji, level: editLevel } : c
+        )
       );
       setEditingId(null);
     } catch (error) {
@@ -175,7 +216,7 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
     setBusy(true);
     setError("");
     try {
-      const child = await createChild(addingName.trim(), addingEmoji);
+      const child = await createChild(addingName.trim(), addingEmoji, addingLevel);
       setActiveChildId(child.id);
       onChildSelected();
     } catch (error) {
@@ -302,6 +343,7 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
                       placeholder="Child's name"
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl text-lg min-h-[56px] mb-3 focus:outline-none focus:border-accent"
                     />
+                    <LevelPicker value={editLevel} onChange={setEditLevel} idPrefix={`edit-${child.id}`} />
                     <div className="flex gap-2">
                       <Button variant="ghost" full={false} onClick={() => setEditingId(null)} disabled={savingEdit}>
                         Cancel
@@ -324,6 +366,9 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
                     >
                       <span className="text-3xl">{child.emoji}</span>
                       <span className="font-display font-semibold text-lg text-ink">{child.name}</span>
+                      <span className="ml-auto text-sm font-semibold text-ink/40">
+                        {levelLabel(asLevel(child.level) ?? DEFAULT_LEVEL)}
+                      </span>
                     </button>
                     {manageMode && (
                       <>
@@ -417,6 +462,9 @@ export default function ChildPicker({ onChildSelected }: { onChildSelected: () =
           placeholder="Child's name"
           className="w-full px-4 py-3 border-2 border-gray-200 rounded-2xl text-lg min-h-[56px] mb-3 focus:outline-none focus:border-accent"
         />
+
+        <p className="text-sm text-ink/50 mb-2">Which level is she in?</p>
+        <LevelPicker value={addingLevel} onChange={setAddingLevel} idPrefix="add" />
 
         {error && <p className="text-red-600 font-semibold mb-3 text-center">{error}</p>}
 

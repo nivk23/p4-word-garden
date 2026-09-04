@@ -8,6 +8,7 @@ import {
   saveDayRecord,
   getUserProfile,
   saveUserProfile,
+  getActiveLevel,
 } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
 import { buildDailyQuiz, markCorrect, markWrong, markSpellingCorrect, markSpellingWrong } from "../lib/scheduler";
@@ -46,10 +47,11 @@ export default function Quiz() {
       // concurrently instead; yesterday's record is fetched even when it
       // turns out not to be needed (extra-practice quizzes), which costs
       // nothing since it's already in flight alongside the other two.
-      const [record, allItems, yesterdayRecord] = await Promise.all([
+      const [record, allItems, yesterdayRecord, level] = await Promise.all([
         getDayRecord(today),
         getSchedulerItems(),
         getDayRecord(yesterday),
+        getActiveLevel(),
       ]);
 
       if (!record) {
@@ -81,7 +83,7 @@ export default function Quiz() {
           const word = allWords.find(w => w.word === item.itemId);
           if (word) {
             // Use askIdx as seed for reproducible distractor selection
-            const wordQuestions = generateWordQuestions(word, askIdx);
+            const wordQuestions = generateWordQuestions(word, askIdx, level);
             if (wordQuestions.length > 0) {
               realQuestions.push(wordQuestions[0]); // Pick first question type
             }

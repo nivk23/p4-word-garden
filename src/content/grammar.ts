@@ -1,5 +1,9 @@
+import type { Level } from "./levels";
+
 export interface GrammarLesson {
   id: string;
+  /** Primary level this rule is taught at. See scripts/grammar_levels.json. */
+  level: Level;
   title: string;
   description: string;
   examples: string[];
@@ -15,6 +19,7 @@ export interface GrammarLesson {
 export const grammarLessons: GrammarLesson[] = [
   {
     id: "lesson_1",
+    level: 1,
     title: "Naming Words (Nouns)",
     description: "Nouns are words for people, animals, things, or places.",
     examples: [
@@ -40,6 +45,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_2",
+    level: 1,
     title: "Doing Words (Verbs)",
     description: "Verbs are action words. They show what someone does or is.",
     examples: [
@@ -65,6 +71,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_3",
+    level: 1,
     title: "Describing Words (Adjectives)",
     description: "Adjectives describe nouns. They tell you more about a person, animal, thing, or place.",
     examples: [
@@ -90,6 +97,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_4",
+    level: 1,
     title: "Capital Letters",
     description: "Use a capital letter at the start of a sentence and for names of people and places.",
     examples: [
@@ -119,6 +127,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_5",
+    level: 1,
     title: "Full Stops",
     description: "Use a full stop at the end of a sentence to show it is complete.",
     examples: [
@@ -142,6 +151,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_6",
+    level: 1,
     title: "A and An",
     description: "Use 'a' before a word that starts with a consonant sound. Use 'an' before a word that starts with a vowel sound.",
     examples: [
@@ -175,6 +185,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_7",
+    level: 1,
     title: "Singular and Plural (-s)",
     description: "Singular is one thing. Plural is more than one. Add -s to make most nouns plural.",
     examples: [
@@ -200,6 +211,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_8",
+    level: 2,
     title: "Plural -es and Irregular",
     description: "Some nouns add -es to become plural. Some nouns change completely.",
     examples: [
@@ -225,6 +237,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_9",
+    level: 1,
     title: "Pronouns (I, You, He, She, It, They)",
     description: "Pronouns are words that replace nouns. They help us avoid saying the same name over and over.",
     examples: [
@@ -244,6 +257,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_10",
+    level: 1,
     title: "Is and Are",
     description: "Use 'is' with one person or thing (he, she, it). Use 'are' with more than one (you, we, they).",
     examples: [
@@ -277,6 +291,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_11",
+    level: 2,
     title: "Was and Were",
     description: "Was and were are past tense of 'is' and 'are'. Use 'was' for I, he, she, it. Use 'were' for you, we, they.",
     examples: [
@@ -310,6 +325,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_12",
+    level: 2,
     title: "Has and Have",
     description: "Use 'has' with he, she, it. Use 'have' with I, you, we, they.",
     examples: [
@@ -333,6 +349,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_13",
+    level: 2,
     title: "Simple Present (-s with he/she/it)",
     description: "In the simple present, add -s to the verb when you use he, she, or it.",
     examples: [
@@ -356,6 +373,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_14",
+    level: 2,
     title: "Present Continuous (-ing)",
     description: "Use -ing to show what is happening right now. You add -ing to the verb: play → playing, run → running.",
     examples: [
@@ -385,6 +403,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_15",
+    level: 2,
     title: "Simple Past (-ed)",
     description: "To make the past tense, add -ed to the verb. play → played, walk → walked. You use it for things that already happened.",
     examples: [
@@ -414,6 +433,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_16",
+    level: 3,
     title: "Irregular Past Tense",
     description: "Some verbs do not add -ed. They change in special ways: go → went, eat → ate, see → saw.",
     examples: [
@@ -439,6 +459,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_17",
+    level: 1,
     title: "Question Words (Who, What, Where)",
     description: "Question words help you ask about people, things, and places. Who = person, What = thing, Where = place, Why = reason.",
     examples: [
@@ -464,6 +485,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_18",
+    level: 1,
     title: "Question Marks",
     description: "Use a question mark at the end of a question. Questions are sentences that ask for information.",
     examples: [
@@ -487,6 +509,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_19",
+    level: 2,
     title: "And, But, Because",
     description: "These words join ideas together. 'and' adds ideas, 'but' shows difference, 'because' shows reason.",
     examples: [
@@ -512,6 +535,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_20",
+    level: 1,
     title: "Prepositions (in, on, under)",
     description: "Prepositions show where things are. in = inside, on = top of, under = below.",
     examples: [
@@ -537,6 +561,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_21",
+    level: 2,
     title: "Contractions (don't, can't, won't)",
     description: "Contractions are short forms where two words join and a letter is removed. do not → don't, can not → can't.",
     examples: [
@@ -562,6 +587,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_22",
+    level: 2,
     title: "Possessives ('s)",
     description: "Use 's to show that something belongs to someone. cat's = the cat's, Tom's = Tom's.",
     examples: [
@@ -581,6 +607,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_23",
+    level: 3,
     title: "Commas in Lists",
     description: "Use commas to separate items in a list. The last two items are joined with 'and'.",
     examples: [
@@ -603,6 +630,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_24",
+    level: 4,
     title: "Question Tags",
     description: "Question tags are small questions at the end of a sentence. Positive sentence → negative tag. She likes cats, doesn't she?",
     examples: [
@@ -622,6 +650,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_25",
+    level: 3,
     title: "Question Words: Where and Which",
     description: "Where asks about place. Which asks about choice from a group. Who asks about person.",
     examples: [
@@ -640,6 +669,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_26",
+    level: 2,
     title: "The vs A",
     description: "Use 'the' for something specific you already know. Use 'a' for something new or general.",
     examples: [
@@ -662,6 +692,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_27",
+    level: 2,
     title: "Comparatives (taller, smaller, faster)",
     description: "Use -er to compare two things. She is taller than him. The red ball is bigger than the blue ball.",
     examples: [
@@ -680,6 +711,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_28",
+    level: 2,
     title: "Superlatives (tallest, smallest, fastest)",
     description: "Use -est to compare all things. She is the tallest in the class. It is the biggest of all.",
     examples: [
@@ -698,6 +730,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_29",
+    level: 2,
     title: "Prepositions of Place (in, on, by)",
     description: "Different prepositions show different places. 'In bed' but 'on the bed'. 'In the middle of'. 'On the Internet'.",
     examples: [
@@ -721,6 +754,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_30",
+    level: 3,
     title: "Countable and Uncountable Nouns",
     description: "Countable nouns you can count: one apple, two apples. Uncountable you cannot count: much water, a lot of rice.",
     examples: [
@@ -744,6 +778,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_31",
+    level: 5,
     title: "Gerunds as Subjects",
     description: "A gerund is an -ing word used as a noun. It can be the subject of a sentence. 'Swimming is fun.'",
     examples: [
@@ -763,6 +798,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_32",
+    level: 4,
     title: "Past Continuous (was doing)",
     description: "Past continuous shows what was happening at a time in the past. She was reading when I called.",
     examples: [
@@ -786,6 +822,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_33",
+    level: 6,
     title: "Passive Voice (has been done)",
     description: "Passive voice: the subject receives the action. The letter was written by Tom. The house has been abandoned.",
     examples: [
@@ -808,6 +845,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_34",
+    level: 3,
     title: "Irregular Plurals",
     description: "Some plurals do not use -s or -es. One ox → oxen. One child → children. One tooth → teeth.",
     examples: [
@@ -827,6 +865,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_35",
+    level: 3,
     title: "Adverbs from Adjectives (-ly)",
     description: "Add -ly to adjectives to make adverbs. happy → happily. slow → slowly. When y → i, happy → happily.",
     examples: [
@@ -852,6 +891,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_36",
+    level: 3,
     title: "Any vs Some in Negatives",
     description: "Use 'some' in positive sentences. Use 'any' in negative sentences and questions. There is some water / There is not any water.",
     examples: [
@@ -875,6 +915,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_37",
+    level: 3,
     title: "Irregular Past Tense (shone, drew, built, tore, rang, met)",
     description: "Some verbs change completely in past tense. shine → shone. draw → drew. build → built. tear → tore. ring → rang. meet → met.",
     examples: [
@@ -902,6 +943,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_38",
+    level: 4,
     title: "It's vs Its",
     description: "It's = it is. Its = something belongs to it. The cat likes its toy. It's a beautiful day.",
     examples: [
@@ -934,6 +976,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_39",
+    level: 4,
     title: "Phrasal Verbs (dozed off, put off)",
     description: "Phrasal verbs are verb + particle (like 'off', 'up', 'on'). doze off = fall asleep. put off = delay. They dozed off. She put off the meeting.",
     examples: [
@@ -953,6 +996,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_40",
+    level: 4,
     title: "Would You Like? and I Wish I Could",
     description: "Would you like... is a polite question. I wish I could... show something you want but cannot do.",
     examples: [
@@ -976,6 +1020,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_41",
+    level: 4,
     title: "Uncountable Nouns Take IS",
     description: "Uncountable nouns like furniture, dust, sugar do not add -s. They use IS not ARE. The furniture is new.",
     examples: [
@@ -1009,6 +1054,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_42",
+    level: 4,
     title: "Plural Verbs with Two Subjects",
     description: "When two people or things do the action together, use a plural verb. She and her friend have lunch. Birds exist in nature.",
     examples: [
@@ -1031,6 +1077,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_43",
+    level: 4,
     title: "Used To (Past Habit)",
     description: "Used to + base verb shows something you did in the past but not now. I used to play every day.",
     examples: [
@@ -1053,6 +1100,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_44",
+    level: 3,
     title: "Plural -es After ch, x, o",
     description: "When a noun ends with ch, x, or o, add -es to make it plural. inch → inches. volcano → volcanoes.",
     examples: [
@@ -1078,6 +1126,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_45",
+    level: 4,
     title: "Too + Adjective + To",
     description: "Too + adjective + to + verb shows something is too much or more than needed. She is too tired to play.",
     examples: [
@@ -1100,6 +1149,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_46",
+    level: 5,
     title: "A Number Of + Plural",
     description: "Use 'a number of' with a plural noun and a plural verb. A number of students are here. Many people are late.",
     examples: [
@@ -1122,6 +1172,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_47",
+    level: 4,
     title: "With vs Of",
     description: "Use 'with' for company or thing together. Use 'of' for part or type. Birds with big beaks. A shower of dust.",
     examples: [
@@ -1145,6 +1196,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_48",
+    level: 3,
     title: "In vs On for Time and Place",
     description: "Use 'in' for month and year: in January. Use 'on' for day: on Friday. In bed but on the bed.",
     examples: [
@@ -1178,6 +1230,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_49",
+    level: 3,
     title: "Comparatives vs Superlatives",
     description: "Comparatives compare two things: taller. Superlatives are the most: tallest. She is taller than him. She is the tallest.",
     examples: [
@@ -1203,6 +1256,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_50",
+    level: 5,
     title: "Passive Voice (was + past participle)",
     description: "Passive: the subject receives the action. She was measured. They were involved. The house was built.",
     examples: [
@@ -1225,6 +1279,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_51",
+    level: 5,
     title: "Keen On",
     description: "Keen on means you really like something. She is keen on sport. He is keen on reading.",
     examples: [
@@ -1243,6 +1298,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_52",
+    level: 4,
     title: "-ous Adjectives",
     description: "Many adjectives end with -ous: religious, dangerous, marvellous. It means full of or having a quality.",
     examples: [
@@ -1262,6 +1318,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_53",
+    level: 5,
     title: "-ed Adjectives vs -ing Adjectives",
     description: "Adjectives with -ed describe a feeling. Adjectives with -ing describe the cause. I am amazed. The show is amazing.",
     examples: [
@@ -1295,6 +1352,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_54",
+    level: 4,
     title: "-less Adjectives",
     description: "Adjectives with -less mean without. Countless = without count. Tireless = without getting tired.",
     examples: [
@@ -1314,6 +1372,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_55",
+    level: 4,
     title: "For + Purpose",
     description: "Use 'for' to say why you do something. He goes to the shop for milk.",
     examples: [
@@ -1337,6 +1396,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_56",
+    level: 5,
     title: "Looking Forward To + -ing",
     description: "Looking forward to always use -ing form. She is looking forward to seeing her friend.",
     examples: [
@@ -1359,6 +1419,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_57",
+    level: 5,
     title: "One Of The + Plural",
     description: "One of the is always followed by a plural noun. He is one of the greatest players.",
     examples: [
@@ -1381,6 +1442,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_58",
+    level: 4,
     title: "Good At vs Good With",
     description: "Good at = skill. Good with = get along with people or handle thing well.",
     examples: [
@@ -1414,6 +1476,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_59",
+    level: 5,
     title: "Although vs However",
     description: "Although introduces a contrast. However shows a change. Although it is raining, we go. It is raining; however, we go.",
     examples: [
@@ -1436,6 +1499,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_60",
+    level: 4,
     title: "May + Base Verb (possibility)",
     description: "May + base verb shows something is possible. The colour may vary. The price may change.",
     examples: [
@@ -1459,6 +1523,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_61",
+    level: 5,
     title: "Make + Someone + Base Verb",
     description: "Make + someone + base verb. The sad story makes her cry. Loud noise makes the baby wake.",
     examples: [
@@ -1481,6 +1546,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_62",
+    level: 5,
     title: "Was/Were + Past Participle (Passive)",
     description: "In the passive voice, 'was' or 'were' must match the subject. The letter was brought by post. The flowers were formed in spring.",
     examples: [
@@ -1503,6 +1569,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_63",
+    level: 3,
     title: "At The Weekends",
     description: "Use 'at the weekends' for recurring time. At the weekends, I play with friends.",
     examples: [
@@ -1525,6 +1592,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_64",
+    level: 3,
     title: "From vs To",
     description: "From = start place. To = end place. She goes from home to school.",
     examples: [
@@ -1547,6 +1615,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_65",
+    level: 4,
     title: "Become + Adjective",
     description: "Become + adjective shows change. The animal became extinct. She became famous.",
     examples: [
@@ -1570,6 +1639,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_66",
+    level: 6,
     title: "Had Been + Past Participle",
     description: "Had been + past participle shows a past passive. The money had been stolen. The letter had been lost.",
     examples: [
@@ -1592,6 +1662,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_67",
+    level: 6,
     title: "Had + Past Participle (Past Perfect)",
     description: "Had + past participle shows something happened before. She had delivered the package.",
     examples: [
@@ -1614,6 +1685,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_68",
+    level: 3,
     title: "Possessive Pronouns (mine, yours, his)",
     description: "Possessive pronouns show who something belongs to. This toy is mine. That book is yours.",
     examples: [
@@ -1637,6 +1709,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_69",
+    level: 4,
     title: "-t Past Forms (meant, learnt, dealt)",
     description: "Some verbs use '-t' instead of '-ed' in the past. mean → meant. learn → learnt. deal → dealt.",
     examples: [
@@ -1670,6 +1743,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_70",
+    level: 6,
     title: "Specialise In",
     description: "Specialise in = study or know something very well. She specialises in science. He specialises in maths.",
     examples: [
@@ -1692,6 +1766,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_71",
+    level: 2,
     title: "There Is and There Are",
     description: "Use 'there is' for one thing. Use 'there are' for more than one. There is a cat. There are two cats.",
     examples: [
@@ -1725,6 +1800,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_72",
+    level: 5,
     title: "Relative Clauses (who, which, that)",
     description: "Use 'who' for people and 'which' for things. 'That' can be used for both. The boy who won is my friend.",
     examples: [
@@ -1754,6 +1830,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_73",
+    level: 6,
     title: "Reported Speech (said that)",
     description: "When you tell what someone said, the tense usually steps back. 'I am tired,' she said. → She said that she was tired.",
     examples: [
@@ -1787,6 +1864,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_74",
+    level: 3,
     title: "Modals: Can, Must, Should",
     description: "Can shows ability. Must shows something necessary. Should gives advice. Each one is followed by the plain verb.",
     examples: [
@@ -1812,6 +1890,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_75",
+    level: 3,
     title: "Adverbs of Frequency",
     description: "Always, usually, often, sometimes and never say how often. They go before the main verb but after 'is' and 'are'.",
     examples: [
@@ -1841,6 +1920,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_76",
+    level: 5,
     title: "If Sentences (First Conditional)",
     description: "If + present tense, then will + plain verb. If it rains, we will stay at home.",
     examples: [
@@ -1874,6 +1954,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_77",
+    level: 5,
     title: "So and Such … That",
     description: "So + adjective + that. Such + a + adjective + noun + that. It was so hot that we stayed inside.",
     examples: [
@@ -1907,6 +1988,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_78",
+    level: 5,
     title: "Either and Neither",
     description: "Either … or means one of two. Neither … nor means not one and not the other. The verb matches the nearer subject.",
     examples: [
@@ -1940,6 +2022,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_79",
+    level: 4,
     title: "Collective Nouns",
     description: "A collective noun names a group: a flock of birds, a bunch of bananas, a herd of cows.",
     examples: [
@@ -1969,6 +2052,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_80",
+    level: 5,
     title: "Since and For with Time",
     description: "Use 'since' for when something started: since Monday. Use 'for' for how long it lasted: for two hours.",
     examples: [
@@ -2002,6 +2086,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_81",
+    level: 2,
     title: "Sequence Words (first, next, then, finally)",
     description: "Sequence words put steps in order when you tell a story or explain how to do something.",
     examples: [

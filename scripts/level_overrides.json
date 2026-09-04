@@ -1,0 +1,22 @@
+{
+  "_comment": "Hand-reviewed corrections to scripts/grade_levels.py. The frequency corpus is adult speech, so words that are common for grown-ups but not understood by a young child (career, mortgage, contract) grade too low; a few rare-but-concrete words grade too high. Word -> level. Reviewed 2026-09-04.",
+
+  "career": 5, "boss": 3, "dealer": 4, "checker": 4, "cell": 4, "course": 4,
+  "cause": 4, "deal": 3, "offer": 3, "report": 3, "means": 3, "meant": 2,
+  "likely": 4, "mostly": 3, "bother": 3, "court": 4, "trust": 3, "truth": 3,
+  "waste": 3, "sort": 3, "chance": 3, "hiss": 2, "ray": 3,
+
+  "agent": 4, "brand": 4, "command": 4, "control": 4, "doubt": 4, "rate": 4,
+  "spirit": 4, "staff": 4, "system": 4, "term": 4, "scale": 4, "prove": 4,
+  "suppose": 4, "sense": 3, "service": 3, "worth": 3, "charge": 3, "counter": 3,
+  "figure": 3, "matter": 3, "judge": 3, "law": 3, "form": 3, "force": 3,
+
+  "account": 5, "estate": 5, "evidence": 5, "contract": 5, "issue": 5,
+  "claim": 5, "concern": 5, "debt": 5, "degree": 5, "firm": 5, "general": 5,
+  "range": 5, "role": 5, "source": 5, "unit": 5, "tax": 5, "vote": 5,
+  "witness": 5, "complex": 5, "condition": 5, "confirm": 4, "consider": 4,
+  "involved": 4, "mention": 4, "release": 4, "request": 4, "settle": 4,
+  "suspect": 4, "target": 4, "task": 4,
+
+  "finch": 5, "holly": 5, "reed": 5, "marsh": 5, "pod": 4, "boo": 4
+}

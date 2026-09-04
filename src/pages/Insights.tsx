@@ -7,6 +7,7 @@ import {
   getUserProfile,
   saveUserProfile,
   hashPin,
+  getActiveLevel,
 } from "../store/progress";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import {
@@ -24,7 +25,7 @@ import {
   calculateSpellingAccuracy,
   findTrickySpellings,
 } from "../lib/insights";
-import { allWords } from "../content/allWords";
+import { wordsForLevel } from "../content/levelContent";
 import { PageTitle, Card, Button, Loading } from "../components/ui";
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
@@ -72,7 +73,9 @@ export default function Insights() {
       const learned = calculateLearnedCount(items);
       const beingLearned = calculateBeingLearnedCount(items);
       const spellingMastered = calculateSpellingMasteredCount(items);
-      const total = allWords.length;
+      // Out of the words her level covers, not the whole 2,565-word bank —
+      // "mastered 40 / 2565" reads as failure when only 1,778 are hers to learn.
+      const total = wordsForLevel(await getActiveLevel()).length;
 
       // Streak and days
       const completed = dayRecords.filter((r) => r.completed).length;

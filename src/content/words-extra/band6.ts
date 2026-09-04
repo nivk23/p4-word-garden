@@ -4,6 +4,7 @@ export const band6: Word[] = [
   {
     word: "embarrassed",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Feeling shy or ashamed in front of others.",
     examples: ["She was embarrassed when she tripped in class.", "He felt embarrassed about making a silly mistake."],
     emoji: "😳",
@@ -13,6 +14,7 @@ export const band6: Word[] = [
   {
     word: "relieved",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Feeling happy because worry or pain stops.",
     examples: ["She felt relieved when the test was finally over.", "He was relieved to hear his friend was safe."],
     emoji: "😌",
@@ -22,6 +24,7 @@ export const band6: Word[] = [
   {
     word: "jealous",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Feeling unhappy because someone else has something you want.",
     examples: ["She felt jealous when her friend won the prize.", "He was jealous of his brother's new toy."],
     emoji: "😒",
@@ -31,6 +34,7 @@ export const band6: Word[] = [
   {
     word: "guilty",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Feeling bad because you did something wrong.",
     examples: ["She felt guilty after lying to her mother.", "He looked guilty when caught stealing the biscuit."],
     emoji: "😔",
@@ -40,6 +44,7 @@ export const band6: Word[] = [
   {
     word: "delighted",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Feeling very happy and pleased about something.",
     examples: ["She was delighted to receive a gift from her grandmother.", "He looked delighted when he won the game."],
     emoji: "😄",
@@ -49,6 +54,7 @@ export const band6: Word[] = [
   {
     word: "frightened",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Feeling very scared or afraid of something.",
     examples: ["She was frightened by the loud thunder.", "The child was frightened of the dark."],
     emoji: "😨",
@@ -58,6 +64,7 @@ export const band6: Word[] = [
   {
     word: "furious",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Very angry about something.",
     examples: ["She was furious when someone broke her pencil.", "He looked furious after losing the match."],
     emoji: "😠",
@@ -67,6 +74,7 @@ export const band6: Word[] = [
   {
     word: "miserable",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Feeling very unhappy or sad.",
     examples: ["She felt miserable after her friend moved away.", "He looked miserable sitting alone at lunch."],
     emoji: "😢",
@@ -76,6 +84,7 @@ export const band6: Word[] = [
   {
     word: "homesick",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Missing home when you are away from it.",
     examples: ["She felt homesick during the school camp.", "He got homesick after sleeping at his cousin's house."],
     emoji: "🏠",
@@ -85,6 +94,7 @@ export const band6: Word[] = [
   {
     word: "content",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Feeling satisfied and at peace.",
     examples: ["She felt content reading her favourite book.", "He looked content playing in the garden."],
     emoji: "😌",
@@ -94,6 +104,7 @@ export const band6: Word[] = [
   {
     word: "ashamed",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Feeling bad or shameful about what you did.",
     examples: ["She felt ashamed after being mean to someone.", "He was ashamed when caught cheating."],
     emoji: "😔",
@@ -103,6 +114,7 @@ export const band6: Word[] = [
   {
     word: "confused",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Unable to understand.",
     examples: ["She felt confused by the difficult question.", "He looked confused when reading the instructions."],
     emoji: "🤔",
@@ -112,6 +124,7 @@ export const band6: Word[] = [
   {
     word: "surprised",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Feeling shocked because something unexpected happened.",
     examples: ["She was surprised to see a gift on her desk.", "He looked surprised when he saw the rainbow."],
     emoji: "😲",
@@ -121,6 +134,7 @@ export const band6: Word[] = [
   {
     word: "stubborn",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Not willing to change your mind.",
     examples: ["She was stubborn and refused to say sorry.", "He is stubborn when he wants something."],
     emoji: "🚫",
@@ -130,6 +144,7 @@ export const band6: Word[] = [
   {
     word: "greedy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Wanting too much of something for yourself.",
     examples: ["She looked greedy when taking all the food.", "He was greedy and wanted the biggest piece."],
     emoji: "🍽️",
@@ -139,6 +154,7 @@ export const band6: Word[] = [
   {
     word: "cheeky",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Playfully rude or impolite.",
     examples: ["She gave her teacher a cheeky smile.", "He was cheeky and made a funny joke."],
     emoji: "😏",
@@ -148,6 +164,7 @@ export const band6: Word[] = [
   {
     word: "timid",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Easily scared; not confident.",
     examples: ["She was too timid to raise her hand.", "He seemed timid when meeting new people."],
     emoji: "😳",
@@ -157,6 +174,7 @@ export const band6: Word[] = [
   {
     word: "kind",
     pos: "adjective",
+    level: 1,
     kidMeaning: "Showing care and being nice to others.",
     examples: ["She was kind and helped an older person cross the road.", "He is kind to all his friends."],
     emoji: "💚",
@@ -166,6 +184,7 @@ export const band6: Word[] = [
   {
     word: "cruel",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Being mean and causing harm to others.",
     examples: ["She was cruel to exclude her classmate.", "He acted cruelly when teasing the younger child."],
     emoji: "😈",
@@ -175,6 +194,7 @@ export const band6: Word[] = [
   {
     word: "bossy",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Always telling others what to do.",
     examples: ["She was bossy and wanted to lead the game.", "He acted bossy during the group work."],
     emoji: "📢",
@@ -184,6 +204,7 @@ export const band6: Word[] = [
   {
     word: "arrogant",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Too proud of yourself; thinking you are better than others.",
     examples: ["She was arrogant and looked down on others.", "He spoke in an arrogant tone."],
     emoji: "😏",
@@ -193,6 +214,7 @@ export const band6: Word[] = [
   {
     word: "thoughtful",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Thinking about others' feelings and needs.",
     examples: ["She was thoughtful and brought flowers to visit her friend.", "He showed thoughtfulness by helping without being asked."],
     emoji: "💭",
@@ -202,6 +224,7 @@ export const band6: Word[] = [
   {
     word: "creep",
     pos: "verb",
+    level: 4,
     kidMeaning: "To move slowly and quietly.",
     examples: ["She crept up the stairs to surprise her friend.", "He crept closer to see what was happening."],
     emoji: "🚶",
@@ -211,6 +234,7 @@ export const band6: Word[] = [
   {
     word: "dash",
     pos: "verb",
+    level: 4,
     kidMeaning: "To run very fast.",
     examples: ["She dashed to catch the ball.", "He dashed across the field to score a goal."],
     emoji: "🏃",
@@ -220,6 +244,7 @@ export const band6: Word[] = [
   {
     word: "gasp",
     pos: "verb",
+    level: 4,
     kidMeaning: "To suddenly breathe in sharply with surprise.",
     examples: ["She gasped when she saw the surprise party.", "He gasped at the sudden loud noise."],
     emoji: "😲",
@@ -229,6 +254,7 @@ export const band6: Word[] = [
   {
     word: "mutter",
     pos: "verb",
+    level: 5,
     kidMeaning: "To speak quietly and unclearly.",
     examples: ["She muttered something under her breath.", "He muttered a complaint as he left the room."],
     emoji: "🤐",
@@ -238,6 +264,7 @@ export const band6: Word[] = [
   {
     word: "giggle",
     pos: "verb",
+    level: 5,
     kidMeaning: "To laugh in a light, nervous way.",
     examples: ["She giggled at the funny joke.", "He giggled when tickled by his younger sister."],
     emoji: "😄",
@@ -247,6 +274,7 @@ export const band6: Word[] = [
   {
     word: "sob",
     pos: "verb",
+    level: 5,
     kidMeaning: "To cry with short, loud breaths.",
     examples: ["She sobbed after seeing the sad film.", "He sobbed when he could not find his lost toy."],
     emoji: "😭",
@@ -256,6 +284,7 @@ export const band6: Word[] = [
   {
     word: "stagger",
     pos: "verb",
+    level: 6,
     kidMeaning: "To walk unsteadily, as if about to fall.",
     examples: ["She staggered under the weight of the heavy bag.", "He staggered backwards after the push."],
     emoji: "🚶",
@@ -265,6 +294,7 @@ export const band6: Word[] = [
   {
     word: "peep",
     pos: "verb",
+    level: 4,
     kidMeaning: "To look quickly at something, often secretly.",
     examples: ["She peeped through the door to see the surprise.", "He peeped at the answer sheet to cheat."],
     emoji: "👀",
@@ -274,6 +304,7 @@ export const band6: Word[] = [
   {
     word: "pounce",
     pos: "verb",
+    level: 5,
     kidMeaning: "To jump on something suddenly and forcefully.",
     examples: ["The cat pounced on the mouse.", "She pounced on the opportunity to win the game."],
     emoji: "🐱",
@@ -283,6 +314,7 @@ export const band6: Word[] = [
   {
     word: "crouch",
     pos: "verb",
+    level: 6,
     kidMeaning: "To bend low and stay close to the ground.",
     examples: ["She crouched behind the bush to hide.", "He crouched down to pick up the coin."],
     emoji: "🤐",
@@ -292,6 +324,7 @@ export const band6: Word[] = [
   {
     word: "hug",
     pos: "verb",
+    level: 3,
     kidMeaning: "To put your arms around someone to show love.",
     examples: ["She hugged her mother when she arrived home.", "He hugged his friend tightly."],
     emoji: "🤗",
@@ -301,6 +334,7 @@ export const band6: Word[] = [
   {
     word: "yell",
     pos: "verb",
+    level: 3,
     kidMeaning: "To shout loudly.",
     examples: ["She yelled to call her friend from far away.", "He yelled in pain when he stubbed his toe."],
     emoji: "📢",
@@ -310,6 +344,7 @@ export const band6: Word[] = [
   {
     word: "scream",
     pos: "verb",
+    level: 2,
     kidMeaning: "To cry out loudly in fear or pain.",
     examples: ["She screamed when she saw the spider.", "He screamed as he went down the slide."],
     emoji: "😱",
@@ -319,6 +354,7 @@ export const band6: Word[] = [
   {
     word: "whip",
     pos: "verb",
+    level: 3,
     kidMeaning: "To move something quickly with a sudden motion.",
     examples: ["She whipped around to see who was calling.", "He whipped the towel playfully."],
     emoji: "⚡",
@@ -328,6 +364,7 @@ export const band6: Word[] = [
   {
     word: "spin",
     pos: "verb",
+    level: 3,
     kidMeaning: "To turn around quickly.",
     examples: ["She will spin in a circle until dizzy.", "He will spin the top and watch it turn."],
     emoji: "🌀",
@@ -337,6 +374,7 @@ export const band6: Word[] = [
   {
     word: "twist",
     pos: "verb",
+    level: 3,
     kidMeaning: "To turn something around its centre.",
     examples: ["She twisted the lid to open the jar.", "He twisted his body to see behind him."],
     emoji: "🔄",
@@ -346,6 +384,7 @@ export const band6: Word[] = [
   {
     word: "poke",
     pos: "verb",
+    level: 4,
     kidMeaning: "To push something with your finger or a pointed object.",
     examples: ["She poked the bubble wrap playfully.", "He poked his friend in the ribs to wake him up."],
     emoji: "👆",
@@ -355,6 +394,7 @@ export const band6: Word[] = [
   {
     word: "nudge",
     pos: "verb",
+    level: 5,
     kidMeaning: "To push someone gently with your elbow.",
     examples: ["She nudged her friend to get his attention.", "He nudged the door open with his shoulder."],
     emoji: "👉",
@@ -364,6 +404,7 @@ export const band6: Word[] = [
   {
     word: "bump",
     pos: "verb",
+    level: 3,
     kidMeaning: "To hit something lightly.",
     examples: ["She bumped into the door by accident.", "He bumped his head on the low ceiling."],
     emoji: "💥",
@@ -373,6 +414,7 @@ export const band6: Word[] = [
   {
     word: "collide",
     pos: "verb",
+    level: 6,
     kidMeaning: "To crash into something with force.",
     examples: ["The two cars collided at the intersection.", "She collided with a person while running."],
     emoji: "💥",
@@ -382,6 +424,7 @@ export const band6: Word[] = [
   {
     word: "bounce",
     pos: "verb",
+    level: 4,
     kidMeaning: "To spring back after hitting a surface.",
     examples: ["The ball bounced across the court.", "She bounced on the bed happily."],
     emoji: "⛹️",
@@ -391,6 +434,7 @@ export const band6: Word[] = [
   {
     word: "hop",
     pos: "verb",
+    level: 3,
     kidMeaning: "To jump on one leg or bounce up and down.",
     examples: ["She hopped on one foot in the playground.", "The rabbit hopped across the garden."],
     emoji: "🐰",
@@ -400,6 +444,7 @@ export const band6: Word[] = [
   {
     word: "jump",
     pos: "verb",
+    level: 1,
     kidMeaning: "To push yourself off the ground with force.",
     examples: ["She jumped over the puddle.", "He jumped up with joy when he heard the good news."],
     emoji: "🤸",
@@ -409,6 +454,7 @@ export const band6: Word[] = [
   {
     word: "swim",
     pos: "verb",
+    level: 2,
     kidMeaning: "To move through water using your arms and legs.",
     examples: ["She will swim in the pool fast.", "He can swim very well now."],
     emoji: "🏊",
@@ -418,6 +464,7 @@ export const band6: Word[] = [
   {
     word: "dive",
     pos: "verb",
+    level: 3,
     kidMeaning: "To plunge into water headfirst.",
     examples: ["She dived into the pool from the diving board.", "He dived to catch the falling ball."],
     emoji: "🤿",
@@ -427,6 +474,7 @@ export const band6: Word[] = [
   {
     word: "drag",
     pos: "verb",
+    level: 3,
     kidMeaning: "To pull something along the ground.",
     examples: ["She dragged her suitcase up the stairs.", "He dragged his feet when walking slowly."],
     emoji: "🚧",
@@ -436,6 +484,7 @@ export const band6: Word[] = [
   {
     word: "snatch",
     pos: "verb",
+    level: 4,
     kidMeaning: "To grab something quickly and roughly.",
     examples: ["She snatched the toy away from her brother.", "He snatched the last piece of cake."],
     emoji: "⚡",
@@ -445,6 +494,7 @@ export const band6: Word[] = [
   {
     word: "flick",
     pos: "verb",
+    level: 4,
     kidMeaning: "To move something quickly with a light motion.",
     examples: ["She flicked the switch to turn on the light.", "He flicked water at his friend playfully."],
     emoji: "⚡",
@@ -454,6 +504,7 @@ export const band6: Word[] = [
   {
     word: "sway",
     pos: "verb",
+    level: 4,
     kidMeaning: "To move back and forth gently.",
     examples: ["The trees swayed in the wind.", "She swayed to the music while dancing."],
     emoji: "🌊",
@@ -463,6 +514,7 @@ export const band6: Word[] = [
   {
     word: "glide",
     pos: "verb",
+    level: 5,
     kidMeaning: "To move smoothly and easily.",
     examples: ["The skater glided across the ice.", "She glided down the stairs gracefully."],
     emoji: "✨",
@@ -472,6 +524,7 @@ export const band6: Word[] = [
   {
     word: "reply",
     pos: "verb",
+    level: 4,
     kidMeaning: "To answer someone when they speak to you.",
     examples: ["She replied to his question honestly.", "He replied with a smile to her greeting."],
     emoji: "💬",
@@ -481,6 +534,7 @@ export const band6: Word[] = [
   {
     word: "insist",
     pos: "verb",
+    level: 4,
     kidMeaning: "To say something firmly and not change your mind.",
     examples: ["She insisted that she did not break the vase.", "He insisted on finishing his work before playing."],
     emoji: "📢",
@@ -490,6 +544,7 @@ export const band6: Word[] = [
   {
     word: "complain",
     pos: "verb",
+    level: 4,
     kidMeaning: "To say that you are unhappy about something.",
     examples: ["She complained about the cold weather.", "He complained that the homework was too difficult."],
     emoji: "😤",
@@ -499,6 +554,7 @@ export const band6: Word[] = [
   {
     word: "warn",
     pos: "verb",
+    level: 3,
     kidMeaning: "To tell someone about a danger or problem.",
     examples: ["She warned him about the icy path.", "He warned the children not to go near the cliff."],
     emoji: "⚠️",
@@ -508,6 +564,7 @@ export const band6: Word[] = [
   {
     word: "exclaim",
     pos: "verb",
+    level: 6,
     kidMeaning: "To say something loudly and with strong emotion.",
     examples: ["She exclaimed with delight at the surprise.", "He exclaimed in pain when he touched the hot stove."],
     emoji: "😲",
@@ -517,6 +574,7 @@ export const band6: Word[] = [
   {
     word: "stammer",
     pos: "verb",
+    level: 6,
     kidMeaning: "To speak with difficulty, repeating sounds.",
     examples: ["She stammered when nervous while speaking.", "He stammered as he told his story."],
     emoji: "😳",
@@ -526,6 +584,7 @@ export const band6: Word[] = [
   {
     word: "tease",
     pos: "verb",
+    level: 4,
     kidMeaning: "To make fun of someone in a playful way.",
     examples: ["She teased her brother about his new glasses.", "He teased his friend about being slow."],
     emoji: "😏",
@@ -535,6 +594,7 @@ export const band6: Word[] = [
   {
     word: "moan",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a low sound of pain or sadness.",
     examples: ["She moaned when she had a headache.", "He moaned about the unfair decision."],
     emoji: "😞",
@@ -544,6 +604,7 @@ export const band6: Word[] = [
   {
     word: "groan",
     pos: "verb",
+    level: 4,
     kidMeaning: "To make a deep sound showing pain or tiredness.",
     examples: ["She groaned when waking up early.", "He groaned under the weight of the heavy box."],
     emoji: "😫",
@@ -553,6 +614,7 @@ export const band6: Word[] = [
   {
     word: "growl",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a deep angry sound.",
     examples: ["The dog growled at the stranger.", "She growled in annoyance when interrupted."],
     emoji: "😠",
@@ -562,6 +624,7 @@ export const band6: Word[] = [
   {
     word: "hiss",
     pos: "verb",
+    level: 2,
     kidMeaning: "To make a sharp sound like a snake.",
     examples: ["The cat hissed at the new kitten.", "She hissed a warning to be quiet."],
     emoji: "🐍",
@@ -571,6 +634,7 @@ export const band6: Word[] = [
   {
     word: "sigh",
     pos: "verb",
+    level: 4,
     kidMeaning: "To breathe out heavily, showing sadness or tiredness.",
     examples: ["She sighed with relief when the test ended.", "He sighed deeply, worried about his marks."],
     emoji: "😔",
@@ -580,6 +644,7 @@ export const band6: Word[] = [
   {
     word: "snort",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a sharp sound through your nose.",
     examples: ["He snorted with laughter at the joke.", "She snorted in disbelief at the story."],
     emoji: "😒",
@@ -589,6 +654,7 @@ export const band6: Word[] = [
   {
     word: "grumble",
     pos: "verb",
+    level: 6,
     kidMeaning: "To complain in a quiet, unhappy way.",
     examples: ["She grumbled about having to do chores.", "He grumbled while doing his homework."],
     emoji: "😤",
@@ -598,6 +664,7 @@ export const band6: Word[] = [
   {
     word: "murmur",
     pos: "verb",
+    level: 6,
     kidMeaning: "To speak in a soft, unclear way.",
     examples: ["She murmured her thanks quietly.", "He murmured agreement from the back of the class."],
     emoji: "🤐",
@@ -607,6 +674,7 @@ export const band6: Word[] = [
   {
     word: "mumble",
     pos: "verb",
+    level: 6,
     kidMeaning: "To speak unclearly, making it hard to understand.",
     examples: ["She mumbled an excuse when late.", "He mumbled something under his breath."],
     emoji: "🤐",
@@ -616,6 +684,7 @@ export const band6: Word[] = [
   {
     word: "chant",
     pos: "verb",
+    level: 5,
     kidMeaning: "To sing or shout the same words repeatedly.",
     examples: ["They chanted their team's name at the match.", "The crowd chanted together loudly."],
     emoji: "🎵",
@@ -625,6 +694,7 @@ export const band6: Word[] = [
   {
     word: "cheer",
     pos: "verb",
+    level: 3,
     kidMeaning: "To shout for joy or to support someone.",
     examples: ["She cheered when her team won the match.", "They cheered loudly for the players."],
     emoji: "📢",
@@ -634,6 +704,7 @@ export const band6: Word[] = [
   {
     word: "boo",
     pos: "verb",
+    level: 4,
     kidMeaning: "To make a sound to show disapproval or to scare someone.",
     examples: ["The audience booed the losing team.", "He booed to scare his sister."],
     emoji: "👻",
@@ -643,6 +714,7 @@ export const band6: Word[] = [
   {
     word: "hoot",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a loud sound like an owl.",
     examples: ["The owl hooted at night in the forest.", "She hooted with laughter at the funny moment."],
     emoji: "🦉",
@@ -652,6 +724,7 @@ export const band6: Word[] = [
   {
     word: "squeak",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a high, thin sound.",
     examples: ["The door squeaked when opened.", "She squeaked with excitement at the gift."],
     emoji: "🐭",
@@ -661,6 +734,7 @@ export const band6: Word[] = [
   {
     word: "screech",
     pos: "verb",
+    level: 4,
     kidMeaning: "To make a loud, harsh, high sound.",
     examples: ["The brakes screeched as the car stopped.", "She screeched with laughter at the joke."],
     emoji: "😲",
@@ -670,6 +744,7 @@ export const band6: Word[] = [
   {
     word: "realise",
     pos: "verb",
+    level: 5,
     kidMeaning: "To understand or become aware of something.",
     examples: ["She realised she had made a big mistake.", "He realised the truth when she told him."],
     emoji: "💡",
@@ -680,6 +755,7 @@ export const band6: Word[] = [
   {
     word: "decide",
     pos: "verb",
+    level: 3,
     kidMeaning: "To make up your mind about something.",
     examples: ["She decided to join the football team.", "He decided to tell the truth."],
     emoji: "✅",
@@ -689,6 +765,7 @@ export const band6: Word[] = [
   {
     word: "imagine",
     pos: "verb",
+    level: 3,
     kidMeaning: "To picture something in your mind.",
     examples: ["She imagined living in a fairy tale castle.", "He imagined what it would be like to be famous."],
     emoji: "🧠",
@@ -698,6 +775,7 @@ export const band6: Word[] = [
   {
     word: "remember",
     pos: "verb",
+    level: 2,
     kidMeaning: "To recall something from your memory.",
     examples: ["She remembered the day they first became friends.", "He tried to remember the answer to the question."],
     emoji: "💭",
@@ -707,6 +785,7 @@ export const band6: Word[] = [
   {
     word: "forget",
     pos: "verb",
+    level: 2,
     kidMeaning: "To fail to remember something.",
     examples: ["She forgot to bring her homework to school.", "He could not forget the sad moment."],
     emoji: "😕",
@@ -716,6 +795,7 @@ export const band6: Word[] = [
   {
     word: "doubt",
     pos: "verb",
+    level: 4,
     kidMeaning: "To have questions about whether something is true.",
     examples: ["She doubted his excuse for being late.", "He doubted he could win the race."],
     emoji: "🤨",
@@ -725,6 +805,7 @@ export const band6: Word[] = [
   {
     word: "recognise",
     pos: "verb",
+    level: 6,
     kidMeaning: "To identify or know someone you have seen before.",
     examples: ["She recognised her friend from far away.", "He recognised the voice immediately."],
     emoji: "👁️",
@@ -735,6 +816,7 @@ export const band6: Word[] = [
   {
     word: "notice",
     pos: "verb",
+    level: 3,
     kidMeaning: "To see or observe something.",
     examples: ["She noticed a small scratch on the desk.", "He noticed that someone was missing."],
     emoji: "👀",
@@ -744,6 +826,7 @@ export const band6: Word[] = [
   {
     word: "ponder",
     pos: "verb",
+    level: 5,
     kidMeaning: "To think deeply about something.",
     examples: ["She pondered the difficult question.", "He pondered what he should do next."],
     emoji: "🤔",
@@ -753,6 +836,7 @@ export const band6: Word[] = [
   {
     word: "daydream",
     pos: "verb",
+    level: 6,
     kidMeaning: "To think about pleasant things while awake.",
     examples: ["She daydreamed about her holiday.", "He daydreamed during the boring lesson."],
     emoji: "😴",
@@ -762,6 +846,7 @@ export const band6: Word[] = [
   {
     word: "villain",
     pos: "noun",
+    level: 5,
     kidMeaning: "The bad character in a story.",
     examples: ["The villain tried to stop the hero.", "She acted as the villain in the school play."],
     emoji: "😈",
@@ -771,6 +856,7 @@ export const band6: Word[] = [
   {
     word: "hero",
     pos: "noun",
+    level: 2,
     kidMeaning: "The main good character in a story.",
     examples: ["The hero defeated the evil wizard.", "He was the hero who saved the day."],
     emoji: "🦸",
@@ -780,6 +866,7 @@ export const band6: Word[] = [
   {
     word: "clue",
     pos: "noun",
+    level: 3,
     kidMeaning: "Information that helps solve a mystery.",
     examples: ["She found an important clue in the room.", "The detective looked for clues at the scene."],
     emoji: "🔍",
@@ -789,6 +876,7 @@ export const band6: Word[] = [
   {
     word: "treasure",
     pos: "noun",
+    level: 3,
     kidMeaning: "Valuable things, often hidden and sought.",
     examples: ["They searched for buried treasure on the island.", "The treasure was hidden in a secret place."],
     emoji: "💎",
@@ -798,6 +886,7 @@ export const band6: Word[] = [
   {
     word: "trap",
     pos: "noun",
+    level: 2,
     kidMeaning: "Something set to catch or harm someone.",
     examples: ["The hunter set a trap for the animal.", "It was a trap to catch the villain."],
     emoji: "⚠️",
@@ -807,6 +896,7 @@ export const band6: Word[] = [
   {
     word: "castle",
     pos: "noun",
+    level: 3,
     kidMeaning: "A large stone building where kings and queens live.",
     examples: ["The princess lived in a beautiful castle.", "The knight defended the castle."],
     emoji: "🏰",
@@ -816,6 +906,7 @@ export const band6: Word[] = [
   {
     word: "secret",
     pos: "noun",
+    level: 2,
     kidMeaning: "Something hidden that not many people know.",
     examples: ["She kept the secret safe from everyone.", "He discovered a secret passage."],
     emoji: "🤐",
@@ -825,6 +916,7 @@ export const band6: Word[] = [
   {
     word: "mystery",
     pos: "noun",
+    level: 4,
     kidMeaning: "Something strange or puzzling that needs to be solved.",
     examples: ["The mystery of the missing ring confused everyone.", "She loved reading mystery stories."],
     emoji: "🔍",
@@ -834,6 +926,7 @@ export const band6: Word[] = [
   {
     word: "adventure",
     pos: "noun",
+    level: 5,
     kidMeaning: "An exciting and dangerous journey or experience.",
     examples: ["They had an amazing adventure in the jungle.", "She dreamed of going on an adventure."],
     emoji: "🗺️",
@@ -843,6 +936,7 @@ export const band6: Word[] = [
   {
     word: "quest",
     pos: "noun",
+    level: 4,
     kidMeaning: "A long journey to find or achieve something.",
     examples: ["The knight went on a quest to find the ring.", "Their quest for treasure was challenging."],
     emoji: "⚔️",
@@ -852,6 +946,7 @@ export const band6: Word[] = [
   {
     word: "dragon",
     pos: "noun",
+    level: 3,
     kidMeaning: "A large mythical creature that can breathe fire.",
     examples: ["The brave knight fought the dragon.", "A friendly dragon appears in her story."],
     emoji: "🐉",
@@ -861,6 +956,7 @@ export const band6: Word[] = [
   {
     word: "monster",
     pos: "noun",
+    level: 3,
     kidMeaning: "A scary creature, often imaginary.",
     examples: ["The monster lived under the child's bed.", "He was not afraid of monsters."],
     emoji: "👹",
@@ -870,6 +966,7 @@ export const band6: Word[] = [
   {
     word: "wizard",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person with magical powers in stories.",
     examples: ["The wizard cast a spell on the castle.", "She wanted to become a wizard like Harry Potter."],
     emoji: "🧙",
@@ -879,6 +976,7 @@ export const band6: Word[] = [
   {
     word: "witch",
     pos: "noun",
+    level: 2,
     kidMeaning: "A woman with magical powers.",
     examples: ["The witch lived in the dark forest.", "She dressed as a witch for Halloween."],
     emoji: "🧙‍♀️",
@@ -888,6 +986,7 @@ export const band6: Word[] = [
   {
     word: "knight",
     pos: "noun",
+    level: 3,
     kidMeaning: "A warrior in armour who serves a king.",
     examples: ["The knight rode on a horse.", "She dreamed of being a brave knight."],
     emoji: "⚔️",
@@ -897,6 +996,7 @@ export const band6: Word[] = [
   {
     word: "sword",
     pos: "noun",
+    level: 2,
     kidMeaning: "A weapon with a long blade.",
     examples: ["The knight drew his sword in battle.", "She held the sword with both hands."],
     emoji: "⚔️",
@@ -906,6 +1006,7 @@ export const band6: Word[] = [
   {
     word: "magic",
     pos: "noun",
+    level: 2,
     kidMeaning: "Mysterious powers that can do impossible things.",
     examples: ["The wizard used magic to defeat the monster.", "She believed in magic and fairy tales."],
     emoji: "✨",
@@ -915,6 +1016,7 @@ export const band6: Word[] = [
   {
     word: "spell",
     pos: "noun",
+    level: 2,
     kidMeaning: "Words or actions that create magic.",
     examples: ["The wizard cast a spell on the enemy.", "She learned a new spell in the story."],
     emoji: "🪄",
@@ -924,6 +1026,7 @@ export const band6: Word[] = [
   {
     word: "enchanted",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Affected by magic; magical.",
     examples: ["She wandered through an enchanted forest.", "The enchanted castle was hidden from view."],
     emoji: "✨",
@@ -933,6 +1036,7 @@ export const band6: Word[] = [
   {
     word: "curse",
     pos: "noun",
+    level: 3,
     kidMeaning: "Bad magic that brings harm or bad luck.",
     examples: ["The witch placed a curse on the princess.", "A curse made him sleep for a hundred years."],
     emoji: "😈",
@@ -942,6 +1046,7 @@ export const band6: Word[] = [
   {
     word: "ally",
     pos: "noun",
+    level: 4,
     kidMeaning: "Someone who works with you against an enemy.",
     examples: ["She gained an important ally in the battle.", "He considered the warrior his trusted ally."],
     emoji: "🤝",
@@ -951,6 +1056,7 @@ export const band6: Word[] = [
   {
     word: "crown",
     pos: "noun",
+    level: 3,
     kidMeaning: "A decorated ring worn on the head by a ruler.",
     examples: ["The king wore a golden crown.", "She was crowned with a beautiful crown."],
     emoji: "👑",
@@ -960,6 +1066,7 @@ export const band6: Word[] = [
   {
     word: "throne",
     pos: "noun",
+    level: 3,
     kidMeaning: "The special chair where a king or queen sits.",
     examples: ["The king sat on his throne proudly.", "She inherited the throne from her father."],
     emoji: "🪑",
@@ -969,6 +1076,7 @@ export const band6: Word[] = [
   {
     word: "suddenly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "All at once; happening without warning.",
     examples: ["The lights suddenly went out.", "She suddenly remembered where she left her keys."],
     emoji: "⚡",
@@ -978,6 +1086,7 @@ export const band6: Word[] = [
   {
     word: "carefully",
     pos: "adverb",
+    level: 4,
     kidMeaning: "With great attention; being cautious.",
     examples: ["She carefully placed the egg on the table.", "He walked carefully on the icy path."],
     emoji: "👁️",
@@ -987,6 +1096,7 @@ export const band6: Word[] = [
   {
     word: "eagerly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "With enthusiasm and desire.",
     examples: ["She eagerly opened the gift.", "He eagerly awaited the start of the game."],
     emoji: "🤩",
@@ -996,6 +1106,7 @@ export const band6: Word[] = [
   {
     word: "silently",
     pos: "adverb",
+    level: 5,
     kidMeaning: "Without making any sound.",
     examples: ["She silently crept into the room.", "He silently closed the door behind him."],
     emoji: "🤐",
@@ -1005,6 +1116,7 @@ export const band6: Word[] = [
   {
     word: "bravely",
     pos: "adverb",
+    level: 4,
     kidMeaning: "With courage; without fear.",
     examples: ["She bravely faced her fear of heights.", "He bravely stood up to the bully."],
     emoji: "💪",
@@ -1014,6 +1126,7 @@ export const band6: Word[] = [
   {
     word: "gently",
     pos: "adverb",
+    level: 5,
     kidMeaning: "With softness and care.",
     examples: ["She gently touched the butterfly.", "He spoke gently to calm the scared child."],
     emoji: "🌸",
@@ -1023,6 +1136,7 @@ export const band6: Word[] = [
   {
     word: "reluctantly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "Not wanting to do it.",
     examples: ["She reluctantly went to bed.", "He reluctantly admitted his mistake."],
     emoji: "😒",
@@ -1032,6 +1146,7 @@ export const band6: Word[] = [
   {
     word: "cautiously",
     pos: "adverb",
+    level: 6,
     kidMeaning: "Very carefully; watching for danger.",
     examples: ["She cautiously approached the strange animal.", "He cautiously entered the dark room."],
     emoji: "⚠️",
@@ -1041,6 +1156,7 @@ export const band6: Word[] = [
   {
     word: "quickly",
     pos: "adverb",
+    level: 3,
     kidMeaning: "At high speed; fast.",
     examples: ["She quickly ran to answer the door.", "He quickly finished his meal."],
     emoji: "💨",
@@ -1050,6 +1166,7 @@ export const band6: Word[] = [
   {
     word: "slowly",
     pos: "adverb",
+    level: 3,
     kidMeaning: "At low speed; taking a long time.",
     examples: ["She slowly climbed the stairs.", "He walked slowly to get his balance."],
     emoji: "🐢",
@@ -1059,6 +1176,7 @@ export const band6: Word[] = [
   {
     word: "badly",
     pos: "adverb",
+    level: 2,
     kidMeaning: "In a poor or negative way.",
     examples: ["She played badly in the match.", "He badly wanted to win the competition."],
     emoji: "😞",
@@ -1068,6 +1186,7 @@ export const band6: Word[] = [
   {
     word: "well",
     pos: "adverb",
+    level: 1,
     kidMeaning: "In a good way.",
     examples: ["She played well at the concert.", "He did well on his exam."],
     emoji: "✅",
@@ -1077,6 +1196,7 @@ export const band6: Word[] = [
   {
     word: "happily",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a pleased and joyful way.",
     examples: ["She happily skipped to school.", "He happily accepted the invitation."],
     emoji: "😊",
@@ -1086,6 +1206,7 @@ export const band6: Word[] = [
   {
     word: "sadly",
     pos: "adverb",
+    level: 3,
     kidMeaning: "In an unhappy or sorrowful way.",
     examples: ["She sadly watched her friend leave.", "He sadly shook his head at the news."],
     emoji: "😢",
@@ -1095,6 +1216,7 @@ export const band6: Word[] = [
   {
     word: "angrily",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a furious or enraged manner.",
     examples: ["She angrily slammed the door.", "He angrily refused the offer."],
     emoji: "😠",
@@ -1104,6 +1226,7 @@ export const band6: Word[] = [
   {
     word: "calmly",
     pos: "adverb",
+    level: 3,
     kidMeaning: "In a peaceful and relaxed way.",
     examples: ["She calmly explained her plan.", "He calmly waited for his turn."],
     emoji: "😌",
@@ -1113,6 +1236,7 @@ export const band6: Word[] = [
   {
     word: "nervously",
     pos: "adverb",
+    level: 4,
     kidMeaning: "With worry or anxiety.",
     examples: ["She nervously awaited the test results.", "He nervously tapped his fingers."],
     emoji: "😰",
@@ -1122,6 +1246,7 @@ export const band6: Word[] = [
   {
     word: "confidently",
     pos: "adverb",
+    level: 6,
     kidMeaning: "With assurance and belief in yourself.",
     examples: ["She confidently answered the question.", "He walked confidently into the room."],
     emoji: "💪",
@@ -1131,6 +1256,7 @@ export const band6: Word[] = [
   {
     word: "honestly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a truthful way; being sincere.",
     examples: ["She honestly told the truth.", "He honestly did not know the answer."],
     emoji: "✅",
@@ -1140,6 +1266,7 @@ export const band6: Word[] = [
   {
     word: "loudly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "With a loud sound or voice.",
     examples: ["She loudly cheered for her team.", "He laughed loudly at the joke."],
     emoji: "📢",
@@ -1149,6 +1276,7 @@ export const band6: Word[] = [
   {
     word: "softly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "With little sound; quietly.",
     examples: ["She spoke softly so as not to wake the baby.", "He softly sang the lullaby."],
     emoji: "🤐",
@@ -1158,6 +1286,7 @@ export const band6: Word[] = [
   {
     word: "roughly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a harsh or violent way.",
     examples: ["He roughly pushed past her.", "She roughly grabbed the toy."],
     emoji: "💢",
@@ -1167,6 +1296,7 @@ export const band6: Word[] = [
   {
     word: "smoothly",
     pos: "adverb",
+    level: 5,
     kidMeaning: "Without bumps or problems.",
     examples: ["The plan went smoothly without problems.", "She smoothly glided across the ice."],
     emoji: "✨",
@@ -1176,6 +1306,7 @@ export const band6: Word[] = [
   {
     word: "awkwardly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a clumsy or not smooth way.",
     examples: ["She awkwardly stumbled over her words.", "He awkwardly tripped and fell."],
     emoji: "😅",
@@ -1185,6 +1316,7 @@ export const band6: Word[] = [
   {
     word: "gracefully",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a beautiful and elegant way.",
     examples: ["She gracefully danced across the stage.", "The swan gracefully glided on the water."],
     emoji: "✨",
@@ -1194,6 +1326,7 @@ export const band6: Word[] = [
   {
     word: "fiercely",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a strong and intense way.",
     examples: ["She fiercely defended her friend.", "The lion fiercely roared at the intruder."],
     emoji: "🦁",
@@ -1203,6 +1336,7 @@ export const band6: Word[] = [
   {
     word: "playfully",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a fun and light-hearted way.",
     examples: ["She playfully nudged her brother.", "He playfully teased her about her mistake."],
     emoji: "🎮",
@@ -1212,6 +1346,7 @@ export const band6: Word[] = [
   {
     word: "seriously",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In an earnest and solemn way.",
     examples: ["She seriously considered the problem.", "He seriously meant what he said."],
     emoji: "😑",
@@ -1221,6 +1356,7 @@ export const band6: Word[] = [
   {
     word: "secretly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a hidden or private way; not openly.",
     examples: ["She secretly wished for his forgiveness.", "He secretly liked her all along."],
     emoji: "🤐",
@@ -1230,6 +1366,7 @@ export const band6: Word[] = [
   {
     word: "openly",
     pos: "adverb",
+    level: 2,
     kidMeaning: "Without hiding; in public.",
     examples: ["She openly admitted her fear.", "He openly expressed his opinion."],
     emoji: "📢",
@@ -1239,6 +1376,7 @@ export const band6: Word[] = [
   {
     word: "constantly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "All the time; repeatedly.",
     examples: ["She constantly checked her phone.", "He constantly worried about his marks."],
     emoji: "🔄",
@@ -1248,6 +1386,7 @@ export const band6: Word[] = [
   {
     word: "frequently",
     pos: "adverb",
+    level: 6,
     kidMeaning: "Often; many times.",
     examples: ["She frequently visits the library.", "He frequently goes to the park."],
     emoji: "🔄",
@@ -1257,6 +1396,7 @@ export const band6: Word[] = [
   {
     word: "rarely",
     pos: "adverb",
+    level: 4,
     kidMeaning: "Not often; seldom.",
     examples: ["She rarely complains about anything.", "He rarely misses school."],
     emoji: "🟣",
@@ -1266,6 +1406,7 @@ export const band6: Word[] = [
   {
     word: "eventually",
     pos: "adverb",
+    level: 6,
     kidMeaning: "After a long time; finally.",
     examples: ["She eventually found what she was looking for.", "He eventually admitted the truth."],
     emoji: "⏳",
@@ -1275,6 +1416,7 @@ export const band6: Word[] = [
   {
     word: "immediately",
     pos: "adverb",
+    level: 6,
     kidMeaning: "Right away; without delay.",
     examples: ["She immediately answered the phone.", "He immediately understood the instructions."],
     emoji: "⚡",
@@ -1284,6 +1426,7 @@ export const band6: Word[] = [
   {
     word: "determined",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Having a strong decision to do something.",
     examples: ["She looked determined to win the race.", "He was determined to finish his project."],
     emoji: "💪",
@@ -1293,6 +1436,7 @@ export const band6: Word[] = [
   {
     word: "hopeful",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Believing something good will happen.",
     examples: ["She felt hopeful about the future.", "He remained hopeful despite the setback."],
     emoji: "🌟",
@@ -1302,6 +1446,7 @@ export const band6: Word[] = [
   {
     word: "hopeless",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Believing nothing good will happen.",
     examples: ["She felt hopeless after failing the test.", "He sounded hopeless about his chances."],
     emoji: "😞",
@@ -1311,6 +1456,7 @@ export const band6: Word[] = [
   {
     word: "sceptical",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not believing something without proof.",
     examples: ["She was sceptical about the ghost story.", "He sounded sceptical of the plan."],
     emoji: "🤨",
@@ -1320,6 +1466,7 @@ export const band6: Word[] = [
   {
     word: "suspicious",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Thinking someone might be doing something wrong.",
     examples: ["She became suspicious of his sudden kindness.", "He looked suspicious at the strange offer."],
     emoji: "🤨",
@@ -1329,6 +1476,7 @@ export const band6: Word[] = [
   {
     word: "resentful",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Feeling bitter or angry about something.",
     examples: ["She felt resentful after being left out.", "He was resentful of the unfair treatment."],
     emoji: "😠",
@@ -1338,6 +1486,7 @@ export const band6: Word[] = [
   {
     word: "regretful",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Feeling sorry about something you did.",
     examples: ["She looked regretful about her harsh words.", "He was regretful for his mistake."],
     emoji: "😔",
@@ -1347,6 +1496,7 @@ export const band6: Word[] = [
   {
     word: "independent",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Able to do things without help from others.",
     examples: ["She was independent and solved the problem alone.", "He acted independently without asking."],
     emoji: "💪",
@@ -1356,6 +1506,7 @@ export const band6: Word[] = [
   {
     word: "dependent",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Needing help from others.",
     examples: ["The young child was dependent on his mother.", "She seemed dependent on her friend's approval."],
     emoji: "🤝",
@@ -1365,6 +1516,7 @@ export const band6: Word[] = [
   {
     word: "flee",
     pos: "verb",
+    level: 4,
     kidMeaning: "To run away from danger.",
     examples: ["She fled from the burning house.", "He fled when he saw the angry dog."],
     emoji: "🏃",
@@ -1374,6 +1526,7 @@ export const band6: Word[] = [
   {
     word: "release",
     pos: "verb",
+    level: 4,
     kidMeaning: "To let something go free.",
     examples: ["She released the bird from its cage.", "He released his grip on the toy."],
     emoji: "🦅",
@@ -1383,6 +1536,7 @@ export const band6: Word[] = [
   {
     word: "escape",
     pos: "verb",
+    level: 2,
     kidMeaning: "To get away from a place or situation.",
     examples: ["She escaped from the locked room.", "He managed to escape from trouble."],
     emoji: "🏃",
@@ -1392,6 +1546,7 @@ export const band6: Word[] = [
   {
     word: "lean",
     pos: "verb",
+    level: 3,
     kidMeaning: "To bend your body to one side.",
     examples: ["She leaned against the wall.", "He leaned forward to listen carefully."],
     emoji: "🚶",
@@ -1401,6 +1556,7 @@ export const band6: Word[] = [
   {
     word: "relax",
     pos: "verb",
+    level: 2,
     kidMeaning: "To rest and become calm.",
     examples: ["She relaxed in the sun.", "He relaxed on the beach."],
     emoji: "😌",
@@ -1410,6 +1566,7 @@ export const band6: Word[] = [
   {
     word: "tense",
     pos: "verb",
+    level: 3,
     kidMeaning: "To tighten your muscles.",
     examples: ["She tensed up before the test.", "He tensed when hearing the noise."],
     emoji: "😰",
@@ -1419,6 +1576,7 @@ export const band6: Word[] = [
   {
     word: "hold",
     pos: "verb",
+    level: 1,
     kidMeaning: "To keep something in your hand.",
     examples: ["She will hold the baby safe.", "He will hold the rope tightly."],
     emoji: "🤲",
@@ -1428,6 +1586,7 @@ export const band6: Word[] = [
   {
     word: "knock",
     pos: "verb",
+    level: 2,
     kidMeaning: "To hit a door to get someone's attention.",
     examples: ["She knocked on the door loudly.", "He knocked three times."],
     emoji: "🚪",
@@ -1437,6 +1596,7 @@ export const band6: Word[] = [
   {
     word: "tap",
     pos: "verb",
+    level: 3,
     kidMeaning: "To hit lightly and quickly.",
     examples: ["She tapped on the window to signal.", "He tapped the desk with his pencil."],
     emoji: "👆",
@@ -1446,6 +1606,7 @@ export const band6: Word[] = [
   {
     word: "strike",
     pos: "verb",
+    level: 2,
     kidMeaning: "To hit someone or something with force.",
     examples: ["She will strike the ball hard.", "He can strike the ball well."],
     emoji: "⚡",
@@ -1455,6 +1616,7 @@ export const band6: Word[] = [
   {
     word: "swallow",
     pos: "verb",
+    level: 4,
     kidMeaning: "To take food down your throat.",
     examples: ["She swallowed the medicine quickly.", "He swallowed hard and said nothing."],
     emoji: "😌",
@@ -1464,6 +1626,7 @@ export const band6: Word[] = [
   {
     word: "spit",
     pos: "verb",
+    level: 3,
     kidMeaning: "To force liquid from your mouth.",
     examples: ["He spit out the bad-tasting food.", "She spit the seeds into the bin."],
     emoji: "😛",
@@ -1473,6 +1636,7 @@ export const band6: Word[] = [
   {
     word: "suck",
     pos: "verb",
+    level: 2,
     kidMeaning: "To draw in liquid or air.",
     examples: ["She sucked on the lollipop.", "He sucked in his cheeks."],
     emoji: "😋",
@@ -1482,6 +1646,7 @@ export const band6: Word[] = [
   {
     word: "blow",
     pos: "verb",
+    level: 2,
     kidMeaning: "To force air from your mouth.",
     examples: ["She will blow out the candles.", "He will blow into the whistle."],
     emoji: "💨",
@@ -1491,6 +1656,7 @@ export const band6: Word[] = [
   {
     word: "itch",
     pos: "verb",
+    level: 5,
     kidMeaning: "To have a itch on your skin.",
     examples: ["She itched her arm where the mosquito bit her.", "He itched his nose."],
     emoji: "😤",
@@ -1500,6 +1666,7 @@ export const band6: Word[] = [
   {
     word: "ghost",
     pos: "noun",
+    level: 2,
     kidMeaning: "The spirit of a dead person.",
     examples: ["The ghost haunted the old castle.", "She did not believe in ghosts."],
     emoji: "👻",
@@ -1509,6 +1676,7 @@ export const band6: Word[] = [
   {
     word: "spirit",
     pos: "noun",
+    level: 4,
     kidMeaning: "A being without a body.",
     examples: ["The spirit of Christmas brought joy.", "He believed in forest spirits."],
     emoji: "👻",
@@ -1518,6 +1686,7 @@ export const band6: Word[] = [
   {
     word: "invisible",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not able to be seen.",
     examples: ["The invisible cloak made him disappear.", "She felt invisible when ignored."],
     emoji: "👁️",
@@ -1527,6 +1696,7 @@ export const band6: Word[] = [
   {
     word: "potion",
     pos: "noun",
+    level: 5,
     kidMeaning: "It is a drink with magic.",
     examples: ["The witch mixed a potion to heal the wound.", "He drank the magic potion."],
     emoji: "🧪",
@@ -1536,6 +1706,7 @@ export const band6: Word[] = [
   {
     word: "wand",
     pos: "noun",
+    level: 4,
     kidMeaning: "A stick used to cast spells in magic.",
     examples: ["The wizard waved his wand.", "She held the magic wand carefully."],
     emoji: "🪄",
@@ -1545,6 +1716,7 @@ export const band6: Word[] = [
   {
     word: "scroll",
     pos: "noun",
+    level: 4,
     kidMeaning: "An old piece of paper rolled up.",
     examples: ["The ancient scroll held secrets.", "She unrolled the magical scroll."],
     emoji: "📜",
@@ -1554,6 +1726,7 @@ export const band6: Word[] = [
   {
     word: "riddle",
     pos: "noun",
+    level: 5,
     kidMeaning: "A tricky puzzle or question.",
     examples: ["She solved the riddle correctly.", "He could not answer the sphinx's riddle."],
     emoji: "🧩",
@@ -1563,6 +1736,7 @@ export const band6: Word[] = [
   {
     word: "tale",
     pos: "noun",
+    level: 3,
     kidMeaning: "A story, especially an old or magical one.",
     examples: ["Grandmother told an old fairy tale.", "He loved adventure tales."],
     emoji: "📖",
@@ -1572,6 +1746,7 @@ export const band6: Word[] = [
   {
     word: "creature",
     pos: "noun",
+    level: 4,
     kidMeaning: "A living being or animal.",
     examples: ["The creature emerged from the water.", "He studied strange creatures in the forest."],
     emoji: "🦁",
@@ -1581,6 +1756,7 @@ export const band6: Word[] = [
   {
     word: "angel",
     pos: "noun",
+    level: 3,
     kidMeaning: "A good being with wings.",
     examples: ["The angel watched over her.", "He prayed to the angel for help."],
     emoji: "😇",
@@ -1590,6 +1766,7 @@ export const band6: Word[] = [
   {
     word: "demon",
     pos: "noun",
+    level: 3,
     kidMeaning: "An evil spirit or creature.",
     examples: ["The demon tried to stop the hero.", "She feared the demon in the story."],
     emoji: "😈",
@@ -1599,6 +1776,7 @@ export const band6: Word[] = [
   {
     word: "elf",
     pos: "noun",
+    level: 4,
     kidMeaning: "A magical small creature from fairy tales.",
     examples: ["The elf danced in the moonlight.", "An elf danced with fairies."],
     emoji: "🧝",
@@ -1608,6 +1786,7 @@ export const band6: Word[] = [
   {
     word: "fairy",
     pos: "noun",
+    level: 4,
     kidMeaning: "A magical tiny being with wings.",
     examples: ["The fairy godmother helped Cinderella.", "He wished to meet a real fairy."],
     emoji: "🧚",
@@ -1617,6 +1796,7 @@ export const band6: Word[] = [
   {
     word: "troll",
     pos: "noun",
+    level: 4,
     kidMeaning: "An ugly giant creature in fairy tales.",
     examples: ["The troll lived under the bridge.", "She was afraid of the fierce troll."],
     emoji: "👹",
@@ -1626,6 +1806,7 @@ export const band6: Word[] = [
   {
     word: "goblin",
     pos: "noun",
+    level: 5,
     kidMeaning: "A small mischievous creature.",
     examples: ["The goblins stole the treasure.", "He fought off the goblin army."],
     emoji: "👹",
@@ -1635,6 +1816,7 @@ export const band6: Word[] = [
   {
     word: "ogre",
     pos: "noun",
+    level: 6,
     kidMeaning: "A large brutal giant in stories.",
     examples: ["The ogre guarded the princess.", "She was terrified of the ugly ogre."],
     emoji: "👹",
@@ -1644,6 +1826,7 @@ export const band6: Word[] = [
   {
     word: "mermaid",
     pos: "noun",
+    level: 5,
     kidMeaning: "A mythical creature half-woman, half-fish.",
     examples: ["The mermaid sang beautifully.", "He saw a mermaid in the ocean."],
     emoji: "🧜‍♀️",
@@ -1653,6 +1836,7 @@ export const band6: Word[] = [
   {
     word: "unicorn",
     pos: "noun",
+    level: 6,
     kidMeaning: "A horse with a single horn.",
     examples: ["The unicorn pranced in the meadow.", "She dreamed of riding a unicorn."],
     emoji: "🦄",
@@ -1662,6 +1846,7 @@ export const band6: Word[] = [
   {
     word: "charm",
     pos: "noun",
+    level: 3,
     kidMeaning: "An object or words with magical power.",
     examples: ["The charm protected her from evil.", "She wore a lucky charm."],
     emoji: "✨",
@@ -1671,6 +1856,7 @@ export const band6: Word[] = [
   {
     word: "stutter",
     pos: "verb",
+    level: 6,
     kidMeaning: "To speak with repeated sounds.",
     examples: ["She stuttered nervously during the presentation.", "He stuttered when trying to explain."],
     emoji: "😳",
@@ -1680,6 +1866,7 @@ export const band6: Word[] = [
   {
     word: "announce",
     pos: "verb",
+    level: 4,
     kidMeaning: "To tell people something important.",
     examples: ["She announced the winner loudly.", "He announced his arrival."],
     emoji: "📢",
@@ -1689,6 +1876,7 @@ export const band6: Word[] = [
   {
     word: "declare",
     pos: "verb",
+    level: 4,
     kidMeaning: "To state something firmly.",
     examples: ["She declared war on the enemy.", "He declared his love openly."],
     emoji: "📢",
@@ -1698,6 +1886,7 @@ export const band6: Word[] = [
   {
     word: "deny",
     pos: "verb",
+    level: 4,
     kidMeaning: "To say something is not true.",
     examples: ["She denied taking the money.", "He denied seeing the accident."],
     emoji: "🚫",
@@ -1707,6 +1896,7 @@ export const band6: Word[] = [
   {
     word: "promise",
     pos: "verb",
+    level: 2,
     kidMeaning: "To say you will definitely do something.",
     examples: ["She promised to be on time.", "He promised to help her."],
     emoji: "🤝",
@@ -1716,6 +1906,7 @@ export const band6: Word[] = [
   {
     word: "swear",
     pos: "verb",
+    level: 2,
     kidMeaning: "To make a solemn promise.",
     examples: ["He will swear to tell the truth.", "She will swear an oath."],
     emoji: "🙋",
@@ -1725,6 +1916,7 @@ export const band6: Word[] = [
   {
     word: "praise",
     pos: "verb",
+    level: 3,
     kidMeaning: "To say nice things about someone.",
     examples: ["The teacher praised her excellent work.", "He praised his friend's bravery."],
     emoji: "👏",
@@ -1734,6 +1926,7 @@ export const band6: Word[] = [
   {
     word: "process",
     pos: "verb",
+    level: 4,
     kidMeaning: "To think through information.",
     examples: ["She took time to process the news.", "He processed what she said."],
     emoji: "⚙️",
@@ -1743,6 +1936,7 @@ export const band6: Word[] = [
   {
     word: "anxious",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Feeling worried or uneasy.",
     examples: ["She felt anxious before the competition.", "He was anxious about the results."],
     emoji: "😰",
@@ -1752,6 +1946,7 @@ export const band6: Word[] = [
   {
     word: "panicked",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Sudden fear that makes you act carelessly.",
     examples: ["She panicked when she saw the spider.", "He looked panicked during the fire drill."],
     emoji: "😱",
@@ -1761,6 +1956,7 @@ export const band6: Word[] = [
   {
     word: "courageous",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Very brave and fearless.",
     examples: ["She was courageous to stand up for her friend.", "He showed courageous actions."],
     emoji: "💪",
@@ -1770,6 +1966,7 @@ export const band6: Word[] = [
   {
     word: "cowardly",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Showing fear; not brave.",
     examples: ["He was cowardly and ran away.", "She called his behaviour cowardly."],
     emoji: "😰",
@@ -1779,6 +1976,7 @@ export const band6: Word[] = [
   {
     word: "modest",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Not boasting; simple and humble.",
     examples: ["She was modest about her achievement.", "He had modest ambitions."],
     emoji: "🙏",
@@ -1788,6 +1986,7 @@ export const band6: Word[] = [
   {
     word: "lair",
     pos: "noun",
+    level: 4,
     kidMeaning: "A secret hideout or den.",
     examples: ["The villain retreated to his secret lair.", "She found the dragon's lair."],
     emoji: "🐉",
@@ -1797,6 +1996,7 @@ export const band6: Word[] = [
   {
     word: "hideout",
     pos: "noun",
+    level: 5,
     kidMeaning: "A place where someone hides.",
     examples: ["The bandits found their hideout.", "He discovered the secret hideout."],
     emoji: "🏠",
@@ -1806,6 +2006,7 @@ export const band6: Word[] = [
   {
     word: "defeat",
     pos: "noun",
+    level: 4,
     kidMeaning: "A loss or failure.",
     examples: ["The defeat was hard to accept.", "She refused to accept defeat."],
     emoji: "😞",
@@ -1815,6 +2016,7 @@ export const band6: Word[] = [
   {
     word: "retreat",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place to go for safety or rest.",
     examples: ["The cabin was a peaceful retreat.", "He needed a quiet retreat from the city."],
     emoji: "🏠",
@@ -1824,6 +2026,7 @@ export const band6: Word[] = [
   {
     word: "traitor",
     pos: "noun",
+    level: 4,
     kidMeaning: "Someone who betrays others.",
     examples: ["The traitor revealed the secret location.", "She was revealed as the traitor."],
     emoji: "🚫",
@@ -1833,6 +2036,7 @@ export const band6: Word[] = [
   {
     word: "outlaw",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who breaks the law and is pursued.",
     examples: ["The outlaw lived in hiding.", "Many outlaws were famous long ago."],
     emoji: "🤠",
@@ -1842,6 +2046,7 @@ export const band6: Word[] = [
   {
     word: "rebel",
     pos: "noun",
+    level: 4,
     kidMeaning: "Someone who fights against authority.",
     examples: ["The rebel fought for freedom.", "He was a rebel against unfair rules."],
     emoji: "✊",
@@ -1851,6 +2056,7 @@ export const band6: Word[] = [
   {
     word: "champion",
     pos: "noun",
+    level: 5,
     kidMeaning: "The winner of a competition.",
     examples: ["She was the chess champion.", "He defended his champion title."],
     emoji: "🏆",
@@ -1860,6 +2066,7 @@ export const band6: Word[] = [
   {
     word: "uneasy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Feeling worried.",
     examples: ["She felt uneasy about the dark forest.", "He seemed uneasy before the performance."],
     emoji: "😟",
@@ -1869,6 +2076,7 @@ export const band6: Word[] = [
   {
     word: "thrilled",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Very excited and happy.",
     examples: ["She was thrilled to win the prize.", "He looked thrilled about the big surprise."],
     emoji: "🎉",
@@ -1878,6 +2086,7 @@ export const band6: Word[] = [
   {
     word: "cross",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Annoyed or angry.",
     examples: ["She looked cross when interrupted.", "He was cross about the broken toy."],
     emoji: "😠",
@@ -1887,6 +2096,7 @@ export const band6: Word[] = [
   {
     word: "restless",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Unable to stay still or calm.",
     examples: ["The restless child could not sit down.", "She felt restless before her trip."],
     emoji: "😤",
@@ -1896,6 +2106,7 @@ export const band6: Word[] = [
   {
     word: "weary",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Very tired.",
     examples: ["She felt weary after the long journey.", "He was weary from working hard all day."],
     emoji: "😴",
@@ -1905,6 +2116,7 @@ export const band6: Word[] = [
   {
     word: "bitter",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Feeling angry and unhappy.",
     examples: ["She felt bitter about the unfair loss.", "He had a bitter tone in his voice."],
     emoji: "😤",
@@ -1914,6 +2126,7 @@ export const band6: Word[] = [
   {
     word: "tender",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Soft and gentle easily hurt.",
     examples: ["She had tender feelings for him.", "His tender heart made him cry easily."],
     emoji: "💕",
@@ -1923,6 +2136,7 @@ export const band6: Word[] = [
   {
     word: "fussy",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Particular about small details.",
     examples: ["He was fussy about his food.", "She was fussy about cleanliness."],
     emoji: "😕",
@@ -1932,6 +2146,7 @@ export const band6: Word[] = [
   {
     word: "sensible",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Showing good sense.",
     examples: ["She made a sensible choice.", "He was sensible about safety."],
     emoji: "👍",
@@ -1941,6 +2156,7 @@ export const band6: Word[] = [
   {
     word: "obedient",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Following rules and orders.",
     examples: ["The obedient child listened well.", "She was obedient to her parents."],
     emoji: "😊",
@@ -1950,6 +2166,7 @@ export const band6: Word[] = [
   {
     word: "boastful",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Talking too much about yourself.",
     examples: ["He was boastful about his skills.", "She did not like his boastful behaviour."],
     emoji: "🤐",
@@ -1959,6 +2176,7 @@ export const band6: Word[] = [
   {
     word: "moody",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Having changing moods quickly.",
     examples: ["He was moody and hard to please.", "She seemed moody today."],
     emoji: "😠",
@@ -1968,6 +2186,7 @@ export const band6: Word[] = [
   {
     word: "witty",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Clever and funny.",
     examples: ["She made a witty remark.", "He had a witty sense of humour."],
     emoji: "😄",
@@ -1977,6 +2196,7 @@ export const band6: Word[] = [
   {
     word: "dishonest",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not truthful.",
     examples: ["His dishonest answer upset her.", "She could not trust his dishonest ways."],
     emoji: "🚫",
@@ -1986,6 +2206,7 @@ export const band6: Word[] = [
   {
     word: "sincere",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Honest and genuine.",
     examples: ["She gave a sincere apology.", "He was sincere about his feelings."],
     emoji: "💯",
@@ -1995,6 +2216,7 @@ export const band6: Word[] = [
   {
     word: "reliable",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Can be trusted to help.",
     examples: ["He was a reliable friend.", "She was reliable with her responsibilities."],
     emoji: "✅",
@@ -2004,6 +2226,7 @@ export const band6: Word[] = [
   {
     word: "grumpy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Bad-tempered and unhappy.",
     examples: ["He was grumpy in the morning.", "She seemed grumpy all day."],
     emoji: "😠",
@@ -2013,6 +2236,7 @@ export const band6: Word[] = [
   {
     word: "scurry",
     pos: "verb",
+    level: 6,
     kidMeaning: "To run quickly with short steps.",
     examples: ["The mouse scurried across the floor.", "She scurried away from the danger."],
     emoji: "🐭",
@@ -2022,6 +2246,7 @@ export const band6: Word[] = [
   {
     word: "tiptoe",
     pos: "verb",
+    level: 6,
     kidMeaning: "To walk quietly on toes.",
     examples: ["He tiptoed up the stairs.", "She tiptoed past the sleeping cat."],
     emoji: "🚶",
@@ -2031,6 +2256,7 @@ export const band6: Word[] = [
   {
     word: "hurl",
     pos: "verb",
+    level: 5,
     kidMeaning: "To throw something with force.",
     examples: ["He hurled the ball far away.", "She hurled the rock at the wall."],
     emoji: "⚡",
@@ -2040,6 +2266,7 @@ export const band6: Word[] = [
   {
     word: "clutch",
     pos: "verb",
+    level: 4,
     kidMeaning: "To hold something tightly.",
     examples: ["She clutched her toy hard.", "He clutched the rope for safety."],
     emoji: "✊",
@@ -2049,6 +2276,7 @@ export const band6: Word[] = [
   {
     word: "fumble",
     pos: "verb",
+    level: 6,
     kidMeaning: "To handle in an awkward way.",
     examples: ["He fumbled with the keys.", "She fumbled the catch in the game."],
     emoji: "😅",
@@ -2058,6 +2286,7 @@ export const band6: Word[] = [
   {
     word: "flinch",
     pos: "verb",
+    level: 6,
     kidMeaning: "To move back suddenly.",
     examples: ["He flinched at the loud noise.", "She flinched when touched suddenly."],
     emoji: "😰",
@@ -2067,6 +2296,7 @@ export const band6: Word[] = [
   {
     word: "wriggle",
     pos: "verb",
+    level: 6,
     kidMeaning: "To twist and turn.",
     examples: ["The worm wriggled in the soil.", "She wriggled to get free."],
     emoji: "🪱",
@@ -2076,6 +2306,7 @@ export const band6: Word[] = [
   {
     word: "lurch",
     pos: "verb",
+    level: 5,
     kidMeaning: "To move suddenly or unsteadily.",
     examples: ["The ship lurched in the storm.", "He lurched forward suddenly."],
     emoji: "⛴️",
@@ -2085,6 +2316,7 @@ export const band6: Word[] = [
   {
     word: "scamper",
     pos: "verb",
+    level: 6,
     kidMeaning: "To run quickly.",
     examples: ["The squirrel scampered up the tree.", "They scampered away laughing loudly."],
     emoji: "🐿️",
@@ -2094,6 +2326,7 @@ export const band6: Word[] = [
   {
     word: "snap",
     pos: "verb",
+    level: 3,
     kidMeaning: "To speak in an angry sharp way.",
     examples: ["She snapped at him rudely.", "He snapped when frustrated."],
     emoji: "😠",
@@ -2103,6 +2336,7 @@ export const band6: Word[] = [
   {
     word: "plead",
     pos: "verb",
+    level: 4,
     kidMeaning: "To ask with strong feeling.",
     examples: ["She pleaded for another chance.", "He pleaded with her for help."],
     emoji: "🙏",
@@ -2112,6 +2346,7 @@ export const band6: Word[] = [
   {
     word: "chuckle",
     pos: "verb",
+    level: 5,
     kidMeaning: "To laugh softly.",
     examples: ["He chuckled at the funny joke.", "She chuckled at the silly story."],
     emoji: "😄",
@@ -2121,6 +2356,7 @@ export const band6: Word[] = [
   {
     word: "sneer",
     pos: "verb",
+    level: 6,
     kidMeaning: "To smile in a mean way.",
     examples: ["He sneered at the losers.", "She sneered at his poor try."],
     emoji: "😒",
@@ -2130,6 +2366,7 @@ export const band6: Word[] = [
   {
     word: "whine",
     pos: "verb",
+    level: 5,
     kidMeaning: "To complain in an annoying way.",
     examples: ["The child whined about bedtime.", "She whined about unfair treatment."],
     emoji: "😩",
@@ -2139,6 +2376,7 @@ export const band6: Word[] = [
   {
     word: "taunt",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make fun of to challenge.",
     examples: ["He taunted her about losing.", "She taunted him boldly."],
     emoji: "😠",
@@ -2148,6 +2386,7 @@ export const band6: Word[] = [
   {
     word: "scold",
     pos: "verb",
+    level: 4,
     kidMeaning: "To tell someone off.",
     examples: ["She scolded the child.", "He scolded them for being late."],
     emoji: "😠",
@@ -2157,6 +2396,7 @@ export const band6: Word[] = [
   {
     word: "guess",
     pos: "verb",
+    level: 1,
     kidMeaning: "To try to answer without knowing.",
     examples: ["She guessed the answer was five.", "He guessed what was inside."],
     emoji: "🤔",
@@ -2166,6 +2406,7 @@ export const band6: Word[] = [
   {
     word: "expect",
     pos: "verb",
+    level: 2,
     kidMeaning: "To think something will happen.",
     examples: ["She expected him to arrive soon.", "He expected rain today."],
     emoji: "💭",
@@ -2175,6 +2416,7 @@ export const band6: Word[] = [
   {
     word: "recall",
     pos: "verb",
+    level: 4,
     kidMeaning: "To remember something.",
     examples: ["She recalled the happy day.", "He recalled the story clearly."],
     emoji: "💭",
@@ -2184,6 +2426,7 @@ export const band6: Word[] = [
   {
     word: "hesitate",
     pos: "verb",
+    level: 6,
     kidMeaning: "To pause because unsure.",
     examples: ["She hesitated before answering.", "He hesitated at the edge."],
     emoji: "⏸️",
@@ -2193,6 +2436,7 @@ export const band6: Word[] = [
   {
     word: "rescue",
     pos: "noun",
+    level: 3,
     kidMeaning: "Saving someone from danger.",
     examples: ["The rescue came just in time.", "She was grateful for the rescue."],
     emoji: "🆘",
@@ -2202,6 +2446,7 @@ export const band6: Word[] = [
   {
     word: "disguise",
     pos: "noun",
+    level: 5,
     kidMeaning: "Outfit to hide who you really are.",
     examples: ["She wore a disguise to the party.", "His disguise fooled everyone."],
     emoji: "🎭",
@@ -2211,6 +2456,7 @@ export const band6: Word[] = [
   {
     word: "footprint",
     pos: "noun",
+    level: 6,
     kidMeaning: "The mark left by a foot.",
     examples: ["She found a footprint in sand.", "He followed the footprint trail."],
     emoji: "👣",
@@ -2220,6 +2466,7 @@ export const band6: Word[] = [
   {
     word: "signal",
     pos: "noun",
+    level: 3,
     kidMeaning: "A sign to communicate.",
     examples: ["She gave a signal to start.", "He understood the signal."],
     emoji: "🚩",
@@ -2229,6 +2476,7 @@ export const band6: Word[] = [
   {
     word: "reward",
     pos: "noun",
+    level: 3,
     kidMeaning: "A prize for doing good.",
     examples: ["She received a reward for honesty.", "He wanted the reward badly."],
     emoji: "🏆",
@@ -2238,6 +2486,7 @@ export const band6: Word[] = [
   {
     word: "punishment",
     pos: "noun",
+    level: 5,
     kidMeaning: "Something bad for wrongdoing.",
     examples: ["His punishment was severe.", "She accepted her punishment."],
     emoji: "⚖️",
@@ -2247,6 +2496,7 @@ export const band6: Word[] = [
   {
     word: "weapon",
     pos: "noun",
+    level: 2,
     kidMeaning: "A tool used to fight.",
     examples: ["He carried a weapon for safety.", "The weapon was sharp."],
     emoji: "⚔️",
@@ -2256,6 +2506,7 @@ export const band6: Word[] = [
   {
     word: "victory",
     pos: "noun",
+    level: 4,
     kidMeaning: "A win or success.",
     examples: ["Their victory was celebrated.", "She enjoyed the victory."],
     emoji: "🥇",
@@ -2265,6 +2516,7 @@ export const band6: Word[] = [
   {
     word: "passage",
     pos: "noun",
+    level: 4,
     kidMeaning: "A way or path through.",
     examples: ["The passage was narrow.", "She found a passage."],
     emoji: "🛤️",
@@ -2274,6 +2526,7 @@ export const band6: Word[] = [
   {
     word: "hastily",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a quick and hurried way.",
     examples: ["She hastily packed her bag.", "He hastily left the room."],
     emoji: "💨",
@@ -2283,6 +2536,7 @@ export const band6: Word[] = [
   {
     word: "proudly",
     pos: "adverb",
+    level: 3,
     kidMeaning: "With pride and confidence.",
     examples: ["She proudly showed her work.", "He proudly wore his medal."],
     emoji: "😊",
@@ -2292,6 +2546,7 @@ export const band6: Word[] = [
   {
     word: "sheepishly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In an embarrassed way.",
     examples: ["She sheepishly admitted the truth.", "He sheepishly smiled back."],
     emoji: "😳",
@@ -2301,6 +2556,7 @@ export const band6: Word[] = [
   {
     word: "wearily",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a tired way.",
     examples: ["She wearily walked to school.", "He wearily sat down hard."],
     emoji: "😴",
@@ -2310,6 +2566,7 @@ export const band6: Word[] = [
   {
     word: "firmly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a strong and fixed way.",
     examples: ["She firmly held his hand.", "He spoke firmly and clearly."],
     emoji: "💪",
@@ -2319,6 +2576,7 @@ export const band6: Word[] = [
   {
     word: "politely",
     pos: "adverb",
+    level: 6,
     kidMeaning: "With good manners.",
     examples: ["She politely asked for help.", "He politely excused himself now."],
     emoji: "😊",
@@ -2328,6 +2586,7 @@ export const band6: Word[] = [
   {
     word: "harshly",
     pos: "adverb",
+    level: 5,
     kidMeaning: "In a cruel or severe way.",
     examples: ["She spoke harshly to him.", "He treated her harshly."],
     emoji: "😠",
@@ -2337,6 +2596,7 @@ export const band6: Word[] = [
   {
     word: "warmly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a friendly and kind way.",
     examples: ["She warmly welcomed them all.", "He smiled warmly at her."],
     emoji: "🤍",
@@ -2346,6 +2606,7 @@ export const band6: Word[] = [
   {
     word: "wildly",
     pos: "adverb",
+    level: 4,
     kidMeaning: "In a crazy or wild way.",
     examples: ["She danced wildly at the party.", "He ran wildly through the field."],
     emoji: "🎉",
@@ -2355,6 +2616,7 @@ export const band6: Word[] = [
   {
     word: "freely",
     pos: "adverb",
+    level: 2,
     kidMeaning: "Without limits or control.",
     examples: ["She spoke freely about her feelings.", "He roamed freely in the forest."],
     emoji: "🦅",
@@ -2364,6 +2626,7 @@ export const band6: Word[] = [
   {
     word: "swiftly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "In a quick and smooth way.",
     examples: ["She swiftly moved across the ice.", "He swiftly caught the ball."],
     emoji: "⚡",
@@ -2373,6 +2636,7 @@ export const band6: Word[] = [
   {
     word: "bluntly",
     pos: "adverb",
+    level: 6,
     kidMeaning: "Speaking directly and honestly.",
     examples: ["She bluntly told the truth.", "He bluntly refused the offer."],
     emoji: "💯",

@@ -9,13 +9,17 @@ import {
   calculateComprehensionAccuracy,
   calculateSpellingAccuracy,
 } from "../lib/insights";
-import { allWords } from "../content/allWords";
+import { wordsForLevel } from "../content/levelContent";
+import { levelLabel, asLevel, DEFAULT_LEVEL } from "../content/levels";
 import { Page, PageTitle, Card, Button, Loading } from "../components/ui";
 
 interface ChildRow {
   child: ChildProfile;
   known: number;
   mastered: number;
+  // Each child's totals are out of *her own* level's word list, so the two
+  // columns below aren't comparable across children without seeing the level.
+  total: number;
   streak: number;
   daysCompleted: number;
   accuracy: number;
@@ -41,6 +45,7 @@ export default function CompareChildren() {
             // actually means.
             known: calculateLearnedCount(items),
             mastered: calculateMasteredCount(items),
+            total: wordsForLevel(asLevel(child.level) ?? DEFAULT_LEVEL).length,
             streak: profile.streak || 0,
             daysCompleted: dayRecords.filter((r) => r.completed).length,
             accuracy: calculateAccuracy(logs),
@@ -57,8 +62,6 @@ export default function CompareChildren() {
   if (rows === null) {
     return <Loading label="Loading progress…" />;
   }
-
-  const totalWords = allWords.length;
 
   return (
     <Page>
@@ -89,6 +92,9 @@ export default function CompareChildren() {
                     Child
                   </th>
                   <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
+                    Level
+                  </th>
+                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
                     Words known
                   </th>
                   <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
@@ -112,16 +118,19 @@ export default function CompareChildren() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map(({ child, known, mastered, streak, daysCompleted, accuracy, comprehension, spelling }) => (
+                {rows.map(({ child, known, mastered, total, streak, daysCompleted, accuracy, comprehension, spelling }) => (
                   <tr key={child.id} className="border-t border-secondary/15">
                     <td className="sticky left-0 bg-cream py-3 pr-4 font-display font-semibold text-ink whitespace-nowrap">
                       {child.emoji} {child.name}
                     </td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
-                      {known} / {totalWords}
+                      {levelLabel(asLevel(child.level) ?? DEFAULT_LEVEL)}
                     </td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
-                      {mastered} / {totalWords}
+                      {known} / {total}
+                    </td>
+                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
+                      {mastered} / {total}
                     </td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">🔥 {streak}</td>
                     <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{daysCompleted}</td>

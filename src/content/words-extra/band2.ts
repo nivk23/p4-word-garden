@@ -4,6 +4,7 @@ export const band2: Word[] = [
   {
     word: "neighbour",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who lives near you.",
     examples: ["My neighbour is very kind.", "She helps her neighbour with groceries."],
     emoji: "👫",
@@ -13,6 +14,7 @@ export const band2: Word[] = [
   {
     word: "stranger",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person you do not know.",
     examples: ["He does not talk to strangers.", "The stranger asked for directions."],
     emoji: "🚶",
@@ -22,6 +24,7 @@ export const band2: Word[] = [
   {
     word: "cousin",
     pos: "noun",
+    level: 3,
     kidMeaning: "Your aunt or uncle's child.",
     examples: ["My cousin lives in another town.", "She plays with her cousin every holiday."],
     emoji: "👨‍👩‍👧",
@@ -31,6 +34,7 @@ export const band2: Word[] = [
   {
     word: "classmate",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person in your school class.",
     examples: ["His classmate sits next to him.", "She shares her lunch with a classmate."],
     emoji: "👬",
@@ -40,6 +44,7 @@ export const band2: Word[] = [
   {
     word: "customer",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who buys things from a shop.",
     examples: ["The customer pays for the food.", "She serves many customers each day."],
     emoji: "🛍️",
@@ -49,6 +54,7 @@ export const band2: Word[] = [
   {
     word: "shopkeeper",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who owns or runs a shop.",
     examples: ["The shopkeeper opens the shop early.", "She is a shopkeeper at the mall."],
     emoji: "🏪",
@@ -58,6 +64,7 @@ export const band2: Word[] = [
   {
     word: "vendor",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who sells things at a stall.",
     examples: ["The vendor sells fruit at the market.", "He is a street vendor."],
     emoji: "🍎",
@@ -67,6 +74,7 @@ export const band2: Word[] = [
   {
     word: "cashier",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who takes money at a shop.",
     examples: ["The cashier scans the items.", "She works as a cashier."],
     emoji: "💳",
@@ -76,6 +84,7 @@ export const band2: Word[] = [
   {
     word: "passenger",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person on a bus, train, or plane.",
     examples: ["The passenger gets on the train.", "She is a passenger in the car."],
     emoji: "✈️",
@@ -85,6 +94,7 @@ export const band2: Word[] = [
   {
     word: "guide",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who shows you the way.",
     examples: ["The tour guide leads the group.", "He is a guide for tourists."],
     emoji: "🗺️",
@@ -94,6 +104,7 @@ export const band2: Word[] = [
   {
     word: "host",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who welcomes guests.",
     examples: ["The host greets the visitors.", "She is the host of the party."],
     emoji: "🤝",
@@ -103,6 +114,7 @@ export const band2: Word[] = [
   {
     word: "guest",
     pos: "noun",
+    level: 2,
     kidMeaning: "A person visiting someone.",
     examples: ["The guest arrives at the door.", "She invites many guests to her home."],
     emoji: "🚪",
@@ -112,6 +124,7 @@ export const band2: Word[] = [
   {
     word: "colleague",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person you work with.",
     examples: ["My colleague helps me with the project.", "She works with her colleagues."],
     emoji: "👥",
@@ -121,6 +134,7 @@ export const band2: Word[] = [
   {
     word: "enemy",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who wants to hurt you.",
     examples: ["He does not want to see his enemy.", "She tries not to make enemies."],
     emoji: "⚔️",
@@ -130,6 +144,7 @@ export const band2: Word[] = [
   {
     word: "student",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who learns at school.",
     examples: ["The student listens to the teacher.", "He is a student in P4."],
     emoji: "📚",
@@ -139,6 +154,7 @@ export const band2: Word[] = [
   {
     word: "driver",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who controls a vehicle.",
     examples: ["The driver steers the car.", "She is a taxi driver."],
     emoji: "🚗",
@@ -148,6 +164,7 @@ export const band2: Word[] = [
   {
     word: "pilot",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who flies an aeroplane.",
     examples: ["The pilot controls the plane.", "He is a pilot for the airline."],
     emoji: "✈️",
@@ -157,6 +174,7 @@ export const band2: Word[] = [
   {
     word: "captain",
     pos: "noun",
+    level: 2,
     kidMeaning: "A leader of a team or ship.",
     examples: ["The captain leads the ship.", "He is the captain of the football team."],
     emoji: "⛵",
@@ -166,6 +184,7 @@ export const band2: Word[] = [
   {
     word: "soldier",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person in the army.",
     examples: ["The soldier serves the country.", "She meets a soldier at the parade."],
     emoji: "🪖",
@@ -175,6 +194,7 @@ export const band2: Word[] = [
   {
     word: "worker",
     pos: "noun",
+    level: 1,
     kidMeaning: "A person who does a job.",
     examples: ["The worker builds the house.", "He is a construction worker."],
     emoji: "👷",
@@ -184,6 +204,7 @@ export const band2: Word[] = [
   {
     word: "farmer",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who grows food on land.",
     examples: ["The farmer grows rice and vegetables.", "She is a farmer in the countryside."],
     emoji: "🚜",
@@ -193,6 +214,7 @@ export const band2: Word[] = [
   {
     word: "baker",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person who makes bread and cakes.",
     examples: ["The baker works in the bakery.", "She is a baker who makes good bread."],
     emoji: "🥖",
@@ -202,6 +224,7 @@ export const band2: Word[] = [
   {
     word: "waiter",
     pos: "noun",
+    level: 1,
     kidMeaning: "A person who serves food in a restaurant.",
     examples: ["The waiter brings the food.", "She works as a waiter at the cafe."],
     emoji: "🍽️",
@@ -211,6 +234,7 @@ export const band2: Word[] = [
   {
     word: "artist",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who makes paintings or sculptures.",
     examples: ["The artist paints beautiful pictures.", "She is an artist at the gallery."],
     emoji: "🎨",
@@ -220,6 +244,7 @@ export const band2: Word[] = [
   {
     word: "musician",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who plays music.",
     examples: ["The musician plays the piano.", "He is a musician in the band."],
     emoji: "🎵",
@@ -229,6 +254,7 @@ export const band2: Word[] = [
   {
     word: "actor",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who acts in films or plays.",
     examples: ["The actor performs on the stage.", "She is an actress in the drama."],
     emoji: "🎬",
@@ -238,6 +264,7 @@ export const band2: Word[] = [
   {
     word: "author",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person who writes books.",
     examples: ["The author writes stories for children.", "She is an author of many books."],
     emoji: "📖",
@@ -247,6 +274,7 @@ export const band2: Word[] = [
   {
     word: "player",
     pos: "noun",
+    level: 1,
     kidMeaning: "A person who plays a sport or game.",
     examples: ["The player kicks the ball.", "He is a football player."],
     emoji: "⚽",
@@ -256,6 +284,7 @@ export const band2: Word[] = [
   {
     word: "coach",
     pos: "noun",
+    level: 2,
     kidMeaning: "A person who trains a team.",
     examples: ["The coach teaches the players.", "She is a swimming coach."],
     emoji: "🏋️",
@@ -265,6 +294,7 @@ export const band2: Word[] = [
   {
     word: "referee",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who watches a game and enforces rules.",
     examples: ["The referee blows the whistle.", "He is the referee for the match."],
     emoji: "🏅",
@@ -274,6 +304,7 @@ export const band2: Word[] = [
   {
     word: "explorer",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who travels to find new places.",
     examples: ["The explorer discovers new lands.", "She is an explorer of jungles."],
     emoji: "🧭",
@@ -283,6 +314,7 @@ export const band2: Word[] = [
   {
     word: "scientist",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who studies and does experiments.",
     examples: ["The scientist does experiments.", "He is a scientist in the lab."],
     emoji: "🔬",
@@ -292,6 +324,7 @@ export const band2: Word[] = [
   {
     word: "engineer",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person who designs and builds things.",
     examples: ["The engineer builds bridges.", "She is an engineer for the company."],
     emoji: "🏗️",
@@ -301,6 +334,7 @@ export const band2: Word[] = [
   {
     word: "friendly",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Kind and nice to other people.",
     examples: ["He is very friendly to everyone.", "The friendly dog wags its tail."],
     emoji: "😊",
@@ -310,6 +344,7 @@ export const band2: Word[] = [
   {
     word: "honest",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Telling the truth always.",
     examples: ["She is honest about her mistake.", "The honest boy tells the truth."],
     emoji: "✓",
@@ -319,6 +354,7 @@ export const band2: Word[] = [
   {
     word: "trustworthy",
     pos: "adjective",
+    level: 6,
     kidMeaning: "A person you can depend on.",
     examples: ["She is trustworthy with secrets.", "He is a trustworthy friend."],
     emoji: "🤝",
@@ -328,6 +364,7 @@ export const band2: Word[] = [
   {
     word: "lazy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Not wanting to work or move.",
     examples: ["He is lazy and sleeps all day.", "The lazy cat does not move."],
     emoji: "😴",
@@ -337,6 +374,7 @@ export const band2: Word[] = [
   {
     word: "hardworking",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Putting effort into your work.",
     examples: ["She is hardworking in her studies.", "The hardworking farmer ploughs the field."],
     emoji: "💪",
@@ -346,6 +384,7 @@ export const band2: Word[] = [
   {
     word: "shy",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Nervous and quiet around people.",
     examples: ["She is shy when meeting new friends.", "The shy child hides behind his mother."],
     emoji: "😳",
@@ -355,6 +394,7 @@ export const band2: Word[] = [
   {
     word: "confident",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Believing you can do something well.",
     examples: ["She is confident about the test.", "The confident player scores a goal."],
     emoji: "💪",
@@ -364,6 +404,7 @@ export const band2: Word[] = [
   {
     word: "stall",
     pos: "noun",
+    level: 3,
     kidMeaning: "A small shop or stand at a market.",
     examples: ["The stall sells fresh fruit.", "She buys noodles from a stall."],
     emoji: "🏪",
@@ -373,6 +414,7 @@ export const band2: Word[] = [
   {
     word: "hawker",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person who sells food from a stall.",
     examples: ["The hawker grills chicken over fire.", "She asks the hawker for curry."],
     emoji: "🍜",
@@ -382,6 +424,7 @@ export const band2: Word[] = [
   {
     word: "corridor",
     pos: "noun",
+    level: 5,
     kidMeaning: "A long narrow passage in a building.",
     examples: ["The corridor leads to the classrooms.", "He walks down the corridor."],
     emoji: "🚪",
@@ -391,6 +434,7 @@ export const band2: Word[] = [
   {
     word: "mall",
     pos: "noun",
+    level: 3,
     kidMeaning: "A large building with many shops inside.",
     examples: ["The mall is very crowded on weekends.", "He goes to the mall to shop."],
     emoji: "🛍️",
@@ -400,6 +444,7 @@ export const band2: Word[] = [
   {
     word: "supermarket",
     pos: "noun",
+    level: 6,
     kidMeaning: "A large shop selling food and things.",
     examples: ["The supermarket has everything.", "She buys groceries at the supermarket."],
     emoji: "🛒",
@@ -409,6 +454,7 @@ export const band2: Word[] = [
   {
     word: "bank",
     pos: "noun",
+    level: 1,
     kidMeaning: "A place where people keep money.",
     examples: ["The bank is near the school.", "He goes to the bank to withdraw money."],
     emoji: "🏦",
@@ -418,6 +464,7 @@ export const band2: Word[] = [
   {
     word: "library",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place with many books to read.",
     examples: ["The library is quiet.", "She borrows books from the library."],
     emoji: "📚",
@@ -427,6 +474,7 @@ export const band2: Word[] = [
   {
     word: "hospital",
     pos: "noun",
+    level: 2,
     kidMeaning: "A place where sick people get help.",
     examples: ["The hospital has many doctors.", "She stays at the hospital for treatment."],
     emoji: "🏥",
@@ -436,6 +484,7 @@ export const band2: Word[] = [
   {
     word: "restaurant",
     pos: "noun",
+    level: 3,
     kidMeaning: "A place where you can buy and eat food.",
     examples: ["The restaurant serves Chinese food.", "They eat dinner at the restaurant."],
     emoji: "🍽️",
@@ -445,6 +494,7 @@ export const band2: Word[] = [
   {
     word: "cafe",
     pos: "noun",
+    level: 4,
     kidMeaning: "A small place that sells drinks and snacks.",
     examples: ["The cafe has good coffee.", "She meets her friend at the cafe."],
     emoji: "☕",
@@ -454,6 +504,7 @@ export const band2: Word[] = [
   {
     word: "butcher",
     pos: "noun",
+    level: 4,
     kidMeaning: "A person who cuts and sells meat.",
     examples: ["The butcher cuts the meat.", "She buys chicken at the butcher."],
     emoji: "🥩",
@@ -463,6 +514,7 @@ export const band2: Word[] = [
   {
     word: "florist",
     pos: "noun",
+    level: 5,
     kidMeaning: "A shop that sells flowers.",
     examples: ["The florist arranges the flowers.", "He buys roses from the florist."],
     emoji: "🌹",
@@ -472,6 +524,7 @@ export const band2: Word[] = [
   {
     word: "pharmacy",
     pos: "noun",
+    level: 5,
     kidMeaning: "A shop where you get medicine.",
     examples: ["The pharmacy is in the mall.", "She gets cough syrup at the pharmacy."],
     emoji: "💊",
@@ -481,6 +534,7 @@ export const band2: Word[] = [
   {
     word: "cinema",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place where you watch films.",
     examples: ["The cinema shows new movies.", "He watches a film at the cinema."],
     emoji: "🎬",
@@ -490,6 +544,7 @@ export const band2: Word[] = [
   {
     word: "theatre",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place where you watch plays.",
     examples: ["The theatre has a big stage.", "She watches a play at the theatre."],
     emoji: "🎭",
@@ -499,6 +554,7 @@ export const band2: Word[] = [
   {
     word: "gallery",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place where paintings are shown.",
     examples: ["The gallery displays modern art.", "She visits the art gallery."],
     emoji: "🖼️",
@@ -508,6 +564,7 @@ export const band2: Word[] = [
   {
     word: "gym",
     pos: "noun",
+    level: 2,
     kidMeaning: "A place where you exercise.",
     examples: ["The gym has exercise machines.", "He goes to the gym to lift weights."],
     emoji: "💪",
@@ -517,6 +574,7 @@ export const band2: Word[] = [
   {
     word: "pool",
     pos: "noun",
+    level: 2,
     kidMeaning: "A large tank filled with water for swimming.",
     examples: ["The pool is very cold.", "She swims at the pool."],
     emoji: "🏊",
@@ -526,6 +584,7 @@ export const band2: Word[] = [
   {
     word: "court",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place where games are played with a net.",
     examples: ["The court is for tennis players.", "He plays badminton on the court."],
     emoji: "🏸",
@@ -535,6 +594,7 @@ export const band2: Word[] = [
   {
     word: "station",
     pos: "noun",
+    level: 2,
     kidMeaning: "A place where buses or trains stop.",
     examples: ["The station is crowded.", "She waits at the station."],
     emoji: "🚉",
@@ -544,6 +604,7 @@ export const band2: Word[] = [
   {
     word: "airport",
     pos: "noun",
+    level: 3,
     kidMeaning: "A place where aeroplanes take off and land.",
     examples: ["The airport is very busy.", "They go to the airport for their flight."],
     emoji: "✈️",
@@ -553,6 +614,7 @@ export const band2: Word[] = [
   {
     word: "harbour",
     pos: "noun",
+    level: 5,
     kidMeaning: "A sheltered place where ships stop.",
     examples: ["The harbour is full of boats.", "She watches ships in the harbour."],
     emoji: "⛵",
@@ -562,6 +624,7 @@ export const band2: Word[] = [
   {
     word: "tunnel",
     pos: "noun",
+    level: 3,
     kidMeaning: "A passage through a mountain or under ground.",
     examples: ["The tunnel is very long.", "The car drives through the tunnel."],
     emoji: "🚗",
@@ -571,6 +634,7 @@ export const band2: Word[] = [
   {
     word: "lane",
     pos: "noun",
+    level: 2,
     kidMeaning: "A narrow path or road.",
     examples: ["The lane is very quiet.", "He walks down the lane to school."],
     emoji: "🛤️",
@@ -580,6 +644,7 @@ export const band2: Word[] = [
   {
     word: "alley",
     pos: "noun",
+    level: 3,
     kidMeaning: "A narrow passage between buildings.",
     examples: ["The alley is dark at night.", "She takes the alley as a shortcut."],
     emoji: "🏘️",
@@ -589,6 +654,7 @@ export const band2: Word[] = [
   {
     word: "flat",
     pos: "noun",
+    level: 2,
     kidMeaning: "A set of rooms in a building for living.",
     examples: ["The flat is on the tenth floor.", "She lives in a small flat."],
     emoji: "🏠",
@@ -598,6 +664,7 @@ export const band2: Word[] = [
   {
     word: "office",
     pos: "noun",
+    level: 1,
     kidMeaning: "A place where people work.",
     examples: ["The office is on the third floor.", "She works in an office."],
     emoji: "💼",
@@ -607,6 +674,7 @@ export const band2: Word[] = [
   {
     word: "workshop",
     pos: "noun",
+    level: 4,
     kidMeaning: "A place where things are made or fixed.",
     examples: ["The workshop is full of tools.", "He works in a carpentry workshop."],
     emoji: "🔧",
@@ -616,6 +684,7 @@ export const band2: Word[] = [
   {
     word: "factory",
     pos: "noun",
+    level: 3,
     kidMeaning: "A large building where things are made.",
     examples: ["The factory makes toys.", "She works in a car factory."],
     emoji: "🏭",
@@ -625,6 +694,7 @@ export const band2: Word[] = [
   {
     word: "farm",
     pos: "noun",
+    level: 2,
     kidMeaning: "Land where crops grow and animals live.",
     examples: ["The farm has many chickens.", "He grows rice on his farm."],
     emoji: "🌾",
@@ -634,6 +704,7 @@ export const band2: Word[] = [
   {
     word: "field",
     pos: "noun",
+    level: 1,
     kidMeaning: "A large area of land with grass.",
     examples: ["The field is very wide.", "He plays football in the field."],
     emoji: "🌾",
@@ -643,6 +714,7 @@ export const band2: Word[] = [
   {
     word: "valley",
     pos: "noun",
+    level: 3,
     kidMeaning: "A low area between hills.",
     examples: ["The valley is very green.", "She walks through the valley."],
     emoji: "🏞️",
@@ -652,6 +724,7 @@ export const band2: Word[] = [
   {
     word: "island",
     pos: "noun",
+    level: 2,
     kidMeaning: "Land surrounded by water.",
     examples: ["The island is very small.", "He sails to the island."],
     emoji: "🏝️",
@@ -661,6 +734,7 @@ export const band2: Word[] = [
   {
     word: "sea",
     pos: "noun",
+    level: 1,
     kidMeaning: "A large body of salt water.",
     examples: ["The sea is very deep.", "She swims in the sea."],
     emoji: "🌊",
@@ -670,6 +744,7 @@ export const band2: Word[] = [
   {
     word: "platform",
     pos: "noun",
+    level: 4,
     kidMeaning: "A raised area where passengers wait.",
     examples: ["The platform is crowded.", "She waits on the platform for the train."],
     emoji: "🚂",
@@ -679,6 +754,7 @@ export const band2: Word[] = [
   {
     word: "ticket",
     pos: "noun",
+    level: 2,
     kidMeaning: "A pass that allows you to travel.",
     examples: ["The ticket costs five dollars.", "He buys a train ticket."],
     emoji: "🎫",
@@ -688,6 +764,7 @@ export const band2: Word[] = [
   {
     word: "journey",
     pos: "noun",
+    level: 3,
     kidMeaning: "A trip from one place to another.",
     examples: ["The journey takes two hours.", "She enjoys her journey to school."],
     emoji: "🛤️",
@@ -697,6 +774,7 @@ export const band2: Word[] = [
   {
     word: "luggage",
     pos: "noun",
+    level: 4,
     kidMeaning: "Bags and cases you carry when travelling.",
     examples: ["The luggage is very heavy.", "She packs her luggage for the trip."],
     emoji: "🧳",
@@ -706,6 +784,7 @@ export const band2: Word[] = [
   {
     word: "arrive",
     pos: "verb",
+    level: 3,
     kidMeaning: "To come to a place.",
     examples: ["The bus arrives at the station.", "She arrives home at six."],
     emoji: "🚌",
@@ -715,6 +794,7 @@ export const band2: Word[] = [
   {
     word: "depart",
     pos: "verb",
+    level: 5,
     kidMeaning: "To leave a place.",
     examples: ["The plane departs at ten.", "He departs for school at seven."],
     emoji: "✈️",
@@ -724,6 +804,7 @@ export const band2: Word[] = [
   {
     word: "travel",
     pos: "verb",
+    level: 3,
     kidMeaning: "To go from one place to another.",
     examples: ["She travels by train.", "He travels around the world."],
     emoji: "🌍",
@@ -733,6 +814,7 @@ export const band2: Word[] = [
   {
     word: "drive",
     pos: "verb",
+    level: 1,
     kidMeaning: "To control a vehicle.",
     examples: ["He drives a car to work.", "She drives carefully on the road."],
     emoji: "🚗",
@@ -742,6 +824,7 @@ export const band2: Word[] = [
   {
     word: "bus",
     pos: "noun",
+    level: 1,
     kidMeaning: "A large vehicle that carries many people.",
     examples: ["The bus is very crowded.", "She takes the bus to school."],
     emoji: "🚌",
@@ -751,6 +834,7 @@ export const band2: Word[] = [
   {
     word: "taxi",
     pos: "noun",
+    level: 3,
     kidMeaning: "A car that takes people for money.",
     examples: ["The taxi is yellow.", "He calls a taxi to the airport."],
     emoji: "🚕",
@@ -760,6 +844,7 @@ export const band2: Word[] = [
   {
     word: "train",
     pos: "noun",
+    level: 1,
     kidMeaning: "A vehicle that runs on tracks.",
     examples: ["The train is very fast.", "She takes the train to the city."],
     emoji: "🚂",
@@ -769,6 +854,7 @@ export const band2: Word[] = [
   {
     word: "car",
     pos: "noun",
+    level: 1,
     kidMeaning: "A vehicle with four wheels.",
     examples: ["The car is red.", "He drives a car."],
     emoji: "🚗",
@@ -778,6 +864,7 @@ export const band2: Word[] = [
   {
     word: "aeroplane",
     pos: "noun",
+    level: 6,
     kidMeaning: "A vehicle that flies in the air.",
     examples: ["The aeroplane is very high.", "She flies in an aeroplane."],
     emoji: "✈️",
@@ -787,6 +874,7 @@ export const band2: Word[] = [
   {
     word: "helicopter",
     pos: "noun",
+    level: 5,
     kidMeaning: "A flying machine with big blades.",
     examples: ["The helicopter lands on the roof.", "He flies in a helicopter."],
     emoji: "🚁",
@@ -796,6 +884,7 @@ export const band2: Word[] = [
   {
     word: "bicycle",
     pos: "noun",
+    level: 5,
     kidMeaning: "A vehicle with two wheels.",
     examples: ["The bicycle is fast.", "She rides a bicycle to school."],
     emoji: "🚴",
@@ -805,6 +894,7 @@ export const band2: Word[] = [
   {
     word: "motorcycle",
     pos: "noun",
+    level: 6,
     kidMeaning: "A vehicle with two wheels and an engine.",
     examples: ["The motorcycle is very loud.", "He rides a motorcycle fast."],
     emoji: "🏍️",
@@ -814,6 +904,7 @@ export const band2: Word[] = [
   {
     word: "van",
     pos: "noun",
+    level: 1,
     kidMeaning: "A vehicle bigger than a car.",
     examples: ["The van is parked outside.", "She drives a van for her job."],
     emoji: "🚐",
@@ -823,6 +914,7 @@ export const band2: Word[] = [
   {
     word: "boat",
     pos: "noun",
+    level: 1,
     kidMeaning: "A vehicle that floats on water.",
     examples: ["The boat is in the water.", "He sails the boat."],
     emoji: "⛵",
@@ -832,6 +924,7 @@ export const band2: Word[] = [
   {
     word: "ship",
     pos: "noun",
+    level: 1,
     kidMeaning: "A large boat for travel.",
     examples: ["The ship is very big.", "She sails on a ship."],
     emoji: "🚢",
@@ -841,6 +934,7 @@ export const band2: Word[] = [
   {
     word: "ferry",
     pos: "noun",
+    level: 4,
     kidMeaning: "A boat that carries people across water.",
     examples: ["The ferry crosses the sea.", "He takes the ferry to the island."],
     emoji: "⛴️",
@@ -850,6 +944,7 @@ export const band2: Word[] = [
   {
     word: "canoe",
     pos: "noun",
+    level: 5,
     kidMeaning: "A small light boat.",
     examples: ["The canoe glides through the water.", "She paddles the canoe."],
     emoji: "🛶",
@@ -859,6 +954,7 @@ export const band2: Word[] = [
   {
     word: "scooter",
     pos: "noun",
+    level: 4,
     kidMeaning: "A small vehicle with a platform.",
     examples: ["The scooter is fun to ride.", "He rides a scooter to the park."],
     emoji: "🛴",
@@ -868,6 +964,7 @@ export const band2: Word[] = [
   {
     word: "skateboard",
     pos: "noun",
+    level: 6,
     kidMeaning: "A board with wheels for riding.",
     examples: ["The skateboard is cool.", "She rides her skateboard."],
     emoji: "🛹",
@@ -877,6 +974,7 @@ export const band2: Word[] = [
   {
     word: "trolley",
     pos: "noun",
+    level: 5,
     kidMeaning: "A cart with wheels for shopping.",
     examples: ["The trolley is full of groceries.", "She pushes the trolley."],
     emoji: "🛒",
@@ -886,6 +984,7 @@ export const band2: Word[] = [
   {
     word: "suitcase",
     pos: "noun",
+    level: 4,
     kidMeaning: "A bag for carrying clothes when travelling.",
     examples: ["The suitcase is heavy.", "She packs her suitcase for the trip."],
     emoji: "🧳",
@@ -895,6 +994,7 @@ export const band2: Word[] = [
   {
     word: "route",
     pos: "noun",
+    level: 3,
     kidMeaning: "The way to go to a place.",
     examples: ["The route is very long.", "She takes the same route every day."],
     emoji: "🗺️",
@@ -904,6 +1004,7 @@ export const band2: Word[] = [
   {
     word: "distance",
     pos: "noun",
+    level: 3,
     kidMeaning: "How far apart two places are.",
     examples: ["The distance is ten kilometres.", "He measures the distance carefully."],
     emoji: "📏",
@@ -913,6 +1014,7 @@ export const band2: Word[] = [
   {
     word: "fuel",
     pos: "noun",
+    level: 2,
     kidMeaning: "Something burned to make a vehicle go.",
     examples: ["The fuel tank is empty.", "He puts fuel in the car."],
     emoji: "⛽",
@@ -922,6 +1024,7 @@ export const band2: Word[] = [
   {
     word: "petrol",
     pos: "noun",
+    level: 4,
     kidMeaning: "Liquid used to make cars go.",
     examples: ["The petrol is expensive.", "She fills up petrol at the station."],
     emoji: "⛽",
@@ -931,6 +1034,7 @@ export const band2: Word[] = [
   {
     word: "engine",
     pos: "noun",
+    level: 2,
     kidMeaning: "A machine that makes things move.",
     examples: ["The engine is very powerful.", "He fixes the car engine."],
     emoji: "🔧",
@@ -940,6 +1044,7 @@ export const band2: Word[] = [
   {
     word: "wheel",
     pos: "noun",
+    level: 2,
     kidMeaning: "A round object that spins.",
     examples: ["The wheel turns very fast.", "He changes the wheel."],
     emoji: "🛞",
@@ -949,6 +1054,7 @@ export const band2: Word[] = [
   {
     word: "brake",
     pos: "noun",
+    level: 3,
     kidMeaning: "Something that stops a vehicle.",
     examples: ["The brake is working well.", "He uses the brake to stop."],
     emoji: "🛑",
@@ -958,6 +1064,7 @@ export const band2: Word[] = [
   {
     word: "horn",
     pos: "noun",
+    level: 2,
     kidMeaning: "A device that makes a loud sound.",
     examples: ["The horn is very loud.", "She blows the horn."],
     emoji: "📯",
@@ -967,6 +1074,7 @@ export const band2: Word[] = [
   {
     word: "headlight",
     pos: "noun",
+    level: 6,
     kidMeaning: "A light in front of a vehicle.",
     examples: ["The headlight is broken.", "He turns on the headlights."],
     emoji: "💡",
@@ -976,6 +1084,7 @@ export const band2: Word[] = [
   {
     word: "price",
     pos: "noun",
+    level: 2,
     kidMeaning: "The amount of money something costs.",
     examples: ["The price is too high.", "She checks the price of the shirt."],
     emoji: "💰",
@@ -985,6 +1094,7 @@ export const band2: Word[] = [
   {
     word: "discount",
     pos: "noun",
+    level: 5,
     kidMeaning: "A reduction in the price of something.",
     examples: ["The discount is fifty per cent.", "She gets a discount on the dress."],
     emoji: "🏷️",
@@ -994,6 +1104,7 @@ export const band2: Word[] = [
   {
     word: "afford",
     pos: "verb",
+    level: 3,
     kidMeaning: "To have enough money to buy something.",
     examples: ["She can afford the toy.", "He cannot afford the expensive bike."],
     emoji: "💰",
@@ -1003,6 +1114,7 @@ export const band2: Word[] = [
   {
     word: "bargain",
     pos: "noun",
+    level: 5,
     kidMeaning: "Something sold at a very good price.",
     examples: ["The shirt is a bargain.", "She finds a bargain at the sale."],
     emoji: "🏷️",
@@ -1012,6 +1124,7 @@ export const band2: Word[] = [
   {
     word: "bill",
     pos: "noun",
+    level: 2,
     kidMeaning: "A statement of money owed.",
     examples: ["The bill is one hundred dollars.", "She pays the electricity bill."],
     emoji: "📄",
@@ -1021,6 +1134,7 @@ export const band2: Word[] = [
   {
     word: "payment",
     pos: "noun",
+    level: 5,
     kidMeaning: "Money you give for something.",
     examples: ["The payment is by card.", "She makes a payment each month."],
     emoji: "💳",
@@ -1030,6 +1144,7 @@ export const band2: Word[] = [
   {
     word: "cost",
     pos: "verb",
+    level: 2,
     kidMeaning: "To have a certain price.",
     examples: ["The shirt costs ten dollars.", "It costs a lot of money."],
     emoji: "💰",
@@ -1039,6 +1154,7 @@ export const band2: Word[] = [
   {
     word: "charge",
     pos: "verb",
+    level: 3,
     kidMeaning: "To ask for money for something.",
     examples: ["The shop charges high prices.", "He charges for his service."],
     emoji: "💸",
@@ -1048,6 +1164,7 @@ export const band2: Word[] = [
   {
     word: "spend",
     pos: "verb",
+    level: 2,
     kidMeaning: "To use money to buy something.",
     examples: ["She spends money on books.", "He spends too much on toys."],
     emoji: "💸",
@@ -1057,6 +1174,7 @@ export const band2: Word[] = [
   {
     word: "save",
     pos: "verb",
+    level: 1,
     kidMeaning: "To keep money instead of spending it.",
     examples: ["She saves money for a holiday.", "He saves coins in a jar."],
     emoji: "🏦",
@@ -1066,6 +1184,7 @@ export const band2: Word[] = [
   {
     word: "exchange",
     pos: "verb",
+    level: 4,
     kidMeaning: "To give one thing and get another.",
     examples: ["She exchanges the shirt for a smaller size.", "He exchanges his toy."],
     emoji: "🔄",
@@ -1075,6 +1194,7 @@ export const band2: Word[] = [
   {
     word: "refund",
     pos: "noun",
+    level: 6,
     kidMeaning: "Money given back for returned goods.",
     examples: ["The refund is complete.", "She gets a refund for the broken toy."],
     emoji: "💵",
@@ -1084,6 +1204,7 @@ export const band2: Word[] = [
   {
     word: "guarantee",
     pos: "noun",
+    level: 5,
     kidMeaning: "A promise that something will work.",
     examples: ["The guarantee is for two years.", "It has a money-back guarantee."],
     emoji: "✓",
@@ -1093,6 +1214,7 @@ export const band2: Word[] = [
   {
     word: "interest",
     pos: "noun",
+    level: 4,
     kidMeaning: "Extra money paid for borrowing.",
     examples: ["The interest rate is five per cent.", "She pays interest on the loan."],
     emoji: "📊",
@@ -1102,6 +1224,7 @@ export const band2: Word[] = [
   {
     word: "coin",
     pos: "noun",
+    level: 4,
     kidMeaning: "A round piece of metal money.",
     examples: ["The coin is gold.", "He counts his coins."],
     emoji: "🪙",
@@ -1111,6 +1234,7 @@ export const band2: Word[] = [
   {
     word: "note",
     pos: "noun",
+    level: 2,
     kidMeaning: "A piece of paper money.",
     examples: ["The note is worth fifty dollars.", "She holds a ten dollar note."],
     emoji: "💵",
@@ -1120,6 +1244,7 @@ export const band2: Word[] = [
   {
     word: "wallet",
     pos: "noun",
+    level: 4,
     kidMeaning: "A small bag for holding money.",
     examples: ["The wallet is in his pocket.", "She keeps her money in a wallet."],
     emoji: "👝",
@@ -1129,6 +1254,7 @@ export const band2: Word[] = [
   {
     word: "purse",
     pos: "noun",
+    level: 3,
     kidMeaning: "A small bag for money and things.",
     examples: ["The purse is red.", "She carries her purse everywhere."],
     emoji: "👜",
@@ -1138,6 +1264,7 @@ export const band2: Word[] = [
   {
     word: "cash",
     pos: "noun",
+    level: 2,
     kidMeaning: "Money in coins or notes.",
     examples: ["She pays in cash.", "He has cash in his pocket."],
     emoji: "💰",
@@ -1147,6 +1274,7 @@ export const band2: Word[] = [
   {
     word: "card",
     pos: "noun",
+    level: 2,
     kidMeaning: "A plastic thing used to buy things.",
     examples: ["She uses a credit card.", "He pays with a card."],
     emoji: "💳",
@@ -1156,6 +1284,7 @@ export const band2: Word[] = [
   {
     word: "budget",
     pos: "noun",
+    level: 5,
     kidMeaning: "A plan for using money.",
     examples: ["The family budget is tight.", "She makes a monthly budget."],
     emoji: "📊",
@@ -1165,6 +1294,7 @@ export const band2: Word[] = [
   {
     word: "tip",
     pos: "noun",
+    level: 3,
     kidMeaning: "Extra money given for good service.",
     examples: ["The tip is generous.", "She leaves a tip for the waiter."],
     emoji: "💵",
@@ -1174,6 +1304,7 @@ export const band2: Word[] = [
   {
     word: "sale",
     pos: "noun",
+    level: 3,
     kidMeaning: "A time when things are sold cheaply.",
     examples: ["The sale is this weekend.", "She shops during the sale."],
     emoji: "🏷️",
@@ -1183,6 +1314,7 @@ export const band2: Word[] = [
   {
     word: "expensive",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Costing a lot of money.",
     examples: ["The car is very expensive.", "She cannot afford expensive things."],
     emoji: "💸",
@@ -1192,6 +1324,7 @@ export const band2: Word[] = [
   {
     word: "cheap",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Costing very little money.",
     examples: ["The shirt is cheap.", "He buys cheap toys."],
     emoji: "🏷️",
@@ -1201,6 +1334,7 @@ export const band2: Word[] = [
   {
     word: "free",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Costing no money.",
     examples: ["The book is free.", "She gets a free gift."],
     emoji: "🎁",
@@ -1210,6 +1344,7 @@ export const band2: Word[] = [
   {
     word: "dawn",
     pos: "noun",
+    level: 2,
     kidMeaning: "Early morning when the sun rises.",
     examples: ["She wakes at dawn.", "The birds sing at dawn."],
     emoji: "🌅",
@@ -1219,6 +1354,7 @@ export const band2: Word[] = [
   {
     word: "noon",
     pos: "noun",
+    level: 3,
     kidMeaning: "Twelve o'clock in the middle of the day.",
     examples: ["We eat lunch at noon.", "The sun is high at noon."],
     emoji: "☀️",
@@ -1228,6 +1364,7 @@ export const band2: Word[] = [
   {
     word: "midnight",
     pos: "noun",
+    level: 3,
     kidMeaning: "Twelve o'clock at night.",
     examples: ["Midnight is very late.", "The clock strikes midnight."],
     emoji: "🌙",
@@ -1237,6 +1374,7 @@ export const band2: Word[] = [
   {
     word: "schedule",
     pos: "noun",
+    level: 4,
     kidMeaning: "A plan of when things happen.",
     examples: ["The schedule is on the wall.", "She checks the schedule."],
     emoji: "📅",
@@ -1246,6 +1384,7 @@ export const band2: Word[] = [
   {
     word: "punctual",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Arriving or doing things on time.",
     examples: ["She is punctual for class.", "The punctual student is early."],
     emoji: "⏰",
@@ -1255,6 +1394,7 @@ export const band2: Word[] = [
   {
     word: "delay",
     pos: "noun",
+    level: 4,
     kidMeaning: "A period of waiting time.",
     examples: ["The train has a delay.", "There is a delay in service."],
     emoji: "⏱️",
@@ -1264,6 +1404,7 @@ export const band2: Word[] = [
   {
     word: "rush",
     pos: "verb",
+    level: 2,
     kidMeaning: "To move or do something very quickly.",
     examples: ["She rushes to school.", "He rushes through his homework."],
     emoji: "💨",
@@ -1273,6 +1414,7 @@ export const band2: Word[] = [
   {
     word: "hurry",
     pos: "verb",
+    level: 2,
     kidMeaning: "To move quickly to go somewhere.",
     examples: ["She hurries to catch the bus.", "He hurries home."],
     emoji: "💨",
@@ -1282,6 +1424,7 @@ export const band2: Word[] = [
   {
     word: "rest",
     pos: "verb",
+    level: 1,
     kidMeaning: "To stop working and relax.",
     examples: ["She rests after school.", "He rests on the sofa."],
     emoji: "😴",
@@ -1291,6 +1434,7 @@ export const band2: Word[] = [
   {
     word: "wake",
     pos: "verb",
+    level: 1,
     kidMeaning: "To stop sleeping.",
     examples: ["She wakes up early.", "The alarm wakes him."],
     emoji: "👁️",
@@ -1300,6 +1444,7 @@ export const band2: Word[] = [
   {
     word: "routine",
     pos: "noun",
+    level: 4,
     kidMeaning: "A regular way of doing things.",
     examples: ["Her routine is very regular.", "He has a morning routine."],
     emoji: "📋",
@@ -1309,6 +1454,7 @@ export const band2: Word[] = [
   {
     word: "habit",
     pos: "noun",
+    level: 4,
     kidMeaning: "Something you do regularly.",
     examples: ["Reading is her good habit.", "He has a habit of waking early."],
     emoji: "🔁",
@@ -1318,6 +1464,7 @@ export const band2: Word[] = [
   {
     word: "regular",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Happening at the same time often.",
     examples: ["She has a regular class.", "He visits regularly."],
     emoji: "🔁",
@@ -1327,6 +1474,7 @@ export const band2: Word[] = [
   {
     word: "alarm",
     pos: "noun",
+    level: 3,
     kidMeaning: "A device that makes noise at a set time.",
     examples: ["The alarm rings at seven.", "She sets an alarm."],
     emoji: "⏰",
@@ -1336,6 +1484,7 @@ export const band2: Word[] = [
   {
     word: "clock",
     pos: "noun",
+    level: 2,
     kidMeaning: "A device that shows the time.",
     examples: ["The clock shows nine.", "She looks at the clock."],
     emoji: "🕐",
@@ -1345,6 +1494,7 @@ export const band2: Word[] = [
   {
     word: "timer",
     pos: "noun",
+    level: 3,
     kidMeaning: "A device that measures time.",
     examples: ["She sets a timer.", "The timer rings when time is up."],
     emoji: "⏱️",
@@ -1354,6 +1504,7 @@ export const band2: Word[] = [
   {
     word: "deadline",
     pos: "noun",
+    level: 5,
     kidMeaning: "The last day or time to do something.",
     examples: ["The deadline is Friday.", "She meets the deadline."],
     emoji: "📅",
@@ -1363,6 +1514,7 @@ export const band2: Word[] = [
   {
     word: "century",
     pos: "noun",
+    level: 4,
     kidMeaning: "A period of one hundred years.",
     examples: ["The century has passed.", "She studies this century."],
     emoji: "⏳",
@@ -1372,6 +1524,7 @@ export const band2: Word[] = [
   {
     word: "decade",
     pos: "noun",
+    level: 5,
     kidMeaning: "A period of ten years.",
     examples: ["The decade was exciting.", "He lives for many decades."],
     emoji: "📅",
@@ -1381,6 +1534,7 @@ export const band2: Word[] = [
   {
     word: "hour",
     pos: "noun",
+    level: 1,
     kidMeaning: "A period of sixty minutes.",
     examples: ["She studies for one hour.", "An hour has sixty minutes."],
     emoji: "⏰",
@@ -1390,6 +1544,7 @@ export const band2: Word[] = [
   {
     word: "second",
     pos: "noun",
+    level: 1,
     kidMeaning: "A very short period of time.",
     examples: ["She waits one second.", "Give me a second."],
     emoji: "⏱️",
@@ -1399,6 +1554,7 @@ export const band2: Word[] = [
   {
     word: "greet",
     pos: "verb",
+    level: 4,
     kidMeaning: "To welcome someone with a hello.",
     examples: ["She greets her friend.", "He greets the teacher."],
     emoji: "👋",
@@ -1408,6 +1564,7 @@ export const band2: Word[] = [
   {
     word: "meet",
     pos: "verb",
+    level: 1,
     kidMeaning: "To come together with someone.",
     examples: ["She meets her friend at school.", "He meets the new student."],
     emoji: "👫",
@@ -1417,6 +1574,7 @@ export const band2: Word[] = [
   {
     word: "separate",
     pos: "verb",
+    level: 4,
     kidMeaning: "To move apart from someone.",
     examples: ["She separates from the group.", "He separates the objects."],
     emoji: "✂️",
@@ -1426,6 +1584,7 @@ export const band2: Word[] = [
   {
     word: "approach",
     pos: "verb",
+    level: 4,
     kidMeaning: "To come near to someone or something.",
     examples: ["She approaches the building.", "He approaches slowly."],
     emoji: "🚶",
@@ -1435,6 +1594,7 @@ export const band2: Word[] = [
   {
     word: "invite",
     pos: "verb",
+    level: 3,
     kidMeaning: "To ask someone to come to an event.",
     examples: ["She invites her friend.", "He invites many people."],
     emoji: "🎉",
@@ -1444,6 +1604,7 @@ export const band2: Word[] = [
   {
     word: "attend",
     pos: "verb",
+    level: 4,
     kidMeaning: "To go to or be present at.",
     examples: ["She attends the party.", "He attends school every day."],
     emoji: "✓",
@@ -1453,6 +1614,7 @@ export const band2: Word[] = [
   {
     word: "cooperate",
     pos: "verb",
+    level: 6,
     kidMeaning: "To work together with others.",
     examples: ["She cooperates with her team.", "He cooperates with friends."],
     emoji: "🤝",
@@ -1462,6 +1624,7 @@ export const band2: Word[] = [
   {
     word: "compete",
     pos: "verb",
+    level: 4,
     kidMeaning: "To try to do better than others.",
     examples: ["She competes in the race.", "He competes with his friend."],
     emoji: "🏆",
@@ -1471,6 +1634,7 @@ export const band2: Word[] = [
   {
     word: "gather",
     pos: "verb",
+    level: 4,
     kidMeaning: "To come together or collect things.",
     examples: ["They gather in the park.", "She gathers flowers."],
     emoji: "🌸",
@@ -1480,6 +1644,7 @@ export const band2: Word[] = [
   {
     word: "scatter",
     pos: "verb",
+    level: 6,
     kidMeaning: "To spread things around.",
     examples: ["She scatters the seeds.", "The wind scatters the leaves."],
     emoji: "🌪️",
@@ -1489,6 +1654,7 @@ export const band2: Word[] = [
   {
     word: "arrange",
     pos: "verb",
+    level: 4,
     kidMeaning: "To put things in order.",
     examples: ["She arranges the chairs.", "He arranges the flowers."],
     emoji: "📐",
@@ -1498,6 +1664,7 @@ export const band2: Word[] = [
   {
     word: "search",
     pos: "verb",
+    level: 2,
     kidMeaning: "To look carefully for something.",
     examples: ["She searches for her keys.", "He searches through the bag."],
     emoji: "🔍",
@@ -1507,6 +1674,7 @@ export const band2: Word[] = [
   {
     word: "discover",
     pos: "verb",
+    level: 5,
     kidMeaning: "To find something for the first time.",
     examples: ["She discovers a new path.", "He discovers an old toy."],
     emoji: "🔍",
@@ -1516,6 +1684,7 @@ export const band2: Word[] = [
   {
     word: "explore",
     pos: "verb",
+    level: 5,
     kidMeaning: "To travel around to see new places.",
     examples: ["She explores the beach.", "He explores the cave."],
     emoji: "🗺️",
@@ -1525,6 +1694,7 @@ export const band2: Word[] = [
   {
     word: "pack",
     pos: "verb",
+    level: 2,
     kidMeaning: "To put things into a bag or box.",
     examples: ["She packs her clothes.", "He packs for the trip."],
     emoji: "🧳",
@@ -1534,6 +1704,7 @@ export const band2: Word[] = [
   {
     word: "unpack",
     pos: "verb",
+    level: 5,
     kidMeaning: "To take things out of a bag or box.",
     examples: ["She unpacks her bag.", "He unpacks his suitcase."],
     emoji: "📦",
@@ -1543,6 +1714,7 @@ export const band2: Word[] = [
   {
     word: "load",
     pos: "verb",
+    level: 3,
     kidMeaning: "To put things onto a vehicle.",
     examples: ["She loads the boxes.", "He loads the van."],
     emoji: "📦",
@@ -1552,6 +1724,7 @@ export const band2: Word[] = [
   {
     word: "unload",
     pos: "verb",
+    level: 5,
     kidMeaning: "To take things off a vehicle.",
     examples: ["She unloads the car.", "He unloads the boxes."],
     emoji: "📦",
@@ -1561,6 +1734,7 @@ export const band2: Word[] = [
   {
     word: "deliver",
     pos: "verb",
+    level: 4,
     kidMeaning: "To bring something to someone.",
     examples: ["She delivers the package.", "He delivers newspapers."],
     emoji: "📦",
@@ -1570,6 +1744,7 @@ export const band2: Word[] = [
   {
     word: "receive",
     pos: "verb",
+    level: 3,
     kidMeaning: "To get something given to you.",
     examples: ["She receives a gift.", "He receives the package."],
     emoji: "📦",
@@ -1579,6 +1754,7 @@ export const band2: Word[] = [
   {
     word: "loud",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Making a lot of noise.",
     examples: ["The music is very loud.", "He has a loud voice."],
     emoji: "🔊",
@@ -1588,6 +1764,7 @@ export const band2: Word[] = [
   {
     word: "peaceful",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Calm and quiet.",
     examples: ["The park is peaceful.", "She feels peaceful."],
     emoji: "☮️",
@@ -1597,6 +1774,7 @@ export const band2: Word[] = [
   {
     word: "empty",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Having nothing inside.",
     examples: ["The bag is empty.", "The room is empty."],
     emoji: "📭",
@@ -1606,6 +1784,7 @@ export const band2: Word[] = [
   {
     word: "full",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Filled with as much as possible.",
     examples: ["The cup is full of water.", "Her day is full."],
     emoji: "🪣",
@@ -1615,6 +1794,7 @@ export const band2: Word[] = [
   {
     word: "energetic",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Full of energy and activity.",
     examples: ["He is very energetic.", "The energetic dog runs fast."],
     emoji: "⚡",
@@ -1624,6 +1804,7 @@ export const band2: Word[] = [
   {
     word: "gloomy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Dark and sad.",
     examples: ["The weather is gloomy.", "His gloomy mood improves."],
     emoji: "⛅",
@@ -1633,6 +1814,7 @@ export const band2: Word[] = [
   {
     word: "helpful",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Giving help or being useful.",
     examples: ["She is very helpful.", "A helpful student aids others."],
     emoji: "🤝",
@@ -1642,6 +1824,7 @@ export const band2: Word[] = [
   {
     word: "selfish",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Only thinking of yourself.",
     examples: ["He is selfish with his toys.", "The selfish boy refuses to share."],
     emoji: "😤",
@@ -1651,6 +1834,7 @@ export const band2: Word[] = [
   {
     word: "generous",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Willing to give and share.",
     examples: ["She is very generous.", "The generous man gives gifts."],
     emoji: "🎁",
@@ -1660,6 +1844,7 @@ export const band2: Word[] = [
   {
     word: "loyal",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Staying close to someone you care for.",
     examples: ["He is loyal to his friends.", "Her loyal dog follows her everywhere."],
     emoji: "🐕",
@@ -1669,6 +1854,7 @@ export const band2: Word[] = [
   {
     word: "patient",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Able to wait calmly.",
     examples: ["She is patient with her siblings.", "The patient teacher helps all students."],
     emoji: "⏳",
@@ -1678,6 +1864,7 @@ export const band2: Word[] = [
   {
     word: "impatient",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not able to wait calmly.",
     examples: ["He is impatient for lunch.", "The impatient child taps his foot."],
     emoji: "⏱️",
@@ -1687,6 +1874,7 @@ export const band2: Word[] = [
   {
     word: "practical",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Good for everyday use.",
     examples: ["She gives practical advice.", "Practical clothing is best for hiking."],
     emoji: "🔧",
@@ -1696,6 +1884,7 @@ export const band2: Word[] = [
   {
     word: "ungrateful",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not feeling or showing thanks.",
     examples: ["He is ungrateful for help.", "The ungrateful child complains."],
     emoji: "😠",
@@ -1705,6 +1894,7 @@ export const band2: Word[] = [
   {
     word: "humble",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Not proud or boastful.",
     examples: ["He is humble about his success.", "She remains humble despite winning."],
     emoji: "🙏",
@@ -1714,6 +1904,7 @@ export const band2: Word[] = [
   {
     word: "responsible",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Able to do the right thing.",
     examples: ["She is responsible for the plants.", "The responsible student completes homework."],
     emoji: "✓",
@@ -1723,6 +1914,7 @@ export const band2: Word[] = [
   {
     word: "flexible",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Able to bend or change.",
     examples: ["She is flexible in her approach.", "The flexible rope bends easily."],
     emoji: "🤸",
@@ -1732,6 +1924,7 @@ export const band2: Word[] = [
   {
     word: "rigid",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Stiff and unable to bend.",
     examples: ["The rigid stick does not bend.", "His rigid rules never change."],
     emoji: "📏",
@@ -1741,6 +1934,7 @@ export const band2: Word[] = [
   {
     word: "comfortable",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Feeling nice and good.",
     examples: ["The chair is comfortable.", "She feels comfortable with her friends."],
     emoji: "🛋️",
@@ -1750,6 +1944,7 @@ export const band2: Word[] = [
   {
     word: "temporary",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Lasting for a short time only.",
     examples: ["The temporary bridge closes soon.", "She takes a temporary job."],
     emoji: "⏱️",
@@ -1759,6 +1954,7 @@ export const band2: Word[] = [
   {
     word: "permanent",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Lasting forever or for a long time.",
     examples: ["He makes a permanent move.", "The permanent mark stays on the wall."],
     emoji: "♾️",
@@ -1768,6 +1964,7 @@ export const band2: Word[] = [
   {
     word: "prompt",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Done without delay.",
     examples: ["She gives a prompt reply.", "His prompt arrival surprises everyone."],
     emoji: "⚡",
@@ -1777,6 +1974,7 @@ export const band2: Word[] = [
   {
     word: "early",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Before the expected time.",
     examples: ["She arrives early.", "She goes for a walk early in the morning."],
     emoji: "🌅",
@@ -1786,6 +1984,7 @@ export const band2: Word[] = [
   {
     word: "late",
     pos: "adjective",
+    level: 1,
     kidMeaning: "After the expected time.",
     examples: ["He arrives late to school.", "They have a late dinner."],
     emoji: "🌙",
@@ -1795,6 +1994,7 @@ export const band2: Word[] = [
   {
     word: "distant",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Far away from something.",
     examples: ["The mountain is distant.", "Her relative lives in a distant country."],
     emoji: "📏",
@@ -1804,6 +2004,7 @@ export const band2: Word[] = [
   {
     word: "shallow",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Not deep.",
     examples: ["The pool is shallow.", "She walks in shallow water."],
     emoji: "🏊",
@@ -1813,6 +2014,7 @@ export const band2: Word[] = [
   {
     word: "deep",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Extending far down.",
     examples: ["The ocean is very deep.", "He digs a deep hole."],
     emoji: "🌊",
@@ -1822,6 +2024,7 @@ export const band2: Word[] = [
   {
     word: "steep",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Rising at a sharp angle.",
     examples: ["The hill is very steep.", "She climbs the steep stairs."],
     emoji: "⛰️",
@@ -1831,6 +2034,7 @@ export const band2: Word[] = [
   {
     word: "dim",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Not bright; not giving much light.",
     examples: ["The room is very dim.", "The dim bulb flickers."],
     emoji: "💡",
@@ -1840,6 +2044,7 @@ export const band2: Word[] = [
   {
     word: "clear",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Easy to see through or understand.",
     examples: ["The water is very clear.", "Her instructions are clear."],
     emoji: "👀",
@@ -1849,6 +2054,7 @@ export const band2: Word[] = [
   {
     word: "sunny",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Full of sunshine.",
     examples: ["The sunny day is perfect.", "She enjoys sunny weather."],
     emoji: "☀️",
@@ -1858,6 +2064,7 @@ export const band2: Word[] = [
   {
     word: "rainy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Having lots of rain.",
     examples: ["The rainy day makes her sad.", "He plays in the rainy weather."],
     emoji: "🌧️",
@@ -1867,6 +2074,7 @@ export const band2: Word[] = [
   {
     word: "windy",
     pos: "adjective",
+    level: 5,
     kidMeaning: "Having lots of wind.",
     examples: ["The windy day blows hard.", "She flies her kite in windy weather."],
     emoji: "💨",
@@ -1876,6 +2084,7 @@ export const band2: Word[] = [
   {
     word: "warm",
     pos: "adjective",
+    level: 1,
     kidMeaning: "Having or giving heat.",
     examples: ["The weather is very warm.", "She wraps in a warm blanket."],
     emoji: "🔥",
@@ -1885,6 +2094,7 @@ export const band2: Word[] = [
   {
     word: "cool",
     pos: "adjective",
+    level: 1,
     kidMeaning: "Pleasantly cold.",
     examples: ["The cool breeze feels nice.", "He takes a cool drink."],
     emoji: "🧊",
@@ -1894,6 +2104,7 @@ export const band2: Word[] = [
   {
     word: "thick",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Having great distance through.",
     examples: ["The wall is very thick.", "He wears a thick sweater."],
     emoji: "📏",
@@ -1903,6 +2114,7 @@ export const band2: Word[] = [
   {
     word: "thin",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Having small distance through.",
     examples: ["The paper is very thin.", "She wears thin socks."],
     emoji: "📄",
@@ -1912,6 +2124,7 @@ export const band2: Word[] = [
   {
     word: "tall",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Having great height.",
     examples: ["The building is very tall.", "He is a tall boy."],
     emoji: "📏",
@@ -1921,6 +2134,7 @@ export const band2: Word[] = [
   {
     word: "light",
     pos: "adjective",
+    level: 2,
     kidMeaning: "Of little weight or not heavy.",
     examples: ["The feather is very light.", "She carries light bags."],
     emoji: "🪶",
@@ -1930,6 +2144,7 @@ export const band2: Word[] = [
   {
     word: "modern",
     pos: "adjective",
+    level: 3,
     kidMeaning: "Of recent times or now.",
     examples: ["The modern building is tall.", "She likes modern music."],
     emoji: "🏢",
@@ -1939,6 +2154,7 @@ export const band2: Word[] = [
   {
     word: "sprint",
     pos: "verb",
+    level: 5,
     kidMeaning: "To run very fast over a short distance.",
     examples: ["She sprints to the finish line.", "He sprints across the field."],
     emoji: "🏃",
@@ -1948,6 +2164,7 @@ export const band2: Word[] = [
   {
     word: "wander",
     pos: "verb",
+    level: 5,
     kidMeaning: "To walk with no fixed destination.",
     examples: ["She wanders through the market.", "He wanders the streets."],
     emoji: "🗺️",
@@ -1957,6 +2174,7 @@ export const band2: Word[] = [
   {
     word: "inspect",
     pos: "verb",
+    level: 5,
     kidMeaning: "To look carefully at something.",
     examples: ["She inspects the building.", "He inspects the car for damage."],
     emoji: "🔍",
@@ -1966,6 +2184,7 @@ export const band2: Word[] = [
   {
     word: "observe",
     pos: "verb",
+    level: 4,
     kidMeaning: "To watch or notice something.",
     examples: ["She observes the animals.", "He observes the rules."],
     emoji: "👀",
@@ -1975,6 +2194,7 @@ export const band2: Word[] = [
   {
     word: "flatten",
     pos: "verb",
+    level: 6,
     kidMeaning: "To make something flat.",
     examples: ["She flattens the dough.", "He flattens the boxes."],
     emoji: "📏",
@@ -1984,6 +2204,7 @@ export const band2: Word[] = [
   {
     word: "crumple",
     pos: "verb",
+    level: 6,
     kidMeaning: "To crush something into a ball.",
     examples: ["She crumples the paper.", "He crumples his shirt."],
     emoji: "📄",
@@ -1993,6 +2214,7 @@ export const band2: Word[] = [
   {
     word: "squeeze",
     pos: "verb",
+    level: 3,
     kidMeaning: "To press or compress.",
     examples: ["She squeezes the sponge.", "He squeezes the juice from the fruit."],
     emoji: "🍋",
@@ -2002,6 +2224,7 @@ export const band2: Word[] = [
   {
     word: "stretch",
     pos: "verb",
+    level: 3,
     kidMeaning: "To make something longer or wider.",
     examples: ["She stretches the fabric.", "He stretches before exercise."],
     emoji: "🤸",
@@ -2011,6 +2234,7 @@ export const band2: Word[] = [
   {
     word: "unfold",
     pos: "verb",
+    level: 6,
     kidMeaning: "To open something that was folded.",
     examples: ["She unfolds the map.", "He unfolds his chair."],
     emoji: "📝",
@@ -2020,6 +2244,7 @@ export const band2: Word[] = [
   {
     word: "roll",
     pos: "verb",
+    level: 2,
     kidMeaning: "To turn over and over.",
     examples: ["She rolls the ball.", "He rolls down the hill."],
     emoji: "⚽",
@@ -2029,6 +2254,7 @@ export const band2: Word[] = [
   {
     word: "slide",
     pos: "verb",
+    level: 3,
     kidMeaning: "To move smoothly over a surface.",
     examples: ["She slides on the ice.", "He slides down the slope."],
     emoji: "🛷",
@@ -2038,6 +2264,7 @@ export const band2: Word[] = [
   {
     word: "stumble",
     pos: "verb",
+    level: 6,
     kidMeaning: "To almost fall while walking.",
     examples: ["She stumbles over a stone.", "He stumbles in the dark."],
     emoji: "🚶",
@@ -2047,6 +2274,7 @@ export const band2: Word[] = [
   {
     word: "trip",
     pos: "verb",
+    level: 2,
     kidMeaning: "To lose your footing and fall.",
     examples: ["She trips on the stairs.", "He trips over the mat."],
     emoji: "🚶",
@@ -2056,6 +2284,7 @@ export const band2: Word[] = [
   {
     word: "slip",
     pos: "verb",
+    level: 3,
     kidMeaning: "To slide by mistake.",
     examples: ["She slips on the floor.", "He slips on the wet ground."],
     emoji: "🪨",
@@ -2065,6 +2294,7 @@ export const band2: Word[] = [
   {
     word: "zigzag",
     pos: "verb",
+    level: 6,
     kidMeaning: "To move in a side to side pattern.",
     examples: ["She zigzags through the crowd.", "He zigzags down the hill."],
     emoji: "⚡",
@@ -2074,6 +2304,7 @@ export const band2: Word[] = [
   {
     word: "hover",
     pos: "verb",
+    level: 6,
     kidMeaning: "To hang in the air.",
     examples: ["The helicopter hovers over the building.", "The bird hovers before landing."],
     emoji: "🚁",
@@ -2083,6 +2314,7 @@ export const band2: Word[] = [
   {
     word: "toddler",
     pos: "noun",
+    level: 6,
     kidMeaning: "A very young child learning to walk.",
     examples: ["The toddler learns to walk.", "She plays with the toddler."],
     emoji: "👶",
@@ -2092,6 +2324,7 @@ export const band2: Word[] = [
   {
     word: "elderly",
     pos: "adjective",
+    level: 4,
     kidMeaning: "Very old in age.",
     examples: ["The elderly man walks slowly.", "She helps elderly people."],
     emoji: "👴",
@@ -2101,6 +2334,7 @@ export const band2: Word[] = [
   {
     word: "twin",
     pos: "noun",
+    level: 3,
     kidMeaning: "One of two children born at the same time.",
     examples: ["He is a twin with his brother.", "The twins look the same."],
     emoji: "👯",
@@ -2110,6 +2344,7 @@ export const band2: Word[] = [
   {
     word: "grandparent",
     pos: "noun",
+    level: 6,
     kidMeaning: "The parent of your parent.",
     examples: ["She visits her grandparent every week.", "My grandparent tells me stories."],
     emoji: "👵",
@@ -2119,6 +2354,7 @@ export const band2: Word[] = [
   {
     word: "crowd",
     pos: "noun",
+    level: 2,
     kidMeaning: "A large group of people together.",
     examples: ["A large crowd gathers at the market.", "She pushes through the crowd."],
     emoji: "👥",
@@ -2128,6 +2364,7 @@ export const band2: Word[] = [
   {
     word: "cyclist",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who rides a bicycle.",
     examples: ["The cyclist rides fast down the road.", "She is a skilled cyclist."],
     emoji: "🚴",
@@ -2137,6 +2374,7 @@ export const band2: Word[] = [
   {
     word: "tourist",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person visiting a place for pleasure.",
     examples: ["The tourist takes many pictures.", "They are tourists visiting the city."],
     emoji: "📷",
@@ -2146,6 +2384,7 @@ export const band2: Word[] = [
   {
     word: "visitor",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who comes to see someone.",
     examples: ["We welcome the visitor to our home.", "He is a frequent visitor."],
     emoji: "🤝",
@@ -2155,6 +2394,7 @@ export const band2: Word[] = [
   {
     word: "owner",
     pos: "noun",
+    level: 1,
     kidMeaning: "A person who possesses something.",
     examples: ["The owner of the shop is friendly.", "She is the owner of the cat."],
     emoji: "🏠",
@@ -2164,6 +2404,7 @@ export const band2: Word[] = [
   {
     word: "boss",
     pos: "noun",
+    level: 3,
     kidMeaning: "A person in charge of workers.",
     examples: ["My boss gives me work to do.", "The boss is very strict."],
     emoji: "👔",
@@ -2173,6 +2414,7 @@ export const band2: Word[] = [
   {
     word: "staff",
     pos: "noun",
+    level: 4,
     kidMeaning: "All the workers in a place.",
     examples: ["She is part of the staff.", "He joins the hotel staff."],
     emoji: "👨‍💼",
@@ -2182,6 +2424,7 @@ export const band2: Word[] = [
   {
     word: "cleaner",
     pos: "noun",
+    level: 2,
     kidMeaning: "A person who makes things clean.",
     examples: ["The cleaner sweeps the floor.", "She works as a cleaner."],
     emoji: "🧹",
@@ -2191,6 +2434,7 @@ export const band2: Word[] = [
   {
     word: "postman",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who delivers letters.",
     examples: ["The postman brings letters to our house.", "She sees the postman every day."],
     emoji: "📬",
@@ -2200,6 +2444,7 @@ export const band2: Word[] = [
   {
     word: "mechanic",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who fixes machines or cars.",
     examples: ["The mechanic fixes the broken car.", "She is a skilled mechanic."],
     emoji: "🔧",
@@ -2209,6 +2454,7 @@ export const band2: Word[] = [
   {
     word: "vet",
     pos: "noun",
+    level: 4,
     kidMeaning: "A doctor for animals.",
     examples: ["The vet checks the sick dog.", "She takes her cat to the vet."],
     emoji: "🐾",
@@ -2218,6 +2464,7 @@ export const band2: Word[] = [
   {
     word: "lifeguard",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who watches swimmers for safety.",
     examples: ["The lifeguard sits by the pool.", "She works as a lifeguard."],
     emoji: "🏖️",
@@ -2227,6 +2474,7 @@ export const band2: Word[] = [
   {
     word: "salesman",
     pos: "noun",
+    level: 5,
     kidMeaning: "A person who sells things.",
     examples: ["The salesman shows the customer the shirt.", "He works as a salesman in a shop."],
     emoji: "🛒",
@@ -2236,6 +2484,7 @@ export const band2: Word[] = [
   {
     word: "neighbourhood",
     pos: "noun",
+    level: 6,
     kidMeaning: "The area around where you live.",
     examples: ["She knows many people in her neighbourhood.", "My neighbourhood is very quiet."],
     emoji: "🏘️",
@@ -2245,6 +2494,7 @@ export const band2: Word[] = [
   {
     word: "estate",
     pos: "noun",
+    level: 5,
     kidMeaning: "A large area of land with buildings.",
     examples: ["They live in a large housing estate.", "The estate has many trees."],
     emoji: "🏘️",
@@ -2254,6 +2504,7 @@ export const band2: Word[] = [
   {
     word: "storey",
     pos: "noun",
+    level: 6,
     kidMeaning: "A level or floor of a building.",
     examples: ["The building has ten storeys.", "They live on the third storey."],
     emoji: "🏢",
@@ -2263,6 +2514,7 @@ export const band2: Word[] = [
   {
     word: "staircase",
     pos: "noun",
+    level: 5,
     kidMeaning: "Steps that go up or down between floors.",
     examples: ["She walks down the staircase carefully.", "The staircase is made of wood."],
     emoji: "🪜",
@@ -2272,6 +2524,7 @@ export const band2: Word[] = [
   {
     word: "rooftop",
     pos: "noun",
+    level: 5,
     kidMeaning: "The top surface of a building.",
     examples: ["We play on the rooftop.", "The rooftop has a nice view."],
     emoji: "🏠",
@@ -2281,6 +2534,7 @@ export const band2: Word[] = [
   {
     word: "carpark",
     pos: "noun",
+    level: 2,
     kidMeaning: "A place where cars are left.",
     examples: ["She parks her car in the carpark.", "The carpark is very busy."],
     emoji: "🅿️",
@@ -2290,6 +2544,7 @@ export const band2: Word[] = [
   {
     word: "crossing",
     pos: "noun",
+    level: 2,
     kidMeaning: "A place to safely cross a road.",
     examples: ["She waits at the crossing for the light.", "Use the crossing to cross safely."],
     emoji: "🚸",
@@ -2299,6 +2554,7 @@ export const band2: Word[] = [
   {
     word: "junction",
     pos: "noun",
+    level: 5,
     kidMeaning: "A place where roads or paths meet.",
     examples: ["The junction is very busy with cars.", "Turn right at the junction."],
     emoji: "🛣️",
@@ -2308,6 +2564,7 @@ export const band2: Word[] = [
   {
     word: "roundabout",
     pos: "noun",
+    level: 6,
     kidMeaning: "A circular place where roads meet.",
     examples: ["The car goes round the roundabout.", "There is a roundabout at this junction."],
     emoji: "🔄",
@@ -2317,6 +2574,7 @@ export const band2: Word[] = [
   {
     word: "footpath",
     pos: "noun",
+    level: 6,
     kidMeaning: "A path for people to walk on.",
     examples: ["We walk on the footpath.", "The footpath is beside the road."],
     emoji: "🚶",
@@ -2326,6 +2584,7 @@ export const band2: Word[] = [
   {
     word: "kerb",
     pos: "noun",
+    level: 6,
     kidMeaning: "The edge of a path beside a road.",
     examples: ["The ball rolls to the kerb.", "She sits on the kerb."],
     emoji: "🪨",
@@ -2335,6 +2594,7 @@ export const band2: Word[] = [
   {
     word: "drain",
     pos: "noun",
+    level: 3,
     kidMeaning: "A pipe or hole for water to flow out.",
     examples: ["The drain takes the water away.", "Water flows down the drain."],
     emoji: "🚰",
@@ -2344,6 +2604,7 @@ export const band2: Word[] = [
   {
     word: "lamppost",
     pos: "noun",
+    level: 6,
     kidMeaning: "A tall pole with a light at the top.",
     examples: ["The lamppost lights the street.", "We meet by the lamppost."],
     emoji: "💡",
@@ -2353,6 +2614,7 @@ export const band2: Word[] = [
   {
     word: "signboard",
     pos: "noun",
+    level: 2,
     kidMeaning: "A board with writing to give information.",
     examples: ["The signboard shows the shop name.", "She reads the signboard."],
     emoji: "🪧",
@@ -2362,6 +2624,7 @@ export const band2: Word[] = [
   {
     word: "shophouse",
     pos: "noun",
+    level: 2,
     kidMeaning: "A building with a shop below and home above.",
     examples: ["They live in a shophouse.", "The shophouse is very old."],
     emoji: "🏪",
@@ -2371,6 +2634,7 @@ export const band2: Word[] = [
   {
     word: "kiosk",
     pos: "noun",
+    level: 6,
     kidMeaning: "A small shop or stand for selling things.",
     examples: ["She buys a drink at the kiosk.", "The kiosk sells newspapers."],
     emoji: "🎪",
@@ -2380,6 +2644,7 @@ export const band2: Word[] = [
   {
     word: "warehouse",
     pos: "noun",
+    level: 4,
     kidMeaning: "A large building for storing goods.",
     examples: ["The warehouse stores many boxes.", "Goods are sent from the warehouse."],
     emoji: "🏭",
@@ -2389,6 +2654,7 @@ export const band2: Word[] = [
   {
     word: "bookshop",
     pos: "noun",
+    level: 6,
     kidMeaning: "A shop that sells books.",
     examples: ["She buys a book at the bookshop.", "The bookshop has many shelves."],
     emoji: "📚",
@@ -2398,6 +2664,7 @@ export const band2: Word[] = [
   {
     word: "jetty",
     pos: "noun",
+    level: 6,
     kidMeaning: "A path of stone going into the water.",
     examples: ["The boat leaves from the jetty.", "They fish from the jetty."],
     emoji: "⚓",
@@ -2407,6 +2674,7 @@ export const band2: Word[] = [
   {
     word: "pier",
     pos: "noun",
+    level: 3,
     kidMeaning: "A structure built into the water for boats.",
     examples: ["The ship is at the pier.", "People walk on the pier."],
     emoji: "⛴️",
@@ -2416,6 +2684,7 @@ export const band2: Word[] = [
   {
     word: "interchange",
     pos: "noun",
+    level: 6,
     kidMeaning: "A place where people change transport.",
     examples: ["The bus interchange is busy.", "She changes buses at the interchange."],
     emoji: "🚌",
@@ -2425,6 +2694,7 @@ export const band2: Word[] = [
   {
     word: "terminal",
     pos: "noun",
+    level: 5,
     kidMeaning: "A building where transport stops.",
     examples: ["The bus terminal is large.", "They meet at the airport terminal."],
     emoji: "✈️",
@@ -2434,6 +2704,7 @@ export const band2: Word[] = [
   {
     word: "detour",
     pos: "noun",
+    level: 5,
     kidMeaning: "A different way to go because the usual way is blocked.",
     examples: ["The road is closed so we take a detour.", "The detour makes the trip longer."],
     emoji: "🛣️",
@@ -2443,6 +2714,7 @@ export const band2: Word[] = [
   {
     word: "traffic",
     pos: "noun",
+    level: 3,
     kidMeaning: "Many cars and vehicles on the road.",
     examples: ["The traffic is very heavy.", "There is much traffic at rush hour."],
     emoji: "🚗",
@@ -2452,6 +2724,7 @@ export const band2: Word[] = [
   {
     word: "jam",
     pos: "noun",
+    level: 3,
     kidMeaning: "A place where traffic is stuck and moving slowly.",
     examples: ["We are stuck in a traffic jam.", "The jam lasts for two hours."],
     emoji: "🚦",
@@ -2461,6 +2734,7 @@ export const band2: Word[] = [
   {
     word: "honk",
     pos: "verb",
+    level: 5,
     kidMeaning: "To make a loud noise with a car horn.",
     examples: ["The driver honks the horn.", "She honks at the slow car."],
     emoji: "📯",
@@ -2470,6 +2744,7 @@ export const band2: Word[] = [
   {
     word: "overtake",
     pos: "verb",
+    level: 6,
     kidMeaning: "To pass another moving vehicle.",
     examples: ["The car overtakes the bus.", "He overtakes the slow cyclist."],
     emoji: "🚗",
@@ -2479,6 +2754,7 @@ export const band2: Word[] = [
   {
     word: "reverse",
     pos: "verb",
+    level: 4,
     kidMeaning: "To go backward.",
     examples: ["She reverses the car into the space.", "The car reverses out of the driveway."],
     emoji: "⬅️",
@@ -2488,6 +2764,7 @@ export const band2: Word[] = [
   {
     word: "alight",
     pos: "verb",
+    level: 6,
     kidMeaning: "To get off a vehicle.",
     examples: ["He alights from the bus.", "She alights at the next stop."],
     emoji: "🚌",
@@ -2497,6 +2774,7 @@ export const band2: Word[] = [
   {
     word: "cancel",
     pos: "verb",
+    level: 4,
     kidMeaning: "To say something will not happen.",
     examples: ["The teacher cancels the trip.", "They cancel the meeting."],
     emoji: "❌",
@@ -2506,6 +2784,7 @@ export const band2: Word[] = [
   {
     word: "arrival",
     pos: "noun",
+    level: 5,
     kidMeaning: "When someone or something comes to a place.",
     examples: ["The arrival of the bus is delayed.", "His arrival is at three o'clock."],
     emoji: "🚌",
@@ -2515,6 +2794,7 @@ export const band2: Word[] = [
   {
     word: "departure",
     pos: "noun",
+    level: 6,
     kidMeaning: "When someone or something leaves a place.",
     examples: ["The departure time is at nine.", "The departure is delayed by one hour."],
     emoji: "✈️",
@@ -2524,6 +2804,7 @@ export const band2: Word[] = [
   {
     word: "seatbelt",
     pos: "noun",
+    level: 5,
     kidMeaning: "A strap to keep you safe in a car.",
     examples: ["She wears her seatbelt in the car.", "Always fasten your seatbelt."],
     emoji: "🔐",
@@ -2533,6 +2814,7 @@ export const band2: Word[] = [
   {
     word: "helmet",
     pos: "noun",
+    level: 4,
     kidMeaning: "A hard hat to protect your head.",
     examples: ["He wears a helmet on his bike.", "The helmet keeps you safe."],
     emoji: "🪖",
@@ -2542,6 +2824,7 @@ export const band2: Word[] = [
   {
     word: "pedal",
     pos: "noun",
+    level: 5,
     kidMeaning: "A part of a bike you push with your foot.",
     examples: ["She pushes the pedal on her bike.", "The pedal moves the wheel."],
     emoji: "🚴",
@@ -2551,6 +2834,7 @@ export const band2: Word[] = [
   {
     word: "tyre",
     pos: "noun",
+    level: 4,
     kidMeaning: "A round rubber part of a wheel.",
     examples: ["The tyre is flat.", "She pumps air into the tyre."],
     emoji: "🛞",
@@ -2560,6 +2844,7 @@ export const band2: Word[] = [
   {
     word: "puncture",
     pos: "noun",
+    level: 5,
     kidMeaning: "A small hole in a tyre.",
     examples: ["The bike has a puncture.", "A nail causes a puncture."],
     emoji: "🔨",
@@ -2569,6 +2854,7 @@ export const band2: Word[] = [
   {
     word: "voucher",
     pos: "noun",
+    level: 5,
     kidMeaning: "A paper or card to get a discount.",
     examples: ["She uses a voucher to buy shoes.", "The voucher saves her money."],
     emoji: "🎟️",
@@ -2578,6 +2864,7 @@ export const band2: Word[] = [
   {
     word: "coupon",
     pos: "noun",
+    level: 6,
     kidMeaning: "A piece of paper for a discount.",
     examples: ["He cuts out a coupon from a magazine.", "The coupon gives a discount."],
     emoji: "✂️",
@@ -2587,6 +2874,7 @@ export const band2: Word[] = [
   {
     word: "counter",
     pos: "noun",
+    level: 3,
     kidMeaning: "A high table where shop work happens.",
     examples: ["The cashier stands behind the counter.", "She pays at the counter."],
     emoji: "🏪",
@@ -2596,6 +2884,7 @@ export const band2: Word[] = [
   {
     word: "label",
     pos: "noun",
+    level: 4,
     kidMeaning: "A piece of paper with information on it.",
     examples: ["The label shows the price.", "She reads the label on the box."],
     emoji: "🏷️",
@@ -2605,6 +2894,7 @@ export const band2: Word[] = [
   {
     word: "barcode",
     pos: "noun",
+    level: 2,
     kidMeaning: "Black lines that show information to a machine.",
     examples: ["The barcode scans the price.", "She scans the barcode at the shop."],
     emoji: "📊",
@@ -2614,6 +2904,7 @@ export const band2: Word[] = [
   {
     word: "brand",
     pos: "noun",
+    level: 4,
     kidMeaning: "The name of a company that makes things.",
     examples: ["She likes this brand of shoes.", "The brand is very popular."],
     emoji: "🏷️",
@@ -2623,6 +2914,7 @@ export const band2: Word[] = [
   {
     word: "purchase",
     pos: "noun",
+    level: 4,
     kidMeaning: "Something you buy.",
     examples: ["She makes a purchase at the shop.", "His purchase costs twenty dollars."],
     emoji: "💳",
@@ -2632,6 +2924,7 @@ export const band2: Word[] = [
   {
     word: "waste",
     pos: "noun",
+    level: 3,
     kidMeaning: "Rubbish or something not used well.",
     examples: ["Waste goes in the bin.", "Do not waste your money."],
     emoji: "♻️",
@@ -2641,6 +2934,7 @@ export const band2: Word[] = [
   {
     word: "savings",
     pos: "noun",
+    level: 3,
     kidMeaning: "Money kept for later use.",
     examples: ["She puts money in her savings.", "His savings are in the bank."],
     emoji: "🏦",
@@ -2650,6 +2944,7 @@ export const band2: Word[] = [
   {
     word: "allowance",
     pos: "noun",
+    level: 5,
     kidMeaning: "Money given to you regularly.",
     examples: ["She gets an allowance every week.", "His allowance is used to buy toys."],
     emoji: "💰",
@@ -2659,6 +2954,7 @@ export const band2: Word[] = [
   {
     word: "pricey",
     pos: "adjective",
+    level: 6,
     kidMeaning: "Costing a lot of money.",
     examples: ["The shoes are very pricey.", "This restaurant is pricey."],
     emoji: "💸",
@@ -2668,6 +2964,7 @@ export const band2: Word[] = [
   {
     word: "owe",
     pos: "verb",
+    level: 2,
     kidMeaning: "To need to pay money to someone.",
     examples: ["She owes ten dollars to her friend.", "I owe you a thank you."],
     emoji: "💳",
@@ -2677,6 +2974,7 @@ export const band2: Word[] = [
   {
     word: "donate",
     pos: "verb",
+    level: 5,
     kidMeaning: "To give something to help people.",
     examples: ["They donate money to the school.", "She donates her old toys."],
     emoji: "🤝",
@@ -2686,6 +2984,7 @@ export const band2: Word[] = [
   {
     word: "charity",
     pos: "noun",
+    level: 4,
     kidMeaning: "A group that gives help to poor people.",
     examples: ["The charity helps poor people.", "She gives money to charity."],
     emoji: "❤️",
@@ -2695,6 +2994,7 @@ export const band2: Word[] = [
   {
     word: "weekday",
     pos: "noun",
+    level: 6,
     kidMeaning: "A day that is not Saturday or Sunday.",
     examples: ["Weekday mornings are busy.", "School is open on weekdays."],
     emoji: "📅",
@@ -2704,6 +3004,7 @@ export const band2: Word[] = [
   {
     word: "daily",
     pos: "adverb",
+    level: 4,
     kidMeaning: "Every day.",
     examples: ["She reads daily.", "The bus runs daily."],
     emoji: "📅",
@@ -2713,6 +3014,7 @@ export const band2: Word[] = [
   {
     word: "hourly",
     pos: "adverb",
+    level: 2,
     kidMeaning: "Every hour.",
     examples: ["The bus comes hourly.", "She checks hourly for news."],
     emoji: "🕐",
@@ -2722,6 +3024,7 @@ export const band2: Word[] = [
   {
     word: "overnight",
     pos: "adverb",
+    level: 6,
     kidMeaning: "During the night or very quickly.",
     examples: ["She stays overnight at her friend's house.", "The package arrives overnight."],
     emoji: "🌙",
@@ -2731,6 +3034,7 @@ export const band2: Word[] = [
   {
     word: "appointment",
     pos: "noun",
+    level: 4,
     kidMeaning: "A planned time to meet someone.",
     examples: ["She has a doctor's appointment.", "The appointment is at three."],
     emoji: "📋",
@@ -2740,6 +3044,7 @@ export const band2: Word[] = [
   {
     word: "errand",
     pos: "noun",
+    level: 5,
     kidMeaning: "A small trip to do a job.",
     examples: ["She runs an errand at the shop.", "His errands take one hour."],
     emoji: "🏃",
@@ -2749,6 +3054,7 @@ export const band2: Word[] = [
   {
     word: "chore",
     pos: "noun",
+    level: 5,
     kidMeaning: "A job that must be done at home.",
     examples: ["Washing dishes is her chore.", "He does his chores after school."],
     emoji: "🧹",
@@ -2758,6 +3064,7 @@ export const band2: Word[] = [
   {
     word: "reminder",
     pos: "noun",
+    level: 3,
     kidMeaning: "Something that helps you remember.",
     examples: ["The alarm is a reminder to go out.", "She sets a reminder on her phone."],
     emoji: "🔔",
@@ -2767,6 +3074,7 @@ export const band2: Word[] = [
   {
     word: "snooze",
     pos: "verb",
+    level: 5,
     kidMeaning: "To sleep for a short time.",
     examples: ["He snoozes for ten more minutes.", "She snoozes before getting up."],
     emoji: "😴",
@@ -2776,6 +3084,7 @@ export const band2: Word[] = [
   {
     word: "nap",
     pos: "noun",
+    level: 3,
     kidMeaning: "A short time of sleep.",
     examples: ["She takes a nap after lunch.", "The baby sleeps during the nap."],
     emoji: "😴",
@@ -2785,6 +3094,7 @@ export const band2: Word[] = [
   {
     word: "curfew",
     pos: "noun",
+    level: 4,
     kidMeaning: "A time when you must be home.",
     examples: ["The curfew is at nine o'clock.", "She must be home by the curfew."],
     emoji: "⏰",
@@ -2794,6 +3104,7 @@ export const band2: Word[] = [
   {
     word: "festival",
     pos: "noun",
+    level: 4,
     kidMeaning: "A day or time of celebration.",
     examples: ["They celebrate the festival together.", "The festival has many events."],
     emoji: "🎉",
@@ -2803,6 +3114,7 @@ export const band2: Word[] = [
   {
     word: "ceremony",
     pos: "noun",
+    level: 5,
     kidMeaning: "A formal event with special activities.",
     examples: ["The ceremony takes one hour.", "They attend the school ceremony."],
     emoji: "🎩",
@@ -2812,6 +3124,7 @@ export const band2: Word[] = [
   {
     word: "anniversary",
     pos: "noun",
+    level: 6,
     kidMeaning: "The date each year when something special happened.",
     examples: ["It is her birthday anniversary.", "They celebrate their anniversary."],
     emoji: "🎂",
@@ -2821,6 +3134,7 @@ export const band2: Word[] = [
   {
     word: "chat",
     pos: "noun",
+    level: 3,
     kidMeaning: "A friendly talk between people.",
     examples: ["They have a chat after school.", "She enjoys a chat with friends."],
     emoji: "💬",
@@ -2830,6 +3144,7 @@ export const band2: Word[] = [
   {
     word: "gossip",
     pos: "noun",
+    level: 4,
     kidMeaning: "Talk about other people's lives.",
     examples: ["They gossip about their classmates.", "She spreads gossip to her friends."],
     emoji: "🗣️",
@@ -2839,6 +3154,7 @@ export const band2: Word[] = [
   {
     word: "forgive",
     pos: "verb",
+    level: 2,
     kidMeaning: "To stop being angry at someone.",
     examples: ["She forgives him for his mistake.", "He asks her to forgive him."],
     emoji: "🤝",
@@ -2848,6 +3164,7 @@ export const band2: Word[] = [
   {
     word: "remind",
     pos: "verb",
+    level: 3,
     kidMeaning: "To make someone remember.",
     examples: ["She reminds him to do his homework.", "Please remind me to call him."],
     emoji: "🔔",
@@ -2857,6 +3174,7 @@ export const band2: Word[] = [
   {
     word: "obey",
     pos: "verb",
+    level: 4,
     kidMeaning: "To do what someone asks.",
     examples: ["The child obeys the teacher.", "She obeys her parent's rules."],
     emoji: "👂",
@@ -2866,6 +3184,7 @@ export const band2: Word[] = [
   {
     word: "disobey",
     pos: "verb",
+    level: 6,
     kidMeaning: "To not do what someone asks.",
     examples: ["He disobeys the teacher.", "She disobeys her parent's rules."],
     emoji: "🙅",
@@ -2875,6 +3194,7 @@ export const band2: Word[] = [
   {
     word: "misbehave",
     pos: "verb",
+    level: 6,
     kidMeaning: "To act badly.",
     examples: ["He misbehaves in class.", "She misbehaves at the restaurant."],
     emoji: "🚫",
@@ -2884,6 +3204,7 @@ export const band2: Word[] = [
   {
     word: "fetch",
     pos: "verb",
+    level: 3,
     kidMeaning: "To go and get something.",
     examples: ["She fetches water from the well.", "He fetches his bag from school."],
     emoji: "🏃",
@@ -2893,6 +3214,7 @@ export const band2: Word[] = [
   {
     word: "pass",
     pos: "verb",
+    level: 1,
     kidMeaning: "To give something to someone.",
     examples: ["She passes the ball to him.", "He passes the letter to his mother."],
     emoji: "🤝",
@@ -2902,6 +3224,7 @@ export const band2: Word[] = [
   {
     word: "return",
     pos: "verb",
+    level: 2,
     kidMeaning: "To bring something back.",
     examples: ["She returns the book to the library.", "He returns home from school."],
     emoji: "🔄",
@@ -2911,6 +3234,7 @@ export const band2: Word[] = [
   {
     word: "swap",
     pos: "verb",
+    level: 4,
     kidMeaning: "To give something and get something else.",
     examples: ["They swap toys at playtime.", "She swaps her lunch with her friend."],
     emoji: "🔄",
@@ -2920,6 +3244,7 @@ export const band2: Word[] = [
   {
     word: "reserve",
     pos: "verb",
+    level: 5,
     kidMeaning: "To save something for later use.",
     examples: ["She reserves a seat at the cinema.", "He reserves a table at the restaurant."],
     emoji: "📖",
@@ -2929,6 +3254,7 @@ export const band2: Word[] = [
   {
     word: "apologise",
     pos: "verb",
+    level: 6,
     kidMeaning: "To say sorry to someone.",
     examples: ["He apologises for being late.", "She apologises for her mistake."],
     emoji: "🙏",
@@ -2938,6 +3264,7 @@ export const band2: Word[] = [
   {
     word: "thank",
     pos: "verb",
+    level: 1,
     kidMeaning: "To show thanks to someone.",
     examples: ["She thanks him for his help.", "He thanks the teacher."],
     emoji: "🙏",
@@ -2947,6 +3274,7 @@ export const band2: Word[] = [
   {
     word: "queue",
     pos: "noun",
+    level: 4,
     kidMeaning: "A line of people waiting.",
     examples: ["They stand in a queue at the shop.", "The queue is very long."],
     emoji: "👥",
@@ -2956,6 +3284,7 @@ export const band2: Word[] = [
   {
     word: "commuter",
     pos: "noun",
+    level: 6,
     kidMeaning: "A person who travels to work every day.",
     examples: ["The commuter takes the bus to work.", "She is a daily commuter."],
     emoji: "🚌",

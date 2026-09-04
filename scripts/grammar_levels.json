@@ -1,0 +1,27 @@
+{
+  "_comment": "Grammar lesson id -> Primary level, mapped onto the MOE grammar progression: P1 word classes and sentence basics, P2 tenses and comparatives, P3 adverbs/plurals/modals, P4 verb patterns and adjective endings, P5 passives and clauses, P6 perfect tenses and reported speech. Reviewed 2026-09-04.",
+
+  "lesson_1": 1, "lesson_2": 1, "lesson_3": 1, "lesson_4": 1, "lesson_5": 1,
+  "lesson_6": 1, "lesson_7": 1, "lesson_9": 1, "lesson_10": 1, "lesson_17": 1,
+  "lesson_18": 1, "lesson_20": 1,
+
+  "lesson_8": 2, "lesson_11": 2, "lesson_12": 2, "lesson_13": 2, "lesson_14": 2,
+  "lesson_15": 2, "lesson_19": 2, "lesson_21": 2, "lesson_22": 2, "lesson_26": 2,
+  "lesson_27": 2, "lesson_28": 2, "lesson_29": 2, "lesson_71": 2, "lesson_81": 2,
+
+  "lesson_16": 3, "lesson_23": 3, "lesson_25": 3, "lesson_30": 3, "lesson_34": 3,
+  "lesson_35": 3, "lesson_36": 3, "lesson_37": 3, "lesson_44": 3, "lesson_48": 3,
+  "lesson_49": 3, "lesson_63": 3, "lesson_64": 3, "lesson_68": 3, "lesson_74": 3,
+  "lesson_75": 3,
+
+  "lesson_24": 4, "lesson_32": 4, "lesson_38": 4, "lesson_39": 4, "lesson_40": 4,
+  "lesson_41": 4, "lesson_42": 4, "lesson_43": 4, "lesson_45": 4, "lesson_47": 4,
+  "lesson_52": 4, "lesson_54": 4, "lesson_55": 4, "lesson_58": 4, "lesson_60": 4,
+  "lesson_65": 4, "lesson_69": 4, "lesson_79": 4,
+
+  "lesson_31": 5, "lesson_46": 5, "lesson_50": 5, "lesson_51": 5, "lesson_53": 5,
+  "lesson_56": 5, "lesson_57": 5, "lesson_59": 5, "lesson_61": 5, "lesson_62": 5,
+  "lesson_72": 5, "lesson_76": 5, "lesson_77": 5, "lesson_78": 5, "lesson_80": 5,
+
+  "lesson_33": 6, "lesson_66": 6, "lesson_67": 6, "lesson_70": 6, "lesson_73": 6
+}

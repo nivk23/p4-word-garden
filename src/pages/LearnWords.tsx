@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { allWords } from "../content/allWords";
-import { grammarLessons } from "../content/grammar";
-import { getSchedulerItems, saveSchedulerItem, saveDayRecord } from "../store/progress";
+import { wordsForLevel, grammarForLevel } from "../content/levelContent";
+import { DEFAULT_LEVEL } from "../content/levels";
+import type { Level } from "../content/levels";
+import type { Word } from "../content/words";
+import { getSchedulerItems, saveSchedulerItem, saveDayRecord, getActiveLevel } from "../store/progress";
 import { getTodayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { NEW_WORDS_PER_BATCH, MAX_NEW_WORDS_PER_DAY } from "../lib/scheduler";
@@ -11,18 +13,27 @@ import { Page, PageTitle, Loading, Card, Chip, Button, SpeakButton, ProgressDots
 export default function LearnWords() {
   const navigate = useNavigate();
   const [currentWord, setCurrentWord] = useState(0);
-  const [learningWords, setLearningWords] = useState<typeof allWords>([]);
+  const [learningWords, setLearningWords] = useState<Word[]>([]);
+  // Everything this child's level can be taught, easiest first (P1 up to her
+  // level). Held in state because the level comes from her profile, so the pool
+  // isn't known until after the first load.
+  const [wordPool, setWordPool] = useState<Word[]>([]);
+  const [level, setLevel] = useState<Level>(DEFAULT_LEVEL);
   const [isLoading, setIsLoading] = useState(true);
   const [taughtWordIds, setTaughtWordIds] = useState<Set<string>>(new Set());
   const [showMorePrompt, setShowMorePrompt] = useState(false);
 
   useEffect(() => {
     async function loadWordsForToday() {
-      const schedulerItems = await getSchedulerItems();
+      const [schedulerItems, childLevel] = await Promise.all([
+        getSchedulerItems(),
+        getActiveLevel(),
+      ]);
       const taught = new Set(schedulerItems.filter(i => i.type === "word").map(i => i.itemId));
+      const pool = wordsForLevel(childLevel);
 
       const newWords = [];
-      for (const word of allWords) {
+      for (const word of pool) {
         if (!taught.has(word.word)) {
           newWords.push(word);
           if (newWords.length === NEW_WORDS_PER_BATCH) break;
@@ -31,6 +42,8 @@ export default function LearnWords() {
 
       setLearningWords(newWords);
       setTaughtWordIds(taught);
+      setWordPool(pool);
+      setLevel(childLevel);
       setIsLoading(false);
     }
 
@@ -74,15 +87,23 @@ export default function LearnWords() {
     // becomes a revision day on the rule she is weakest at, rather than asking
     // for a lesson number that does not exist — which used to send her back to
     // Home from the grammar step, with no way to finish the day.
+    const lessonsForLevel = grammarForLevel(level);
     const taughtGrammarIds = new Set(schedulerItems.filter(i => i.type === "grammar").map(i => i.itemId));
-    const nextNumber = taughtGrammarIds.size + 1;
-    let grammarId = `lesson_${nextNumber}`;
-    if (!grammarLessons.some(l => l.id === grammarId)) {
-      const taught = schedulerItems.filter(i => i.type === "grammar");
+    // Teach the next untaught rule she's old enough for, rather than counting
+    // lessons off by number — the pool depends on her level now, so lesson N
+    // isn't necessarily the Nth rule she should meet.
+    let grammarId = lessonsForLevel.find(l => !taughtGrammarIds.has(l.id))?.id;
+    if (!grammarId) {
+      // Every rule at her level has been taught: revise the weakest one rather
+      // than asking for a lesson that doesn't exist, which used to send her
+      // back to Home with no way to finish the day.
+      const taught = schedulerItems.filter(
+        i => i.type === "grammar" && lessonsForLevel.some(l => l.id === i.itemId)
+      );
       const weakest = [...taught].sort(
         (a, b) => a.box - b.box || a.lastSeen.localeCompare(b.lastSeen)
       )[0];
-      grammarId = weakest?.itemId ?? grammarLessons[0].id;
+      grammarId = weakest?.itemId ?? lessonsForLevel[0].id;
     }
 
     // Save DayRecord
@@ -100,7 +121,7 @@ export default function LearnWords() {
   };
 
   const hasMoreWordsAvailable = () =>
-    allWords.some(w => !taughtWordIds.has(w.word) && !learningWords.some(lw => lw.word === w.word));
+    wordPool.some(w => !taughtWordIds.has(w.word) && !learningWords.some(lw => lw.word === w.word));
 
   const handleNext = async () => {
     if (currentWord < learningWords.length - 1) {
@@ -123,7 +144,7 @@ export default function LearnWords() {
 
   const handleLearnMore = () => {
     const nextBatch = [];
-    for (const word of allWords) {
+    for (const word of wordPool) {
       if (!taughtWordIds.has(word.word) && !learningWords.some(lw => lw.word === word.word)) {
         nextBatch.push(word);
         if (nextBatch.length === NEW_WORDS_PER_BATCH) break;

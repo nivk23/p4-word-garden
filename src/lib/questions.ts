@@ -1,7 +1,9 @@
 import type { Word } from "../content/words";
 import { allWords } from "../content/allWords";
 import type { GrammarLesson } from "../content/grammar";
-import { passages } from "../content/passages";
+import { wordsForLevel, passagesForLevel } from "../content/levelContent";
+import { DEFAULT_LEVEL } from "../content/levels";
+import type { Level } from "../content/levels";
 import type { SchedulerItem } from "./scheduler";
 
 export type QuestionType =
@@ -42,12 +44,19 @@ export interface Question {
 /**
  * Generate all question types for a word
  */
-export function generateWordQuestions(word: Word, askSeed?: number): Question[] {
+export function generateWordQuestions(
+  word: Word,
+  askSeed?: number,
+  // Distractors are drawn from this level's words only: offering a P1 child
+  // three P6 meanings to choose between makes the right answer guessable by
+  // elimination, which is exactly what the anti-guessing rules exist to stop.
+  level: Level = DEFAULT_LEVEL
+): Question[] {
   const questions: Question[] = [];
 
   // meaning: "What does X mean?"
   const meaningsSeed = askSeed !== undefined ? askSeed * 31 + 1 : undefined;
-  const meanings = [word.kidMeaning, ...getRandomMeanings(3, word.word, meaningsSeed)];
+  const meanings = [word.kidMeaning, ...getRandomMeanings(3, word.word, level, meaningsSeed)];
   questions.push({
     id: `${word.word}_meaning`,
     type: "meaning",
@@ -64,7 +73,7 @@ export function generateWordQuestions(word: Word, askSeed?: number): Question[] 
     type: "situation",
     itemId: word.word,
     question: `${word.examples[0]} Which word is it?`,
-    options: [word.word, ...getRandomWords(3, word.pos, situationSeed)],
+    options: [word.word, ...getRandomWords(3, word.pos, level, situationSeed)],
     correctAnswer: 0,
   });
 
@@ -76,7 +85,7 @@ export function generateWordQuestions(word: Word, askSeed?: number): Question[] 
       type: "fill_blank",
       itemId: word.word,
       question: `The ___ dog ran fast.`,
-      options: [word.word, ...getRandomWords(3, "adjective", fillSeed)],
+      options: [word.word, ...getRandomWords(3, "adjective", level, fillSeed)],
       correctAnswer: 0,
     });
   }
@@ -98,7 +107,7 @@ export function generateWordQuestions(word: Word, askSeed?: number): Question[] 
     type: "listen_pick",
     itemId: word.word,
     question: `Listen to the word. Pick the correct spelling.`,
-    options: [word.word, ...getRandomWords(3, word.pos, listenSeed)],
+    options: [word.word, ...getRandomWords(3, word.pos, level, listenSeed)],
     correctAnswer: 0,
   });
 
@@ -141,8 +150,9 @@ export function stripPunctuation(word: string): string {
 /**
  * Pick a random passage for the day
  */
-export function selectDailyPassage(): { passage: string; questions: Array<{ q: string; a: number }> } {
-  const passage = passages[Math.floor(Math.random() * passages.length)];
+export function selectDailyPassage(level: Level = DEFAULT_LEVEL): { passage: string; questions: Array<{ q: string; a: number }> } {
+  const readable = passagesForLevel(level);
+  const passage = readable[Math.floor(Math.random() * readable.length)];
   return {
     passage: passage.text,
     questions: passage.questions.map((q) => ({ q: q.question, a: q.correctAnswer })),
@@ -151,16 +161,16 @@ export function selectDailyPassage(): { passage: string; questions: Array<{ q: s
 
 // Helper functions
 
-function getRandomMeanings(count: number, excludeWord: string, seed?: number): string[] {
-  const candidates = allWords.filter((w) => w.word !== excludeWord);
+function getRandomMeanings(count: number, excludeWord: string, level: Level, seed?: number): string[] {
+  const candidates = wordsForLevel(level).filter((w) => w.word !== excludeWord);
   const shuffled = shuffleArray(candidates, seed);
   return shuffled
     .slice(0, count)
     .map((w) => w.kidMeaning);
 }
 
-function getRandomWords(count: number, pos: string, seed?: number): string[] {
-  const candidates = allWords.filter((w) => w.pos === pos);
+function getRandomWords(count: number, pos: string, level: Level, seed?: number): string[] {
+  const candidates = wordsForLevel(level).filter((w) => w.pos === pos);
   const shuffled = shuffleArray(candidates, seed);
   return shuffled
     .slice(0, count)

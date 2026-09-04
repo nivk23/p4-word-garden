@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { passages } from "../content/passages";
-import { getDayRecord, logAnswer } from "../store/progress";
+import { passagesForLevel } from "../content/levelContent";
+import { getDayRecord, logAnswer, getActiveLevel } from "../store/progress";
 import { getTodayKey, getYesterdayKey } from "../lib/dates";
 import { speak } from "../lib/tts";
 import { useState, useEffect } from "react";
@@ -20,10 +20,14 @@ export default function MiniRead() {
       const today = getTodayKey();
       const yesterday = getYesterdayKey();
 
-      const [todayRecord, yesterdayRecord] = await Promise.all([
+      const [todayRecord, yesterdayRecord, level] = await Promise.all([
         getDayRecord(today),
         getDayRecord(yesterday),
+        getActiveLevel(),
       ]);
+      // Only passages she can actually read — the bank was written for P4, so a
+      // younger child gets the handful pitched at her level instead.
+      const readable = passagesForLevel(level);
 
       const targetWordIds = new Set<string>();
 
@@ -35,16 +39,16 @@ export default function MiniRead() {
       }
 
       // Find passage with at least one target word
-      let selectedPassage = passages.find(p =>
+      let selectedPassage = readable.find(p =>
         p.targetWords.some(w => targetWordIds.has(w))
       );
 
       // Fallback: pick a passage that hasn't been used recently
       if (!selectedPassage) {
-        selectedPassage = passages[Math.floor(Math.random() * passages.length)];
+        selectedPassage = readable[Math.floor(Math.random() * readable.length)];
       }
 
-      setPassage(selectedPassage || passages[0]);
+      setPassage(selectedPassage || readable[0]);
       setIsLoading(false);
     }
 

@@ -12,6 +12,8 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import type { SchedulerItem } from "../lib/scheduler";
+import { DEFAULT_LEVEL, asLevel } from "../content/levels";
+import type { Level } from "../content/levels";
 import { getTodayKey } from "../lib/dates";
 
 export interface UserProfile {
@@ -33,6 +35,11 @@ export interface ChildProfile {
   // existed still type-check; treat a missing value as the same "1234"
   // default a brand-new profile gets.
   profilePinHash?: string;
+  // Which primary level this child is working at. Decides which words, grammar
+  // rules and passages she is taught (cumulatively, from P1 up to this level).
+  // Optional so profiles created before levels existed still type-check; treat
+  // a missing value as DEFAULT_LEVEL, which is what they were getting anyway.
+  level?: Level;
 }
 
 export const DEFAULT_CHILD_PIN = "1234";
@@ -154,6 +161,27 @@ export async function getActiveChild(): Promise<ChildProfile | null> {
   }
 }
 
+/**
+ * Key used only when Firebase isn't configured (`npm run dev` with no `.env`),
+ * where there are no child profiles to hang a level off.
+ */
+const LOCAL_LEVEL_KEY = "child_level";
+
+/**
+ * The level whose content today's session should draw from. Every page that
+ * picks words, grammar or passages goes through this rather than reading the
+ * full content bank.
+ */
+export async function getActiveLevel(): Promise<Level> {
+  const child = await getActiveChild();
+  if (child) return asLevel(child.level) ?? DEFAULT_LEVEL;
+  return asLevel(Number(localStorage.getItem(LOCAL_LEVEL_KEY))) ?? DEFAULT_LEVEL;
+}
+
+export function setLocalLevel(level: Level): void {
+  localStorage.setItem(LOCAL_LEVEL_KEY, String(level));
+}
+
 export interface ChildRawData {
   items: SchedulerItem[];
   dayRecords: DayRecord[];
@@ -202,7 +230,7 @@ export async function getChildRawData(childId: string): Promise<ChildRawData> {
 /**
  * Create a new child profile under the signed-in account.
  */
-export async function createChild(name: string, emoji = "🌱"): Promise<ChildProfile> {
+export async function createChild(name: string, emoji = "🌱", level: Level = DEFAULT_LEVEL): Promise<ChildProfile> {
   const auth = getFirebaseAuth();
   const uid = auth?.currentUser?.uid;
   if (!isFirebaseAvailable() || !uid) {
@@ -217,12 +245,14 @@ export async function createChild(name: string, emoji = "🌱"): Promise<ChildPr
     emoji,
     createdAt: new Date().toISOString(),
     profilePinHash: hashPin(DEFAULT_CHILD_PIN),
+    level,
   };
   await setDoc(newDoc, {
     name: child.name,
     emoji: child.emoji,
     createdAt: child.createdAt,
     profilePinHash: child.profilePinHash,
+    level: child.level,
   });
   return child;
 }
@@ -314,7 +344,7 @@ export async function resetChildProgress(childId: string): Promise<void> {
 /**
  * Update a child's own name and/or emoji (not their UserProfile).
  */
-export async function updateChild(childId: string, updates: { name?: string; emoji?: string }): Promise<void> {
+export async function updateChild(childId: string, updates: { name?: string; emoji?: string; level?: Level }): Promise<void> {
   const auth = getFirebaseAuth();
   const uid = auth?.currentUser?.uid;
   if (!isFirebaseAvailable() || !uid) {

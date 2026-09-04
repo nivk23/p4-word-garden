@@ -35,3 +35,6 @@ __pycache__/
 
 # Merriam-Webster API key — never commit
 .mw-key
+
+# word-frequency corpus for scripts/grade_levels.py — downloaded, not vendored
+scripts/data/

@@ -1,4 +1,4 @@
-# Handoff — P4 Word Garden (as of 2026-09-01)
+# Handoff — P4 Word Garden (as of 2026-09-04)
 
 Read this first in a new session, then `CLAUDE.md` (rules) and `docs/PLAN.md` (spec).
 
@@ -30,19 +30,35 @@ in exam editing format, outside the daily flow.
   its self-reports were unreliable. Code work stays on Haiku. See memory `haiku-content-quality`.
 - User reviews on a tablet; cannot run a browser for me (Chrome extension not connected).
 
-## State of the build (verified 2026-09-01)
-- `npm test` → 255 tests in 29 files, all green. `npx tsc --noEmit` → clean.
+## State of the build (verified 2026-09-04)
+- `npm test` → 274 tests in 30 files, all green. `npm run build` → clean.
+  Use `npx tsc -b --noEmit` to type-check: plain `npx tsc --noEmit` checks **nothing**, because
+  the root `tsconfig.json` is `"files": []` plus project references. Earlier handoffs called it
+  clean; it was a no-op, and it hid three real type errors until `npm run build` caught them.
 - Working tree clean; `main` == `origin/main`, nothing unpushed.
 - Content: 400 core words (every P4 word from *Editing for Spelling and Grammar Explained! P4*
   worksheets 1–41) + 7 themed bands = **2,565 unique words**; **81 grammar lessons**
-  (`grammar.ts`); **81 rule teachings + 245 editing items** (`grammarPractice.ts`); 41 passages;
-  one WordNet definition per word in `dictionary.ts`.
+  (`grammar.ts`); **81 rule teachings + 245 editing items** (`grammarPractice.ts`); **70
+  passages**; one WordNet definition per word in `dictionary.ts`. Every word, lesson and passage
+  now carries a **P1–P6 level** (see `src/content/levels.ts` and the Levels section of CLAUDE.md).
 - `scripts/audit_content.py` must report 0 SVA/American/missing/duplicate flags before content
   is "done" (a few known false positives in words.ts/band4: "apartment", "Tom and Ali play").
 - Every kid meaning was cross-checked against a dictionary (2026-08-30) and the core 400's
   meanings were re-fixed for dropped inflections on 2026-08-31.
 
-## What shipped since the last handoff (2026-08-27 → 2026-09-01)
+## What shipped since the last handoff (2026-09-01 → 2026-09-04)
+- **School levels P1–P6** (2026-09-04): each child profile now has a level, picked when the
+  profile is created and editable under Manage profiles. Levels are cumulative and easiest-first
+  — a P4 child is taught P1–P4 words starting at P1, because a struggling P4 reader is usually
+  missing P2 vocabulary. The level gates new words, quiz distractors, grammar lessons, mini-read
+  passages and the Insights denominator. Grading is reproducible: `scripts/grade_levels.py`
+  (frequency + syllables + length + POS + concreteness) with hand-reviewed corrections in
+  `scripts/level_overrides.json`, hand-mapped `scripts/grammar_levels.json`, and passage levels
+  computed from the words used. **30 new P1–P3 passages** were written at the same time, because
+  the old bank was almost entirely P4 and a young child would have seen the same two passages
+  every day. Existing profiles have no `level` field and keep behaving exactly as before (P4).
+
+## What shipped in the handoff before that (2026-08-27 → 2026-09-01)
 - **Accounts & profiles**: real email/password login, multiple child profiles, child picker,
   profile delete/reset/rename/avatar, per-child PIN, a Compare Children page, and the active
   child's name shown on Home.

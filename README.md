@@ -71,6 +71,7 @@ firebase deploy               # hosting (dist/) + firestore.rules
 | `npm test` | Vitest (unit + page-level integration tests) |
 | `npm run lint` | oxlint |
 | `python scripts/audit_content.py` | Content audit: grammar heuristic, American spellings, missing fields, duplicates across all word files (writes `audit_report.json`) |
+| `python scripts/grade_levels.py` | Re-grade every word, grammar lesson and passage into levels P1–P6 (`--write` to apply, `--sample N` to review) |
 
 Dev helper: append `?day=YYYY-MM-DD` to the URL to simulate a different calendar day.
 
@@ -89,6 +90,7 @@ src/
     grammarPractice.ts rule teachings + exam-format editing items
     passages.ts        mini-read passages with comprehension questions
     knownWords.ts      simple base vocabulary allowed in meanings
+    levels.ts          P1–P6 levels: the word/grammar/passage list per level
   lib/
     scheduler.ts       Leitner boxes, mastery rule, daily quiz builder
     questions.ts       question generators + distractors
@@ -104,15 +106,47 @@ src/
   components/          AuthGate, SpellTiles, SpellMissing, SpellType,
                        FixSentence, GardenBed, ui
 tests/                 Vitest suites
-scripts/               content audit script
+scripts/               content audit + dictionary and level grading scripts
 ```
+
+## School levels (P1–P6)
+
+Each child profile has a level from **P1 to P6**, chosen when the profile is created and
+changeable any time under *Manage profiles*. Levels are **cumulative**: a P4 child is taught
+every word graded P1–P4, easiest first. A child can be in P4 and still be missing P2
+vocabulary — that is the whole reason this app exists — so nothing below her level is assumed
+to be known, and a child who does know the early words clears them in a few days.
+
+The level decides four things: which words she is taught, which distractors the quiz offers
+(a P1 child is never asked to choose between four P6 meanings), which grammar rules she meets,
+and which mini-read passages she can be given. It also sets the denominator on the Insights
+page — *words mastered out of the words at her level*, not out of all 2,565.
+
+| Level | Words at this level | Cumulative | Grammar lessons | Passages |
+|---|---|---|---|---|
+| P1 | 327 | 327 | 12 | 14 |
+| P2 | 328 | 655 | 15 | 28 |
+| P3 | 388 | 1,043 | 16 | 38 |
+| P4 | 737 | 1,780 | 18 | 69 |
+| P5 | 380 | 2,160 | 15 | 70 |
+| P6 | 405 | 2,565 | 5 | 70 |
+
+Word levels are produced by `scripts/grade_levels.py` from word frequency, syllable count,
+length, part of speech and how concrete the word is, then corrected by a hand-reviewed
+`scripts/level_overrides.json` (an adult corpus rates "career" as common; a nine-year-old
+does not). Grammar levels are hand-mapped in `scripts/grammar_levels.json`; passage levels
+are computed from the words each passage uses. Re-run the script after adding content.
+
+Changing a child's level never loses progress — words she has already learned stay in her
+scheduler and keep coming back for review either way.
 
 ## Editing content
 
 All content is plain TypeScript data. To add words, append `Word` objects to a band file (or
 `words.ts` for high-priority words). Each entry needs `word`, `pos`, `kidMeaning`, two
-`examples` that contain the word, `emoji`, `syllables`, `distractorGroup`, and optionally
-`spellingTip`, `confusedWith`, `mt` (mother-tongue hint). Use British spelling and correct
+`examples` that contain the word, `emoji`, `syllables`, `distractorGroup`, `level`, and
+optionally `spellingTip`, `confusedWith`, `mt` (mother-tongue hint). Leave `level` to
+`python scripts/grade_levels.py --write` rather than guessing it by hand. Use British spelling and correct
 subject–verb agreement — run `python scripts/audit_content.py` and `npm test` afterwards;
 `tests/words.test.ts` enforces the core list (exactly 400, no duplicates, all book words
 present).
