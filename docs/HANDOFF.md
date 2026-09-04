@@ -59,7 +59,12 @@ in exam editing format, outside the daily flow.
   computed from the words used. **50 new passages** were written at the same time (30 at P1–P3,
   20 at P5–P6): the old bank of 40 was almost entirely P4, so a young child would have seen the
   same two passages every day and an older one had nothing above her book words. The bank now
-  runs 14 / 28 / 38 / 69 / 80 / 90 cumulative across P1–P6. Existing profiles have no `level` field and keep behaving exactly as before (P4).
+  runs 14 / 28 / 38 / 69 / 80 / 90 cumulative across P1–P6. Grammar lessons are **capped at P4**:
+  all 81 come from her P4 book's worksheets or a P4 exam paper (lessons 71–81 were added because
+  a P4 paper tests them), so grading reported speech or the passive at P5/P6 by the general MOE
+  progression would have silently stopped teaching her 20 rules her own exam asks for. The MOE
+  level is still recorded in `scripts/grammar_levels.json` because it gives the right order below
+  P4; the cap is `GRAMMAR_LEVEL_CAP` in `grade_levels.py`, and a test enforces it. Existing profiles have no `level` field and keep behaving exactly as before (P4).
 
 ## What shipped in the handoff before that (2026-08-27 → 2026-09-01)
 - **Accounts & profiles**: real email/password login, multiple child profiles, child picker,

@@ -22,6 +22,15 @@ describe('level grading', () => {
     expect(ungraded.map((p) => p.id)).toEqual([]);
   });
 
+  it('keeps every grammar rule reachable by P4', () => {
+    // Every lesson in grammar.ts comes from her P4 book's grammar worksheets or
+    // from a P4 exam paper — lessons 71-81 were added precisely because a P4
+    // paper tests them. Grading one at P5/P6 by the general MOE progression
+    // would silently stop teaching a rule her own exam asks for.
+    const tooHigh = grammarLessons.filter((l) => l.level > 4);
+    expect(tooHigh.map((l) => `${l.id} ${l.title}`)).toEqual([]);
+  });
+
   it('keeps every level stocked with words to teach', () => {
     for (const level of LEVELS) {
       expect(allWords.filter((w) => w.level === level).length).toBeGreaterThan(50);
@@ -74,6 +83,10 @@ describe('grammarForLevel', () => {
     expect([...levels].sort((a, b) => a - b)).toEqual(levels);
     expect(grammarForLevel(6).length).toBe(grammarLessons.length);
     expect(grammarForLevel(1).every((l) => l.level === 1)).toBe(true);
+  });
+
+  it('gives a P4 child the whole rule bank, since all of it is P4 material', () => {
+    expect(grammarForLevel(4).length).toBe(grammarLessons.length);
   });
 
   it('starts a P1 child on nouns, not on the passive voice', () => {

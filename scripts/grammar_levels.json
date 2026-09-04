@@ -1,5 +1,5 @@
 {
-  "_comment": "Grammar lesson id -> Primary level, mapped onto the MOE grammar progression: P1 word classes and sentence basics, P2 tenses and comparatives, P3 adverbs/plurals/modals, P4 verb patterns and adjective endings, P5 passives and clauses, P6 perfect tenses and reported speech. Reviewed 2026-09-04.",
+  "_comment": "Grammar lesson id -> Primary level, mapped onto the MOE grammar progression: P1 word classes and sentence basics, P2 tenses and comparatives, P3 adverbs/plurals/modals, P4 verb patterns and adjective endings, P5 passives and clauses, P6 perfect tenses and reported speech. Reviewed 2026-09-04. NOTE: grade_levels.py caps what it writes at P4 (GRAMMAR_LEVEL_CAP), because every lesson here comes from her P4 book or a P4 exam paper. The 5s and 6s below are kept because they give the right teaching ORDER, not to hide those rules from a P4 child.",
 
   "lesson_1": 1, "lesson_2": 1, "lesson_3": 1, "lesson_4": 1, "lesson_5": 1,
   "lesson_6": 1, "lesson_7": 1, "lesson_9": 1, "lesson_10": 1, "lesson_17": 1,

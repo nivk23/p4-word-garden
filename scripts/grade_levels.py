@@ -256,6 +256,16 @@ def write_levels(levels):
     return changed
 
 
+# Every lesson in grammar.ts comes from her P4 book's grammar worksheets or from
+# a P4 exam paper (see docs/PLAN.md and the lessons 71-81 commit), so by her
+# school's own reckoning all 81 are P4 material - even the ones that sit at P5/P6
+# in the general MOE progression, like reported speech and the passive voice.
+# grammar_levels.json records that true difficulty, because it still gives the
+# right *order* (a P1 child must start on nouns, not on relative clauses), but the
+# level written into the content is capped here so a P4 child is never denied a
+# rule her own paper tests. This is the same rule words.ts lives under.
+GRAMMAR_LEVEL_CAP = 4
+
 GRAMMAR_LEVELS_PATH = os.path.join(BASE, "scripts", "grammar_levels.json")
 GRAMMAR_PATH = os.path.join(CONTENT, "grammar.ts")
 PASSAGES_PATH = os.path.join(CONTENT, "passages.ts")
@@ -272,13 +282,11 @@ def write_grammar_levels():
         sys.exit("No level for grammar lesson(s): %s - add them to %s"
                  % (", ".join(missing), os.path.basename(GRAMMAR_LEVELS_PATH)))
 
-    def repl(m):
-        return '%s\n%slevel: %d,' % (m.group(0), m.group("indent"), wanted[m.group("id")])
-
     text = re.sub(r'\n(?P<indent>\s*)level:\s*\d,(?=\n\s*title:)', "", text)
-    text, n = re.subn(r'(?P<indent2>[ \t]*)id: "(?P<id>lesson_\d+)",', 
+    text, n = re.subn(r'(?P<indent2>[ \t]*)id: "(?P<id>lesson_\d+)",',
                       lambda m: '%sid: "%s",\n%slevel: %d,' % (m.group("indent2"), m.group("id"),
-                                                               m.group("indent2"), wanted[m.group("id")]),
+                                                               m.group("indent2"),
+                                                               min(wanted[m.group("id")], GRAMMAR_LEVEL_CAP)),
                       text)
     io.open(GRAMMAR_PATH, "w", encoding="utf-8", newline="\n").write(text)
     return n

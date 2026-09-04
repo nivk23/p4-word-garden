@@ -52,6 +52,11 @@ is the only place that turns a level into content: `wordsForLevel`, `grammarForL
   passage levels are computed from the words the passage uses.
 - Words in `words.ts` are her P4 book words and **may never grade above P4** — the cap is
   applied last in the script, after overrides, and `tests/levels.test.ts` enforces it.
+- **Every grammar lesson is capped at P4** for the same reason: all 81 come from her P4 book's
+  worksheets or a P4 exam paper (lessons 71–81 were added *because* a P4 paper tests them).
+  `grammar_levels.json` still records the true MOE level, because that gives the right teaching
+  order below P4 — the cap lives in `grade_levels.py` (`GRAMMAR_LEVEL_CAP`). Never let a P4+
+  child lose a rule her own exam asks for.
 - Quiz distractors must come from `wordsForLevel(level)`, not `allWords`: offering a P1 child
   three P6 meanings makes the answer guessable by elimination. Pass the level into
   `generateWordQuestions`. Looking a *scheduled* item back up still uses `allWords`, so a word

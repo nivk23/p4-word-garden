@@ -125,11 +125,16 @@ page — *words mastered out of the words at her level*, not out of all 2,565.
 | Level | Words at this level | Cumulative | Grammar lessons | Passages |
 |---|---|---|---|---|
 | P1 | 327 | 327 | 12 | 14 |
-| P2 | 328 | 655 | 15 | 28 |
-| P3 | 388 | 1,043 | 16 | 38 |
-| P4 | 737 | 1,780 | 18 | 69 |
-| P5 | 380 | 2,160 | 15 | 80 |
-| P6 | 405 | 2,565 | 5 | 90 |
+| P2 | 328 | 655 | 27 | 28 |
+| P3 | 388 | 1,043 | 43 | 38 |
+| P4 | 737 | 1,780 | 81 | 69 |
+| P5 | 380 | 2,160 | 81 | 80 |
+| P6 | 405 | 2,565 | 81 | 90 |
+
+Grammar lesson counts are cumulative and stop growing at P4 on purpose: all 81 lessons come
+from her P4 book's grammar worksheets or from a P4 exam paper, so none may be graded above P4
+even where the general MOE progression would put it later (reported speech, the passive voice).
+The levels below P4 still control the *order* — a P1 child starts on nouns, not relative clauses.
 
 Word levels are produced by `scripts/grade_levels.py` from word frequency, syllable count,
 length, part of speech and how concrete the word is, then corrected by a hand-reviewed

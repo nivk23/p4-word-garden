@@ -778,7 +778,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_31",
-    level: 5,
+    level: 4,
     title: "Gerunds as Subjects",
     description: "A gerund is an -ing word used as a noun. It can be the subject of a sentence. 'Swimming is fun.'",
     examples: [
@@ -822,7 +822,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_33",
-    level: 6,
+    level: 4,
     title: "Passive Voice (has been done)",
     description: "Passive voice: the subject receives the action. The letter was written by Tom. The house has been abandoned.",
     examples: [
@@ -1149,7 +1149,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_46",
-    level: 5,
+    level: 4,
     title: "A Number Of + Plural",
     description: "Use 'a number of' with a plural noun and a plural verb. A number of students are here. Many people are late.",
     examples: [
@@ -1256,7 +1256,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_50",
-    level: 5,
+    level: 4,
     title: "Passive Voice (was + past participle)",
     description: "Passive: the subject receives the action. She was measured. They were involved. The house was built.",
     examples: [
@@ -1279,7 +1279,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_51",
-    level: 5,
+    level: 4,
     title: "Keen On",
     description: "Keen on means you really like something. She is keen on sport. He is keen on reading.",
     examples: [
@@ -1318,7 +1318,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_53",
-    level: 5,
+    level: 4,
     title: "-ed Adjectives vs -ing Adjectives",
     description: "Adjectives with -ed describe a feeling. Adjectives with -ing describe the cause. I am amazed. The show is amazing.",
     examples: [
@@ -1396,7 +1396,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_56",
-    level: 5,
+    level: 4,
     title: "Looking Forward To + -ing",
     description: "Looking forward to always use -ing form. She is looking forward to seeing her friend.",
     examples: [
@@ -1419,7 +1419,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_57",
-    level: 5,
+    level: 4,
     title: "One Of The + Plural",
     description: "One of the is always followed by a plural noun. He is one of the greatest players.",
     examples: [
@@ -1476,7 +1476,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_59",
-    level: 5,
+    level: 4,
     title: "Although vs However",
     description: "Although introduces a contrast. However shows a change. Although it is raining, we go. It is raining; however, we go.",
     examples: [
@@ -1523,7 +1523,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_61",
-    level: 5,
+    level: 4,
     title: "Make + Someone + Base Verb",
     description: "Make + someone + base verb. The sad story makes her cry. Loud noise makes the baby wake.",
     examples: [
@@ -1546,7 +1546,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_62",
-    level: 5,
+    level: 4,
     title: "Was/Were + Past Participle (Passive)",
     description: "In the passive voice, 'was' or 'were' must match the subject. The letter was brought by post. The flowers were formed in spring.",
     examples: [
@@ -1639,7 +1639,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_66",
-    level: 6,
+    level: 4,
     title: "Had Been + Past Participle",
     description: "Had been + past participle shows a past passive. The money had been stolen. The letter had been lost.",
     examples: [
@@ -1662,7 +1662,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_67",
-    level: 6,
+    level: 4,
     title: "Had + Past Participle (Past Perfect)",
     description: "Had + past participle shows something happened before. She had delivered the package.",
     examples: [
@@ -1743,7 +1743,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_70",
-    level: 6,
+    level: 4,
     title: "Specialise In",
     description: "Specialise in = study or know something very well. She specialises in science. He specialises in maths.",
     examples: [
@@ -1800,7 +1800,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_72",
-    level: 5,
+    level: 4,
     title: "Relative Clauses (who, which, that)",
     description: "Use 'who' for people and 'which' for things. 'That' can be used for both. The boy who won is my friend.",
     examples: [
@@ -1830,7 +1830,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_73",
-    level: 6,
+    level: 4,
     title: "Reported Speech (said that)",
     description: "When you tell what someone said, the tense usually steps back. 'I am tired,' she said. → She said that she was tired.",
     examples: [
@@ -1920,7 +1920,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_76",
-    level: 5,
+    level: 4,
     title: "If Sentences (First Conditional)",
     description: "If + present tense, then will + plain verb. If it rains, we will stay at home.",
     examples: [
@@ -1954,7 +1954,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_77",
-    level: 5,
+    level: 4,
     title: "So and Such … That",
     description: "So + adjective + that. Such + a + adjective + noun + that. It was so hot that we stayed inside.",
     examples: [
@@ -1988,7 +1988,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_78",
-    level: 5,
+    level: 4,
     title: "Either and Neither",
     description: "Either … or means one of two. Neither … nor means not one and not the other. The verb matches the nearer subject.",
     examples: [
@@ -2052,7 +2052,7 @@ export const grammarLessons: GrammarLesson[] = [
   },
   {
     id: "lesson_80",
-    level: 5,
+    level: 4,
     title: "Since and For with Time",
     description: "Use 'since' for when something started: since Monday. Use 'for' for how long it lasted: for two hours.",
     examples: [
