@@ -38,11 +38,13 @@ in exam editing format, outside the daily flow.
 - Working tree clean; `main` == `origin/main`, nothing unpushed.
 - Content: 400 core words (every P4 word from *Editing for Spelling and Grammar Explained! P4*
   worksheets 1–41) + 7 themed bands = **2,565 unique words**; **81 grammar lessons**
-  (`grammar.ts`); **81 rule teachings + 245 editing items** (`grammarPractice.ts`); **70
+  (`grammar.ts`); **81 rule teachings + 245 editing items** (`grammarPractice.ts`); **90
   passages**; one WordNet definition per word in `dictionary.ts`. Every word, lesson and passage
   now carries a **P1–P6 level** (see `src/content/levels.ts` and the Levels section of CLAUDE.md).
 - `scripts/audit_content.py` must report 0 SVA/American/missing/duplicate flags before content
-  is "done" (a few known false positives in words.ts/band4: "apartment", "Tom and Ali play").
+  is "done" (a few known false positives in words.ts/band4: "apartment", "Tom and Ali play",
+  and in passages.ts: "two hundred years ago" — the number-plural heuristic can't see that
+  "hundred" is the plural head).
 - Every kid meaning was cross-checked against a dictionary (2026-08-30) and the core 400's
   meanings were re-fixed for dropped inflections on 2026-08-31.
 
@@ -54,9 +56,10 @@ in exam editing format, outside the daily flow.
   passages and the Insights denominator. Grading is reproducible: `scripts/grade_levels.py`
   (frequency + syllables + length + POS + concreteness) with hand-reviewed corrections in
   `scripts/level_overrides.json`, hand-mapped `scripts/grammar_levels.json`, and passage levels
-  computed from the words used. **30 new P1–P3 passages** were written at the same time, because
-  the old bank was almost entirely P4 and a young child would have seen the same two passages
-  every day. Existing profiles have no `level` field and keep behaving exactly as before (P4).
+  computed from the words used. **50 new passages** were written at the same time (30 at P1–P3,
+  20 at P5–P6): the old bank of 40 was almost entirely P4, so a young child would have seen the
+  same two passages every day and an older one had nothing above her book words. The bank now
+  runs 14 / 28 / 38 / 69 / 80 / 90 cumulative across P1–P6. Existing profiles have no `level` field and keep behaving exactly as before (P4).
 
 ## What shipped in the handoff before that (2026-08-27 → 2026-09-01)
 - **Accounts & profiles**: real email/password login, multiple child profiles, child picker,

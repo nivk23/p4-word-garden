@@ -1034,4 +1034,204 @@ export const passages: Passage[] = [
     ],
     targetWords: ["artist", "mirror", "busy"],
   },
+  {
+    id: "passage_71",
+    level: 5,
+    text: "Our neighbour brings us fruit from her garden every week. She never asks for anything back. My mother says she is the most generous person on our street.",
+    questions: [
+      { question: "What does the neighbour bring?", options: ["fruit from her garden", "money", "letters"], correctAnswer: 0 },
+      { question: "Why does mother call her generous?", options: ["she gives and asks for nothing back", "she is very rich", "she has a big garden"], correctAnswer: 0 },
+    ],
+    targetWords: ["neighbour", "generous"],
+  },
+  {
+    id: "passage_72",
+    level: 5,
+    text: "The cashier smiled at every customer in the long line. Even when a man complained loudly about a price, she stayed calm. Her manager said she deserved a reward.",
+    questions: [
+      { question: "How did the cashier treat the customers?", options: ["she smiled at them", "she ignored them", "she hurried them"], correctAnswer: 0 },
+      { question: "Why did the manager want to reward her?", options: ["she stayed calm with a difficult man", "she worked very late", "she sold the most"], correctAnswer: 0 },
+    ],
+    targetWords: ["cashier", "customer"],
+  },
+  {
+    id: "passage_73",
+    level: 5,
+    text: "Ravi rode his bicycle up the steep hill without stopping once. Near the top, his front tyre got a puncture. He had to push the bicycle all the way home.",
+    questions: [
+      { question: "What happened near the top of the hill?", options: ["his tyre got a puncture", "he fell off", "it began to rain"], correctAnswer: 0 },
+      { question: "Why did he push the bicycle home?", options: ["the tyre was flat", "he was too tired to ride", "the hill was steep"], correctAnswer: 0 },
+    ],
+    targetWords: ["bicycle", "steep", "puncture"],
+  },
+  {
+    id: "passage_74",
+    level: 5,
+    text: "We watched the boats come into the harbour at sunset. Passengers waved from the top deck as the ship slowly turned. The water was calm and the whole sky was orange.",
+    questions: [
+      { question: "Where were the passengers waving from?", options: ["the top deck", "the harbour wall", "a small boat"], correctAnswer: 0 },
+      { question: "When did they watch the boats?", options: ["at sunset", "at dawn", "at midnight"], correctAnswer: 0 },
+    ],
+    targetWords: ["harbour", "passenger"],
+  },
+  {
+    id: "passage_75",
+    level: 5,
+    text: "The shoes I wanted were far too expensive last month. Yesterday the shop put a discount on every pair. My father agreed that it was a real bargain.",
+    questions: [
+      { question: "Why could they buy the shoes yesterday?", options: ["the shop gave a discount", "father earned more money", "they were a gift"], correctAnswer: 0 },
+      { question: "What did father call it?", options: ["a real bargain", "a mistake", "a waste of money"], correctAnswer: 0 },
+    ],
+    targetWords: ["expensive", "discount", "bargain"],
+  },
+  {
+    id: "passage_76",
+    level: 5,
+    text: "My essay had a deadline on Friday, but I left it until Thursday night. I finished it very late and my writing was untidy. Next time I will be more responsible with my time.",
+    questions: [
+      { question: "When did she start the essay?", options: ["on Thursday night", "on Monday", "on Friday morning"], correctAnswer: 0 },
+      { question: "What did she learn?", options: ["to be more responsible with her time", "to write shorter essays", "to ask for help"], correctAnswer: 0 },
+    ],
+    targetWords: ["essay", "deadline", "responsible"],
+  },
+  {
+    id: "passage_77",
+    level: 5,
+    text: "The scientist spent ten years studying one small island. She wanted to discover why its birds could not fly. What she found changed the way people explore islands today.",
+    questions: [
+      { question: "What did the scientist want to discover?", options: ["why the birds could not fly", "how old the island was", "where the fish had gone"], correctAnswer: 0 },
+      { question: "How long did she study the island?", options: ["ten years", "ten days", "one summer"], correctAnswer: 0 },
+    ],
+    targetWords: ["scientist", "discover", "explore"],
+  },
+  {
+    id: "passage_78",
+    level: 5,
+    text: "Every year my grandmother leads the ceremony at our family reunion. She says a tradition is only alive if somebody keeps it going. This year she asked me to help her.",
+    questions: [
+      { question: "Who leads the ceremony?", options: ["my grandmother", "my mother", "my uncle"], correctAnswer: 0 },
+      { question: "What does grandmother say about a tradition?", options: ["somebody must keep it going", "it must be very old", "it must be quiet"], correctAnswer: 0 },
+    ],
+    targetWords: ["grandmother", "ceremony", "tradition"],
+  },
+  {
+    id: "passage_79",
+    level: 5,
+    text: "The young athlete trains before school every morning. She can sprint faster than anyone else in her club. Her coach believes she will run for the country one day.",
+    questions: [
+      { question: "When does the athlete train?", options: ["before school", "after dinner", "only at weekends"], correctAnswer: 0 },
+      { question: "What does her coach believe?", options: ["she will run for the country", "she should rest more", "she will stop soon"], correctAnswer: 0 },
+    ],
+    targetWords: ["athlete", "sprint"],
+  },
+  {
+    id: "passage_80",
+    level: 5,
+    text: "Amir saves half of his allowance every week. Last month he donated all of it to the animal shelter. He says the chores are worth doing for a reason like that.",
+    questions: [
+      { question: "What did Amir do with his savings?", options: ["he donated them to an animal shelter", "he bought a game", "he lost them"], correctAnswer: 0 },
+      { question: "Why does he not mind the chores?", options: ["they pay for something he cares about", "they are very easy", "his mother pays him extra"], correctAnswer: 0 },
+    ],
+    targetWords: ["allowance", "donate", "chore"],
+  },
+  {
+    id: "passage_81",
+    level: 6,
+    text: "The architect showed us her drawing of the new library. The plan was beautiful, but it was practical too: every desk sat near a window. She was confident that children would want to stay all afternoon.",
+    questions: [
+      { question: "What made the plan practical?", options: ["every desk sat near a window", "it was cheap to build", "it was very small"], correctAnswer: 0 },
+      { question: "What was the architect confident about?", options: ["children would want to stay", "it would be finished early", "nobody would complain"], correctAnswer: 0 },
+    ],
+    targetWords: ["architect", "practical", "confident"],
+  },
+  {
+    id: "passage_82",
+    level: 6,
+    text: "The referee stopped the match to check a rule in his book. The spectators grew impatient and began to shout. He took his time anyway, because a wrong decision would have been far worse.",
+    questions: [
+      { question: "Why did the referee stop the match?", options: ["to check a rule", "to rest", "because of the rain"], correctAnswer: 0 },
+      { question: "Why did he take his time?", options: ["a wrong decision would be worse", "he was tired", "he wanted to annoy the crowd"], correctAnswer: 0 },
+    ],
+    targetWords: ["referee", "spectator", "impatient"],
+  },
+  {
+    id: "passage_83",
+    level: 6,
+    text: "The early train is popular with commuters because it is always punctual. On Monday its departure was delayed by twenty minutes. By the time it arrived, the platform was crowded and strangely quiet.",
+    questions: [
+      { question: "Why do commuters like the early train?", options: ["it is always punctual", "it is always empty", "it is cheaper"], correctAnswer: 0 },
+      { question: "What happened on Monday?", options: ["the departure was delayed", "the train was cancelled", "the platform closed"], correctAnswer: 0 },
+    ],
+    targetWords: ["commuter", "punctual", "departure"],
+  },
+  {
+    id: "passage_84",
+    level: 6,
+    text: "The carpenter built a temporary stage for the school concert. He carried his heavy toolbox up the steps all morning. When the concert ended, the whole stage came apart in an hour.",
+    questions: [
+      { question: "What kind of stage did he build?", options: ["a temporary one", "a stone one", "one meant to last for years"], correctAnswer: 0 },
+      { question: "How long did the stage take to come apart?", options: ["an hour", "a whole day", "a week"], correctAnswer: 0 },
+    ],
+    targetWords: ["carpenter", "temporary", "toolbox"],
+  },
+  {
+    id: "passage_85",
+    level: 6,
+    text: "A historian came to our class to talk about the people who lived here two hundred years ago. She showed us the name of my own ancestor in an old book. I had never thought of my family as part of history.",
+    questions: [
+      { question: "What did the historian show the class?", options: ["the name of my ancestor", "an old photograph", "a map of the town"], correctAnswer: 0 },
+      { question: "What surprised the writer?", options: ["that her family was part of history", "that the book was so old", "that the class was quiet"], correctAnswer: 0 },
+    ],
+    targetWords: ["historian", "ancestor"],
+  },
+  {
+    id: "passage_86",
+    level: 6,
+    text: "In the laboratory we looked at a drop of pond water under a microscope. What seemed empty to the eye was crowded with living things. Nobody in the class spoke for a whole minute.",
+    questions: [
+      { question: "What did they look at?", options: ["a drop of pond water", "a leaf", "a piece of stone"], correctAnswer: 0 },
+      { question: "Why did nobody speak?", options: ["they were amazed by what they saw", "they were bored", "they had been told to be silent"], correctAnswer: 0 },
+    ],
+    targetWords: ["laboratory", "microscope"],
+  },
+  {
+    id: "passage_87",
+    level: 6,
+    text: "The lifeguard warned us to stay in the shallow end until we could swim a full length. My cousin ignored her and got into trouble at once. He has listened to every word she says since that day.",
+    questions: [
+      { question: "What did the lifeguard warn them to do?", options: ["stay in the shallow end", "leave the pool", "swim faster"], correctAnswer: 0 },
+      { question: "Why does the cousin listen to her now?", options: ["he got into trouble when he ignored her", "she is his teacher", "his mother told him to"], correctAnswer: 0 },
+    ],
+    targetWords: ["lifeguard", "shallow"],
+  },
+  {
+    id: "passage_88",
+    level: 6,
+    text: "The bread we bought at the supermarket was hard and dry. My father took it back and asked for a refund. The manager apologised and gave him two loaves of fresh bread instead.",
+    questions: [
+      { question: "What was wrong with the bread?", options: ["it was hard and dry", "it was burnt", "it was the wrong kind"], correctAnswer: 0 },
+      { question: "What did the manager give him?", options: ["two loaves of fresh bread", "his money back", "a discount card"], correctAnswer: 0 },
+    ],
+    targetWords: ["supermarket", "refund", "apologise"],
+  },
+  {
+    id: "passage_89",
+    level: 6,
+    text: "Our teacher put four of us together to build a model bridge. At first nobody would cooperate and the bridge fell apart twice. Once we began to listen to each other, our hardworking group finished first.",
+    questions: [
+      { question: "Why did the bridge fall apart at first?", options: ["nobody would cooperate", "the glue was weak", "it was too heavy"], correctAnswer: 0 },
+      { question: "What changed the result?", options: ["they began to listen to each other", "they were given more time", "the teacher built it"], correctAnswer: 0 },
+    ],
+    targetWords: ["cooperate", "hardworking", "classmate"],
+  },
+  {
+    id: "passage_90",
+    level: 6,
+    text: "Through the telescope we could just see the space station crossing the sky. It looked like a slow, steady star. My brother says that he will be an astronaut on it one day.",
+    questions: [
+      { question: "What did the space station look like?", options: ["a slow, steady star", "an aeroplane", "a thin cloud"], correctAnswer: 0 },
+      { question: "What does the brother want to be?", options: ["an astronaut", "a pilot", "a scientist"], correctAnswer: 0 },
+    ],
+    targetWords: ["telescope", "astronaut"],
+  },
 ];

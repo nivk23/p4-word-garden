@@ -128,8 +128,8 @@ page — *words mastered out of the words at her level*, not out of all 2,565.
 | P2 | 328 | 655 | 15 | 28 |
 | P3 | 388 | 1,043 | 16 | 38 |
 | P4 | 737 | 1,780 | 18 | 69 |
-| P5 | 380 | 2,160 | 15 | 70 |
-| P6 | 405 | 2,565 | 5 | 70 |
+| P5 | 380 | 2,160 | 15 | 80 |
+| P6 | 405 | 2,565 | 5 | 90 |
 
 Word levels are produced by `scripts/grade_levels.py` from word frequency, syllable count,
 length, part of speech and how concrete the word is, then corrected by a hand-reviewed
