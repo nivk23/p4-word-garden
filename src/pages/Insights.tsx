@@ -206,12 +206,21 @@ export default function Insights() {
             <Card className="text-center">
               <p className="font-hand text-2xl text-ink/50 -mb-1">words mastered</p>
               <div className="font-display text-6xl font-semibold text-secondary-dark mb-2">{masteredCount}</div>
-              <p className="text-base text-ink/60 mb-4">out of {totalWords} total words</p>
+              <p className="text-base text-ink/60 mb-4">
+                {masteredCount > totalWords
+                  ? `more than the ${totalWords} words at her level — she is ready to move up`
+                  : `out of ${totalWords} words at her level`}
+              </p>
               <div className="w-full bg-secondary-light rounded-full h-3 mb-4">
                 <div
                   className="bg-secondary h-3 rounded-full transition-all"
                   style={{
-                    width: totalWords > 0 ? `${(masteredCount / totalWords) * 100}%` : "0%",
+                    // Clamped: a child moved *down* a level can have mastered more
+                    // words than her new level contains, and an unclamped width
+                    // overflows the bar (400 mastered at P1 rendered at 122%).
+                    width: totalWords > 0
+                      ? `${Math.min(100, (masteredCount / totalWords) * 100)}%`
+                      : "0%",
                   }}
                 />
               </div>

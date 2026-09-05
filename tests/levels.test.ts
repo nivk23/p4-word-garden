@@ -120,6 +120,25 @@ describe('level-aware distractors', () => {
   });
 });
 
+describe('moving a child down a level', () => {
+  it('leaves plenty still to teach, so the day never dead-ends', () => {
+    // Her 400 book words are mostly P2–P4, so they barely dent the P1 pool.
+    const taught = new Set(allWords.slice(0, 400).map((w) => w.word));
+    for (const level of LEVELS) {
+      const left = wordsForLevel(level).filter((w) => !taught.has(w.word)).length;
+      expect(left).toBeGreaterThan(100);
+    }
+  });
+
+  it('keeps every word she already learned reviewable, whatever her level', () => {
+    // Words are looked up in allWords, never in the level pool, so a word
+    // learned before a drop still renders in the quiz and in SpellIt.
+    const learned = allWords.slice(0, 700).map((w) => w.word);
+    const byName = new Map(allWords.map((w) => [w.word, w]));
+    expect(learned.filter((w) => !byName.has(w))).toEqual([]);
+  });
+});
+
 describe('level helpers', () => {
   it('labels levels the way a Singapore parent writes them', () => {
     expect(LEVELS.map(levelLabel)).toEqual(['P1', 'P2', 'P3', 'P4', 'P5', 'P6']);
