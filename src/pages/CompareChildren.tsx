@@ -27,6 +27,20 @@ interface ChildRow {
   spelling: number;
 }
 
+/**
+ * The measures shown on every child's card, in the order a parent reads them.
+ * Kept as data rather than markup so each card is guaranteed the same set.
+ */
+const METRICS: Array<{ label: string; value: (row: ChildRow) => string }> = [
+  { label: "Words known", value: (r) => `${r.known} / ${r.total}` },
+  { label: "Words mastered", value: (r) => `${r.mastered} / ${r.total}` },
+  { label: "Streak", value: (r) => `🔥 ${r.streak}` },
+  { label: "Days done", value: (r) => `${r.daysCompleted}` },
+  { label: "Accuracy", value: (r) => `${r.accuracy}%` },
+  { label: "Comprehension", value: (r) => `${r.comprehension}%` },
+  { label: "Spelling", value: (r) => `${r.spelling}%` },
+];
+
 export default function CompareChildren() {
   const navigate = useNavigate();
   const [rows, setRows] = useState<ChildRow[] | null>(null);
@@ -83,66 +97,42 @@ export default function CompareChildren() {
           <Button onClick={() => navigate("/insights")}>Back to Insights</Button>
         </Card>
       ) : (
-        <Card>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr>
-                  <th className="sticky left-0 bg-cream pr-4 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50">
-                    Child
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Level
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Words known
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Words mastered
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Streak
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Days done
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Accuracy
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Comprehension
-                  </th>
-                  <th className="px-3 pb-3 text-sm font-bold uppercase tracking-wide text-ink/50 whitespace-nowrap">
-                    Spelling
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map(({ child, known, mastered, total, streak, daysCompleted, accuracy, comprehension, spelling }) => (
-                  <tr key={child.id} className="border-t border-secondary/15">
-                    <td className="sticky left-0 bg-cream py-3 pr-4 font-display font-semibold text-ink whitespace-nowrap">
-                      {child.emoji} {child.name}
-                    </td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
-                      {levelLabel(asLevel(child.level) ?? DEFAULT_LEVEL)}
-                    </td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
-                      {known} / {total}
-                    </td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">
-                      {mastered} / {total}
-                    </td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">🔥 {streak}</td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{daysCompleted}</td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{accuracy}%</td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{comprehension}%</td>
-                    <td className="px-3 py-3 text-ink/80 whitespace-nowrap">{spelling}%</td>
-                  </tr>
+        <div className="w-full flex flex-col gap-3">
+          {/* A card per child, not a table.
+              A table needed one nowrap column per measure inside a horizontal
+              scroller, and with seven profiles — several of them named with a
+              long run of emoji a child typed in — the sticky name column filled
+              the screen and pushed every number out of sight. Transposing it
+              only moves the problem to the headers. Cards never scroll
+              sideways, however many children there are and whatever they are
+              called. */}
+          {rows.map((row) => (
+            <Card key={row.child.id} className="text-left">
+              <div className="flex items-baseline gap-2 mb-3 pb-3 border-b border-secondary/15">
+                {/* min-w-0 lets the name actually truncate inside the flex row,
+                    so a wall of emoji can't push the level badge off-screen. */}
+                <span className="text-xl flex-shrink-0">{row.child.emoji}</span>
+                <span className="font-display font-semibold text-ink text-lg truncate min-w-0 flex-1">
+                  {row.child.name}
+                </span>
+                <span className="flex-shrink-0 text-sm font-bold text-secondary-dark bg-secondary-light/60 rounded-full px-3 py-1">
+                  {levelLabel(asLevel(row.child.level) ?? DEFAULT_LEVEL)}
+                </span>
+              </div>
+              <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3">
+                {METRICS.map(({ label, value }) => (
+                  <div key={label} className="min-w-0">
+                    <dt className="text-xs font-bold uppercase tracking-wide text-ink/40">{label}</dt>
+                    <dd className="text-base text-ink/80 truncate">{value(row)}</dd>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+              </dl>
+            </Card>
+          ))}
+          <p className="text-sm text-ink/40 px-2">
+            Words are counted out of each child's own level, so the totals differ by level.
+          </p>
+        </div>
       )}
 
       <Button variant="ghost" full={false} onClick={() => navigate("/insights")}>
